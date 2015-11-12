@@ -1,0 +1,44 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <h1></h1>
+  
+
+<p>[[TracGuideToc]]</p>
+
+<p>Since Trac uses a database backend, some extra care is required to safely create a backup of a [wiki:TracEnvironment project environment]. Luckily, [wiki:TracAdmin trac-admin] has a command to make backups easier: <code>hotcopy</code>.</p>
+
+<p><em>Note: Trac uses the <code>hotcopy</code> nomenclature to match that of <a href="http://subversion.tigris.org/">Subversion</a>, to make it easier to remember when managing both Trac and Subversion servers.</em></p>
+
+<h1 id="creating-a-backup:4f037046b666250159a67e422b653389">Creating a Backup</h1>
+
+<p>To create a backup of a live TracEnvironment, simply run:</p>
+
+<pre><code>  $ trac-admin /path/to/projenv hotcopy /path/to/backupdir
+</code></pre>
+
+<p>[wiki:TracAdmin trac-admin] will lock the database while copying.&rdquo;</p>
+
+<p>The resulting backup directory is safe to handle using standard file-based backup tools like <code>tar</code> or <code>dump</code>/<code>restore</code>.</p>
+
+<p>Please, note, that hotcopy command does not overwrite target directory and when such exists, hotcopy ends with error: <code>Command failed: [Errno 17] File exists:</code> This is discussed in [trac:ticket:3198 #3198].</p>
+
+<h2 id="restoring-a-backup:4f037046b666250159a67e422b653389">Restoring a Backup</h2>
+
+<p>Backups are simply a copied snapshot of the entire [wiki:TracEnvironment project environment] directory, including the SQLite database.</p>
+
+<p>To restore an environment from a backup, stop the process running Trac (i.e. the Web server or [wiki:TracStandalone tracd]), restore the contents of your backup (path/to/backupdir) to your [wiki:TracEnvironment project environment] directory and restart the service.</p>
+
+<p><em>Note: Automatic backup of environments that don&rsquo;t use SQLite as database backend is not supported at this time. As a workaround, we recommend that you stop the server, copy the environment directory, and make a backup of the database using whatever mechanism is provided by the database system.</em></p>
+
+<hr />
+
+<p>See also: TracAdmin, TracEnvironment, TracGuide, [trac:TracMigrate TracMigrate]</p>
+
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>

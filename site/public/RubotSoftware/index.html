@@ -1,0 +1,76 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <h1></h1>
+  
+
+<p>RuBot was created by Chris Lee to provide a framework in ruby to study different botnets in a safe environment. This page gives an example of how to access and configure that framework for experimentation in DETER.  We describe a simple use of RuBot that has been coordinated through <a href="http://seer.isi.deterlab.net/trac">SEER</a>.  This example is a starting point from which researchers can explore SEER integration and the RuBot package.</p>
+
+<h1 id="a-sample-worm-propagation:7cbb09dff5e0eea1813a5a216f7279eb">A Sample Worm Propagation</h1>
+
+<p>Our example is uses one of the RuBot botnets that demonstrates a simple worm propagation which has each bot connect to an IRC server.  This code will allow the user to initiate a worm in one node and have to worm propagate to multiple other nodes.  The code works by starting a vulnerable server on each node the user wants to infect.  If the node being attacked is running a vulnerable server then the attack is successful.  Each time a node is compromised it will run a payload and connect to an IRC server to receive commands.  All user commands can be given via SEER.  The payload and additional IRC commands have to be specified by changing the code.</p>
+
+<p>In order to have this worm run in your experiment through SEER you need to have rubot.tgz installed on each node.  Inside of the NS file you need to have:</p>
+
+<pre><code>tb-set-node-tarfiles [set $node] /usr/ /proj/Deter/tarfiles/rubot.tgz 
+</code></pre>
+
+<p>So the RuBot framework will be loaded onto each node.  Replace ‘$node’ with the node(s) you want to have RuBot on.  The ‘/usr/’ is where RuBot will be unzipped.  RuBot needs to be unzipped in the /usr directory.</p>
+
+<p>The next step is copping wormAgent.py into a place where SEER can find it and load it as an attack agent.  To do this wormAgent.py needs to be copied from /users/arod/seer_rubot/modules and placed in a directory in either your directory or your projects directory.  The directory needs to be set up with three sub directories titled modules, source, scripts. For example /users/arod/seer_rubot which has modules, source, and scripts as subdirectories.  Place wormAgent.py in the modules subdirectory.  Inside of the NS file place:</p>
+
+<pre><code>tb-set-node-startcmd $node &quot;sudo python /share/seer/v160/experiment-setup.py Basic -d /users/arod/seer_rubot wormAgent&quot;
+</code></pre>
+
+<p>Replace ‘/users/arod/seer_rubot’ with the path to your seer directory not the path to the wormAgent.py and replace ‘$node’ with each node in your experiment.</p>
+
+<p>When you start SEER select the &lsquo;Worm&rsquo; agent from the attack menu.  The &lsquo;IRC Host&rsquo; variable specifies which node will run the IRC server  Make sure each node has a path to the IRC server so they can talk. This worm is started at one node and pointed towards other nodes within the network.  The node which starts the worm is specified by the &lsquo;Worm Start&rsquo; variable.  This node needs to be different from the IRC server.  The worm does not penetrate any defenses, but will successfully defeat a node if the node has a vulnerable server running on it (vulnserv.rb).  Select the nodes you want to become vulnerable in the &lsquo;Vulnerable Servers&rsquo; variable.  The worm will branch out from the &lsquo;Worm Start&rsquo; node and will attack the IP addresses you specify in the &lsquo;Target IPs&rsquo; variable.</p>
+
+<p>[[Image(Screenshot-SEER.png)]]</p>
+
+<p>Once the vulnerable node has been &lsquo;attacked&rsquo; by the worm it will run a series of commands embedded in vulnserv.rb.  These commands are running the payload, initiating communication with an IRC server, and attacking the next level of IP addresses.  The current payload is a get call to a website.  The communication between the bots and the IRC server is limited.  The bots will accept commands only from the nick &lsquo;botmaster.&rsquo;  The only commands they respond to are &lsquo;hi&rsquo; and &lsquo;quit.&rsquo;  For &lsquo;hi&rsquo; each bot will respond with &lsquo;hi&rsquo; and for &lsquo;quit&rsquo; each bot will leave the IRC server and stop running vulnserv.rb.  Commands can be given either in the open or as PRIVMSGs.  More commands can be programed by altering vulnserv.rb.</p>
+
+<p>[[Image(Screenshot-irssi.png)]]</p>
+
+<p>Once the variables have been set, STARTIRC will start the IRC server and STARTBOT will begin the propagation of the worm.  You can monitor the status of the bots logging onto the IRC server by joining the IRC server on channel #test.</p>
+
+<h1 id="seer-integration-details:7cbb09dff5e0eea1813a5a216f7279eb">SEER Integration Details</h1>
+
+<p>In order to create a SEER Agent you have to create an agent file.  The name of the file follows the format <code>agent</code><em>NameOfTheAgent</em><code>.py</code> where the NameOfTheAgent is in caps.  For example <code>agentWORM.py</code> or <code>agentBOTNET.py</code>.</p>
+
+<p>The agent code has some specific requirements (you can see these in the example [attachment:agentWORM.py]).  The agent is defined in a class &lsquo;class wormAgent(Agent)&rsquo; that is derived from SEER&rsquo;s Agent class.  Inside of the class there are seven class variables which need to be defined:</p>
+
+<ul>
+<li>DEPENDS</li>
+<li>SOFTWARE</li>
+<li>AGENTGROUP</li>
+<li>AGENTTYPE</li>
+<li>NICENAME</li>
+<li>COMMANDS</li>
+<li>VARIABLES</li>
+</ul>
+
+<p>DEPENDS specifies additional modules to load during startup.  SOFTWARE specifies any binary software which needs to be loaded onto the nodes.  Both of these can be empty lists.  AGENTGROUP specifies which menu the agent will be under in SEER (Traffic, Attack, Malware, Defense, or Analysis).  The AGENTTYPE is the type of Traffic, Attack, etc. the agent is (HTTP, TCP, worm, botnet&hellip;).  The NICENAME is what is displayed under the AGENTGROUP (Worm, Botnet, Ping&hellip;).  The COMMANDS class variable is where the commands available to the user are placed.  The commands are just listed here to be defined later and need to be in all caps.  For the VARIABLES you need to define five parts for each variable.  The format is TypeOfVariable(&lsquo;NameOfVariable&rsquo;, DefaultValue, &lsquo;GUIDisplayName&rsquo;, &lsquo;ExpinationOfTheVariable&rsquo;).  For example NodeVar(&lsquo;IRCHost&rsquo;, None,g &lsquo;IRC Host&rsquo;, &lsquo;Select the node to run the IRC server&rsquo;).  A list of variable types can be found on the <a href="http://seer.isi.deterlab.net/v1.6/devel/agents.html">SEER Agents page</a>.</p>
+
+<p>To extend the basic agent class you need to call the &lsquo;Agent!<strong>init!</strong>&rsquo; method.  This will enable you to implement the commands you created.  For each command you need to create a definition &lsquo;def handleCOMMAND(self):&rsquo;  where command is the name of your command.  To have code run on a node if the code is already installed you can use &lsquo;self.pids.append(spawn(&lsquo;CommandLineCode&rsquo;))&rsquo;  If you want to only run code on a node the user selects as a variable then you can use the function &lsquo;self.VariableName.myNodeMemberOf()&rsquo; which will return True if the node is in VariableName.</p>
+
+<h1 id="next-steps:7cbb09dff5e0eea1813a5a216f7279eb">Next Steps</h1>
+
+<p>There are two paths to expand this work.  One is to explore the RuBot worm more and the other is to explore the other botnets modeled in RuBot.  Some places to expand the simple worm are</p>
+
+<ul>
+<li>changing the payload delivered by the worm</li>
+<li>adding commands given by the IRC server</li>
+<li>added a success rate to the worm propagation</li>
+<li>or specifying which node attacks each IP address.<br /></li>
+</ul>
+
+<p>The second path has many more possibilities.  RuBot has code for several more complicated botnet than a simple worm.  It contains a simulated Storm, Nugache, and UDP botnet code as well.  Any of these other models would be interesting to look at and incorporate into the Deter testbed.</p>
+
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>

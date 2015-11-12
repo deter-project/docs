@@ -1,0 +1,92 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <h1></h1>
+  
+
+<h1 id="gatekeeper-isi-deterlab-net:8c34cf40e0dbcf7832fabd1aa76bf5df">gatekeeper.isi.deterlab.net</h1>
+
+<p>Gatekeeper is a bridging firewall running FreeBSD 7.3 and pf.</p>
+
+<h2 id="hardware:8c34cf40e0dbcf7832fabd1aa76bf5df">Hardware</h2>
+
+<ul>
+<li>Dell PowerEdge Chassis</li>
+<li>Pentium 4 2.4Ghz</li>
+<li>256Mb of RAM</li>
+<li>40GB Seagate ST340014A Hard Drive</li>
+</ul>
+
+<h2 id="interfaces:8c34cf40e0dbcf7832fabd1aa76bf5df">Interfaces</h2>
+
+<ul>
+<li><p>Dual Port Card 1</p>
+
+<ul>
+<li>em0 internet facing interface (verify)</li>
+<li>ether 00:04:23:c2:8e:a8</li>
+<li>em1 testbed facing interface (verify)</li>
+<li>ether 00:04:23:c2:8e:a9</li>
+</ul></li>
+
+<li><p>Dual Port Card 2</p>
+
+<ul>
+<li>em2 is unused</li>
+<li>ether 00:04:23:a5:ac:ee</li>
+<li>em3 10.0.23.0/24 network, address 10.0.23.254</li>
+<li>ether 00:04:23:a5:ac:ef</li>
+</ul></li>
+</ul>
+
+<h2 id="bridging-configuration:8c34cf40e0dbcf7832fabd1aa76bf5df">Bridging Configuration</h2>
+
+<ul>
+<li>bridge0 consists of em0 and em1</li>
+
+<li><p>bridge0 is configured in rc.conf with the following lines:</p>
+
+<p>cloned_interfaces=&ldquo;bridge0&rdquo;
+   ifconfig_bridge0=&ldquo;inet 206.117.25.46 netmask 255.255.255.0 addm em0 addm em1 up&rdquo;
+   ifconfig_em0=&ldquo;up&rdquo;
+   ifconfig_em1=&ldquo;up&rdquo;</p></li>
+</ul>
+
+<h2 id="pf-configuration:8c34cf40e0dbcf7832fabd1aa76bf5df">PF configuration</h2>
+
+<ul>
+<li><p>Two sysctl variables need to be set in order to enable pf on a bridged interface in /etc/sysctl.conf.  Rules on bridges have no direction.</p>
+
+<p>net.link.bridge.pfil_bridge=1
+   net.link.bridge.pfil_onlyip=1</p></li>
+
+<li><p>pf is enabled in /etc/rc.conf</p>
+
+<p>pf_enable=&ldquo;YES&rdquo;
+   pflog_enable=&ldquo;YES&rdquo;</p></li>
+
+<li><p>The pf.conf file is in CVS under /operations/configuration/gatekeeper</p></li>
+
+<li><p>The kernel configuration in /operations/configuration/gatekeeper contains the pf and pflog devices:</p>
+
+<p>device          pf
+   device          pflog</p></li>
+</ul>
+
+<h2 id="nat-configuration:8c34cf40e0dbcf7832fabd1aa76bf5df">NAT Configuration</h2>
+
+<ul>
+<li>We have a NAT&rsquo;ed network hanging off of gatekeeper for machines that need to access the internet, but do not need to have it.</li>
+
+<li><p>The sysctl variable for ip forwarding is enabled in /etc/sysctl.conf:</p>
+
+<p>net.inet.ip.forwarding=1</p></li>
+</ul>
+
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>

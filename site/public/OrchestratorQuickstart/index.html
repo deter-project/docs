@@ -1,0 +1,86 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <h1></h1>
+  
+
+<p>[[TOC]]
+[wiki:Documentation &lt; Documentation] | [wiki:OrchestratorGuide Orchestrator Guide &gt;]</p>
+
+<p>This page describes basic information about the MAGI Orchestrator and provides a high-level overview of how to use it. More details are available in the [wiki:OrchestratorGuide Orchestrator Guide].</p>
+
+<h1 id="what-is-the-magi-orchestrator:edd305819fa4570fe64a314f14644fa6">What is the MAGI Orchestrator?</h1>
+
+<p>MAGI allows you to automate and manage the procedures of a DeterLab experiment which is very useful for highly complex experiments. It&rsquo;s essentially a workflow management system for DeterLab that provides deterministic control and orchestration over event streams, repeatable enactment of procedures and control and data management for experiments.</p>
+
+<p>MAGI replaces the SEER experimentation framework and is part of the DETER experiment lifecycle management tools.</p>
+
+<h1 id="how-does-it-work:edd305819fa4570fe64a314f14644fa6">How does it work?</h1>
+
+<p>The procedure for a MAGI experiment is expressed in a YAML-based Agent Activation Language (AAL) file. The MAGI Orchestrator tool parses the procedure AAL file and maintains experiment-wide state to execute the procedure. The Orchestrator then sends and receives events from agents on the experiment nodes and enforces synchronization points &ndash; called as triggers — to deterministically execute the procedure.</p>
+
+<h1 id="how-do-i-use-the-orchestrator:edd305819fa4570fe64a314f14644fa6">How do I use the Orchestrator?</h1>
+
+<h2 id="1-include-a-special-start-command-in-your-topology:edd305819fa4570fe64a314f14644fa6">1. Include a special start command in your topology</h2>
+
+<p>Add a special start command in your topology to install MAGI and supporting tools on all nodes at startup. The command will be similar to the following:</p>
+
+<pre><code>tb-set-node-startcmd $NodeName &quot;sudo python /share/magi/current/magi_bootstrap.py&quot;
+</code></pre>
+
+<h2 id="2-write-the-aal-file-that-describes-the-experiment-s-workflows:edd305819fa4570fe64a314f14644fa6">2. Write the AAL file that describes the experiment&rsquo;s workflows</h2>
+
+<p>Describe the experiment procedure (ie, workflow) in a YAML-based AAL (.aal) file that describes:
+* groups - one or more nodes of with similar behavior.
+* agents - sets of behaviors
+* event streams - list of events and triggers that make up a procedure.
+  * events - invoke a procedure implemented in an agent
+  * triggers - synchronization mechanism based on events or time.</p>
+
+<p>The following is an example of an event in the AAL file:</p>
+
+<pre><code>- type: event
+  agent: server_agent
+  method: startServer
+  trigger: serverStartedSuccessfully
+  args: {}
+</code></pre>
+
+<p>You&rsquo;ll find more detailed information about writing the AAL file in the [wiki:OrchestratorGuide Orchestrator Guide].</p>
+
+<h2 id="3-run-the-magi-orchestrator-py-tool-on-a-physical-experiment-in-deterlab:edd305819fa4570fe64a314f14644fa6">3. Run the <code>magi_orchestrator.py</code> tool on a physical experiment in DeterLab</h2>
+
+<p>Similar to [wiki:ContainersQuickstart Containers], you run the Orchestrator tool in conjunction with a swapped-in physical experiment in DeterLab. <code>magi_orchestrator.py</code> reads the procedure&rsquo;s AAL file and orchestrates an experiment based on the specified procedures.</p>
+
+<p>You would run a command similar to the following on <code>users</code>:</p>
+
+<pre><code>/share/magi/current/magi_orchestrator.py --control clientnode.myExp.myProj --events procedure.aal
+</code></pre>
+
+<h2 id="4-view-results-by-accessing-nodes-modify-the-experiment-as-needed:edd305819fa4570fe64a314f14644fa6">4. View results by accessing nodes, modify the experiment as needed.</h2>
+
+<p>In an orchestrated experiment, you can access the virtual nodes with the same directories mounted as in a Core DeterLab experiment. You can load and run software and conduct experiments as you would in a Core experiment.</p>
+
+<h2 id="5-save-your-work-and-swap-out-your-experiment-release-the-resources:edd305819fa4570fe64a314f14644fa6">5. Save your work and swap out your experiment (release the resources)</h2>
+
+<p>As with all DeterLab experiment, when you are ready to stop working on an experiment but know you want to work on it again, save your files in specific protected directories and swap-out (via web interface or commandline) to release resources back to the testbed. This helps ensure there are enough resources for all DeterLab users.</p>
+
+<h1 id="more-information:edd305819fa4570fe64a314f14644fa6">More Information</h1>
+
+<p>For more detailed information about the Orchestrator, read the following:</p>
+
+<ul>
+<li>[wiki:OrchestratorGuide Orchestrator Guide] - This guide walks you through a basic example of using the Orchestrator and includes some advanced topics.</li>
+<li>[wiki:OrchestratorCaseStudies Orchestrator Case Studies] - Includes details of real-world examples of using Orchestrator.</li>
+<li>[wiki:OrchestratorReference Orchestrator Reference] - This reference includes commands, configuration details and logs.</li>
+</ul>
+
+<p>[wiki:Documentation &lt; Documentation] | [wiki:OrchestratorGuide Orchestrator Guide &gt;]</p>
+
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>

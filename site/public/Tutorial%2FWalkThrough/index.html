@@ -1,0 +1,118 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <h1></h1>
+  
+
+<p>[[TOC]]</p>
+
+<p>#!html
+    <p style="text-align: center; background-color: #fcf8e3; font-weight: bold;">
+    IMPORTANT: This page is outdated. Updated information is coming soon.
+    </p></p>
+
+<p>It is important to understand how DETER is setup in order to properly use the testbed.  We will start with a rather busy overview of how the network is setup at DETER.</p>
+
+<h1 id="operational-network-diagram:f746638537b1b0d3e53f5d695b61f545">Operational Network Diagram</h1>
+
+<p>[[Image(wiki:DETERTopology:Infrastructure.png, 800px)]]</p>
+
+<h2 id="networks:f746638537b1b0d3e53f5d695b61f545">Networks</h2>
+
+<h3 id="control-network:f746638537b1b0d3e53f5d695b61f545">Control Network</h3>
+
+<p>This is a special network for testbed nodes.  Each node is assigned an IP address on this network.  All network booting, filesystem traffic, imaging traffic, and user interaction goes over this network.</p>
+
+<p>[[Image(control.png)]]</p>
+
+<p>A picture of two of our control network switches.</p>
+
+<h3 id="experimental-network:f746638537b1b0d3e53f5d695b61f545">Experimental Network</h3>
+
+<p>All network interfaces aside from the control network interface are connected into the experimental network.  This network is dynamically configured.</p>
+
+<p>[[Image(experimental network.png)]]</p>
+
+<h2 id="control-hardware-network:f746638537b1b0d3e53f5d695b61f545">Control Hardware Network</h2>
+
+<p>Switches and power controllers are accessed, typically via SNMP, over this network.</p>
+
+<h2 id="the-transparent-isi-to-ucb-connection:f746638537b1b0d3e53f5d695b61f545">The transparent ISI to UCB Connection</h2>
+
+<p>Since DETER is actually in two different locations (see [wiki:ISIUCB ISI and UCB]), we need a way to make them appear as a single testbed.  In order to accomplish this, we have a pair of transparent bridges, one for experimental traffic and another for control traffic, at both sites connected by a 1Gbit high performance network link.</p>
+
+<p>[[Image(gateways.png)]]</p>
+
+<p>bgwe and bgwc, the control and experimental gateways at ISI.</p>
+
+<h2 id="servers-and-network-equipment:f746638537b1b0d3e53f5d695b61f545">Servers and Network equipment</h2>
+
+<h3 id="boss-boss:f746638537b1b0d3e53f5d695b61f545">Boss #boss</h3>
+
+<p>boss.isi.deterlab.net is the main testbed server it is the brains of the operation.  Testbed users are not allowed to
+log into boss.  Here are a few of the things boss does:</p>
+
+<ul>
+<li>Runs the web interface for the testbed as www.isi.deterlab.net.</li>
+<li>Runs the database for the testbed.</li>
+<li>Serves operating system images and acts as a network boot server for testbed nodes.</li>
+<li>Maps NS files to physical switches.</li>
+</ul>
+
+<h3 id="users-users:f746638537b1b0d3e53f5d695b61f545">Users #users</h3>
+
+<p>users.isi.deterlab.net is our file server and serves as a shell host for testbed users.</p>
+
+<p>[[Image(boss and users.png)]]</p>
+
+<p>Gatekeeper, router, boss, and users.</p>
+
+<h3 id="router-router:f746638537b1b0d3e53f5d695b61f545">Router #router</h3>
+
+<p>Router is pretty much transparent.  It does run a firewall that prevents testbed nodes from accessing boss and users in
+ways that are prohibited (for example, you can ssh from users to a testbed node, but not the other way around).</p>
+
+<h3 id="testbed-nodes:f746638537b1b0d3e53f5d695b61f545">Testbed Nodes</h3>
+
+<p>A node is a machine that is available for allocation by experimenters.  We currently have around 400 nodes for experimental use.  These nodes are split pretty evenly between [wiki:ISIUCB ISI and UCB].</p>
+
+<p>[[Image(pc3000.png)]]</p>
+
+<p>Here is an image of some of the pc3000 class machines at [wiki:ISIUCB ISI].</p>
+
+<h3 id="gatekeeper-gatekeeper:f746638537b1b0d3e53f5d695b61f545">Gatekeeper #gatekeeper</h3>
+
+<p>Gatekeeper is a bridging firewall.  It protects the internet facing side of the testbed and serves as a NAT machine for the Private Internet Network.</p>
+
+<h3 id="scratch-scratch:f746638537b1b0d3e53f5d695b61f545">Scratch #scratch</h3>
+
+<p>Scratch serves as our local Ubuntu, CentOS, and FreeBSD mirror.  All supported operating system images should be configured to fetch packages from scratch.</p>
+
+<p>[[Image(scratch.png)]]</p>
+
+<p>scratch</p>
+
+<h2 id="serial-console-servers-serialserver:f746638537b1b0d3e53f5d695b61f545">Serial Console Servers #serialserver</h2>
+
+<p>Each node is setup to use the serial port as the console.  This allows testbed users to easily get on the console of a node by logging into users.</p>
+
+<p>[[Image(serial.png)]]</p>
+
+<p>Here is one of our serial servers.  It consists of an older IBM X330 server with a Cyclades serial controller.  The beige
+boxes are chained off this controller giving the machine a very large number of serial ports.</p>
+
+<h2 id="power-controllers-powercontroller:f746638537b1b0d3e53f5d695b61f545">Power Controllers #powercontroller</h2>
+
+<p>Each node is connected to a power controller which in turn is connected to the control network.  This allows you to power cycle a node if it becomes stuck.</p>
+
+<p>[[Image(APC.png)]]</p>
+
+<p>One of the power controllers we use is the APC 7902.</p>
+
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>

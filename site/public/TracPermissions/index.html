@@ -1,0 +1,222 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <h1></h1>
+  
+
+<p>[[TracGuideToc]]</p>
+
+<p>Trac uses a simple, case sensitive, permission system to control what users can and can&rsquo;t access.</p>
+
+<p>Permission privileges are managed using the [TracAdmin trac-admin] tool or (new in version 0.11) the <em>General / Permissions&rdquo; panel in the &ldquo;Admin</em> tab of the web interface.</p>
+
+<p>In addition to the default permission policy described in this page, it is possible to activate additional permission policies by enabling plugins and listing them in the <code>[trac] permission_policies</code> configuration entry in the TracIni. See TracFineGrainedPermissions for more details.</p>
+
+<p>Non-authenticated users accessing the system are assigned the name &ldquo;anonymous&rdquo;. Assign permissions to the &ldquo;anonymous&rdquo; user to set privileges for anonymous/guest users. The parts of Trac that a user does not have the privileges for will not be displayed in the navigation.
+In addition to these privileges, users can be granted additional individual rights in effect when authenticated and logged into the system. All logged in users belong to the virtual group &ldquo;authenticated&rdquo;, which inherits permissions from &ldquo;anonymous&rdquo;.</p>
+
+<h1 id="graphical-admin-tab:63c6ca8cc17eadce601f205ca07f1252">Graphical Admin Tab</h1>
+
+<p><em>This feature is new in version 0.11.</em></p>
+
+<p>To access this tab, a user must have <code>TRAC_ADMIN privileges</code>. This can be performed as follows (more on the trac-admin script below):</p>
+
+<pre><code>  $ trac-admin /path/to/projenv permission add bob TRAC_ADMIN
+</code></pre>
+
+<p>Then, the user <code>bob</code> will be able to see the Admin tab, and can then access the permissions menu. This menu will allow you to perform all the following actions, but from the browser without requiring root access to the server (just the correct permissions for your user account).   <em>Use at least one lowercase character in user names, as all-uppercase names are reserved for permissions.</em></p>
+
+<ol>
+<li>[[Image(htdocs:../common/guide/admin.png)]]</li>
+<li>[[Image(htdocs:../common/guide/admin-permissions.png)]]</li>
+<li>[[Image(htdocs:../common/guide/admin-permissions-TICKET_ADMIN.png)]]</li>
+</ol>
+
+<p>An easy way to quickly secure a new Trac install is to run the above command on the anonymous user, install the <a href="http://trac-hacks.org/wiki/AccountManagerPlugin">AccountManagerPlugin</a>, create a new admin account graphically and then remove the TRAC_ADMIN permission from the anonymous user.</p>
+
+<h1 id="available-privileges:63c6ca8cc17eadce601f205ca07f1252">Available Privileges</h1>
+
+<p>To enable all privileges for a user, use the <code>TRAC_ADMIN</code> permission. Having <code>TRAC_ADMIN</code> is like being <code>root</code> on a *NIX system: it will allow you to perform any operation.</p>
+
+<p>Otherwise, individual privileges can be assigned to users for the various different functional areas of Trac (<em>note that the privilege names are case-sensitive</em>):</p>
+
+<h2 id="repository-browser:63c6ca8cc17eadce601f205ca07f1252">Repository Browser</h2>
+
+<p>|| <code>BROWSER_VIEW</code> || View directory listings in the [wiki:TracBrowser repository browser] ||
+|| <code>LOG_VIEW</code> || View revision logs of files and directories in the [wiki:TracBrowser repository browser] ||
+|| <code>FILE_VIEW</code> || View files in the [wiki:TracBrowser repository browser] ||
+|| <code>CHANGESET_VIEW</code> || View [wiki:TracChangeset repository check-ins] ||</p>
+
+<h2 id="ticket-system:63c6ca8cc17eadce601f205ca07f1252">Ticket System</h2>
+
+<p>|| <code>TICKET_VIEW</code> || View existing [wiki:TracTickets tickets] and perform [wiki:TracQuery ticket queries] ||
+|| <code>TICKET_CREATE</code> || Create new [wiki:TracTickets tickets] ||
+|| <code>TICKET_APPEND</code> || Add comments or attachments to [wiki:TracTickets tickets] ||
+|| <code>TICKET_CHGPROP</code> || Modify [wiki:TracTickets ticket] properties (priority, assignment, keywords, etc.) with the following exceptions: edit description field, add/remove other users from cc field when logged in, and set email to pref ||
+|| <code>TICKET_MODIFY</code> || Includes both <code>TICKET_APPEND</code> and <code>TICKET_CHGPROP</code>, and in addition allows resolving [wiki:TracTickets tickets]. Tickets can be assigned to users through a [TracTickets#Assign-toasDrop-DownList drop-down list] when the list of possible owners has been restricted. ||
+|| <code>TICKET_EDIT_CC</code> || Full modify cc field ||
+|| <code>TICKET_EDIT_DESCRIPTION</code> || Modify description field ||
+|| <code>TICKET_EDIT_COMMENT</code> || Modify comments ||
+|| <code>TICKET_ADMIN</code> || All <code>TICKET_*</code> permissions, plus the deletion of ticket attachments and modification of the reporter and description fields. It also allows managing ticket properties in the WebAdmin panel. ||</p>
+
+<p>Attention: the &ldquo;view tickets&rdquo; button appears with the <code>REPORT_VIEW</code> permission.</p>
+
+<h2 id="roadmap:63c6ca8cc17eadce601f205ca07f1252">Roadmap</h2>
+
+<p>|| <code>MILESTONE_VIEW</code> || View milestones and assign tickets to milestones. ||
+|| <code>MILESTONE_CREATE</code> || Create a new milestone ||
+|| <code>MILESTONE_MODIFY</code> || Modify existing milestones ||
+|| <code>MILESTONE_DELETE</code> || Delete milestones ||
+|| <code>MILESTONE_ADMIN</code> || All <code>MILESTONE_*</code> permissions ||
+|| <code>ROADMAP_VIEW</code> || View the [wiki:TracRoadmap roadmap] page, is not (yet) the same as MILESTONE_VIEW, see [trac:#4292 #4292] ||
+|| <code>ROADMAP_ADMIN</code> || to be removed with [trac:#3022 #3022], replaced by MILESTONE_ADMIN ||</p>
+
+<h2 id="reports:63c6ca8cc17eadce601f205ca07f1252">Reports</h2>
+
+<p>|| <code>REPORT_VIEW</code> || View [wiki:TracReports reports], i.e. the &ldquo;view tickets&rdquo; link. ||
+|| <code>REPORT_SQL_VIEW</code> || View the underlying SQL query of a [wiki:TracReports report] ||
+|| <code>REPORT_CREATE</code> || Create new [wiki:TracReports reports] ||
+|| <code>REPORT_MODIFY</code> || Modify existing [wiki:TracReports reports] ||
+|| <code>REPORT_DELETE</code> || Delete [wiki:TracReports reports] ||
+|| <code>REPORT_ADMIN</code> || All <code>REPORT_*</code> permissions ||</p>
+
+<h2 id="wiki-system:63c6ca8cc17eadce601f205ca07f1252">Wiki System</h2>
+
+<p>|| <code>WIKI_VIEW</code> || View existing [wiki:TracWiki wiki] pages ||
+|| <code>WIKI_CREATE</code> || Create new [wiki:TracWiki wiki] pages ||
+|| <code>WIKI_MODIFY</code> || Change [wiki:TracWiki wiki] pages ||
+|| <code>WIKI_RENAME</code> || Rename [wiki:TracWiki wiki] pages ||
+|| <code>WIKI_DELETE</code> || Delete [wiki:TracWiki wiki] pages and attachments ||
+|| <code>WIKI_ADMIN</code> || All <code>WIKI_*</code> permissions, plus the management of <em>readonly</em> pages. ||</p>
+
+<h2 id="permissions:63c6ca8cc17eadce601f205ca07f1252">Permissions</h2>
+
+<p>|| <code>PERMISSION_GRANT</code> || add/grant a permission ||
+|| <code>PERMISSION_REVOKE</code> || remove/revoke a permission ||
+|| <code>PERMISSION_ADMIN</code> || All <code>PERMISSION_*</code> permissions ||</p>
+
+<h2 id="others:63c6ca8cc17eadce601f205ca07f1252">Others</h2>
+
+<p>|| <code>TIMELINE_VIEW</code> || View the [wiki:TracTimeline timeline] page ||
+|| <code>SEARCH_VIEW</code> || View and execute [wiki:TracSearch search] queries ||
+|| <code>CONFIG_VIEW</code> || Enables additional pages on <em>About Trac</em> that show the current configuration or the list of installed plugins ||
+|| <code>EMAIL_VIEW</code> || Shows email addresses even if [trac:wiki:0.11/TracIni trac show_email_addresses configuration option is false] ||</p>
+
+<h1 id="creating-new-privileges:63c6ca8cc17eadce601f205ca07f1252">Creating New Privileges</h1>
+
+<p>To create custom permissions, for example to be used in a custom workflow, enable the optional <code>tracopt.perm.config_perm_provider.ExtraPermissionsProvider</code> component in the &ldquo;Plugins&rdquo; admin panel, and add the desired permissions to the <code>[extra-permissions]</code> section in your [wiki:TracIni#extra-permissions-section trac.ini]. For more information, please refer to the documentation of the component in the admin panel.</p>
+
+<h1 id="granting-privileges:63c6ca8cc17eadce601f205ca07f1252">Granting Privileges</h1>
+
+<p>You grant privileges to users using [wiki:TracAdmin trac-admin]. The current set of privileges can be listed with the following command:</p>
+
+<pre><code>  $ trac-admin /path/to/projenv permission list
+</code></pre>
+
+<p>This command will allow the user <em>bob</em> to delete reports:</p>
+
+<pre><code>  $ trac-admin /path/to/projenv permission add bob REPORT_DELETE
+</code></pre>
+
+<p>The <code>permission add</code> command also accepts multiple privilege names:</p>
+
+<pre><code>  $ trac-admin /path/to/projenv permission add bob REPORT_DELETE WIKI_CREATE
+</code></pre>
+
+<p>Or add all privileges:</p>
+
+<pre><code>  $ trac-admin /path/to/projenv permission add bob TRAC_ADMIN
+</code></pre>
+
+<h1 id="permission-groups:63c6ca8cc17eadce601f205ca07f1252">Permission Groups</h1>
+
+<p>There are two built-in groups, &ldquo;authenticated&rdquo; and &ldquo;anonymous&rdquo;.
+Any user who has not logged in is automatically in the &ldquo;anonymous&rdquo; group.
+Any user who has logged in is also in the &ldquo;authenticated&rdquo; group.
+The &ldquo;authenticated&rdquo; group inherits permissions from the &ldquo;anonymous&rdquo; group.
+For example, if the &ldquo;anonymous&rdquo; group has permission WIKI_MODIFY,
+it is not necessary to add the WIKI_MODIFY permission to the &ldquo;authenticated&rdquo; group as well.</p>
+
+<p>Custom groups may be defined that inherit permissions from the two built-in groups.</p>
+
+<p>Permissions can be grouped together to form roles such as <em>developer&rdquo;, &ldquo;admin</em>, etc.</p>
+
+<pre><code>  $ trac-admin /path/to/projenv permission add developer WIKI_ADMIN
+  $ trac-admin /path/to/projenv permission add developer REPORT_ADMIN
+  $ trac-admin /path/to/projenv permission add developer TICKET_MODIFY
+  $ trac-admin /path/to/projenv permission add bob developer
+  $ trac-admin /path/to/projenv permission add john developer
+</code></pre>
+
+<p>Group membership can be checked by doing a <code>permission list</code> with no further arguments; the resulting output will include group memberships. <em>Use at least one lowercase character in group names, as all-uppercase names are reserved for permissions</em>.</p>
+
+<h1 id="adding-a-new-group-and-permissions:63c6ca8cc17eadce601f205ca07f1252">Adding a New Group and Permissions</h1>
+
+<p>Permission groups can be created by assigning a user to a group you wish to create, then assign permissions to that group.</p>
+
+<p>The following will add <em>bob&rdquo; to the new group called &ldquo;beta_testers&rdquo; and then will assign WIKI_ADMIN permissions to that group. (Thus, &ldquo;bob</em> will inherit the WIKI_ADMIN permission)</p>
+
+<pre><code>   $ trac-admin /path/to/projenv permission add bob beta_testers
+   $ trac-admin /path/to/projenv permission add beta_testers WIKI_ADMIN
+</code></pre>
+
+<h1 id="removing-permissions:63c6ca8cc17eadce601f205ca07f1252">Removing Permissions</h1>
+
+<p>Permissions can be removed using the &lsquo;remove&rsquo; command. For example:</p>
+
+<p>This command will prevent the user <em>bob</em> from deleting reports:</p>
+
+<pre><code>  $ trac-admin /path/to/projenv permission remove bob REPORT_DELETE
+</code></pre>
+
+<p>Just like <code>permission add</code>, this command accepts multiple privilege names.</p>
+
+<p>You can also remove all privileges for a specific user:</p>
+
+<pre><code>  $ trac-admin /path/to/projenv permission remove bob '*'
+</code></pre>
+
+<p>Or one privilege for all users:</p>
+
+<pre><code>  $ trac-admin /path/to/projenv permission remove '*' REPORT_ADMIN
+</code></pre>
+
+<h1 id="default-permissions:63c6ca8cc17eadce601f205ca07f1252">Default Permissions</h1>
+
+<p>By default on a new Trac installation, the <code>anonymous</code> user will have <em>view</em> access to everything in Trac, but will not be able to create or modify anything.
+On the other hand, the <code>authenticated</code> users will have the permissions to <em>create and modify tickets and wiki pages</em>.
+<em>anonymous</em></p>
+
+<pre><code> BROWSER_VIEW 
+ CHANGESET_VIEW 
+ FILE_VIEW 
+ LOG_VIEW 
+ MILESTONE_VIEW 
+ REPORT_SQL_VIEW 
+ REPORT_VIEW 
+ ROADMAP_VIEW 
+ SEARCH_VIEW 
+ TICKET_VIEW 
+ TIMELINE_VIEW
+ WIKI_VIEW
+</code></pre>
+
+<p><em>authenticated</em></p>
+
+<pre><code> TICKET_CREATE 
+ TICKET_MODIFY 
+ WIKI_CREATE 
+ WIKI_MODIFY  
+</code></pre>
+
+<hr />
+
+<p>See also: TracAdmin, TracGuide and TracFineGrainedPermissions</p>
+
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>

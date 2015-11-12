@@ -1,0 +1,132 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <h1></h1>
+  
+
+<p>Trac supports language-specific syntax highlighting of source code within wiki formatted text in [WikiProcessors#CodeHighlightingSupport wiki processors] blocks and in the [TracBrowser repository browser].</p>
+
+<p>To do this, Trac uses external libraries with support for a great number of programming languages.</p>
+
+<p>Currently Trac supports syntax coloring using one or more of the following packages:</p>
+
+<ul>
+<li><a href="http://pygments.pocoo.org/">Pygments</a>, by far the preferred system, as it covers a wide range of programming languages and other structured texts and is actively supported</li>
+<li><a href="http://www.codento.com/people/mtr/genscript/">GNU Enscript</a>, commonly available on Unix but somewhat unsupported on Windows</li>
+<li><a href="http://silvercity.sourceforge.net/">SilverCity</a>, legacy system, some versions can be <a href="http://trac.edgewall.org/wiki/TracFaq#why-is-my-css-code-not-being-highlighted-even-though-i-have-silvercity-installed">problematic</a></li>
+</ul>
+
+<p>To activate syntax coloring, simply install either one (or more) of these packages (see [#ExtraSoftware] section below).
+If none of these packages is available, Trac will display the data as plain text.</p>
+
+<h2 id="about-pygments:661d6316028e22896cc03e37577e2959">About Pygments</h2>
+
+<p>Starting with trac 0.11 <a href="http://pygments.org/">pygments</a> will be the new default highlighter. It&rsquo;s a highlighting library implemented in pure python, very fast, easy to extend and <a href="http://pygments.org/docs/">well documented</a>.</p>
+
+<p>The Pygments default style can specified in the [TracIni#mimeviewer-section mime-viewer] section of trac.ini. The default style can be overridden by setting a Style preference on the [/prefs/pygments preferences page].</p>
+
+<p>It&rsquo;s very likely that the list below is outdated because the list of supported pygments lexers is growing weekly. Just have a look at the page of <a href="http://pygments.org/docs/lexers/">supported lexers</a> on the pygments webpage.</p>
+
+<h1 id="syntax-coloring-support:661d6316028e22896cc03e37577e2959">Syntax Coloring Support</h1>
+
+<p>=== Known MIME Types</p>
+
+<p>[[KnownMimeTypes]]</p>
+
+<p>=== List of Languages Supported, by Highlighter #language-supported</p>
+
+<p>This list is only indicative.</p>
+
+<p>||                 ||||||||
+|| Ada             ||                 ||  ✓              ||     ||
+|| Asm             ||                 ||  ✓              ||     ||
+|| Apache Conf     ||                 ||                 ||  ✓  ||
+|| ASP             ||  ✓              ||  ✓              ||     ||
+|| C               ||  ✓              ||  ✓              ||  ✓  ||
+|| C#              ||                 ||  ✓ <sup class="footnote-ref" id="fnref:661d6316028e22896cc03e37577e2959:a1-1"><a rel="footnote" href="#fn:661d6316028e22896cc03e37577e2959:a1-1">1</a></sup>^  ||  ✓  ||
+|| C++             ||  ✓              ||  ✓              ||  ✓  ||
+|| Java            ||  ✓ <sup class="footnote-ref" id="fnref:661d6316028e22896cc03e37577e2959:a2-2"><a rel="footnote" href="#fn:661d6316028e22896cc03e37577e2959:a2-2">2</a></sup>^  ||  ✓              ||  ✓  ||
+|| Awk             ||                 ||  ✓              ||     ||
+|| Boo             ||                 ||                 ||  ✓  ||
+|| CSS             ||  ✓              ||                 ||  ✓  ||
+|| Python Doctests ||                 ||                 ||  ✓  ||
+|| Diff            ||                 ||  ✓              ||  ✓  ||
+|| Eiffel          ||                 ||  ✓              ||     ||
+|| Elisp           ||                 ||  ✓              ||     ||
+|| Fortran         ||                 ||  ✓ <sup class="footnote-ref" id="fnref:661d6316028e22896cc03e37577e2959:a1-1"><a rel="footnote" href="#fn:661d6316028e22896cc03e37577e2959:a1-1">3</a></sup>^  ||  ✓  ||
+|| Haskell         ||                 ||  ✓              ||  ✓  ||
+|| Genshi          ||                 ||                 ||  ✓  ||
+|| HTML            ||  ✓              ||  ✓              ||  ✓  ||
+|| IDL             ||                 ||  ✓              ||     ||
+|| INI             ||                 ||                 ||  ✓  ||
+|| Javascript      ||  ✓              ||  ✓              ||  ✓  ||
+|| Lua             ||                 ||                 ||  ✓  ||
+|| m4              ||                 ||  ✓              ||     ||
+|| Makefile        ||                 ||  ✓              ||  ✓  ||
+|| Mako            ||                 ||                 ||  ✓  ||
+|| Matlab <sup class="footnote-ref" id="fnref:661d6316028e22896cc03e37577e2959:a3-3"><a rel="footnote" href="#fn:661d6316028e22896cc03e37577e2959:a3-3">4</a></sup>^  ||             ||  ✓              ||  ✓  ||
+|| Mygthy          ||                 ||                 ||  ✓  ||
+|| Objective-C     ||                 ||  ✓              ||  ✓  ||
+|| OCaml           ||                 ||                 ||  ✓  ||
+|| Pascal          ||                 ||  ✓              ||  ✓  ||
+|| Perl            ||  ✓              ||  ✓              ||  ✓  ||
+|| PHP             ||  ✓              ||                 ||  ✓  ||
+|| PSP             ||  ✓              ||                 ||     ||
+|| Pyrex           ||                 ||  ✓              ||     ||
+|| Python          ||  ✓              ||  ✓              ||  ✓  ||
+|| Ruby            ||  ✓              ||  ✓ <sup class="footnote-ref" id="fnref:661d6316028e22896cc03e37577e2959:a1-1"><a rel="footnote" href="#fn:661d6316028e22896cc03e37577e2959:a1-1">5</a></sup>^  ||  ✓  ||
+|| Scheme          ||                 ||  ✓              ||  ✓  ||
+|| Shell           ||                 ||  ✓              ||  ✓  ||
+|| Smarty          ||                 ||                 ||  ✓  ||
+|| SQL             ||  ✓              ||  ✓              ||  ✓  ||
+|| Troff           ||                 ||  ✓              ||  ✓  ||
+|| TCL             ||                 ||  ✓              ||     ||
+|| Tex             ||                 ||  ✓              ||  ✓  ||
+|| Verilog         ||  ✓ <sup class="footnote-ref" id="fnref:661d6316028e22896cc03e37577e2959:a2-2"><a rel="footnote" href="#fn:661d6316028e22896cc03e37577e2959:a2-2">6</a></sup>^  ||  ✓              ||     ||
+|| VHDL            ||                 ||  ✓              ||     ||
+|| Visual Basic    ||                 ||  ✓              ||  ✓  ||
+|| VRML            ||                 ||  ✓              ||     ||
+|| XML             ||  ✓              ||                 ||  ✓  ||</p>
+
+<p>&ldquo;[=#a1 (1)] Not included in the Enscript distribution.  Additional highlighting rules can be obtained for
+<a href="http://neugierig.org/software/ruby/">Ruby</a>,
+<a href="http://wiki.hasno.info/index.php/Csharp.st">C#</a>,
+<a href="http://wiki.hasno.info/index.php/F90.st">Fortran 90x/2003</a></p>
+
+<p>&ldquo;[=#a2 (2)] since Silvercity 0.9.7 released on 2006-11-23</p>
+
+<p>&ldquo;[=#a3 (3)] By default <code>.m</code> files are considered Objective-C files. In order to treat <code>.m</code> files as MATLAB files, add &ldquo;text/matlab:m&rdquo; to the &ldquo;mime_map&rdquo; setting in the [wiki:TracIni#mimeviewer-section &ldquo;[mimeviewer] section of trac.ini&rdquo;].</p>
+
+<h1 id="extra-software:661d6316028e22896cc03e37577e2959">Extra Software</h1>
+
+<ul>
+<li>GNU Enscript &ndash; <a href="http://directory.fsf.org/GNU/enscript.html">http://directory.fsf.org/GNU/enscript.html</a></li>
+<li>GNU Enscript for Windows &ndash; <a href="http://gnuwin32.sourceforge.net/packages/enscript.htm">http://gnuwin32.sourceforge.net/packages/enscript.htm</a></li>
+<li>SilverCity &ndash; <a href="http://silvercity.sf.net/">http://silvercity.sf.net/</a></li>
+<li>Pygments &ndash; <a href="http://pygments.org/">http://pygments.org/</a></li>
+</ul>
+
+<hr />
+
+<p>See also: WikiProcessors, WikiFormatting, TracWiki, TracBrowser</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:661d6316028e22896cc03e37577e2959:a1-1">#a1 (1) <a class="footnote-return" href="#fnref:661d6316028e22896cc03e37577e2959:a1-1"><sup>[return]</sup></a></li>
+<li id="fn:661d6316028e22896cc03e37577e2959:a2-2">#a2 (2) <a class="footnote-return" href="#fnref:661d6316028e22896cc03e37577e2959:a2-2"><sup>[return]</sup></a></li>
+<li id="fn:661d6316028e22896cc03e37577e2959:a1-1">#a1 (1) <a class="footnote-return" href="#fnref:661d6316028e22896cc03e37577e2959:a1-1"><sup>[return]</sup></a></li>
+<li id="fn:661d6316028e22896cc03e37577e2959:a3-3">#a3 (3) <a class="footnote-return" href="#fnref:661d6316028e22896cc03e37577e2959:a3-3"><sup>[return]</sup></a></li>
+<li id="fn:661d6316028e22896cc03e37577e2959:a1-1">#a1 (1) <a class="footnote-return" href="#fnref:661d6316028e22896cc03e37577e2959:a1-1"><sup>[return]</sup></a></li>
+<li id="fn:661d6316028e22896cc03e37577e2959:a2-2">#a2 (2) <a class="footnote-return" href="#fnref:661d6316028e22896cc03e37577e2959:a2-2"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>

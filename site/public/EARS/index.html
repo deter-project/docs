@@ -1,0 +1,98 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <h1></h1>
+  
+
+<p>Access to the EARS cluster is filtered by a bastion host.  We figured the easiest way to provide secure access to users was to use SSH as a proxy from a bastion host.  Here is an overview of the steps.</p>
+
+<ul>
+<li>Get access to egate.deterlab.net which is the bastion host for the EARS testbed.</li>
+<li>Use egate.deterlab.net as a SOCKS proxy to access the web interface at <a href="https://www.ears.deterlab.net/">https://www.ears.deterlab.net/</a></li>
+<li>Apply to your project on EARS.</li>
+</ul>
+
+<h1 id="logging-into-egate-the-bastion-host:4601390087ae3c4312e53a78c7db778d">Logging into EGATE, the bastion host</h1>
+
+<ul>
+<li>First, create a SSH key pair and email the public key, as an attachment, to us.  Also let us know what your preferred username is.</li>
+
+<li><p>Once you get word that your account has been created, please try to SSH to <em>egate.deterlab.net<em>&rsquo;  The &lsquo;</em>-D 1080</em> will open a SOCKS proxy port on your local machine.</p>
+
+<p>$ ssh jjh@egate.deterlab.net -D 1080
+Last login: Thu Jul 18 16:40:33 2013 from pod.isi.edu
+FreeBSD 9.1-RELEASE-p3 (EGATE) #2: Fri Jun  7 17:48:53 PDT 2013</p>
+
+<p>Welcome to FreeBSD!</p>
+
+<p>Handy bash(1) prompt:  PS1=&rdquo;\u@\h \w !$ &ldquo;
+        &ndash; David Scheidt <a href="mailto:dscheidt@tumbolia.com">dscheidt@tumbolia.com</a>
+[jjh@egate ~]$</p></li>
+</ul>
+
+<p>You can also edit your .ssh/config file to automatically setup forwarding every time you login to elate:</p>
+
+<pre><code># Ears cluster
+Host egate
+        HostName egate.deterlab.net
+        DynamicForward 1080
+</code></pre>
+
+<h1 id="using-the-proxy-for-the-ears-web-interface:4601390087ae3c4312e53a78c7db778d">Using the Proxy for the EARS web interface</h1>
+
+<ul>
+<li>You can now configure your browser to use the SOCKS port.  There are two ways to do this.  For both we recommend using Firefox.</li>
+</ul>
+
+<h2 id="sending-all-firefox-traffic-through-egate-deterlab-net:4601390087ae3c4312e53a78c7db778d">Sending all Firefox traffic through egate.deterlab.net</h2>
+
+<p>This is the easiest way to get going, but all web traffic will be sent through egate.deterlab.net.</p>
+
+<ul>
+<li><p>Open Firefox settings window and select the <em>Advanced</em> tab
+[[Image(FirefoxSettings.png)]]</p></li>
+
+<li><p>Now select the <em>Settings&hellip;._&rsquo; button on the top right of the page under the &ldquo;&lsquo;Connection&rdquo;&rsquo; heading.  Select &ldquo;&lsquo;Manual Proxy Configuration&rdquo;&rsquo; and put &ldquo;&lsquo;127.0.0.1&rdquo;&rsquo; in as the &ldquo;&lsquo;SOCKS Host&rdquo;&rsquo; and &ldquo;&lsquo;1080&rdquo;&rsquo; as the port.  Select the &lsquo;_SOCKS v5</em> radio button.</p></li>
+</ul>
+
+<p>[[Image(FirefoxConnection.png)]]</p>
+
+<h2 id="sending-only-web-traffic-destined-for-www-ears-deterlab-net-through-the-proxy:4601390087ae3c4312e53a78c7db778d">Sending only web traffic destined for www.ears.deterlab.net through the proxy</h2>
+
+<p>We recommend using Firefox with the FoxyProxy Standard extension.  This extension allows finer grained control of how the proxy is used.</p>
+
+<ul>
+<li>Once the FoxyProxy Standard plugin is installed, you can go to <em>Tools -&gt; FoxyProxy -&gt; Options</em>
+[[Image(AddOns.png)]]</li>
+<li>Click the &ldquo;Add New Proxy&rdquo; button on the right.
+[[Image(AddNewProxy.png)]]</li>
+<li>Under the proxy Details tab, fill in 127.0.0.1 for the <em>Host or IP Address_&rsquo; field, select the &ldquo;&lsquo;SOCKS proxy?&rdquo;&rsquo; check box, and select &lsquo;_SOCKS v5</em>
+[[Image(ProxyDetails.png)]]</li>
+<li>Now click the <em>URL Patterns</em> button at the top.  Add in the following pattern for EARS:
+[[Image(URLPattern.png)]]</li>
+
+<li><p>Now in the main window, make sure <em>Select Mode:_&rsquo; at the top is set to &lsquo;_Use proxies based on their pre-defined patterns and priorities</em>
+[[Image(SelectMode.png)]]</p></li>
+
+<li><p>Now you should be able to access the web interface of the EARS cluster.</p></li>
+</ul>
+
+<h1 id="accessing-the-web-interface:4601390087ae3c4312e53a78c7db778d">Accessing the Web Interface</h1>
+
+<ul>
+<li><p>Once you have your proxy properly configured, you can access the web interface of the EARS cluster at <a href="https://www.ears.deterlab.net">https://www.ears.deterlab.net/</a></p></li>
+
+<li><p>If you are new to the EARS cluster, you will need to <a href="https://www.ears.deterlab.net/joinproject.php">Join an Existing Project</a></p>
+
+<h1 id="logging-into-users:4601390087ae3c4312e53a78c7db778d">Logging into users</h1></li>
+</ul>
+
+<p>You can log into users.ears.deterlab.net from egate.  You will need to apply to a project and be approved before you can log into users since the EARS testbed is distinct from the ISI testbed.</p>
+
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>

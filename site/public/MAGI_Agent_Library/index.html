@@ -1,0 +1,303 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <h1></h1>
+  
+
+<p>[wiki:MAGI_System_Files_and_Logs &lt; MAGI System Files and Logs] | [wiki:MAGI_Tools MAGI Tools &gt;]</p>
+
+<p>[[TOC]]</p>
+
+<h1 id="overview:1313c16d33575e1e2d78237d0545a50a">Overview</h1>
+
+<p>Every node has a daemon running with a series of Agents on it. These Agents are each executed in their own thread or process. They are provided with a defined interface with which to send and receive messages to other objects in the experiment. The MAGI daemon will route messages to the agent based on the routing information in the message. The daemon supports group-based, name-based, and “dock”-based routing. (A dock is like a port for a traditional daemon; an agent listens on a dock.) Once a message is delivered to an agent, the format of the message data is then up to the agent itself.</p>
+
+<p>Most agents will not need to parse messages directly, however, because the MAGI Agent Library supports a number of useful abstractions implemented in base classes from which Agent authors can derive. These are described in detail below.</p>
+
+<h1 id="agent-execution-models:1313c16d33575e1e2d78237d0545a50a">Agent Execution Models</h1>
+
+<p>There are two execution models supported by the daemon for Agents:
+* <em>Thread-based</em> - A thread-based Agent is loaded and runs in the process space of the daemon. The daemon communicates with a thread-based agent directly
+* <em>Process-based</em> - A process-based Agent is started as a separate process. The daemon communicates with it via standard interprocess communication techniques: a pipe or a socket.</p>
+
+<p>Here is a list outlining the differences between the execution models.</p>
+
+<p><em>Threads</em>
+* <em>Pro</em>: Lightweight
+* <em>Pro</em>: Messages passed as objects without need for serialization
+* <em>Con</em>: Must be written in Python
+* <em>Con</em>: Must be aware of other threads when it comes to file descriptors or other shared memory</p>
+
+<p><em>Process</em> (Pipe or Socket)
+* <em>Pro</em>: Agents may be written in languages other than Python.
+* <em>Pro</em>: May kill off agent individually from the shell
+* <em>Con</em>: Heavier weight if invoking a new interpreter for each Agent for scripted languages
+* <em>Con</em>: Message transceiver is more complex, in particular if a library for the language has not been written. (Note: As of now, only Python is supported. We are working on adding support for other languages.)</p>
+
+<h1 id="interface-description-language-idl:1313c16d33575e1e2d78237d0545a50a">Interface Description Language (IDL)</h1>
+
+<p>Agent authors must write an IDL that matches the interface exported by their agent. This IDL is used by MAGI to validate the interface of the agent (and in the future to generate GUIs for agent execution and configuration.)</p>
+
+<p>The IDL should specify:
+* agent execution model (thread or process);
+* any public agent variables and their types, ranges, or enumerated values;
+* any public methods and the method arguments and their types;
+* “help” strings for each method and agent variable which explain their purpose;
+* and finally any Agent library from which they derive.</p>
+
+<p>This may seem like a lot to specify, but the Agent Library supplies IDL for base Agents &ndash;  so in practice much of the IDL specification will be supplied to the Agent author.</p>
+
+<p>The IDL format and keywords are given in a table below.</p>
+
+<p>(TBD - Coming soon)</p>
+
+<h1 id="agent-library:1313c16d33575e1e2d78237d0545a50a">Agent Library</h1>
+
+<p>In this section we describe the Agent Library and give brief examples for usage. Classes are organized from the bottom up, that is, starting with the class from which the others derive.</p>
+
+<p><em>Note:</em> When using the Orchestrator to run your experiment, the Orchestrator will, by default, handle a return value of <em>False&rdquo; from an Agent method as a reason to unload all Agents, break down communication groups and exit. Thus your Agent may stop an experiment by returning &ldquo;False</em>.</p>
+
+<h2 id="agent:1313c16d33575e1e2d78237d0545a50a"><code>Agent</code></h2>
+
+<p>This is the base Agent class. It implements a <code>setConfiguration</code> method. If derived from, the user may call <code>setConfiguration</code> to set any <code>self</code> variables in your class.</p>
+
+<p>Agent also implements an empty <code>confirmConfiguration</code> method that is called once the <code>self</code> variables are set. You may implement your own <code>confirmConfiguration</code> if you need to make sure the user has set your internal variables to match any constraints you may want to impose. Returning <em>False&rdquo; from this method will signal to the Orchestrator that something is wrong and the Orchestrator should handle this as an error. The default implementation of <code>confirmConfiguration</code> simply returns &ldquo;True</em>.</p>
+
+<p>The method signature for <code>confirmConfiguration()</code> is</p>
+
+<pre><code>def confirmConfiguration(self):
+</code></pre>
+
+<p>It takes no arguments.</p>
+
+<p>In your <code>confirmConfiguration</code> method, you should confirm that your agent internal variables are the correct type and in the expected range.</p>
+
+<p>In the following example, imagine an agent has a variable that is an integer and the range of the value must be between 1 and 10. An agent can use the <code>Agent</code> class to implement this as so:</p>
+
+<pre><code>from magi.util.agent import Agent
+
+class myAgent(Agent):
+    def __init__(self):
+        self.value = None
+
+    def confirmConfiguration():
+        if not isinstance(self.value, int):
+            return False
+
+        if not 1 &lt;= self.value &lt;= 10:
+            return False
+
+        return True
+</code></pre>
+
+<p>If the variable <code>self.value</code> is not an integer or is not between 1 and 10, <code>confirmConfiguration</code> returns <em>False&rdquo;. If running this agent with the Orchestrator, the &ldquo;False</em> value will get returned to the Orchestrator which will unload all agents, destroy all group communications, then exit. Thus your agent may cause the experiment to stop and be reset when it is not given the correct inputs.</p>
+
+<p><em>Note:</em> In the future, this functionality of enforcing correct input will be handled outside of the agent code. The IDL associated with the agent already specifies correct input and the Orchestrator (or other Montage/MAGI front end tool) will enforce proper input.</p>
+
+<p>All classes in the <code>AgentLibrary</code> inherit from <code>Agent</code>.</p>
+
+<p>The <code>Agent</code> documentation can seen here. <a href="http://montage.deterlab.net/backend/python/util.html#magi.util.agent.Agent">http://montage.deterlab.net/backend/python/util.html#magi.util.agent.Agent</a></p>
+
+<h2 id="dispatchagent:1313c16d33575e1e2d78237d0545a50a"><code>DispatchAgent</code></h2>
+
+<p>The <code>DispatchAgent</code> implements the simple remote procedure call (RPC) mechanism used by the Orchestrator (and available through the MAGI python API). This allows any method in a class derived from <code>DispatchAgent</code> to be invoked in an AAL file (or by a <code>MagiMessage</code> if using the MAGI python interface directly).</p>
+
+<p>You almost always want to derive your agent from <code>DispatchAgent</code>. The <code>DispatchAgent</code> code simply loops, parsing incoming messages, looking for an event message. When it finds one, it attempts to call the method specified in the message with the arguments given in the message, thus implementing a basic RPC functionality in your agent.</p>
+
+<p>The first argument to your RPC-enabled method is the received message. It is accompanied by the optional named-parameters, sent as part of the <code>MagiMessage</code>. The Agent Library exports a function decorator for <code>DispatchAgent</code>-callable methods named <code>agentmethod</code>. It is not currently used for anything, but it is suggested that agent developers use it anyway.</p>
+
+<p>The <code>DispatchAgent</code> reads incoming messages and invokes the required method synchronously, i.e., it waits for a method call to return before reading the next message.</p>
+
+<p>Here is a simple example:</p>
+
+<pre><code>from magi.util.agent import DispatchAgent, agentmethod
+
+def myAgent(DispatchAgent):
+    def __init__(self):
+        DispatchAgent.__init__(self)
+
+    @agentmethod()
+    def doAction(self, msg):
+        pass
+</code></pre>
+
+<p>Given the agent <code>myAgent</code> above and the AAL fragment below, the method <code>doAction</code> will be called on all test nodes associated with <code>myAgentGroup</code>.</p>
+
+<pre><code>eventstreams:
+    myStream:
+        - type: event
+          agent: myAgentGroup
+          method: doAction
+          args: { }
+</code></pre>
+
+<p>The <code>DispatchAgent</code> documentation may seen here. <a href="http://montage.deterlab.net/backend/python/util.html#magi.util.agent.DispatchAgent">http://montage.deterlab.net/backend/python/util.html#magi.util.agent.DispatchAgent</a></p>
+
+<h2 id="nonblockingdispatchagent:1313c16d33575e1e2d78237d0545a50a"><code>NonBlockingDispatchAgent</code></h2>
+
+<p>The <code>NonBlockingDispatchAgent</code> is similar to <code>DispatchAgent</code>. The only difference is that <code>NonBlockingDispatchAgent</code> invokes the methods <em>asynchronously</em>, i.e., it forks a new thread for each method call and does not wait for the call to return. It invokes the required method and moves on to read the next message.</p>
+
+<h2 id="reportingdispatchagent:1313c16d33575e1e2d78237d0545a50a"><code>ReportingDispatchAgent</code></h2>
+
+<p>You will note that the <code>DispatchAgent</code> only allows an outside source to send commands to the agent. There is no communication backwards. The <code>ReportingDispatchAgent</code> base class has a slightly different run loop. Rather than blocking forever on incoming messages, it will also call its own method, <code>periodic</code>, to allow other operations to occur.</p>
+
+<p>The call to <code>periodic</code> will return the amount of time in seconds (as a float) that it will wait until calling <code>periodic</code> again. The <code>periodic</code> function therefore controls how often it is called. The first call will happen as soon as the run is called.</p>
+
+<p>The method signature of the <code>periodic</code> method is:</p>
+
+<pre><code>def periodic(self, now):
+</code></pre>
+
+<p>If <code>periodic</code> is not implemented in the subclass, an exception is raised.</p>
+
+<p>This example code writes the current time to a file once a second. Note the explicit use of the <code>Agent</code> class to set the file name.</p>
+
+<pre><code>import os.path
+from magi.util.agent import ReportingDispatchAgent, agentmethod
+
+class myTimeTracker(ReportingDispatchAgent):
+    def __init__(self):
+        ReportingDispatchAgent.__init__(self)
+        self.filename = None
+
+    def confirmConfiguration(self):
+        if not os.path.exists(self.filename):
+            return False
+
+    def periodic(self, now):
+        with open(self.filename, 'a') as fd:
+            fd.write('%f\n' % now)
+
+        # call again one second from now
+        return 1.0
+</code></pre>
+
+<p>The <code>ReportingDispatchAgent</code> documentation may seen here. <a href="http://montage.deterlab.net/backend/python/util.html#magi.util.agent.ReportingDispatchAgent">http://montage.deterlab.net/backend/python/util.html#magi.util.agent.ReportingDispatchAgent</a></p>
+
+<h2 id="sharedserver:1313c16d33575e1e2d78237d0545a50a"><code>SharedServer</code></h2>
+
+<p>The <code>SharedServer</code> class inherits from <code>DispatchAgent</code> and expects the subclass to implement the methods <code>runserver</code> and <code>terminateserver</code> to start or stop a local server process.</p>
+
+<p>The <code>SharedServer</code> class takes care of multiple agents requesting use of the server and only calls <code>runserver</code> or <code>terminateserver</code> when required. This ensures that there is ever only one instance of the server running at once on a given host. A canonical example of this would be a web server running a single instance of Apache. The methods <code>runserver</code> and <code>stopserver</code> take no arguments.</p>
+
+<p>Below is an example of a simple agent that starts and stops Apache on the local host. If there are other agents running on the machine that require Apache to be running, they may inherit from <code>SharedServer</code> as well, thus ensuring that there is only ever one instance of Apache running.</p>
+
+<pre><code>from subprocess import check_call, CalledProcessError
+from magi.util.agent import SharedServer
+
+class ApacheServerAgent(SharedServer):
+    def __init__(self):
+        SharedServer.__init__(self)
+
+    def runserver(self):
+        try:
+            check_call('apachectl start'.split())
+
+        except CalledProcessError:
+            return False
+
+        return True
+
+    def stopserver(self):
+        try:
+            check_call('apachectl stop'.split())
+
+        except CalledProcessError:
+            return False
+
+        return True
+</code></pre>
+
+<p>The <code>SharedServer</code> documentation may seen here. <a href="http://montage.deterlab.net/backend/python/util.html#magi.util.agent.SharedServer">http://montage.deterlab.net/backend/python/util.html#magi.util.agent.SharedServer</a></p>
+
+<h2 id="trafficclientagent:1313c16d33575e1e2d78237d0545a50a"><code>TrafficClientAgent</code></h2>
+
+<p><code>TrafficClientAgent</code> models an agent that periodically generates traffic. It must implement the <code>getCmd</code> method, returning a string to execute on the commandline to generate traffic. For example, the <code>getCmd</code> could return a <code>curl</code> or <code>wget</code> command to generate client-side HTML traffic. The signature of <code>getCmd</code> is:</p>
+
+<pre><code>def getCmd(self, destination)
+</code></pre>
+
+<p>Where <code>destination</code> is a server host name from which the agent should request traffic.</p>
+
+<p>The <code>TrafficClientAgent</code> class implements the following event-callable methods: <code>startClient()</code> and     stopClient()}}. Neither method takes any arguments. These methods may be invoked from an AAL and start and stop the client respectively.</p>
+
+<pre><code>The base class contains a number of variables which control how often `getCmd` is called and which servers should be contacted: 
+</code></pre>
+
+<ul>
+<li><code>servers</code>: A list of server hostnames</li>
+<li><code>interval</code>: A distribution variable</li>
+</ul>
+
+<p><em>Note:</em> A distribution variable is any valid python expression that returns a float. It may be as simple as an integer, “1”, or an actual distribution function. The Agent Library provides <code>minmax</code>, <code>gamma</code>, <code>pareto</code>, and <code>expo</code> in the distributions module. Thus a valid value for the <code>TrafficClientAgent</code> interval value could be <code>minmax(1,10)</code>, which returns a value between 1 and 10 inclusive. The signatures of these distributions are:</p>
+
+<pre><code>    minmax(min, max)
+    gamma(alpha, rate, cap = None)
+    pareto(alpha, scale None)
+    expo(lambd, scale None)
+</code></pre>
+
+<p>Below is a sample <code>TrafficClientAgent</code> which implements a simple HTTP client-side traffic agent. It assumes the destinations have been set correctly (via the <code>Agent setConfiguration</code> method) and there are web servers already running there.</p>
+
+<pre><code>from magi.util.agent import TrafficClientAgent
+
+class mySimpleHTTPClient(TrafficClientAgent):
+    def __init__(self):
+        TrafficClientAgent.__init__(self)
+
+    def getCmd(self, destination):
+        cmd = 'curl -s -o /dev/null http://%s/index.html' % destination
+        return cmd
+</code></pre>
+
+<p>When this agent is used with the following AAL clauses, the servers <em>server<em>1</em>&rsquo; and &lsquo;_server_2</em> are used as HTTP traffic generation servers and traffic is generated once an interval where the interval ranges randomly between 5 and 10 seconds, inclusive. The first event sets the agent’s internal configuration. The second event starts the traffic generation.</p>
+
+<pre><code>eventstreams:
+    myStream:
+        - type: event
+          agent: myHTTPClients
+          method: setConfiguration
+          args:
+                interval: 'minmax(5, 10)'
+                servers: ['server_1', 'server_2']
+
+        - type: event
+          agent: myHTTPClients
+          method: startClient
+          args: { }
+</code></pre>
+
+<p>The <code>TrafficClientAgent</code> documentation may seen here. <a href="http://montage.deterlab.net/backend/python/util.html#magi.util.agent.TrafficClientAgent">http://montage.deterlab.net/backend/python/util.html#magi.util.agent.TrafficClientAgent</a></p>
+
+<h2 id="probabilistictrafficclientagent:1313c16d33575e1e2d78237d0545a50a"><code>ProbabilisticTrafficClientAgent</code></h2>
+
+<p><code>ProbabilisticTrafficClientAgent</code> provides the same service as <code>TrafficAgent</code>, but <code>getCmd</code> is called only when the configured probability function evaluates to a non-zero value.</p>
+
+<h2 id="connectedtrafficclientagent:1313c16d33575e1e2d78237d0545a50a"><code>ConnectedTrafficClientAgent</code></h2>
+
+<p><code>ConnectedTrafficClientAgent</code> is a base for an agent that controls a set of agents that have standing connections to, and traffic between, a set of servers.</p>
+
+<p><code>connect()</code> and <code>disconnect()</code> are called periodically when a given client should connect or disconnect to a given server.</p>
+
+<p><code>generateTraffic()</code> is called when the given client should generate traffic between itself and the server it is connected to. The sequence of calls is:</p>
+
+<pre><code>[period], connect(), [period], generateTraffic(), [period], generateTraffic(), ..., disconnect()
+</code></pre>
+
+<p>This sequence may be repeated.</p>
+
+<p>Derived classes should implement <code>connect()</code>, <code>disconnect()</code>, and <code>generateTraffic()</code>.</p>
+
+<h1 id="agent-load-and-execution-chain-for-threaded-agents:1313c16d33575e1e2d78237d0545a50a">Agent Load and Execution Chain (for threaded agents)</h1>
+
+<p>(TBD - Coming soon)</p>
+
+<p>[wiki:MAGI_System_Files_and_Logs &lt; MAGI System Files and Logs] | [wiki:MAGI_Tools MAGI Tools &gt;]</p>
+
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>

@@ -1,0 +1,134 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <h1></h1>
+  
+
+<p>[[TracGuideToc]]</p>
+
+<p>The Trac ticket database provides simple but effective tracking of issues and bugs within a project.</p>
+
+<p>As the central project management element of Trac, tickets are used for <em>project tasks_&lsquo;, &ldquo;&lsquo;feature requests&rdquo;&rsquo;, &ldquo;&lsquo;bug reports&rdquo;&rsquo; and &lsquo;_software support issues</em>.</p>
+
+<p>As with the TracWiki, this subsystem has been designed with the goal of making user contribution and participation as simple as possible. It should be as easy as possible to report bugs, ask questions and suggest improvements.</p>
+
+<p>An issue is assigned to a person who must resolve it or reassign the ticket to someone else.
+All tickets can be edited, annotated, assigned, prioritized and discussed at any time.</p>
+
+<h1 id="ticket-fields:12efbd8eaf2c0c28996dc2842aa5e094">Ticket Fields</h1>
+
+<p>A  ticket contains the following information attributes:</p>
+
+<ul>
+<li><em>Reporter</em> — The author of the ticket.</li>
+
+<li><p><em>Type</em> — The nature of the ticket (for example, defect or enhancement request)</p></li>
+
+<li><p><em>Component</em> — The project module or subsystem this ticket concerns.</p></li>
+
+<li><p><em>Version</em> — Version of the project that this ticket pertains to.</p></li>
+
+<li><p><em>Keywords</em> — Keywords that a ticket is marked with.  Useful for searching and report generation.</p></li>
+
+<li><p><em>Priority</em> — The importance of this issue, ranging from <em>trivial&rdquo; to &ldquo;blocker</em>.</p></li>
+
+<li><p><em>Milestone</em> — When this issue should be resolved at the latest.</p></li>
+
+<li><p><em>Assigned to/Owner</em> — Principal person responsible for handling the issue.</p></li>
+
+<li><p><em>Cc</em> — A comma-separated list of other users or E-Mail addresses to notify. <em>Note that this does not imply responsiblity or any other policy.</em></p></li>
+
+<li><p><em>Resolution</em> — Reason for why a ticket was closed. One of <code>fixed</code>, <code>invalid</code>, <code>wontfix</code>, <code>duplicate</code>, <code>worksforme</code>.</p></li>
+
+<li><p><em>Status</em> — What is the current status? One of <code>new</code>, <code>assigned</code>, <code>closed</code>, <code>reopened</code>.</p></li>
+
+<li><p><em>Summary</em> — A brief description summarizing the problem or issue.</p></li>
+
+<li><p><em>Description</em> — The body of the ticket. A good description should be specific, descriptive and to the point.
+<em>Note:</em> Versions of Trac prior to 0.9 did not have the <em>type&rdquo; field, but instead provided a &ldquo;severity&rdquo; field and different default values for the &ldquo;priority&rdquo; field. This change was done to simplify the ticket model by removing the somewhat blurry distinction between &ldquo;priority&rdquo; and &ldquo;severity&rdquo;. However, the old model is still available if you prefer it: just add/modify the default values of the &ldquo;priority&rdquo; and &ldquo;severity&rdquo;, and optionally hide the &ldquo;type</em> field by removing all the possible values through [wiki:TracAdmin trac-admin].
+<em>Note:</em> the [trac:TicketTypes type], [trac:TicketComponent component], version, priority and severity fields can be managed with [wiki:TracAdmin trac-admin] or with the [trac:WebAdmin WebAdmin] plugin.
+<em>Note:</em> Description of the builtin <em>priority</em> values is available at [trac:TicketTypes#Whyistheseverityfieldgone TicketTypes]</p></li>
+</ul>
+
+<h1 id="changing-and-commenting-tickets:12efbd8eaf2c0c28996dc2842aa5e094">Changing and Commenting Tickets</h1>
+
+<p>Once a ticket has been entered into Trac, you can at any time change the
+information by <em>annotating</em> the bug. This means changes and comments to
+the ticket are logged as a part of the ticket itself.</p>
+
+<p>When viewing a ticket, the history of changes will appear below the main ticket area.</p>
+
+<p>&ldquo;In the Trac project, we use ticket comments to discuss issues and tasks. This makes
+understanding the motivation behind a design- or implementation choice easier,
+when returning to it later.&rdquo;
+<em>Note:</em> An important feature is being able to use TracLinks and
+WikiFormatting in ticket descriptions and comments. Use TracLinks to refer to
+other issues, changesets or files to make your ticket more specific and easier
+to understand.
+<em>Note:</em> See TracNotification for how to configure email notifications of ticket changes.
+<em>Note:</em> See TracWorkflow for information about the state transitions (ticket lifecycle), and how this workflow can be customized.</p>
+
+<h1 id="default-values-for-drop-down-fields:12efbd8eaf2c0c28996dc2842aa5e094">Default Values for Drop-Down Fields</h1>
+
+<p>The option selected by default for the various drop-down fields can be set in [wiki:TracIni trac.ini], in the <code>[ticket]</code> section:</p>
+
+<ul>
+<li><code>default_component</code>: Name of the component selected by default</li>
+<li><code>default_milestone</code>: Name of the default milestone</li>
+<li><code>default_priority</code>: Default priority value</li>
+<li><code>default_severity</code>: Default severity value</li>
+<li><code>default_type</code>: Default ticket type</li>
+<li><code>default_version</code>: Name of the default version</li>
+<li><code>default_owner</code>: Name of the default owner, <em>if no owner for the component has been set</em></li>
+</ul>
+
+<p>If any of these options are omitted, the default value will either be the first in the list, or an empty value, depending on whether the field in question is required to be set.  Some of these can be chosen through the [trac:WebAdmin WebAdmin] plugin in the &ldquo;Ticket System&rdquo; section (others in the &ldquo;trac.ini&rdquo; section).  The default owner for a ticket will be the component owner, if that is set, or <code>default_owner</code>, if not.</p>
+
+<h1 id="hiding-fields-and-adding-custom-fields:12efbd8eaf2c0c28996dc2842aa5e094">Hiding Fields and Adding Custom Fields</h1>
+
+<p>Many of the default ticket fields can be hidden from the ticket web interface simply by removing all the possible values through [wiki:TracAdmin trac-admin]. This of course only applies to drop-down fields, such as <em>type&rdquo;, &ldquo;priority&rdquo;, &ldquo;severity&rdquo;, &ldquo;component&rdquo;, &ldquo;version&rdquo; and &ldquo;milestone</em>.</p>
+
+<p>Trac also lets you add your own custom ticket fields. See TracTicketsCustomFields for more information.</p>
+
+<h1 id="assign-to-as-drop-down-list:12efbd8eaf2c0c28996dc2842aa5e094">Assign-to as Drop-Down List</h1>
+
+<p>If the list of possible ticket owners is finite, you can change the <em>assign-to</em> ticket field from a text input to a drop-down list. This is done by setting the <code>restrict_owner</code> option of the <code>[ticket]</code> section in [wiki:TracIni trac.ini] to “true”. In that case, Trac will use the list of all users who have accessed the project to populate the drop-down field.</p>
+
+<p>To appear in the dropdown list, a user needs be registered with the project, <em>i.e.&rdquo; a user session should exist in the database. Such an entry is automatically created in the database the first time the user submits a change in the project, for example when editing the user&rsquo;s details in the &ldquo;Settings</em> page, or simply by authenticating if the user has a login. Also, the user must have <code>TICKET_MODIFY</code> [TracPermissions permissions].
+<em>Note:</em> See <a href="http://pacopablo.com/wiki/pacopablo/blog/set-assign-to-drop-down">Populating Assign To Drop Down</a> on how to add user entries at database level
+<em>Note 2:</em> If you need serious flexibility and aren&rsquo;t afraid of a little plugin coding of your own, see <a href="http://trac-hacks.org/wiki/FlexibleAssignToPlugin">FlexibleAssignTo</a> (disclosure: I&rsquo;m the author)
+<em>Note 3:</em> Activating this option may cause some performance degradation, read more about this in the [trac:TracPerformance#Configuration Trac performance] page.</p>
+
+<h1 id="preset-values-for-new-tickets:12efbd8eaf2c0c28996dc2842aa5e094">Preset Values for New Tickets</h1>
+
+<p>To create a link to the new-ticket form filled with preset values, you need to call the <code>/newticket?</code> URL with variable=value separated by &amp;.</p>
+
+<p>Possible variables are :</p>
+
+<ul>
+<li><em>type</em> — The type droplist</li>
+<li><em>reporter</em> — Name or email of the reporter</li>
+<li><em>summary</em> — Summary line for the ticket</li>
+<li><em>description</em> — Long description of the ticket</li>
+<li><em>component</em> — The component droplist</li>
+<li><em>version</em> — The version droplist</li>
+<li><em>severity</em> — The severity droplist</li>
+<li><em>keywords</em> — The keywords</li>
+<li><em>priority</em> — The priority droplist</li>
+<li><em>milestone</em> — The milestone droplist</li>
+<li><em>owner</em> — The person responsible for the ticket</li>
+<li><em>cc</em> — The list of emails for notifying about the ticket change
+<em>Example:</em> <em>/trac/newticket?summary=Compile%20Error&amp;version=1.0&amp;component=gui</em>[[BR]]</li>
+</ul>
+
+<hr />
+
+<p>See also:  TracGuide, TracWiki, TracTicketsCustomFields, TracNotification, TracReports, TracQuery</p>
+
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>

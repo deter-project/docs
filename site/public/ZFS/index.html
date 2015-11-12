@@ -1,0 +1,23 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <h1></h1>
+  
+
+<h1 id="deter-zfs-storage:8e964d6ef5c5971d9f4431fdbe030445">DETER ZFS Storage</h1>
+
+<p>DETER offers a projects access to bulk storage using a large ZFS system.  Right now, we automatically export and create ZFS space for every active project on the testbed, but we do not mount it by default on testbed nodes.  Mounting the filesystem by hand is pretty simple.  For Linux:</p>
+
+<pre><code>mkdir -p /zfs/&lt;PROJECTNAME&gt;
+mount -t nfs -o tcp,vers=3 zfs:/zfs/&lt;PROJECTNAME&gt; /zfs/&lt;PROJECTNAME&gt;
+</code></pre>
+
+<p>On FreeBSD use the nfsv3 option when mounting.</p>
+
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>

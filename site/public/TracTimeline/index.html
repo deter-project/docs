@@ -1,0 +1,49 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <h1></h1>
+  
+
+<p>[[TracGuideToc]]</p>
+
+<p>The timeline provides a historic view of the project in a single report.</p>
+
+<p>It lists all Trac events that have occurred in chronological order, a
+brief description of each event and if applicable, the person responsible for
+the change.</p>
+
+<p>The timeline lists these kinds of events:
+* <em>Wiki page events</em> — Creation and changes
+* <em>Ticket events</em> — Creation and resolution/closing (and optionally other changes)
+* *Source code changes * — Repository check-ins
+* *Milestone * — Milestone completed</p>
+
+<p>Each event entry provides a hyperlink to the specific event in question, who authored the change as well as
+a brief excerpt of the actual comment or text, if available.</p>
+
+<p>It is possible to filter the displayed events with the various filters in the option panel:
+* <em>View changes from</em> — the date from which to start displaying events (current date if empty). Events that occurred after this date will not be shown, only those that occurred before that date.
+* <em>and X days back</em> — how many days backwards in time to get events.
+* <em>done by&rdquo; — the author of an event. It accepts a space-separated list of authors for which events should be included. Alternatively, if the author names are prefixed by a &ldquo;-&rdquo; character, then the events having those authors will be excluded, and all the others included. Single or double quotes can be used for specifying author names containing space characters. &ldquo;(since 0.12)</em>
+* <em>Changesets in all repositories&rdquo; — if you have more than one repository connected to your Trac project, then you can filter the output so events from specific repositories are not shown. &ldquo;(since 0.12)</em>
+* <em>Milestones reached</em> — display or hide milestones reached.
+* <em>Opened and closed tickets</em> — display or hide ticket open or close events.
+* <em>Wiki changes</em> — display or hide Wiki change events.</p>
+
+<p>See TracIni&rsquo;s [wiki:TracIni#timeline-section &ldquo;[timeline] section&rdquo;] for timeline configuration options.</p>
+
+<h1 id="rss-support:32020d7acb3c14a1a66da4974dbc3f23">RSS Support</h1>
+
+<p>The Timeline module supports subscription using RSS 2.0 syndication. To subscribe to project events, click the orange <em>XML</em> icon at the bottom of the page. See TracRss for more information on RSS support in Trac.</p>
+
+<hr />
+
+<p>See also: TracGuide, TracIni, TracWiki, WikiFormatting, TracRss, TracNotification</p>
+
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>

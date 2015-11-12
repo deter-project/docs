@@ -1,0 +1,56 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <h1></h1>
+  
+
+<p>[[TracGuideToc]]</p>
+
+<p>Wiki page names commonly use the CamelCase convention. Within wiki text, any word in CamelCase automatically becomes a hyperlink to the wiki page with that name.</p>
+
+<p>CamelCase page names must follow these rules:</p>
+
+<ol>
+<li>The name must consist of <em>alphabetic characters only</em>. No digits, spaces, punctuation, or underscores are allowed.</li>
+<li>A name must have at least two capital letters.</li>
+<li>The first character must be capitalized.</li>
+<li>Every capital letter must be followed by one or more lower-case letters.</li>
+<li>The use of slash ( / ) is permitted in page names (possibly representing a hierarchy).</li>
+</ol>
+
+<p>If you want to create a wiki page that doesn&rsquo;t follow CamelCase rules you can use the following syntax:</p>
+
+<pre><code> * [wiki:Wiki_page], [wiki:ISO9000],
+   and with a label: [wiki:ISO9000 ISO 9000 standard]
+ * [wiki:&quot;Space Matters&quot;]
+   and with a label: [wiki:&quot;Space Matters&quot; all about white space]
+ * or simply: [&quot;WikiPageName&quot;]s
+ * even better, the new [[WikiCreole link style]]
+   and with a label: [[WikiCreole link style|WikiCreole style links]]
+</code></pre>
+
+<p>This will be rendered as:
+* [wiki:Wiki<em>page], [wiki:ISO9000],
+   and with a label: [wiki:ISO9000 ISO 9000 standard]
+* [wiki:&ldquo;Space Matters&rdquo;] _(that page name embeds space characters)</em>
+   and with a label: [wiki:&ldquo;Space Matters&rdquo; all about white space]
+* or simply: [&ldquo;WikiPageName&rdquo;]s <em>(old MoinMoin&rsquo;s internal free links style)</em>
+* even better, the new [[WikiCreole link style]]
+   and with a label: [[WikiCreole link style|WikiCreole style links]]
+   <em>(since 0.12, also now adopted by MoinMoin)</em></p>
+
+<p>Starting with Trac 0.11, it&rsquo;s also possible to link to a specific <em>version</em> of a Wiki page, as you would do for a specific version of a file, for example: WikiStart@1.</p>
+
+<p>You can also prevent a CamelCase name to be interpreted as a TracLinks, by quoting it. See TracLinks#EscapingLinks.</p>
+
+<h2 id="as-visible-in-the-example-above-one-can-also-append-an-anchor-to-a-wiki-page-name-in-order-to-link-to-a-specific-section-within-that-page-the-anchor-can-easily-be-seen-by-hovering-the-mouse-over-a-section-heading-then-clicking-on-the-html-para-sign-that-appears-at-its-end-the-anchor-is-usually-generated-automatically-but-it-s-also-possible-to-specify-it-explicitly-see-wikiformatting-using-explicit-id-in-heading:686a8bbae42878b2f022795d05964849">As visible in the example above, one can also append an anchor to a Wiki page name, in order to link to a specific section within that page. The anchor can easily be seen by hovering the mouse over a section heading, then clicking on the [[html(&para;)]] sign that appears at its end. The anchor is usually generated automatically, but it&rsquo;s also possible to specify it explicitly: see WikiFormatting#using-explicit-id-in-heading.</h2>
+
+<p>See also: WikiNewPage, WikiFormatting, TracWiki, TracLinks</p>
+
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>

@@ -1,0 +1,284 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <h1></h1>
+  
+
+<p>[[TracGuideToc]]</p>
+
+<p>The Trac reports module provides a simple, yet powerful reporting facility
+to present information about tickets in the Trac database.</p>
+
+<p>Rather than have its own report definition format, TracReports relies on standard SQL
+<code>SELECT</code> statements for custom report definition.</p>
+
+<p><em>Note:</em> <em>The report module is being phased out in its current form because it seriously limits the ability of the Trac team to make adjustments to the underlying database schema. We believe that the [wiki:TracQuery query module] is a good replacement that provides more flexibility and better usability. While there are certain reports that cannot yet be handled by the query module, we intend to further enhance it so that at some point the reports module can be completely removed. This also means that there will be no major enhancements to the report module anymore.</em></p>
+
+<p><em>You can already completely replace the reports module by the query module simply by disabling the former in [wiki:TracIni trac.ini]:</em></p>
+
+<pre><code>  [components]
+  trac.ticket.report.* = disabled
+</code></pre>
+
+<p><em>This will make the query module the default handler for the “View Tickets” navigation item. We encourage you to try this configuration and report back what kind of features of reports you are missing, if any.</em></p>
+
+<p>A report consists of these basic parts:
+* <em>ID</em> — Unique (sequential) identifier
+* <em>Title</em> — Descriptive title
+* <em>Description</em> — A brief description of the report, in WikiFormatting text.
+* <em>Report Body</em> — List of results from report query, formatted according to the methods described below.
+* <em>Footer</em> — Links to alternative download formats for this report.</p>
+
+<h1 id="changing-sort-order:8b57ace37c64d383640a9dea33edb36e">Changing Sort Order</h1>
+
+<p>Simple reports - ungrouped reports to be specific - can be changed to be sorted by any column simply by clicking the column header.</p>
+
+<p>If a column header is a hyperlink (red), click the column you would like to sort by. Clicking the same header again reverses the order.</p>
+
+<h1 id="changing-report-numbering:8b57ace37c64d383640a9dea33edb36e">Changing Report Numbering</h1>
+
+<p>There may be instances where you need to change the ID of the report, perhaps to organize the reports better. At present this requires changes to the trac database. The <em>report&rdquo; table has the following schema &ldquo;(since 0.10)</em>:
+* id integer PRIMARY KEY
+* author text
+* title text
+* query text
+* description text
+Changing the ID changes the shown order and number in the <em>Available Reports</em> list and the report&rsquo;s perma-link. This is done by running something like:</p>
+
+<pre><code>update report set id=5 where id=3;
+</code></pre>
+
+<p>Keep in mind that the integrity has to be maintained (i.e., ID has to be unique, and you don&rsquo;t want to exceed the max, since that&rsquo;s managed by SQLite someplace).</p>
+
+<p>You may also need to update or remove the report number stored in the report or query.</p>
+
+<h1 id="navigating-tickets:8b57ace37c64d383640a9dea33edb36e">Navigating Tickets</h1>
+
+<p>Clicking on one of the report results will take you to that ticket. You can navigate through the results by clicking the <em>Next Ticket&rdquo; or &ldquo;Previous Ticket&rdquo; links just below the main menu bar, or click the &ldquo;Back to Report</em> link to return to the report page.</p>
+
+<p>You can safely edit any of the tickets and continue to navigate through the results using the <em>!Next/Previous/Back to Report&rdquo; links after saving your results, but when you return to the report, there will be no hint about what has changed, as would happen if you were navigating a list of tickets obtained from a query (see TracQuery#NavigatingTickets). &ldquo;(since 0.11)</em></p>
+
+<h1 id="alternative-download-formats:8b57ace37c64d383640a9dea33edb36e">Alternative Download Formats</h1>
+
+<p>Aside from the default HTML view, reports can also be exported in a number of alternative formats.
+At the bottom of the report page, you will find a list of available data formats. Click the desired link to
+download the alternative report format.</p>
+
+<h2 id="comma-delimited-csv-comma-separated-values:8b57ace37c64d383640a9dea33edb36e">Comma-delimited - CSV (Comma Separated Values)</h2>
+
+<p>Export the report as plain text, each row on its own line, columns separated by a single comma (&lsquo;,&rsquo;).
+<em>Note:</em> The output is fully escaped so carriage returns, line feeds, and commas will be preserved in the output.</p>
+
+<h2 id="tab-delimited:8b57ace37c64d383640a9dea33edb36e">Tab-delimited</h2>
+
+<p>Like above, but uses tabs (\t) instead of comma.</p>
+
+<h2 id="rss-xml-content-syndication:8b57ace37c64d383640a9dea33edb36e">RSS - XML Content Syndication</h2>
+
+<p>All reports support syndication using XML/RSS 2.0. To subscribe to an RSS feed, click the orange &lsquo;XML&rsquo; icon at the bottom of the page. See TracRss for general information on RSS support in Trac.</p>
+
+<hr />
+
+<h1 id="creating-custom-reports:8b57ace37c64d383640a9dea33edb36e">Creating Custom Reports</h1>
+
+<p><em>Creating a custom report requires a comfortable knowledge of SQL.</em></p>
+
+<p>A report is basically a single named SQL query, executed and presented by
+Trac.  Reports can be viewed and created from a custom SQL expression directly
+in the web interface.</p>
+
+<p>Typically, a report consists of a SELECT-expression from the &lsquo;ticket&rsquo; table,
+using the available columns and sorting the way you want it.</p>
+
+<h1 id="ticket-columns:8b57ace37c64d383640a9dea33edb36e">Ticket columns</h1>
+
+<p>The <em>ticket</em> table has the following columns:
+* id
+* type
+* time
+* changetime
+* component
+* severity<br />
+* priority
+* owner
+* reporter
+* cc
+* version
+* milestone
+* status
+* resolution
+* summary
+* description
+* keywords</p>
+
+<p>See TracTickets for a detailed description of the column fields.</p>
+
+<p>Example: <em>All active tickets, sorted by priority and time</em></p>
+
+<pre><code>SELECT id AS ticket, status, severity, priority, owner, 
+       time AS created, summary FROM ticket 
+  WHERE status IN ('new', 'assigned', 'reopened')
+  ORDER BY priority, time
+</code></pre>
+
+<hr />
+
+<h1 id="advanced-reports-dynamic-variables:8b57ace37c64d383640a9dea33edb36e">Advanced Reports: Dynamic Variables</h1>
+
+<p>For more flexible reports, Trac supports the use of <em>dynamic variables</em> in report SQL statements.
+In short, dynamic variables are <em>special</em> strings that are replaced by custom data before query execution.</p>
+
+<h2 id="using-variables-in-a-query:8b57ace37c64d383640a9dea33edb36e">Using Variables in a Query</h2>
+
+<p>The syntax for dynamic variables is simple, any upper case word beginning with &lsquo;$&rsquo; is considered a variable.</p>
+
+<p>Example:</p>
+
+<pre><code>SELECT id AS ticket,summary FROM ticket WHERE priority=$PRIORITY
+</code></pre>
+
+<p>To assign a value to $PRIORITY when viewing the report, you must define it as an argument in the report URL, leaving out the leading &lsquo;$&rsquo;.</p>
+
+<p>Example:</p>
+
+<pre><code> http://trac.edgewall.org/reports/14?PRIORITY=high
+</code></pre>
+
+<p>To use multiple variables, separate them with an &lsquo;&amp;&lsquo;.</p>
+
+<p>Example:</p>
+
+<pre><code> http://trac.edgewall.org/reports/14?PRIORITY=high&amp;SEVERITY=critical
+</code></pre>
+
+<h2 id="special-constant-variables:8b57ace37c64d383640a9dea33edb36e">!Special/Constant Variables</h2>
+
+<p>There is one dynamic variable whose value is set automatically (the URL does not have to be changed) to allow practical reports.</p>
+
+<ul>
+<li>$USER — Username of logged in user.</li>
+</ul>
+
+<p>Example (<em>List all tickets assigned to me</em>):</p>
+
+<pre><code>SELECT id AS ticket,summary FROM ticket WHERE owner=$USER
+</code></pre>
+
+<hr />
+
+<h1 id="advanced-reports-custom-formatting:8b57ace37c64d383640a9dea33edb36e">Advanced Reports: Custom Formatting</h1>
+
+<p>Trac is also capable of more advanced reports, including custom layouts,
+result grouping and user-defined CSS styles. To create such reports, we&rsquo;ll use
+specialized SQL statements to control the output of the Trac report engine.</p>
+
+<h1 id="special-columns:8b57ace37c64d383640a9dea33edb36e">Special Columns</h1>
+
+<p>To format reports, TracReports looks for &lsquo;magic&rsquo; column names in the query
+result. These &lsquo;magic&rsquo; names are processed and affect the layout and style of the
+final report.</p>
+
+<h2 id="automatically-formatted-columns:8b57ace37c64d383640a9dea33edb36e">Automatically formatted columns</h2>
+
+<ul>
+<li><em>ticket</em> — Ticket ID number. Becomes a hyperlink to that ticket.</li>
+<li><em>id_&rsquo; — same as &ldquo;&lsquo;ticket&rdquo;&rsquo; above when &lsquo;_realm</em> is not set</li>
+<li><em>realm_&rsquo; — together with &ldquo;&lsquo;id</em>, can be used to create links to other resources than tickets (e.g. a realm of &ldquo;wiki&rdquo; and an &ldquo;id_ to a page name will create a link to that wiki page)</li>
+<li><em>created, modified, date, time</em> — Format cell as a date and/or time.</li>
+
+<li><p><em>description</em> — Ticket description field, parsed through the wiki engine.
+<em>Example:</em></p>
+
+<p>SELECT id AS ticket, created, status, summary FROM ticket</p></li>
+</ul>
+
+<p>Those columns can also be defined but marked as hidden, see [#column-syntax below].</p>
+
+<p>See trac:wiki/CookBook/Configuration/Reports for some example of creating reports for realms other than <em>ticket</em>.</p>
+
+<h2 id="custom-formatting-columns:8b57ace37c64d383640a9dea33edb36e">Custom formatting columns</h2>
+
+<p>Columns whose names begin and end with 2 underscores (Example: <em><code>__color__</code></em>) are
+assumed to be <em>formatting hints</em>, affecting the appearance of the row.</p>
+
+<ul>
+<li><em><code>__group__</code></em> — Group results based on values in this column. Each group will have its own header and table.</li>
+<li><em><code>__grouplink__</code></em> — Make the header of each group a link to the specified URL. The URL is taken from the first row of each group.</li>
+
+<li><p><em><code>__color__</code></em> — Should be a numeric value ranging from 1 to 5 to select a pre-defined row color. Typically used to color rows by issue priority.</p>
+
+<p>#!html
+<div style="margin-left:7.5em">Defaults:
+<span style="border: none; color: #333; background: transparent;  font-size: 85%; background: #fdc; border-color: #e88; color: #a22">Color 1</span>
+<span style="border: none; color: #333; background: transparent;  font-size: 85%; background: #ffb; border-color: #eea; color: #880">Color 2</span>
+<span style="border: none; color: #333; background: transparent;  font-size: 85%; background: #fbfbfb; border-color: #ddd; color: #444">Color 3</span>
+<span style="border: none; color: #333; background: transparent; font-size: 85%; background: #e7ffff; border-color: #cee; color: #099">Color 4</span>
+<span style="border: none; color: #333; background: transparent;  font-size: 85%; background: #e7eeff; border-color: #cde; color: #469">Color 5</span>
+</div></p></li>
+
+<li><p><em><code>__style__</code></em> — A custom CSS style expression to use for the current row.
+<em>Example:</em> <em>List active tickets, grouped by milestone, group header linked to milestone page, colored by priority</em></p>
+
+<p>SELECT p.value AS <strong>color</strong>,
+     t.milestone AS <strong>group</strong>,
+     &lsquo;../milestone/&rsquo; || t.milestone AS <strong>grouplink</strong>,
+     (CASE owner WHEN &lsquo;daniel&rsquo; THEN &lsquo;font-weight: bold; background: red;&rsquo; ELSE &ldquo; END) AS <strong>style</strong>,
+       t.id AS ticket, summary
+  FROM ticket t,enum p
+  WHERE t.status IN (&lsquo;new&rsquo;, &lsquo;assigned&rsquo;, &lsquo;reopened&rsquo;)
+    AND p.name=t.priority AND p.type=&lsquo;priority&rsquo;
+  ORDER BY t.milestone, p.value, t.severity, t.time</p></li>
+</ul>
+
+<p><em>Note:</em> A table join is used to match <em>ticket</em> priorities with their
+numeric representation from the <em>enum</em> table.</p>
+
+<h2 id="changing-layout-of-report-rows-column-syntax:8b57ace37c64d383640a9dea33edb36e">Changing layout of report rows #column-syntax</h2>
+
+<p>By default, all columns on each row are display on a single row in the HTML
+report, possibly formatted according to the descriptions above. However, it&rsquo;s
+also possible to create multi-line report entries.</p>
+
+<ul>
+<li><p><em><code>column_</code></em> — <em>Break row after this</em>. By appending an underscore (&rsquo;_&lsquo;) to the column name, the remaining columns will be continued on a second line.</p></li>
+
+<li><p><em><code>_column_</code></em> — <em>Full row</em>. By adding an underscore (&rsquo;_&lsquo;) both at the beginning and the end of a column name, the data will be shown on a separate row.</p></li>
+
+<li><p><em><code>_column</code>* — <em>Hide data</em>. Prepending an underscore (&rsquo;_&lsquo;) to a column name instructs Trac to hide the contents from the HTML output. This is useful for information to be visible only if downloaded in other formats (like CSV or RSS/XML).
+This can be used to hide any kind of column, even important ones required for identifying the resource, e.g. <code>id as _id</code> will hide the *Id</em> column but the link to the ticket will be present.
+<em>Example:</em> <em>List active tickets, grouped by milestone, colored by priority, with  description and multi-line layout</em></p>
+
+<p>SELECT p.value AS <strong>color</strong>,
+       t.milestone AS <strong>group</strong>,
+       (CASE owner
+          WHEN &lsquo;daniel&rsquo; THEN &lsquo;font-weight: bold; background: red;&rsquo;
+          ELSE &ldquo; END) AS <strong>style</strong>,
+       t.id AS ticket, summary AS summary<em>,             &ndash; ## Break line here
+       component,version, severity, milestone, status, owner,
+       time AS created, changetime AS modified,         &ndash; ## Dates are formatted
+       description AS _description</em>,                    &ndash; ## Uses a full row
+       changetime AS _changetime, reporter AS _reporter &ndash; ## Hidden from HTML output
+  FROM ticket t,enum p
+  WHERE t.status IN (&lsquo;new&rsquo;, &lsquo;assigned&rsquo;, &lsquo;reopened&rsquo;)
+    AND p.name=t.priority AND p.type=&lsquo;priority&rsquo;
+  ORDER BY t.milestone, p.value, t.severity, t.time</p></li>
+</ul>
+
+<h2 id="reporting-on-custom-fields:8b57ace37c64d383640a9dea33edb36e">Reporting on custom fields</h2>
+
+<p>If you have added custom fields to your tickets (a feature since v0.8, see TracTicketsCustomFields), you can write a SQL query to cover them. You&rsquo;ll need to make a join on the ticket_custom table, but this isn&rsquo;t especially easy.</p>
+
+<p>If you have tickets in the database <em>before</em> you declare the extra fields in trac.ini, there will be no associated data in the ticket_custom table. To get around this, use SQL&rsquo;s &ldquo;LEFT OUTER JOIN&rdquo; clauses. See [trac:TracIniReportCustomFieldSample TracIniReportCustomFieldSample] for some examples.
+<em>Note that you need to set up permissions in order to see the buttons for adding or editing reports.</em></p>
+
+<hr />
+
+<p>See also: TracTickets, TracQuery, TracGuide, <a href="http://www.sqlite.org/lang_expr.html">Query Language Understood by SQLite</a></p>
+
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>

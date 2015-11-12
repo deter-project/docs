@@ -1,0 +1,234 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <h1></h1>
+  
+
+<p>The attacker poisons a DNS cache to take over authority for a given domain. The attacker then creates a phishing page and tries to steal user&rsquo;s usernames/passwords. There are two classes of experiments that need to be combined:
+    a. an experiment where a DNS cache is poisoned, subclass of cache poisoning experiments
+    b. an experiment where a phishing attack is conducted via a Web page to steal usernames/passwords</p>
+
+<h1 id="example-2-dns-cache-poisoning-for-phishing:0010c1ad8cf7f7fc6dffa9efcc792eb5">Example 2: DNS cache poisoning for phishing</h1>
+
+<p>This example used two metadescriptions. Let&rsquo;s go through each of them. This example is written in [CurrentlyProposedLanguage].</p>
+
+<h2 id="cache-poisoning-metadescription:0010c1ad8cf7f7fc6dffa9efcc792eb5">Cache poisoning metadescription</h2>
+
+<p><em>define cachePoisoning:</em></p>
+
+<p><em>Logical topology:</em></p>
+
+<pre><code>*Objects:*
+
+  Attacker extends Node
+
+  Name, fakeResource extends String
+
+  Cache extends Object
+
+  Cache := {String[] records}
+
+*Cardinality:*
+
+  |Attacker|,,1,,
+
+  |Name|,,1,,
+
+  |fakeResource|,,1,,
+
+  |Cache|,,1,,
+
+*Relationships:*
+
+  not collocated(Cache, Attacker)
+</code></pre>
+
+<p>*Timeline of events: *</p>
+
+<p><em>Definitions:</em></p>
+
+<pre><code>Attacker a, Cache c, Name n, fakeResource fr
+
+e1 :REPLY, origin c, content = (n=fr)}
+
+s1 := {c.records += (n=fr)} 
+</code></pre>
+
+<p><em>Timeline:</em></p>
+
+<pre><code>e1 -&gt; s1
+</code></pre>
+
+<p><em>Invariants:</em>    Nothing in addition to the topology and timeline above.</p>
+
+<h2 id="dns-cache-poisoning-metadescription:0010c1ad8cf7f7fc6dffa9efcc792eb5">DNS Cache poisoning metadescription</h2>
+
+<p>This is a special case of cache poisoning where the target is DNS cache.</p>
+
+<p><em>define DNSCachePoisoning: import cachePoisoning cp</em></p>
+
+<p><em>Logical topology:</em></p>
+
+<p><em>Objects:</em></p>
+
+<pre><code>Auth extends Node
+
+(Name extends DNSName, Name := cp.Name, fakeIP extends IPAddress, FakeIP := cp.fakeResource) xor
+
+(Name extends DNSName, domain(Name) := cp.Name, fakeAuth extends DNSName,  fakeAuth := cp.fakeResource)
+
+RealIP extends IPAddress
+
+victimCache extends Object, victimCache := cp.Cache
+
+victimCache := {DNSRecord[] records}
+
+authCache extends Object
+
+authCache :{Name=RealIP, auth(domain(Name)) = Auth}
+</code></pre>
+
+<p><em>Cardinality:</em></p>
+
+<pre><code>|Auth|,,1,,
+
+|RealIP|,,1,,
+
+|authCache|,,1,,
+</code></pre>
+
+<p><em>Relationships:</em></p>
+
+<pre><code>not collocated(victimCache, Auth)
+
+collocated(authCache, Auth)
+</code></pre>
+
+<p>*Timeline of events: *</p>
+
+<p><em>Definitions:</em></p>
+
+<pre><code>DNSREQUEST extends REQUEST
+
+DNSREPLY extends REPLY
+
+Attacker att, Auth auth, Name n, FakeIP fIP, fakeAuth fauth, RealIP rIP, victimCache vc, authCache ac
+
+  e1 :DNSREQUEST, origin vc, content = IP(n)?}
+
+  e2 :DNSREQUEST, origin auth, content = IP(n)?}
+
+  e3 :DNSREPLY, origin vc, content = {n=rIP}}
+
+  e4 :DNSREPLY, origin vc, content = {n=unknown}}
+
+  e5 :DNSREPLY, origin vc, content fakeAuth}}
+
+  s1 :fakeAuth)}
+
+  e6 :DNSREPLY, origin vc, content = {n=fIP}}
+
+  s2 :=  cp.s1, s1 := {vc.records += (n=fIP)}
+</code></pre>
+
+<p><em>Timeline:</em></p>
+
+<pre><code>  e1 -&gt; e2 -&gt; (e5 | matches(e5,e2) -&gt; s1 -&gt; e4 xor e6 | matches(e6, e2) -&gt; s2 -&gt; e3) 
+</code></pre>
+
+<p><em>Invariants:</em>    Nothing in addition to the topology and timeline above.</p>
+
+<h2 id="confidential-access-metadescription:0010c1ad8cf7f7fc6dffa9efcc792eb5">Confidential access metadescription</h2>
+
+<p>The phishing attempt is essentially same as presenting a valid page to the user that asks for confidential info - it&rsquo;s just that the location of that page is not as user expected.</p>
+
+<p><em>define confidentialAccess:</em></p>
+
+<p><em>Logical topology:</em></p>
+
+<p><em>Objects:</em></p>
+
+<pre><code>  User extends Human
+
+  Server extends webServer
+
+  Page extends webPage
+
+  Public, Confidential extends String
+</code></pre>
+
+<p><em>Cardinality:</em></p>
+
+<pre><code>|User|,,1,,
+</code></pre>
+
+<p>   |Server|,,1,,</p>
+
+<pre><code>|Page|,,&gt;=1,,
+
+|Public|,,1,,
+
+|Confidential|,,1,,
+</code></pre>
+
+<p><em>Relationships:</em></p>
+
+<p>   collocated(Page, Server)</p>
+
+<p>*Timeline of events: *</p>
+
+<p><em>Definitions:</em></p>
+
+<pre><code>User u, Server s, Public p, Confidential c, Page wp
+
+  e1 :WEBREQUEST, origin s, content = url(wp)}
+
+  e2 :WEBREQUEST, origin u, content = (public?, confidential?)}
+
+  e3 :WEBREPLY, origin s, content = (public=x, confidential=y)}
+
+  e4 :WEBREPLY, origin u, content = wp}
+</code></pre>
+
+<p><em>Timeline:</em></p>
+
+<pre><code>  e1 -&gt; e2 -&gt; e3 -&gt; if (x # p and y c) then e4
+</code></pre>
+
+<p><em>Invariants:</em>    Nothing in addition to the topology and timeline above.</p>
+
+<h2 id="experiment-design:0010c1ad8cf7f7fc6dffa9efcc792eb5">Experiment design</h2>
+
+<p>Now I&rsquo;m a user who wants to design an experiment. I need to combine two metadescriptions (DNS cache poisoning and phishing) and somehow tie them down to generator choices. To combine I&rsquo;ll do something like this:</p>
+
+<p><em>&lsquo;define Phishing: import DNSCachePoisoning dcp, confidentialAccess ca</em></p>
+
+<p><em>Logical topology:</em></p>
+
+<p><em>Objects:</em></p>
+
+<pre><code>dcp.FakeIP := ip(ca.Server)
+</code></pre>
+
+<p><em>Cardinality:</em></p>
+
+<p><em>Relationships:</em></p>
+
+<p>*Timeline of events: *</p>
+
+<p><em>Definitions:</em></p>
+
+<p><em>Timeline:</em></p>
+
+<pre><code>  timeline(dcp) -&gt; timeline(ca)
+</code></pre>
+
+<p><em>Invariants:</em>    Nothing in addition to the topology and timeline above.</p>
+
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>

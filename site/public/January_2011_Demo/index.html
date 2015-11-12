@@ -1,0 +1,95 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <h1></h1>
+  
+
+<p>[[TOC]]</p>
+
+<p>This page documents the January 2011 demo.</p>
+
+<p>Ted and Mike are rehashing the CATCH demo to demonstrate some of the new virtualization infrastructure. We will embed processes inside qemu virtual machines inside physical machines.</p>
+
+<h1 id="the-demo:ff763f8556f144d3be79fdfac555609c">The Demo</h1>
+
+<p>q9bot and the IRC server(s) will run inside processes embedded in qemu virtual machines. The intermediate routers on the network will probably be inside processes as well. The target machine may be a process, virtual machine, or physical machine.</p>
+
+<h1 id="new-virtualization-containers:ff763f8556f144d3be79fdfac555609c">New Virtualization Containers</h1>
+
+<h2 id="qemu-virtual-machine:ff763f8556f144d3be79fdfac555609c">QEMU virtual machine</h2>
+
+<p>This is very similar to an OpenVZ virtual machines. It runs a very vanilla Ubuntu 10.10 without most of the usual testbed facilities.</p>
+
+<ul>
+<li>Ordinary control interface</li>
+<li>Normal testbed file systems (/home, /proj, /groups, /share)</li>
+<li>Testbed user accounts</li>
+<li><em>No TMCD support</em>
+
+<ul>
+<li>None of the files in /var/emulab/boot</li>
+</ul></li>
+</ul>
+
+<p>It is hosted by a physical node running Ubuntu1004-STD. The only major change to the host node is that the control interface is bridged with the control interfaces of the vnodes it contains.</p>
+
+<h2 id="processes:ff763f8556f144d3be79fdfac555609c">Processes</h2>
+
+<p>This is an extremely lightweight container.</p>
+
+<ul>
+<li>Has a full network stack</li>
+<li>Access to all the file systems on the pnode/vnode that hosts it</li>
+<li><em>No control interface</em></li>
+<li><em>No TMCD</em></li>
+</ul>
+
+<p>A process can be embedded inside a physical machine or a virtual machine (<a href="http://i.imgur.com/F63mB.jpg">yo dawg!</a>).</p>
+
+<h2 id="virtual-vs-physical-topology:ff763f8556f144d3be79fdfac555609c">Virtual vs. Physical Topology</h2>
+
+<p>It is useful to make a distinction between physical topo and virtual topo (ptopo and vtopo). The vtopo is the network topology as presented to the experimenter. It is some interconnected network of processes, virtual machines, and physical machines that all talk to each other over IP and form an experiment. The ptopo is the network of physical and virtual machines that host virtual elements. The ptopo should be invisible to the experiment.</p>
+
+<p>Example: a vtopo containing two processes and a qemu virtual machine in a LAN. This can be physically (ptopo) realized in the following ways:</p>
+
+<ul>
+<li>One pnode vhost which runs the processes and virtual machine</li>
+<li>One pnode vhost running two vnodes, one is the virtual machine and the other is a vhost which runs the processes</li>
+<li>Two pnode vhosts, one running the virtual machine and another hosting the processes
+
+<ul>
+<li>The virtual LAN between the vnode and the processes is realized in a UDP multicast socket between the vhosts on the emulab experiment network</li>
+</ul></li>
+</ul>
+
+<p>In all three cases the vtopo is the same but the ptopo varies.</p>
+
+<h1 id="seer-support:ff763f8556f144d3be79fdfac555609c">SEER support</h1>
+
+<p>The biggest issue we face is that we have some machines which are vhosts and others which need to be presented in the vtopo.</p>
+
+<h2 id="pnodes:ff763f8556f144d3be79fdfac555609c">pnodes</h2>
+
+<p>The physical machines hosting qemu should be a small effort; they run ordinary Ubuntu1004-STD images. Most (all?) of these will be vhosts.</p>
+
+<p>As noted above, the control interface is replaced with a bridged interface (named control0).</p>
+
+<h2 id="vnodes:ff763f8556f144d3be79fdfac555609c">vnodes</h2>
+
+<p>The qemu machines will need some work. SEER depends on some of the files in /var/emulab/boot. We will probably want packet counter support in these.</p>
+
+<p>Most/all of these nodes will be vhosts. Some may be ordinary vtopo elements.</p>
+
+<h2 id="processes-1:ff763f8556f144d3be79fdfac555609c">processes</h2>
+
+<p>These guys are strange. It doesn&rsquo;t make sense to run a separate daemon as a part of the process, so I imagine these elements will piggy-back on the SEER running in the vnode/pnode hosting them. As they have access to the host file system, they can write to files/pipes/etc that the SEER daemon watches. I can instrument further communication mechanisms if desired.</p>
+
+<p>If necessary we can run a separate SEER process in the virtualized environment. This will necessitate adding a control interface. It can be done for this demo, but keep in mind that we intend to eventually support virtualized environments in which this does not make sense.</p>
+
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>

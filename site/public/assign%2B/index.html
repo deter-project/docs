@@ -1,0 +1,100 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <h1></h1>
+  
+
+<p>Algorithm for <em>assign+</em> is described in <a href="http://www.isi.edu/~mirkovic/publications/imc12-final.pdf">http://www.isi.edu/~mirkovic/publications/imc12-final.pdf</a></p>
+
+<p>Code resides in assign<em>plus branch of the repository, in assign+ folder. There are three files:
+* <em>assign+</em>
+     * PURPOSE: reads resource requirements and available resources and finds an allocation with minimum interswitch bw use
+     * INPUT: two command line arguments _ptopfile&rdquo; and &ldquo;topfile</em>. These files are usually produced in the process of resource assignment by assign<em>wrapper, now called mapper. There are a few other command line options, that should be self-explanatory when you run the code. If you want very verbose output run it with -d.
+     * OUTPUT: textual output denoting nodes and links and their assignments that can be passed further to resource allocation
+* <em>getptopdetail.pl</em>
+      * PURPOSE: parse a _ptopfile</em> into something human-readable. Assign+ also uses this output.
+      * INPUT: <em>ptopfile</em>
+      * OUTPUT: human-readable summary of <em>ptopfile</em>
+* <em>gettopdetail.pl</em>
+      * PURPOSE: parse a <em>topfile</em> into something human-readable. Assign+ also uses this output.
+      * INPUT: <em>topfile</em>
+      * OUTPUT: human-readable summary of <em>topfile</em></p>
+
+<p>Testing code resides in assign<em>plus branch of the repository, in assign+/test folder. There are several files that jointly perform tests that compare performance of _assign&rdquo; and &ldquo;assign+</em>.
+* <em>removefixed.pl</em>
+      * PURPOSE: Remove fixed nodes from a <em>topfile</em>
+      * INPUT: <em>topfile</em>
+      * OUTPUT: <em>topfile</em> in correct format minus lines that talk about fixed nodes
+* <em>makefixed.pl</em>
+      * PURPOSE: Make a <em>topfile&rdquo; with fixed nodes taken from the output of &ldquo;assign&rdquo; or &ldquo;assign+</em>
+      * INPUT: output-file-of-assign-or-assign+ <em>topfile</em>
+      * OUTPUT: <em>topfile</em> in correct format plus lines that enforce fixed nodes and fixed interfaces for links
+* <em>parseinfo.pl</em>
+      * PURPOSE: measure performance of <em>assign&rdquo; or &ldquo;assign+</em>
+      * INPUT: a file containing output of <em>assign&rdquo; or &ldquo;assign+</em>
+      * OUTPUT: success or failure of allocation, time the allocation took, number of nodes and interswitch links allocated
+* <em>runtests.pl</em>
+      * PURPOSE: run a number of tests with <em>assign&rdquo; and &ldquo;assign+</em>. The tests we run are the following:
+          * t1. <em>assign&rdquo; with given &ldquo;ptopfile&rdquo; and &ldquo;topfile</em>
+          * t2. <em>assign+&rdquo; with given &ldquo;ptopfile&rdquo; and &ldquo;topfile</em>
+          * t3. <em>assign&rdquo; with given &ldquo;ptopfile&rdquo; and modified &ldquo;topfile</em> to remove fixed nodes
+          * t4. <em>assign+&rdquo; with given &ldquo;ptopfile&rdquo; and modified &ldquo;topfile</em> to remove fixed nodes
+          * t5. <em>assign&rdquo; with given &ldquo;ptopfile&rdquo; and modified &ldquo;topfile&rdquo; to remove fixed nodes, and then include fixed nodes and fixed interfaces from the output of &ldquo;assign+</em> in step t4
+      * INPUT: a file containing lines with <em>ptopfile&rdquo; and &ldquo;topfile</em>
+      * OUTPUT: file <em>testresults</em> that contains performance of these two allocation algorithms for each line of input
+* <em>processresults.pl</em>
+      * PURPOSE: process the results file generated in the previous step
+      * INPUT: name of the results file
+      * OUTPUT: statistics about successes and failures of <em>assign&rdquo; and &ldquo;assign+</em>. The code also produces files that contain inputs that lead to following potentially anomalous cases:
+          * <em>checktests&rdquo; - &ldquo;assign+&rdquo; failed and &ldquo;assign</em> didn&rsquo;t, i.e. t1 was a success and t2 was a failure
+          * <em>failedtests&rdquo; - both &ldquo;assign+&rdquo; and &ldquo;assign</em> failed, i.e. both t1 and t2 were failures
+          * <em>weirdtests&rdquo; - &ldquo;assign+&rdquo; succeeded and &ldquo;assign</em> didn&rsquo;t, i.e. t1 was a failure and t2 and t5 were a success
+          * <em>impossibletests&rdquo; - &ldquo;assign+&rdquo; succeeded and &ldquo;assign&rdquo; didn&rsquo;t with fixed nodes from output of &ldquo;assign+&rdquo;,  i.e. t1 was a failure, t2 was a success and t5 was a failure. This most often happens because &ldquo;assign</em> cannot deal properly with fixed interfaces on links.</p>
+
+<p>Additionally, the folder contains a version of <em>assign</em> I have used in testing, that will run on boss. It also contains two sets of test cases:
+* <em>expinfotests</em> - all attempted allocations from start of DeterLab until Spring 2013
+* <em>expfailedtests</em> - all failed allocations roughly from Jan 2012 until Spring 2013</p>
+
+<h1 id="expinfotests:e89af9a8fa9e8cb909dfc97e68655e72">Expinfotests</h1>
+
+<p>There were total of 109,326 tests. Historically, in real operation some of these allocations succeeded and some failed.</p>
+
+<p>||Category|| Count|| Percentage || Reason ||
+|| Both <em>assign&rdquo; and &ldquo;assign+</em> succeeded || 98,641 || 90% || n/a ||
+|| <em>assign&rdquo; succeeded, &ldquo;assign+&rdquo; failed || 98 || 0.08% || In 93 of these cases &ldquo;assign&rdquo; doesn&rsquo;t detect a disconnected switch topology nor oversubscribed interswitch bandwidth, but it should. In 2 cases we overestimate what we need in one vclass. I can fix this issue but it will have to wait. In 3 cases the &ldquo;ptopfile&rdquo; has an error - two interfaces on a physical node are called the same. &ldquo;assign&rdquo; doesn&rsquo;t pick up on this but &ldquo;assign+&rdquo; does, which should be correct behavior. So effectively in only 2 out of 109,326 &ldquo;assign&rdquo; is better than &ldquo;assign+</em>. ||
+||  Both <em>assign&rdquo; and &ldquo;assign+</em> failed || 6,341 || 5.8% || n/a ||
+|| <em>assign&rdquo; failed, &ldquo;assign+&rdquo; succeeded, &ldquo;assign&rdquo; succeeded with fixed nodes from &ldquo;assign+&rdquo; || 666 || 0.61% || There is a good solution but &ldquo;assign</em> cannot find it in a given number of trials.||
+|| <em>assign&rdquo; failed, &ldquo;assign+&rdquo; succeeded, &ldquo;assign&rdquo; failed with fixed nodes from &ldquo;assign+&rdquo; || 3,580 || 3.24% || This happens because &ldquo;assign</em> cannot properly deal with fixed interfaces. I checked quite a few of these solutions manually and they are possible solutions. ||</p>
+
+<h1 id="expfailedtests:e89af9a8fa9e8cb909dfc97e68655e72">Expfailedtests</h1>
+
+<p>There were total of 9,861 tests. Historically, all these allocations failed.</p>
+
+<p>||Category|| Count|| Percentage || Reason ||
+|| Both <em>assign&rdquo; and &ldquo;assign+&rdquo; succeeded || 300 || 3% || &ldquo;assign</em> sometimes fails due to &ldquo;luck&rdquo;. There is a good solution but it runs out of trials to find it. ||
+|| <em>assign&rdquo; succeeded, &ldquo;assign+&rdquo; failed || 4 || 0.04% || In one case there was a disconnected switch topology. In other 3 cases &ldquo;assign&rdquo; does not properly check for OS support and ends up assigning nodes that cannot load a requested OS. Thus effectively there were 0 cases in these tests where &ldquo;assign&rdquo; was better than &ldquo;assign+</em>. ||
+||  Both <em>assign&rdquo; and &ldquo;assign+</em> failed || 9,409 || 95.4% || n/a ||
+|| <em>assign&rdquo; failed, &ldquo;assign+&rdquo; succeeded, &ldquo;assign&rdquo; succeeded with fixed nodes from &ldquo;assign+&rdquo; || 147 || 1.49% || There is a good solution but &ldquo;assign</em> cannot find it in a given number of trials. ||
+|| <em>assign&rdquo; failed, &ldquo;assign+&rdquo; succeeded, &ldquo;assign&rdquo; failed with fixed nodes from &ldquo;assign+&rdquo; || 1 || 0.01% || This happens because &ldquo;assign</em> cannot properly deal with fixed interfaces. I checked quite a few of these solutions manually and they are possible solutions. ||</p>
+
+<h1 id="performance-results:e89af9a8fa9e8cb909dfc97e68655e72">Performance Results</h1>
+
+<p>[[Image(time.jpg)]]</p>
+
+<p>The image above shows the ratio of time taken by <em>assign+&rdquo; vs &ldquo;assign&rdquo; on y axis vs time taken by &ldquo;assign+&rdquo; on x axis. Values of y smaller than 1 (blue line) are better. We can see that the ratio varies a lot for short times, e.g., under 10 seconds. Sometimes &ldquo;assign&rdquo; is better and sometimes &ldquo;assign+&rdquo;. As we go to more complex topologies that take longer to allocate &ldquo;assign+&rdquo; becomes decidedly better, often taking <sup>1</sup>&frasl;<sub>10</sub> of the time that &ldquo;assign&rdquo; needs. In the extreme this is 1 minute for &ldquo;assign+&rdquo; vs 10 minutes for &ldquo;assign</em>.</p>
+
+<p>[[Image(nodes.jpg)]]</p>
+
+<p>The image above shows the ratio of the nodes allocated by <em>assign+&rdquo; vs &ldquo;assign&rdquo; on y axis vs number of nodes allocated by &ldquo;assign+</em> on x axis. All values are very close to 1 (blue line) indicating that both algorithms allocate similar numbers of nodes for a given topology.</p>
+
+<p>[[Image(isw.jpg)]]</p>
+
+<p>The image above shows the number of interswitch links allocated by <em>assign&rdquo; on y axis vs number of interswitch links allocated by &ldquo;assign+&rdquo; on x axis. Values of y greater than 1 (above blue line) are better. We can see that &ldquo;assign+&rdquo; often allocates 10-100 times fewer interswitch links than &ldquo;assign</em>.</p>
+
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>

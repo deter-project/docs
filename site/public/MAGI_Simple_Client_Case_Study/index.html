@@ -1,0 +1,239 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <h1></h1>
+  
+
+<p>[wiki:OrchestratorCaseStudies &lt; MAGI Orchestrator Case Studies] | [wiki:MAGI_Scaled_Server_Case_Study MAGI Orchestrator Scaled Server Case Study &gt;]</p>
+
+<p>[[TOC]]</p>
+
+<p>In this example, we demonstrate how to set up client and server traffic generators with only one server and one client. (In the Scaled Server Case Study (link), we will show how the same procedure can be used for a significantly larger topology.)</p>
+
+<p>We demonstrate three aspects of MAGI: specifying multiple event streams, synchronizing with triggers, and a special target called <code>exit</code> to unload agents.</p>
+
+<h1 id="event-streams:e1e43d44d4d9fe3b1b9862589e2a04ca">Event Streams</h1>
+
+<p>This example has three events streams; the server stream, the client stream, and the cleanup stream.</p>
+
+<p>The coordination between the events can be illustrated as follows:</p>
+
+<p>[[Image(cs_workflow.png, 360px)]]</p>
+
+<p>Event streams can be synchronized using <em>event-based triggers&rdquo; (such as after the server has started) or &ldquo;time-based triggers&rdquo; (such as wait for 30 seconds). The triggers are indicated as &ldquo;wait</em> states (in gray). Forming the groups and loading the agents, which are also automated by the orchestrator tool, are not illustrated above.</p>
+
+<h2 id="server-stream:e1e43d44d4d9fe3b1b9862589e2a04ca">Server Stream</h2>
+
+<p>The server event stream consists of three states.</p>
+
+<ol>
+<li><p>The <em>start</em> state generates a trigger, called <code>serverStarted</code>, once the server agent is activated on the experiment nodes.</p></li>
+
+<li><p>It then enters the <em>wait</em> state where it waits for a trigger from the client event stream.</p></li>
+
+<li><p>Once the trigger is received, it enters the <em>stop</em> state, when the server is deactivated or terminated.</p></li>
+</ol>
+
+<p>Here is the relevant AAL description:</p>
+
+<pre><code>serverstream:
+    - type: event
+      agent: server_agent
+      method: startServer
+        trigger: serverStarted
+      args: {}
+
+    - type: trigger
+      triggers: [ {event: ClientStopped} ]
+
+    - type: event
+      agent: server_agent
+      method: stopServer
+      trigger: ServerStopped
+      args: {}
+</code></pre>
+
+<h2 id="client-stream:e1e43d44d4d9fe3b1b9862589e2a04ca">Client Stream</h2>
+
+<p>The client event stream consists of five states.</p>
+
+<ol>
+<li>First, the client agent implementation is <em>parameterized</em> by the configuration state. This occurs as part of the agent loading process.</li>
+<li>The client stream then <em>synchronizes</em> with the server stream by waiting for the <code>serverStarted</code> trigger from the server nodes.</li>
+<li>Once it receives the trigger, the client agent is <em>activated</em> in the start state.</li>
+<li>Next, the client stream <em>waits_&rsquo; for a period of time and then &lsquo;_terminates</em> the client agents in the stop state.</li>
+<li>On termination, the client agents send a <code>clientStopped</code> trigger that allows the server stream to synchronize and terminate the servers only after all the client have terminated.</li>
+</ol>
+
+<p>Here is the relevant AAL description:</p>
+
+<pre><code>clientstream:
+    - type: trigger
+      triggers: [ {event: ServerStarted} ]
+
+    - type: event
+      agent: client_agent
+      method: startClient
+      args: {}
+
+    - type: trigger
+      triggers: [ {timeout: 60000} ]
+
+    - type: event
+      agent: client_agent
+      method: stopClient
+      trigger: clientStopped
+      args: {}
+</code></pre>
+
+<h2 id="cleanup-stream:e1e43d44d4d9fe3b1b9862589e2a04ca">Cleanup Stream</h2>
+
+<p>The last event stream, the cleanup stream consists of two states.</p>
+
+<ol>
+<li>First, it <em>waits</em> for all the servers to stop.</li>
+<li>Then it enters the <em>exit</em> state.</li>
+</ol>
+
+<p>The exit state unloads and tears down all the communication mechanisms between the agents. The exit state is entered by the key target and is used to transfer control to a reserved state internal to the Orchestrator.</p>
+
+<p>It causes the Orchestrator to send agent <code>unload</code> and <code>disband</code> group messages to all of the experiment nodes and then it exits the Orchestrator.</p>
+
+<p>Here is the relevant AAL code:</p>
+
+<pre><code>cleanup:
+    - type: trigger
+      triggers: [ {event: ServerStopped, target: exit} ]
+</code></pre>
+
+<h1 id="running-the-experiment:e1e43d44d4d9fe3b1b9862589e2a04ca">Running the Experiment</h1>
+
+<h2 id="step-1-swap-in-the-experiment:e1e43d44d4d9fe3b1b9862589e2a04ca">Step 1: Swap in the experiment</h2>
+
+<p>Swap in the experiment using this network description file: [attachment:casestudy_clientserver.tcl?format=raw casestudy_clientserver.tcl].</p>
+
+<h2 id="step-2-set-up-your-environment:e1e43d44d4d9fe3b1b9862589e2a04ca">Step 2: Set up your environment</h2>
+
+<p>Assuming your experiment is named <code>myExp</code>, your project is named <code>myProj</code>, and the AAL file is called <em>casestudy_clientserver.aal</em>, include this in your environment:</p>
+
+<pre><code>PROJ=myExp
+EXP=myProj
+AAL=casestudy_clientserver.aal
+</code></pre>
+
+<h2 id="step-3-run-the-orchestrator:e1e43d44d4d9fe3b1b9862589e2a04ca">Step 3: Run the Orchestrator</h2>
+
+<p>Once the experiment is swapped in, run the Orchestrator using this AAL file: [attachment:casestudy_clientserver.aal?format=raw casestudy_clientserver.aal].</p>
+
+<pre><code>&gt; /share/magi/current/magi_orchestrator.py --experiment $EXP --project $PROJ --events $AAL
+</code></pre>
+
+<p>Once run, you will see the orchestrator step through the events in the AAL file. The example output below uses the project <em>montage_&rsquo; with experiment &lsquo;_caseClientServer</em>. The output will be as follows:</p>
+
+<p>[[Image(cs_orch.png)]]</p>
+
+<ol>
+<li>The Orchestrator runs an internally defined stream called <code>initilization</code> that is responsible for establishing the <code>server_group</code> and the <code>client_group</code> and loading the agents. Once the agents are loaded, as indicated by the received trigger <code>AgentLoadDone</code>, the initialization stream is complete.</li>
+<li>Now the <code>serverstream</code>, <code>clientstream</code> and the <code>cleanup</code> stream start concurrently. The <code>serverstream</code> sends the <code>startServer</code> event to the <code>server_group</code>. All members of the <code>server_group</code> start the server and fire a trigger <code>serverStarted</code>.</li>
+<li>The <code>clientstream</code> then sends the <code>startClient</code> event to the client_group. One minute later, the <code>clientstream</code> sends the event <code>stopClient</code> to the client_group and terminates the <code>clientstream</code>. All members of the client_group terminate the client_agent and generate a <code>clientStopped</code> trigger which is sent back to the Orchestrator.</li>
+<li>Once the <code>serverstream</code> receives the <code>clientStopped</code> trigger from the client_group, it sends out the <code>stopServer</code> event on the server_group. Once all the servers are stopped, the members of the server_group respond with a <code>serverStopped</code> trigger, which is forwarded to the <code>cleanupstream</code>.</li>
+<li>Upon receiving the <code>serverStopped</code> trigger, the <code>cleanupstream</code> enacts an internally define stream called <code>exit</code> that is responsible for unloading agents and tearing down the groups.</li>
+</ol>
+
+<p>The experiment artifacts, the procedure and topology file that were used for the case study are attached below.
+* Procedure: [attachment:casestudy_clientserver.aal?format=raw casestudy_clientserver.aal]
+* Topology: [attachment:casestudy_clientserver.tcl?format=raw casestudy_clientserver.tcl]
+* Archived Logs: [attachment:casestudy_clientserver.tar.gz]</p>
+
+<h1 id="visualizing-experiment-results:e1e43d44d4d9fe3b1b9862589e2a04ca">Visualizing Experiment Results</h1>
+
+<p>In order to visualize the traffic on the network, modify the above-mentioned procedure to add another stream called <code>monitorstream</code>. This stream deploys a packet sensor agent on the server node to measure the traffic on the link in the experiment. The packet sensor agent records the traffic data using MAGI’s data management layer.</p>
+
+<pre><code>monitor_group: [servernode]
+
+monitor_agent:
+  group: monitor_group
+  path: /share/magi/modules/pktcounters/pktCountersAgent.tar.gz
+  execargs: {}
+
+monitorstream:
+    - type: trigger
+      triggers: [ { event: serverStarted } ]
+
+    - type: event
+      agent: monitor_agent
+      method: startCollection
+      trigger: collectionServer
+      args: {}
+
+    - type: trigger
+      triggers: [ { event: clientStopped } ]
+
+    - type: event
+      agent: monitor_agent
+      method: stopCollection
+      args: {}
+</code></pre>
+
+<p>The recorded data is then pulled out by the [below mentioned] tools to create a traffic plot.</p>
+
+<p>In order to populate the traffic data, re-run the experiment using the updated procedure file: [attachment:casestudy_clientserver_monitor.aal?format=raw casestudy_clientserver_monitor.aal]. The corresponding logs are also [attachment:casestudy_clientserver_monitor.tar.gz|available here]].</p>
+
+<p>The traffic may then be plotted in two ways:</p>
+
+<h2 id="offline-plotting:e1e43d44d4d9fe3b1b9862589e2a04ca">Offline Plotting</h2>
+
+<p>A plot of the traffic on the link connecting the client and the server can be generated by the MAGI Graph Creation Tool.</p>
+
+<pre><code>&gt; GRAPHCONF=cs_magi_graph.conf
+&gt; /share/magi/current/magi_graph.py -e $EXP -p $PROJ -c $GRAPHCONF -o cs_traffic_plot.png
+</code></pre>
+
+<p>[[Image(cs_traffic_plot.png, 460px)]]</p>
+
+<h2 id="real-time-plotting:e1e43d44d4d9fe3b1b9862589e2a04ca">Real-time Plotting</h2>
+
+<p>A real time simulated traffic plot using canned data from a pre-run experiment may be visualized here.</p>
+
+<p>A similar plot using live data may be plotted by visiting the same web page and additionally passing it the hostname of the database config node of your experiment.</p>
+
+<p>You can find the database config node for your experiment by reading your experiment’s configuration file, similar to the following.</p>
+
+<pre><code>&gt; cat /proj/myProject/exp/myExperiment/experiment.conf
+</code></pre>
+
+<p>The database config node is as follows:</p>
+
+<pre><code>dbdl:
+  configHost: node-1
+
+expdl:
+  experimentName: myExperiment
+  projectName: myProject
+</code></pre>
+
+<p>Then edit the simulated traffic plot URL, passing it the hostname.</p>
+
+<pre><code>host=node-1.myExperiment.myProject
+
+http://&lt;web-host&gt;/traffic.html?host=node-1.myExperiment.myProject
+</code></pre>
+
+<p>The procedure, graph configuration, and archived log files that were used for the visualization of this case study are attached below.
+* Procedure: [attachment:casestudy_clientserver_monitor.aal?format=raw casestudy_clientserver_monitor.aal]
+* Archived Logs: [attachment:casestudy_clientserver_monitor.tar.gz]
+* Graph Config: [attachment:cs_magi_graph.conf?format=raw cs_magi_graph.conf]</p>
+
+<h1 id="scaling-the-experiment:e1e43d44d4d9fe3b1b9862589e2a04ca">Scaling the Experiment</h1>
+
+<p>Now suppose you wanted to generate web traffic for a larger topology. We discuss how the above AAL can be applied to a topology of 55 nodes in the [wiki:MAGI_Scaled_Server_Case_Study next tutorial].</p>
+
+<p>[wiki:OrchestratorCaseStudies &lt; MAGI Orchestrator Case Studies] | [wiki:MAGI_Scaled_Server_Case_Study MAGI Orchestrator Scaled Server Case Study &gt;]</p>
+
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>

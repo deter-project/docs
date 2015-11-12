@@ -1,0 +1,229 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <h1></h1>
+  
+
+<h1 id="introduction:49601fcc70443e8a9f263221deee393b">Introduction</h1>
+
+<p>This has been created as a classroom exercise explaining and demonstrating a few different techniques in active anonymity, and intercepting and making sense of web traffic.
+Throughout this exercise you will:
+* Learn about various forms of anonymity and tools that can be used
+* Use DETER to do the following:
+   * Set up a web server in Linux
+   * Set up a proxy server
+   * Capture web traffic using tcpdump
+   * Analyze that traffic using wireshark
+* Use the knowledge gained to determine the strengths and weaknesses of these different practices and technologies</p>
+
+<p>Anonymity is important because it allows a user to communicate with a service or another user without fear of someone eavesdropping or figuring out their location.  When two systems communicate directly, it makes it easy for someone to figure out who is talking to who and what they are saying.  Keeping your identity hidden is important because it can keep large companies and organizations from collecting your information. Anonymity tools can help them communicate more securely. There are many tools and practices that can be used to help maintain anonymity, and this lesson covers two.</p>
+
+<h2 id="proxy:49601fcc70443e8a9f263221deee393b">Proxy</h2>
+
+<p>One method of hiding your identity would be using a proxy server which works by acting as a mediator between you and the service you are communicating with.  Proxies are used to hide web traffic from the service the user is attempting to connect to.  All the data you send and all the data you receive goes through it.  By connection through a proxy the user is able to camouflage his actual identity so that the service only sees the address of the proxy.<br />
+The benefits of using a proxy are
+* Setting up proxies does not take long
+* They do hide your traffic</p>
+
+<p>But there are a few drawbacks to this
+* One is that it is not hard to determine that the traffic is coming through a proxy.
+* Another is that the proxy is able to see both the user and the service, so it knows the identity of both parties.</p>
+
+<h2 id="onion-routing-tor:49601fcc70443e8a9f263221deee393b">Onion Routing &amp; Tor</h2>
+
+<p>Another method of cloaking one&rsquo;s identity is through using a program called <a href="https://www.torproject.org/">Tor</a>  Tor takes the proxy idea and expands it using the idea of onion routing.  Onion routing is an anonymity tool which uses multiple routers to hide web traffic from the sender to the server. The web data is encrypted using layers, with each layer being removed at the subsequent routers. This means that each router can only see two parts of the traffic, the preceding node and the next node. Therefore a compromised node would not lead to the identity of either person being revealed.</p>
+
+<p>[[Image(onion.png)]]
+This image was obtained from <a href="http://en.wikipedia.org/wiki/File:Onion">http://en.wikipedia.org/wiki/File:Onion</a> diagram.svg</p>
+
+<p>For this exercise, we are going to set up a network with 11 different nodes.  2 nodes will be client nodes, Alice and Bob, which will be making HTTP requests from 2 other nodes, Server1 and Server2, which will be running Apache2.  There will be a proxy node running tinyproxy, 4 nodes running the Tor program, and 2 routers. Once we set up the network, we will set up tinyproxy on the proxy node and Apache2 on the 2 Server nodes.  Then we will have Alice make HTTP requests of the Server1 node directly, through the proxy, and through the Tor network, while we sniff the requests.  The &ldquo;Wide Area&rdquo; should be treated as a cloud of an unknown number of computers and routers, representing a large network where we are just highlighting the nodes used for Tor. We will then analyze this data using Wireshark to determine who is communicating and what they are saying.</p>
+
+<h1 id="creating-the-experiment:49601fcc70443e8a9f263221deee393b">Creating the Experiment</h1>
+
+<p>Open SSH Secure File Transfer Client</p>
+
+<p>[[Image(sshclientstart.png)]]</p>
+
+<p>Click on the Quick Connect Button</p>
+
+<p>[[Image(sshclientlogon.png)]]</p>
+
+<p>It should look like this. Click Connect, and enter your password when prompted.  In the right column you should put [attachment:tor_setup.tgz this tar file]</p>
+
+<p>Then log in to <em>users.isi.deterlab.net</em> through <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/">Putty.</a> For help on logging onto Putty check out <a href="https://trac.deterlab.net/wiki/DETERSSH">this</a> tutorial. Move the tar file to <code>/proj/project_name</code> where project_name is your project&rsquo;s name by typing</p>
+
+<pre><code>cp tor_setup.tgz /proj/project_name
+</code></pre>
+
+<p>Then in [attachment:anonymous.2.ns this NS file] replace YOURPROJECT with the name of your project</p>
+
+<p>[[Image(networksetup.png)]]</p>
+
+<p>After changing the NS file you are now ready to create your experiment! Log into <a href="https://www.isi.deterlab.net/">https://www.isi.deterlab.net/</a> and use the instructions starting on page 11 <a href="http://www.isi.edu/deter/docs/DETER_Tutorial-TF-Jan2011.pdf">http://www.isi.edu/deter/docs/DETER_Tutorial-TF-Jan2011.pdf</a> to create the experiment. Keep in mind that you already have the NS file, so you will not need to use the graphical tool to create one.  Now you can swap in your experiment! Use the same link page 18 <a href="http://www.isi.edu/deter/docs/DETER_Tutorial-TF-Jan2011.pdf">http://www.isi.edu/deter/docs/DETER_Tutorial-TF-Jan2011.pdf</a> to swap it in.</p>
+
+<p>If you are experiencing problems dealing with creating the experiment <a href="https://trac.deterlab.net/wiki/Tutorial/CreatingExperiments">https://trac.deterlab.net/wiki/Tutorial/CreatingExperiments</a> also provides a walk through</p>
+
+<h1 id="step-2-setting-up-the-network:49601fcc70443e8a9f263221deee393b">Step 2 Setting Up the Network</h1>
+
+<h2 id="setting-up-apache:49601fcc70443e8a9f263221deee393b">Setting up apache</h2>
+
+<p>We need to generate traffic in our network and one of the easiest ways to do that is with HTTP traffic, so we need to set up a server and a web page.  SSH into Server1 by using the command:</p>
+
+<pre><code>ssh Server1.ExperimentName.ProjectName
+</code></pre>
+
+<p>Now run [attachment:runme.apache this script] with the <code>sudo</code> command. In order to put the script file into the DeterLab environment connect with the SSH File Transfer Client. This will most likely put the script in /users/UserName/ first you must make the command executable, so use the command:</p>
+
+<pre><code>chmod 0755 /users/UserName/runme.apache
+</code></pre>
+
+<p>You can now run the script using the command</p>
+
+<pre><code>sudo /users/UserName/runme.apache
+</code></pre>
+
+<p>This is the code the script contains:</p>
+
+<pre><code>#! /bin/sh
+
+apt-get install apache2
+
+echo &quot;ServerName localhost&quot; | sudo tee /etc/apache2/conf.d/fqdn
+
+echo &quot;#!/usr/bin/env python\nimport cgi\nimport os\n\nprint \&quot;Content-type: text/html\&quot; \nprint \&quot;\&quot; \n\nprint cgi.escape(os.environ[\&quot;REMOTE_ADDR\&quot;])&quot; &gt; /usr/lib/cgi-bin/ip.txt
+
+mv /usr/lib/cgi-bin/ip.txt /usr/lib/cgi-bin/ip.cgi
+
+chmod 755 /usr/lib/cgi-bin/ip.cgi
+</code></pre>
+
+<p>This will run a script with Apache 2 which sets up the server and web page and displays the users IP address on the Server 1 node.  Once the script is done running, the server is now set up and we can generate traffic!  You can check this by typing <code>w3m http://localhost/cgi-bin/ip.cgi</code> which should display your IP address.
+[[Image(apache2setup.png)]]</p>
+
+<p>It should look like this. Repeat this process on Server 2</p>
+
+<h2 id="setting-up-the-proxy-node:49601fcc70443e8a9f263221deee393b">Setting up the proxy node</h2>
+
+<p>Log onto the proxy node and use [attachment:runme.proxy this script] with the <code>sudo</code> command
+if you used the SSH Secure File Transfer then the script will most likely be in /users/UserName/ but we still need to make the file executable</p>
+
+<pre><code>chmod 755 /users/UserName/runme.proxy
+</code></pre>
+
+<p>Now you can run the script:</p>
+
+<pre><code>sudo /users/UserName/runme.proxy
+</code></pre>
+
+<p>This is the code the script contains:</p>
+
+<pre><code>#! /bin/sh
+
+apt-get update
+
+apt-get install tinyproxy
+
+apt-get update
+
+echo &quot;Filter \&quot;/etc/tinyproxy/filter\&quot;\nFilterURLs On\nAllow 10.0.0.0/8&quot; &gt;&gt; /etc/tinyproxy.conf
+
+cp /usr/share/tinyproxy/default.html /usr/share/tinyproxy/default.html.ORIGINAL
+
+/etc/init.d/tinyproxy reset
+</code></pre>
+
+<p>This will run a script which installs and sets up <a href="https://banu.com/tinyproxy/">tinyproxy</a> on the node. Tinyproxy is a free program and is designed to be small and easy to operate. The proxy is now set up!  We&rsquo;ll get to using it in a little while.</p>
+
+<h1 id="step-3-generating-and-listening-to-network-traffic:49601fcc70443e8a9f263221deee393b">Step 3 Generating and Listening to Network Traffic</h1>
+
+<p>We are now ready to begin learning! [[BR]]
+The topics to be covered are
+* Understanding what happens when one makes a web server request
+* Capturing web traffic using tcpdump
+* Analyzing that traffic using wireshark
+One person needs to connect to either Alice while another person logs into the server1 node (or server2 if you choose).   From the server node type the command <code>ifconfig</code> This will show the ethernet links that the node is using.</p>
+
+<p>[[Image(ifconfig.3.png)]]</p>
+
+<p>Find the one that shows an inet address of 10.x.x.x In the example above it is eth0. Yours may be different, but that is still ok.</p>
+
+<h2 id="direct-client-to-server-traffic:49601fcc70443e8a9f263221deee393b">Direct Client-to-Server Traffic</h2>
+
+<p>Then type the command <code>sudo tcpdump -i eth0 -s 0 -x -w /tmp/direct.pcap</code> This will begin listening to the traffic that comes through this node and that specific ethernet link, eth0 in the example, write the data out to the file direct.pcap in the tmp diretory.  For more help with <code>tcpdump</code> type in the command <code>man tcpdump</code>  At this time, the person connected to Alice will enter the command <code>wget --no-proxy http://server1/cgi-bin/ip.cgi</code> This saves a local copy of the web page set up on the server, and by doing so generates HTTP traffic to examine. We were able to listen in on this traffic thanks to the <code>tcpdump</code> command. Then the users connected to Server1 will enter the command <code>cp /tmp/direct.pcap .</code> This will copy the file with the sniffed data into the users directory. We&rsquo;ll analyze what this data looks like and can tell us at a later time. However if you want to analyze this data now before we sniff more, proceed to Step 4 on this page.
+[[BR]]To reiterate, the commands are:
+* <code>sudo tcpdump -i eth0 -s 0 -x -w /tmp/direct.pcap</code> from the server
+* <code>wget --no-proxy http://server1/cgi-bin/ip.cgi</code> from Alice
+* <code>cp /tmp/direct.pcap .</code> from the server after closing the tcpdump</p>
+
+<h2 id="client-to-server-traffic-through-a-proxy:49601fcc70443e8a9f263221deee393b">Client-to-Server Traffic through a Proxy</h2>
+
+<p>Now we&rsquo;ll use a proxy to make this traffic a bit more anonymous.  A proxy will mask the source and destination of the traffic from both the client and the server by working as a go between for the two nodes.  Repeat the <code>tcpdump</code> command <code>sudo tcpdump -i eth0 -s 0 -x -w /tmp/throughproxy.pcap</code> However, now the user connected to Alice should enter the command <code>env http_proxy=http://proxy:8888 wget http://server1/cgi-bin/ip.cgi</code> This command changes an environmental setting and sends the <code>wget</code> command through the proxy on port 8888.  Thanks to the <code>tcpdump</code> command, we have a copy of this traffic as well. Then the user on the Server1 node should enter <code>cp /tmp/throughproxy.pcap .</code> This saves us a copy of the data.
+[[BR]]Again, in order:
+* <code>sudo tcpdump -i eth0 -s 0 -x -w /tmp/direct.pcap</code> from the server
+* <code>env http_proxy=http://proxy:8888 wget http://server1/cgi-bin/ip.cgi</code> from Alice
+* <code>cp /tmp/direct.pcap .</code> from the server after closing the tcpdump</p>
+
+<h2 id="client-to-server-traffic-through-tor:49601fcc70443e8a9f263221deee393b">Client-to-Server Traffic through Tor</h2>
+
+<p>We will now use <a href="https://www.torproject.org/">Tor</a> to
+onion route the data. As the name suggests onion routing alters the data flow through a minimum of 3 relays, each adding another layer of anonymity, because the packets of data only know the address of the next relay and the previous relay. Repeat the <code>tcpdump</code> command <code>sudo tcpdump -i eth0 -s 0 -x -w /tmp/throughtor.pcap</code>  Now, the user on Alice should use the command <code>torify wget http://server/cgi-bin/ip.cgi</code> And then <code>cp /tmp/throughtor.pcap .</code> from the server node.
+[[BR]]In order:
+* <code>sudo tcpdump -i eth0 -s 0 -x -w /tmp/direct.pcap</code> from the server
+* <code>torify wget http://server1/cgi-bin/ip.cgi</code> from Alice
+* <code>cp /tmp/direct.pcap .</code> from the server after closing the tcpdump</p>
+
+<h1 id="step-4-analyzing-the-traffic-data:49601fcc70443e8a9f263221deee393b">Step 4 Analyzing the Traffic Data</h1>
+
+<p>So now we have collected HTTP network traffic data from 3 different connections: direct, through a proxy, and through the Tor network.  Now, it&rsquo;s time to analyze that data.  We will do this using <a href="http://www.wireshark.org/">Wireshark</a>.  Wireshark is a network packet analyzer, it takes captured packets (or captures its own) and then analyzes and displays the data in the packets.  Displaying the information allows the Wireshark user to ensure that no harmful communication is being used against the system or to even spy on a system.  To access this data we need to use the SSH Secure File Transfer Client</p>
+
+<p>[[Image(sshclientstart.png)]]</p>
+
+<p>Click on the Quick Connect Button</p>
+
+<p>[[Image(sshclientlogon.png)]]</p>
+
+<p>It should look like this. Click Connect, and enter your password when prompted.  In the right column, you should see three files: direct.pcap, throughproxy.pcap, and throughtor.pcap. Copy these files and place them on your desktop.  Then open up Wireshark.</p>
+
+<p>[[Image(wireshark.png)]]</p>
+
+<p>Click on the File tab, and click Open. Find the 3 data files on your desktop and open up direct.pcap.</p>
+
+<p>[[Image(wiresharkdirect.png)]]</p>
+
+<p>It should look similar to this.  When you look at lines 1 and 2, you will see that this is the ARP request coming from Router2 looking for Server1.  The ARP request is a request for the ethernet address of a node, using the IP address. After that, you will see that lines 3 and 4 are the the TCP requests from Alice to the Server1.  After that in line 6 we see the HTTP request, this is requesting the actual page from the Apache2 server. Let&rsquo;s check out the source and destination information from the HTTP data packets.  We can see that the in the source column and down to line 6 that the source of the HTTP request is 10.1.4.2, which corresponds to the Alice node IP address, and the destination in the destination column is 10.1.1.2, which corresponds to the Server1 node&rsquo;s IP address. This makes it clear that Alice was making an HTTP request to Server1.</p>
+
+<p>[[Image(Regular Dataflow.png)]]</p>
+
+<p>Now open up throughproxy.pcap in Wireshark.</p>
+
+<p>[[Image(wiresharkthroughproxy.png)]]</p>
+
+<p>What we see is much different, we see that the source is 10.1.3.4, which is the IP address of the proxy node.  So, now the destination, Server1, doesn&rsquo;t know that the request came from Alice, but instead thinks that the request came from the proxy node.</p>
+
+<p>[[Image(Proxy Dataflow.png)]]</p>
+
+<p>Now, we try it with the throughtor.pcap file.</p>
+
+<p>[[Image(wiresharkthroughtor.png)]]</p>
+
+<p>Again we see that the source is not Alice, but instead matches the IP address from one of the Tor Relay nodes.  It won&rsquo;t always be the same every time because the path that the data takes through the Tor network is random.  This, like going through the proxy, provides anonymity for the client, in our case Alice, but this provides more anonymity because the data goes through 3 Tor relays instead of just one proxy.</p>
+
+<p>[[Image(Tor Dataflow.png)]]</p>
+
+<p>This may provide for anonymous communication, but it doesn&rsquo;t keep the data secure.  We might not know who the data came from, but we can still tell what it was. Open up one of the .pcap files.</p>
+
+<p>[[Image(readwireshark.png)]]</p>
+
+<p>Highlight one of the HTTP packets, then expand the Hypertext Transfer Protocol section. Here we can read that the command <code>wget</code> and the user was trying to access <code>http://server1/cgi-bin/ip.cgi</code> So, even though the server doesn&rsquo;t know where the request came from, we still know what the command is.</p>
+
+<h1 id="more-on-your-own:49601fcc70443e8a9f263221deee393b">More on Your Own</h1>
+
+<p>If you want to explore this some more, you can use <code>tcpdump</code> and Wireshark on more than just the server node. When using the proxy to send data, you can use it on the Alice node and the proxy node to determine what each knows about the source and destination of the packets. If you&rsquo;re using Tor, then you can use it on the Alice node and the Tor Relays to determine what they all know about the packets. After you&rsquo;ve done some of that, which anonymity tool do you think is the best at keeping users anonymous?</p>
+
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>

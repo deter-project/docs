@@ -1,0 +1,137 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <h1></h1>
+  
+
+<p>[[TOC]]</p>
+
+<h1 id="link-tracing-and-monitoring-tracing:29f4a18bb07d8e05fbd244928c2838c3">Link Tracing and Monitoring #Tracing</h1>
+
+<p>DeterLab has simple support for tracing and monitoring links and LANs. For example, to trace a link you would use code such as the following in your NS file:</p>
+
+<pre><code>    set link0 [$ns duplex-link $nodeB $nodeA 30Mb 50ms DropTail]
+
+    $link0 trace
+</code></pre>
+
+<p>The default mode for tracing a link (or a LAN) is to capture just the packet headers (the first 64 bytes of the packet) and store them to a tcpdump output file. You may view a realtime summary of packets through the link, via the <a href="http://www.isi.deterlab.net">web interface</a> by going to the Experiment page and clicking on the &ldquo;Link Tracing/Monitoring&rdquo; menu option.</p>
+
+<p>You may also control the link tracing programs on the fly, pausing them, restarting them, and killing them.</p>
+
+<p>Here is an example of the output from interactive &ldquo;Link Tracing/Monitoring&rdquo;:</p>
+
+<pre><code>    1177100936.506386 (icmp:0,0 tcp:0,0 udp:0,0 other:0,0) (icmp:0,0 tcp:0,0 udp:0,0 other:0,0) (dropped:0)
+</code></pre>
+
+<p>The first thing on each line is a timestamp, in typically Unix format (seconds since the epoch). Each set of measurements in parentheses contains counts for one of the interfaces on the node to which you&rsquo;re connected. When you first connect, it prints a single line containing the number of interfaces for the node, and then one line explaining which link each interface belongs to. The first set of measurements on the line corresponds to the first interface reported, and so on. <code>icmp:A,B</code> means that, since the last message, there were A bytes of ICMP traffic sent in B packets.</p>
+
+<p>In addition to capturing just the packet headers, you may also capture the entire packet:</p>
+
+<pre><code>    $link0 trace packet
+</code></pre>
+
+<p>Or you may not capture any packets, but simply gather the realtime summary so that you may view it via the web interface.</p>
+
+<pre><code>    $link0 trace monitor
+</code></pre>
+
+<p>By default, all packets traversing the link are captured by the tracing agent. If you want to narrow the scope of the packets that are captured, you may supply any valid tcpdump (pcap) style expression:</p>
+
+<pre><code>    $link0 trace monitor &quot;icmp or tcp&quot;
+</code></pre>
+
+<p>You may also set the <em>snaplen</em> for a link or LAN, which sets the number of bytes that will be captured by each of the trace agents (as mentioned above, the default is 64 bytes, which is adequate for determining the type of most packets):</p>
+
+<pre><code>    $link0 trace_snaplen 128
+</code></pre>
+
+<p>Tracing parameters may also be specified on a <em>per-node basis</em>, for each node in a link or LAN. For example, consider the duplex link <code>link0</code> above between <code>nodeA</code> and <code>nodeB</code>. If you want to set a different snaplen and trace expression for packets <em>leaving</em> <code>nodeA</code>, then use:</p>
+
+<pre><code>    [[$ns link $nodeA $nodeB] queue] set trace_type header
+    [[$ns link $nodeA $nodeB] queue] set trace_snaplen 128
+    [[$ns link $nodeA $nodeB] queue] set trace_expr &quot;ip proto tcp&quot;
+</code></pre>
+
+<p>To set the parameters for packets leaving <code>nodeB</code>, simply reverse the arguments to the <code>link</code> statement:</p>
+
+<pre><code>    [[$ns link $nodeB $nodeA] queue] set trace_snaplen 128
+</code></pre>
+
+<p>For a LAN, the syntax is slightly different. Consider a LAN called <code>lan0</code> with a node called <code>nodeL</code> on it:</p>
+
+<pre><code>    [[$ns lanlink $lan0 $nodeL] queue] set trace_type header
+    [[$ns lanlink $lan0 $nodeL] queue] set trace_snaplen 128
+    [[$ns lanlink $lan0 $nodeL] queue] set trace_expr &quot;ip proto tcp&quot;
+</code></pre>
+
+<p>When capturing packets (rather then just &ldquo;monitoring&rdquo;), the packet data is written to tcpdump (pcap) output files in <code>/local/logs</code> on the delay node. Note that while delay nodes are allocated for each traced link/lan, packets are shaped only if the NS file requested traffic shaping. Otherwise, the delay node acts simply as a bridge for the packets, which provides a place to capture and monitor the packets, without affecting the experiment directly.</p>
+
+<p>Whether the link or LAN is shaped or not, packets leaving each node are captured twice; once when they arrive at the delay node, and again when they leave the delay node. This allows you to precisely monitor how the delay node affects your packets, whether the link is actually shaped or not. You can use the [wiki:DeterLabCommands#loghole loghole utility] to copy the capture files back to the experiment&rsquo;s log directory.</p>
+
+<p>When a link or LAN is traced, you may monitor a realtime summary of the packets being captured, via the web interface&rsquo;s Experiment page by clicking on the &ldquo;Link Tracing&rdquo; link. You will see a list of each link and LAN that is traced, and each node in the link or LAN. For each node, you can click on the &ldquo;Monitor&rdquo; button to bring up a window that displays the realtime summary for packets <em>leaving</em> that node. Currently, the realtime summary is somewhat primitive, displaying the number of packets (and total bytes) sent each second, as well as a breakdown of the packet types for some common IP packet types.</p>
+
+<p>Other buttons on the <em>Link Tracing</em> page allow you to temporarily pause packet capture, restart it, or even kill the packet capture processes completely (since they continue to consume CPU even when paused). The &ldquo;snapshot&rdquo; button causes the packet capture process to close its output files, rename them, and then open up new output files. The files can then be saved off with the loghole utility, as mentioned above.</p>
+
+<p>If you want to script the control of the packet tracing processes, you can use the [#DynamicEvents event system] to send dynamic events. For example, to tell the packet capture processes monitoring <code>link0</code> to snapshot, pause, and restart:</p>
+
+<pre><code>    tevc -e myproj/myexp now link0-tracemon snapshot
+    tevc -e myproj/myexp now link0-tracemon stop
+    tevc -e myproj/myexp now link0-tracemon start
+</code></pre>
+
+<p>And of course, you may use the NS &ldquo;at&rdquo; syntax to schedule static events from your NS file:</p>
+
+<pre><code>    $ns at 10 &quot;$link0 trace stop&quot;
+    $ns at 20 &quot;$link0 trace start&quot;
+    $ns at 30 &quot;$link0 trace snapshot&quot;
+</code></pre>
+
+<p>The output files that the capture process create, are stored in <code>/local/logs</code>, and are named by the link and node name. In the above link example, four capture files are created:</p>
+
+<ul>
+<li>trace_nodeA-link0.xmit</li>
+<li>trace_nodeA-link0.recv</li>
+<li>trace_nodeB-link0.xmit</li>
+<li>trace_nodeB-link0.recv</li>
+</ul>
+
+<p>where:
+* The <code>.recv</code> files hold the packets that were sent by the node and <em>received</em> by the delay node.
+* The <code>.xmit</code> files hold those packets that were <em>transmitted</em> by the delay node and received by the other side of the link.</p>
+
+<p>So, for packets sent from <code>nodeA</code> to <code>nodeB</code>, the packet would arrive at the delay node and be recorded in <code>trace_nodeA-link0.recv</code>. Once the packet traverses the delay node (subject to Dummynet traffic shaping) and it is about to be transmitted, it is recorded in <code>trace_nodeA-link0.xmit</code>. By comparing these two files, you can see how the Dummynet traffic shaping has affected your packets, in each direction.</p>
+
+<p>Note that even if you have not specified traffic shaping, you still get the same set of files. In this case, the <code>.recv</code> and <code>.xmit</code> files will be nearly identical, reflecting only the negligible propagation delay through the software bridge.</p>
+
+<p>When you issue a &ldquo;snapshot&rdquo; command, the above files are closed, and renamed to:</p>
+
+<ul>
+<li>trace_nodeA-link0.xmit.0</li>
+<li>trace_nodeA-link0.recv.0</li>
+<li>trace_nodeB-link0.xmit.0</li>
+<li>trace_nodeB-link0.recv.0</li>
+</ul>
+
+<p>and a new set of files is opened. Note that the files are not rolled; the next time you issue the snapshot command, the current set of files ending with <code>.0</code> are lost.</p>
+
+<h1 id="endnode-tracing-and-monitoring:29f4a18bb07d8e05fbd244928c2838c3">EndNode Tracing and Monitoring</h1>
+
+<p><em>Endnode tracing/monitoring</em> refers to putting the trace hooks on the end nodes of a link, instead of on delay nodes. This happens when there are no delay nodes in use or if you have explicitly requested [wiki:linkdelays end node shaping] to reduce the number of nodes you need for an experiment. You may also explicitly request tracing to be done on the end nodes of a link (or a LAN) with the following NS command:</p>
+
+<pre><code>    $link0 trace_endnode 1
+</code></pre>
+
+<p>(Note that if a delay node does exist, it will be used for traffic capture even if endnode tracing is specified.) When tracing/monitoring is done on an endnode, the output files are again stored in <code>/local/logs</code>, and are named by the link and node name. The difference is that there is just a <em>single&rdquo; output file, for those packets &ldquo;leaving</em> the node. Packets are captured after traffic shaping has been applied.</p>
+
+<ul>
+<li>trace_nodeA-link0.xmit</li>
+</ul>
+
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>

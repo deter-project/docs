@@ -1,0 +1,317 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <h1></h1>
+  
+
+<p>This page is a work in progress.  Please be sure to read and be familiar with the <a href="https://users.emulab.net/trac/emulab/wiki/InstallDocs">Emulab documentation</a>.</p>
+
+<p>The testbed needs to know what switches are connected to it and what power ports they are plugged into.  Right now, we insert these manually into the database.</p>
+
+<p>Testbed nodes need to be setup to boot from the network by default.  This is done through the Preboot eXecution Environment, available for most network cards.  For onboard network cards, it is typically enabled through the BIOS.</p>
+
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/Preboot_Execution_Environment">Preboot Execution Environment on Wikipedia</a></li>
+<li><a href="http://downloadcenter.intel.com/Detail_Desc.aspx?agr=Y&amp;DwnldID=19186">Intel PXE firmware and utilities</a></li>
+</ul>
+
+<h1 id="setting-up-the-mfs-for-testbed-nodes:4b2d9a489acfdee30b189eebabe435ec">Setting up the MFS for testbed nodes</h1>
+
+<p>These filesystems are PXE booted over the network via TFTP and allow us to perform various parts of node maintenance.</p>
+
+<p>There are three different MFS (memory file system) images that come with DETER/Emulab.</p>
+
+<p>They are:</p>
+
+<ul>
+<li>The Admin MFS (/tftpboot/freebsd)
+
+<ul>
+<li>Primarily used to create new operating system images using imagezip and ssh</li>
+</ul></li>
+<li>The New Node MFS (/tftpboot/freebsd.newnode)
+
+<ul>
+<li>This is the default image for nodes not explicitly listed in dhcpd.conf.</li>
+<li>Has scripts to try to identify what type of node is being booted based on node_type variables.</li>
+<li>Runs a process to enable auto-detection of which switch ports the node is wired into.</li>
+</ul></li>
+<li>The Frisbee MFS (/tftpboot/frisbee)
+
+<ul>
+<li>This image is used when loading an operating system image onto</li>
+</ul></li>
+</ul>
+
+<p>The reason all these tasks are split up among multiple images is to keep the image size down since they are booted over the network.  With faster networks, these images will likely be rolled into a single Linux based image in the future.</p>
+
+<p>Each site will have to install root SSH keys from boss into each MFS and change the root password.</p>
+
+<p>This process, along with fetching/unpacking the MFS tarball, has been automated by the script setup_mfs in testbed/install:</p>
+
+<pre><code>[jjh@boss ~/testbed/install]$ sudo ./setup_mfs -h
+Usage: setup_mfs
+The setup phase is always performed.  Options not required
+  -g Get the MFS from web and extract
+  -f &lt;filename&gt; Use provided mfs tar.bz2 archive
+</code></pre>
+
+<p>This script will configure all three MFS images with your boss&rsquo;s root ssh key and a password of your choice.</p>
+
+<p>The a copy of the MFS tarball is located in <em>/share/tarballs</em> now.</p>
+
+<pre><code>[deterbuild@boss ~/testbed/install]$ sudo ./setup_mfs -f /share/tarballs/deter-mfs.tar.bz2 
+
+################################################################################
+# Extracting /share/tarballs/deter-mfs.tar.bz2 to /usr/testbed/tftpboot
+#
+Please enter a MFS root password
+Password: 
+Verifying - Password: 
+
+################################################################################
+# Setting up MFS: /usr/testbed/tftpboot/freebsd/boot
+#
+Created md0...
+Created /mnt-md0
+....
+</code></pre>
+
+<p>You can use the &lsquo;-g&rsquo; option to fetch the latest tarball as well:</p>
+
+<pre><code>[jjh@boss ~/testbed/install]$ sudo ./setup_mfs -g
+
+################################################################################
+# Fetching http://www.deterlab.net/~jjh/Deter%20OS%20Images/deter-mfs.tar.bz2
+# Extracting to /usr/testbed/tftpboot
+#
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 37.4M  100 37.4M    0     0  3295k      0  0:00:11  0:00:11 --:--:-- 3287k
+Please enter a MFS root password
+Password: 
+Verifying - Password: 
+
+################################################################################
+# Setting up MFS: /usr/testbed/tftpboot/freebsd/boot
+#
+Created md0...
+Created /mnt-md0
+Changing the image root password...
+Locking toor...
+Unmounting /mnt-md0
+Removing mount point /mnt-md0
+Unconfiguring md0
+Running prepare on mfs and kernel
+loader.conf: 
+loader.rc: 
+kernel: 
+mfsroot: mfsroot.gz updated...
+
+################################################################################
+# Setting up MFS: /usr/testbed/tftpboot/freebsd.newnode/boot
+#
+Created md0...
+Created /mnt-md0
+Changing the image root password...
+Locking toor...
+Unmounting /mnt-md0
+Removing mount point /mnt-md0
+Unconfiguring md0
+Running prepare on mfs and kernel
+loader.conf: 
+loader.rc: 
+kernel: 
+mfsroot: mfsroot.gz updated...
+acpi.ko: 
+
+################################################################################
+# Setting up MFS: /usr/testbed/tftpboot/frisbee/boot
+#
+Created md0...
+Created /mnt-md0
+Changing the image root password...
+Locking toor...
+Unmounting /mnt-md0
+Removing mount point /mnt-md0
+Unconfiguring md0
+Running prepare on mfs and kernel
+loader.conf: 
+loader.rc: 
+kernel: 
+mfsroot: mfsroot.gz updated...
+[jjh@boss ~/testbed/install]$  
+</code></pre>
+
+<h1 id="network-connections:4b2d9a489acfdee30b189eebabe435ec">Network connections</h1>
+
+<p>Generally each node will have a control network interface and experimental interfaces.  The control network interface should be on a switch port that is on the CONTROL (VLAN 2003) network.  The experimental interfaces should be on ports that are enabled, but can be in a default VLAN for now.</p>
+
+<h1 id="bios-settings-for-testbed-nodes:4b2d9a489acfdee30b189eebabe435ec">BIOS settings for testbed nodes</h1>
+
+<p>The testbed nodes should be set to boot only off of the network.  Disable hard drive boot to prevent failed PXE requests from falling through to booting whatever is on the disk.</p>
+
+<h1 id="node-types:4b2d9a489acfdee30b189eebabe435ec">Node Types</h1>
+
+<h2 id="select-a-console-type:4b2d9a489acfdee30b189eebabe435ec">Select a console type</h2>
+
+<p>This setting will determine which MFS the node will boot.  If you are using a serial port, please be aware that by default, we use 115200 as the baud rate for all MFS images.  This is a compile time value, so it is best to use 115200.</p>
+
+<h2 id="determining-the-disk-type:4b2d9a489acfdee30b189eebabe435ec">Determining the disk type</h2>
+
+<p>It is important to know what sort of disks your new nodes have.  FreeBSD differentiates between SATA and SAS drives by using the device types ad and da, respectively.  Also, with older machines, the first ATA disk unit number may be 4.  You will need to know what disk type and unit number you are dealing with before attempting to create a node type.  It is easiest to probably boot a node to a FreeBSD live USB key and run &ldquo;<em>geom disk list&rsquo;</em>:</p>
+
+<pre><code>$ geom disk list
+Geom name: cd0
+Providers:
+</code></pre>
+
+<ol>
+<li><p>Name: cd0
+   Mediasize: 0 (0B)
+   Sectorsize: 2048
+   Mode: r0w0e0
+   descr: NECVMWar VMware IDE CDR10
+   ident: (null)
+   fwsectors: 0
+   fwheads: 0</p>
+
+<p>Geom name: da0
+Providers:</p></li>
+
+<li><p>Name: da0
+   Mediasize: 85899345920 (80G)
+   Sectorsize: 512
+   Mode: r2w2e3
+   descr: VMware Virtual disk
+   ident: (null)
+   fwsectors: 63
+   fwheads: 255</p></li>
+</ol>
+
+<p>So for this example, our type is <em>da</em> and our unit is 0.</p>
+
+<h2 id="determining-the-control-network-interface:4b2d9a489acfdee30b189eebabe435ec">Determining the control network interface</h2>
+
+<p>Before creating a node type, you should know which interface is the control network interface on your node.  Typically it is the first interface on the system, but sometimes it isn&rsquo;t.  You can double check that you have the correct interface by watching a node boot into the &ldquo;freebsd.newnode&rdquo; MFS.  During the boot, dhcp requests will be sent out of all interfaces in order to determine the control network interface.  Here is an example of a machine with 6 interfaces.  It turns out that the unit for the control network is 4 instead of 0.</p>
+
+<pre><code>Emulab looking for control net among:  igb0 igb1 igb2 igb3 igb4 igb5 ...
+igb5: link state changed to UP
+igb3: link state changed to UP
+igb2: link state changed to UP
+igb0: link state changed to UP
+igb4: link state changed to UP
+Terminated
+Emulab control net is igb4
+</code></pre>
+
+<p>If you miss the boot message, don&rsquo;t worry.  You can log into the MFS after it booted and run this:</p>
+
+<pre><code>pc4# kenv boot.netif.name
+igb4
+</code></pre>
+
+<h2 id="creating-the-type:4b2d9a489acfdee30b189eebabe435ec">Creating the type</h2>
+
+<p>You will have to create a new &ldquo;Node Type&rdquo; for each class of node you wish to add to your testbed.</p>
+
+<ol>
+<li>Log into the your testbed web interface.  Go &ldquo;Red Dot.&rdquo;</li>
+<li>Select &ldquo;Experimentation -&gt; Node Status&rdquo;</li>
+<li>At the bottom of the page go click on the link that says &ldquo;Create a New Type&rdquo;</li>
+</ol>
+
+<p>If you are creating a node type for a typical testbed pc, use the class &lsquo;pc.&rsquo;  If you are creating a node type for special hardware, choose something else such as &lsquo;router&rsquo; for routers or &lsquo;appliance&rsquo; for appliance type nodes.</p>
+
+<h2 id="associating-operating-system-images-with-your-new-node-type:4b2d9a489acfdee30b189eebabe435ec">Associating Operating System images with your new node type</h2>
+
+<p>After creating a new node type, you will need to enable support for it with each operating system image.  This can be accomplished by editing the operating system image through the web interface and selecting the new type.  On new installs, you can also cheat with the SQL command below.  Be sure to substitute <em>minipc</em> with the node type you created.</p>
+
+<pre><code>mysql&gt; insert into osidtoimageid select default_osid as osid, 'minipc' as type, imageid from images;
+Query OK, 5 rows affected (0.00 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql&gt; select * from osidtoimageid;
++-------+--------+---------+
+| osid  | type   | imageid |
++-------+--------+---------+
+| 10007 | minipc |   10007 |
+| 10009 | minipc |   10009 |
+| 10005 | minipc |   10005 |
+| 10008 | minipc |   10008 |
+| 10006 | minipc |   10006 |
++-------+--------+---------+
+5 rows in set (0.00 sec)
+</code></pre>
+
+<h1 id="manually-adding-non-standard-nodes:4b2d9a489acfdee30b189eebabe435ec">Manually adding non-standard nodes</h1>
+
+<h2 id="create-the-node-type:4b2d9a489acfdee30b189eebabe435ec">Create the node type</h2>
+
+<p>See the section on node types.  For appliances, two things are important when creating the type:
+* default_imageid_01 needs to be set to &ldquo;No ImageID&rdquo; (the entry is at the end of the list)
+* imageable needs to be set to 0</p>
+
+<h2 id="create-the-nodes-manually:4b2d9a489acfdee30b189eebabe435ec">Create the nodes manually</h2>
+
+<p>Connect to the MySQL database on boss (typically tbdb).</p>
+
+<pre><code>mysql&gt; insert into nodes (node_id, type, phys_nodeid, role) values (&quot;juniper1&quot;, &quot;junpier&quot;, &quot;juniper1&quot;, &quot;testnode&quot;);
+</code></pre>
+
+<p>Update the other fields in the node table for this new type of node:</p>
+
+<pre><code>mysql&gt; update nodes set inception=now(), def_boot_path=_, def_boot_cmd_line='', next_boot_path='', pxe_boot_path='', rpms='', deltas='', tarballs='', startupcmd='', startstatus='none', bootstatus='unknown', status='', status_timestamp='', failureaction='fatal', eventstate='ISUP', state_timestamp=now(), op_mode='MINIMAL', op_mode_timestamp=now(), allocstate='FREE_DIRTY', allocstate_timestamp=now(), next_op_mode='', ipodhash=_ where type=&quot;juniper&quot;;
+</code></pre>
+
+<p>Set the node status to up for the newly created nodes:</p>
+
+<pre><code>mysql&gt; insert into node_status values ('juniper1', 'up', NULL);
+</code></pre>
+
+<h2 id="create-interface-table-entries:4b2d9a489acfdee30b189eebabe435ec">Create Interface Table Entries</h2>
+
+<p>Card is typically incremented and port is always 1 for testbed nodes (I know, confusing).</p>
+
+<pre><code>mysql&gt; insert into interfaces (node_id, card, port, interface_type, iface, role) values (&quot;juniper1&quot;, 1, 1, &quot;fop&quot;, &quot;eth0&quot;, &quot;expt&quot;);
+mysql&gt; insert into interfaces (node_id, card, port, interface_type, iface, role) values (&quot;juniper1&quot;, 2, 1, &quot;fop&quot;, &quot;eth1&quot;, &quot;expt&quot;);
+</code></pre>
+
+<p>We must also setup the interface state table:</p>
+
+<pre><code>mysql&gt; insert into interface_state (node_id, card, port, iface) values (&quot;juniper1&quot;, 1, 1, &quot;eth0&quot;);
+mysql&gt; insert into interface_state (node_id, card, port, iface) values (&quot;juniper1&quot;, 2, 1, &quot;eth1&quot;);
+</code></pre>
+
+<h2 id="create-the-wires-table-entries:4b2d9a489acfdee30b189eebabe435ec">Create the Wires Table Entries</h2>
+
+<p>Lets say our juniper has two ports on card 2 of our switch on ports 23 and 24:</p>
+
+<pre><code>mysql&gt; insert into wires (node_id1, node_id2, type, card1, port1, card2, port2) values (&quot;juniper1&quot;, &quot;hp1&quot;, &quot;Node&quot;, 1, 1, 2, 23);
+mysql&gt; insert into wires (node_id1, node_id2, type, card1, port1, card2, port2) values (&quot;juniper1&quot;, &quot;hp1&quot;, &quot;Node&quot;, 2, 1, 2, 24);
+</code></pre>
+
+<h2 id="add-in-entries-for-power-and-serial-connectivity:4b2d9a489acfdee30b189eebabe435ec">Add in entries for power and serial connectivity</h2>
+
+<p>If you have a serial controller, you can add an entry into the tip lines table.  The &lsquo;tipname&rsquo; corresponds to the name given to the capture daemon on the serial server:</p>
+
+<pre><code>mysql&gt; insert into tiplines (tipname, node_id, server) values ('juniper1', 'juniper1', 'serial3');
+</code></pre>
+
+<p>If you have your node hooked up to a power controller, add a line into the outlets table to allow for power cycling:</p>
+
+<pre><code>mysql&gt; insert into outlets (node_id, power_id, outlet) values ('juniper1', 'power7', 3);
+</code></pre>
+
+<p>If your node is stuck in reloading you can restart the process by using the nfree command on boss:</p>
+
+<pre><code> nfree emulab-ops reloading pc2
+</code></pre>
+
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>

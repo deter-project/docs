@@ -1,0 +1,752 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <h1></h1>
+  
+
+<p>[[TOC]]
+[wiki:CoreReference &lt; Back to Core Reference]</p>
+
+<p>In order to use the testbed specific commands, you must include the following line near the top of your NS topology file (before any testbed commands are used):</p>
+
+<pre><code>    source tb_compat.tcl
+</code></pre>
+
+<p>If you wish to use your file under NS, download [attachment:wiki:Tutorial:tb_compat.tcl tb_compat.tcl] and place it in the same directory as your NS file. When run in this way under NS, the testbed commands will have no effect, but NS will be able to parse your file.</p>
+
+<hr />
+
+<h1 id="tcl-ns-and-node-names:562ecb98141e1876082147d56278e2ee">TCL, NS, and node names</h1>
+
+<p>In your file, you will be creating nodes with something like the following line:</p>
+
+<pre><code>    set node1 [$ns node]
+</code></pre>
+
+<p>With this command, the simulator, represented by <code>$ns</code> is creating a new node, involving many internal data changes, and returning a reference to it which is stored in the variable <code>node1</code>.</p>
+
+<p>In almost all cases, when you need to refer to a node you will do it as <code>$node1</code>, the <code>$</code> indicating that you want the value of the variable <code>node1</code>, i.e. the reference to the node. Thus you will be issuing commands like:</p>
+
+<pre><code>    $ns duplex-link $node1 $node2 100Mb 150ms DropTail
+    tb-set-ip $node1 10.1.0.2
+</code></pre>
+
+<p>Note the instances of <code>$</code>.</p>
+
+<p>You will notice that when your experiment is set up, the node names and such will be    node1}}, node2}}, node3}}, etc. This happens because the parser detects what variable you are using to store the node reference and uses that as the node name. In the case that you do something like:</p>
+
+<pre><code>    set node1 [$ns node2]
+    set A $node1
+</code></pre>
+
+<p>The node will still be called <code>node1</code> as that was the first variable to contain the reference.</p>
+
+<p>If you are dealing with many nodes you may store them in an array, using a command similar to the following:</p>
+
+<pre><code>    for {set i 0} {$i &lt; 4} {incr i} {
+       set nodes($i) [$ns node]
+    }
+</code></pre>
+
+<p>In this case, the names of the node will be <code>nodes-0</code>, <code>nodes-1</code>, <code>nodes-2</code>, <code>nodes-3</code>. In other words, the &ldquo;(&rdquo; character is replaced with &ldquo;-&rdquo;, and &ldquo;)&rdquo; is removed. This slightly different syntax is used to avoid any problems that &ldquo;()&rdquo; may cause later in the process. For example, the &ldquo;()&rdquo; characters may not appear in DNS entries.</p>
+
+<p>As a final note, everything said above for nodes applies equally to LANs, i.e.:</p>
+
+<pre><code>    set lan0 [$ns make-lan &quot;$node0 $node1&quot; 100Mb 0ms]
+    tb-set-lan-loss $lan0 .02
+</code></pre>
+
+<p>Again, note the instances of <code>$</code>.</p>
+
+<p>Links may also be named just like nodes and LANs. The names may then be used to set loss rates or IP addresses. This technique is the only way to set such attributes when there are multiple links between two nodes.</p>
+
+<pre><code>    set link1 [$ns duplex-link $node0 $node1 100Mb 0ms DropTail]
+    tb-set-link-loss $link1 0.05
+    tb-set-ip-link $node0 $link1 10.1.0.128
+</code></pre>
+
+<hr />
+
+<h1 id="captured-ns-file-parameters:562ecb98141e1876082147d56278e2ee">Captured NS file parameters</h1>
+
+<p>A common convention when writing NS files is to place any parameters in an array named <code>opt</code> at the beginning of the file. For example:</p>
+
+<pre><code>    set opt(CLIENT_COUNT) 5
+    set opt(BW) 10mb;    Link bandwidth
+    set opt(LAT) 10ms;   Link latency
+
+   ...
+
+    $ns duplex-link $server $router $opt(BW) $opt(LAT) DropTail
+
+    for {set i 0} {$i &lt; $opt(CLIENT_COUNT)} {incr i} {
+        set nodes($i) [$ns node]
+    ...
+    }
+    set serverprog [$server program-agent -command &quot;starter.sh&quot;]
+</code></pre>
+
+<p>Normally, this convention is only used to help organize the parameters. In DeterLab, however, the contents of the <code>opt</code> array are captured and made available to the emulated environment. For instance, the parameters are added as environment variables to any commands run by [wiki:eventsystem#PROGRAM program-agents]. So in the above example of NS code, the <code>starter.sh</code> script will be able to reference parameters by name, like so:</p>
+
+<pre><code>    #! /bin/sh
+
+    echo &quot;Testing with $CLIENT_COUNT clients.&quot;
+    ...
+</code></pre>
+
+<p>Note that the contents of the <code>opt</code> array are not ordered, so you should not reference other parameters and expect the shell to expand them appropriately:</p>
+
+<pre><code>    set opt(prefix) &quot;/foo/bar&quot;
+    set opt(BINDIR) '$prefix/bin'; # BAD
+
+    set opt(prefix) &quot;/foo/bar&quot;
+    set opt(BINDIR) &quot;$opt(prefix)/bin&quot;; # Good
+</code></pre>
+
+<hr />
+
+<h1 id="ordering-issues:562ecb98141e1876082147d56278e2ee">Ordering Issues</h1>
+
+<p><code>tb-</code> commands have the same status as all other Tcl and NS commands. Thus <em>the order matters</em> not only relative to each other but also relative to other commands. One common example of this is that IP commands must be issued <em>after</em> the links or LANs are created.</p>
+
+<hr />
+
+<h1 id="hardware-commands:562ecb98141e1876082147d56278e2ee">Hardware Commands</h1>
+
+<h2 id="tb-set-hardware:562ecb98141e1876082147d56278e2ee">tb-set-hardware</h2>
+
+<p><code>tb-set-hardware</code><em><code>node</code>&ldquo;&ldquo;<code>type</code>&ldquo;<code>[</code>&ldquo;<code>args</code></em><code>]</code></p>
+
+<p><code>tb-set-hardware $node3 pc</code>[[BR]]
+<code>tb-set-hardware $node4 shark</code></p>
+
+<p>where:
+<em>node</em> - The name of the node.[[BR]]
+<em>type</em> - The type of the node.</p>
+
+<p>Notes:
+  * Please see the <a href="https://www.isi.deterlab.net/nodecontrol_list.php3"> Node Status</a> page for a list of available types. <code>pc</code> is the default type.
+  * No current types have any additional arguments.</p>
+
+<hr />
+
+<h1 id="ip-address-commands:562ecb98141e1876082147d56278e2ee">IP Address Commands</h1>
+
+<p>Each node will be assigned an IP address for each interface that is in use. The following commands will allow you to explicitly set those IP addresses. IP addresses will be automatically generated for all nodes for which you do not explicitly set IP addresses.</p>
+
+<p>In most cases, the IP addresses on either side of a link must be in the same subnet. Likewise, all IP addresses on a LAN should be in the same subnet. Generally the same subnet should not be used for more than one link or LAN in a given experiment, nor should one node have multiple interfaces in the same subnet. Automatically generated IP addresses will conform to these requirements. If part of a link or LAN is explicitly specified with the commands below then the remainder will be automatically generated under the same subnet.</p>
+
+<p>IP address assignment is deterministic and tries to fill lower IP&rsquo;s first, starting at 2. Except in the partial specification case (see above), all automatic IP addresses are in the network <code>10</code>.</p>
+
+<h2 id="tb-set-ip:562ecb98141e1876082147d56278e2ee">tb-set-ip</h2>
+
+<p><code>tb-set-ip</code><em><code>node</code>&ldquo;&ldquo;<code>ip</code></em></p>
+
+<p><code>tb-set-ip $node1 142.3.4.5</code></p>
+
+<p>where:
+<em>node</em> - The node to assign the IP address to[[BR]]
+<em>ip</em> - The IP address.</p>
+
+<p>Notes:</p>
+
+<ul>
+<li>This command should only be used for nodes that have a single link. For nodes with multiple links the following commands should be used. Mixing <code>tb-set-ip</code> and any other IP command on the same node will result in an error.</li>
+</ul>
+
+<h2 id="tb-set-ip-link:562ecb98141e1876082147d56278e2ee">tb-set-ip-link</h2>
+
+<p><code>tb-set-ip-link</code><em><code>node</code>&ldquo;&ldquo;<code>link</code>&ldquo;&ldquo;<code>ip</code></em></p>
+
+<p><code>tb-set-ip-link $node0 $link0 142.3.4.6</code></p>
+
+<p>where:</p>
+
+<p><em>node</em> - The node to set the IP for.[[BR]]
+<em>link</em> - The link to set the IP for.[[BR]]
+<em>ip</em> - The IP address.</p>
+
+<p>Notes:</p>
+
+<ul>
+<li>One way to think of the arguments is a link with the node specifying which side of the link to set the IP for.</li>
+<li>This command cannot be mixed with <code>tb-set-ip</code> on the same node.</li>
+</ul>
+
+<h2 id="tb-set-ip-lan:562ecb98141e1876082147d56278e2ee">tb-set-ip-lan</h2>
+
+<p><code>tb-set-ip-lan</code>_<code>node</code>&ldquo;&ldquo;<code>lan</code>&ldquo;&ldquo;<code>ip</code>_[[BR]]
+<code>tb-set-ip-lan $node1 $lan0 142.3.4.6</code></p>
+
+<p>where:
+<em>node</em> - The node to set the IP for.[[BR]]
+<em>lan</em> - The lan the IP is on.[[BR]]
+<em>ip</em> - The IP address.</p>
+
+<p>Notes:</p>
+
+<ul>
+<li>One way to think of the arguments is a node with the LAN specifying which port to set the IP address for.</li>
+<li>This command cannot be mixed with <code>tb-set-ip</code> on the same node.</li>
+</ul>
+
+<h2 id="tb-set-ip-interface:562ecb98141e1876082147d56278e2ee">tb-set-ip-interface</h2>
+
+<p><code>tb-set-ip-interface</code>_<code>node</code>&ldquo;&ldquo;<code>dst</code>&ldquo;&ldquo;<code>ip</code>_[[BR]]
+<code>tb-set-ip-interface $node2 $node1 142.3.4.6</code></p>
+
+<p>where:
+<em>node</em> - The node to set the IP for.[[BR]]
+<em>dst</em> - The destination of the link to set the IP for.[[BR]]
+<em>IP</em> - The IP address.</p>
+
+<p>Notes:</p>
+
+<ul>
+<li>This command cannot be mixed on the same node with <code>tb-set-ip</code>. (See above)</li>
+<li>In the case of multiple links between the same pair of nodes, there is no way to distinguish which link to the set the IP for. This should be fixed soon.</li>
+<li>This command is converted internally to either <code>tb-set-ip-link</code> or <code>tb-set-ip-lan</code>. It is possible that error messages will report either of those commands instead of <code>tb-set-ip-interface</code>.</li>
+</ul>
+
+<h2 id="tb-set-netmask:562ecb98141e1876082147d56278e2ee">tb-set-netmask</h2>
+
+<p><code>tb-set-netmask</code><em><code>lanlink</code>&ldquo;&ldquo;<code>netmask</code></em></p>
+
+<p><code>tb-set-netmask $link0 &quot;255.255.255.248&quot;</code></p>
+
+<p>where:
+<em>lanlink</em> - The lan or link to set the netmask for.[[BR]]
+<em>netmask</em> - The netmask in dotted notation.</p>
+
+<p>Notes:</p>
+
+<ul>
+<li>This command sets the netmask for a LAN or link. The mask must be big enough to support all of the nodes on the LAN or link!</li>
+<li>You may play with the bottom three octets (0xFFFFFXXX) of the mask; attempts to change the upper octets will cause an error.</li>
+</ul>
+
+<hr />
+
+<h1 id="os-commands-os:562ecb98141e1876082147d56278e2ee">OS Commands #OS</h1>
+
+<h2 id="tb-set-node-os:562ecb98141e1876082147d56278e2ee">tb-set-node-os</h2>
+
+<p><code>tb-set-node-os</code><em><code>node</code>&ldquo;&ldquo;<code>os</code></em></p>
+
+<p><code>tb-set-node-os $node1 FBSD-STD</code>[[BR]]
+<code>tb-set-node-os $node1 MY_OS</code></p>
+
+<p>where:
+<em>node</em> - The node to set the OS for.[[BR]]
+<em>os</em> - The id of the OS for that node.</p>
+
+<p>Notes:</p>
+
+<ul>
+<li>The OSID may either by one of the standard OS&rsquo;s we provide or a custom OSID, created via the web interface.</li>
+<li>If no OS is specified for a node, a default OS is chosen based on the nodes type. This is currently <em>Ubuntu1004-STD</em> for PCs.</li>
+<li>The currently available standard OS types are listed in the [wiki:OSImages OS Information] page.</li>
+</ul>
+
+<h2 id="tb-set-node-rpms:562ecb98141e1876082147d56278e2ee">tb-set-node-rpms</h2>
+
+<p><code>tb-set-node-rpms</code><em><code>node</code>&ldquo;&ldquo;<code>rpms...</code></em></p>
+
+<p><code>tb-set-node-rpms $node0 rpm1 rpm2 rpm3</code></p>
+
+<p>Notes:</p>
+
+<ul>
+<li>This command sets which RPMs are to be installed on the node when it first boots after being assigned to an experiment.</li>
+<li>Each RPM can be either a path to a file or a URL. Paths must be to files that reside in the <code>/proj</code> or <code>/groups</code> directory. You are not allowed to place your RPMs in your home directory. <code>http(s)://</code> and <code>ftp://</code> URLs will be fetched into the experiment&rsquo;s directory, and re-distributed from there.</li>
+<li>See the [wiki:CoreGuide#InstallingRPMsautomatically Core Guide] for more information.</li>
+</ul>
+
+<h2 id="tb-set-node-startcmd:562ecb98141e1876082147d56278e2ee">tb-set-node-startcmd</h2>
+
+<p><code>tb-set-node-startcmd</code><em><code>node</code>&ldquo;&ldquo;<code>startupcmd</code></em></p>
+
+<p><code>tb-set-node-startcmd $node0 &quot;mystart.sh -a &gt;&amp; /tmp/node0.log&quot;</code></p>
+
+<p>Notes:</p>
+
+<ul>
+<li>Specify a script or program to be run when the node is booted.</li>
+<li>See the [wiki:CoreGuide#Startingyourapplicationautomatically Core Guide] for more information.</li>
+</ul>
+
+<h2 id="tb-set-node-cmdline:562ecb98141e1876082147d56278e2ee">tb-set-node-cmdline</h2>
+
+<p><code>tb-set-node-cmdline</code><em><code>node</code>&ldquo;&ldquo;<code>cmdline</code></em></p>
+
+<p><code>tb-set-node-cmdline $node0 {???}</code></p>
+
+<p>Notes:</p>
+
+<ul>
+<li>Set the commandline to be passed to the <em>kernel</em> when it is booted.</li>
+<li>Currently, this is supported on OSKit kernels only.</li>
+</ul>
+
+<h2 id="tb-set-node-tarfiles:562ecb98141e1876082147d56278e2ee">tb-set-node-tarfiles</h2>
+
+<p><code>tb-set-node-tarfiles</code>_<code>node</code>&ldquo;&ldquo;<code>install-dir1</code>&ldquo;&ldquo;<code>tarfile1</code>_<code>...</code></p>
+
+<p>The <code>tb-set-node-tarfiles</code> command is used to install one or more tar files onto a node&rsquo;s local disk. This command is useful for installing files that are used frequently, but will change very little during the course of your experiments. For example, if your software depends on a third-party library not provided in the standard disk images, you can produce a tarball and have the library ready for use on all the experimental nodes.</p>
+
+<p>Another example would be the data sets for your software. The benefit of installing files using this method is that they will reside on the node&rsquo;s local disk, so your experimental runs will not be disrupted by NFS traffic.</p>
+
+<p>Note: Avoid using this command if the files are changing frequently because the tars are only (re)installed when the nodes boot.</p>
+
+<p>Installing individual tar files or RPMs is a midpoint in the spectrum of getting software onto the experimental nodes. At one extreme, you can read everything over NFS, which works well if the files are changing constantly, but can generate a great deal of strain on the control network and disrupt your experiment. The tar files and RPMs are also read over NFS when the nodes initially boot; however, there won&rsquo;t be any extra NFS traffic while you are running your experiment. Finally, if you need a lot of software installed on a large number of nodes, say greater than 20, it might be best to create a [wiki:Tutorial/CustomOS custom disk image]. Using a disk image is easier on the control network since it is transferred using multicast, thus greatly reducing the amount of NFS traffic when the experiment is swapped in.</p>
+
+<p><em>Required Parameters:</em></p>
+
+<ul>
+<li><em>node</em> - The node where the files should be installed. Each node has its own tar file list, which may or may not be different from the others.</li>
+<li>One or more <em>install-dir&rdquo; and &ldquo;tarfile</em> pairs are then listed in the order you wish them to be installed:
+
+<ul>
+<li><em>install-dir</em> - An existing directory on the node where the tar file should be unarchived (e.g. <code>/</code>, <code>/usr</code>, <code>/usr/local</code>). The <code>tar</code> command will be run as &ldquo;root&rdquo; [#tb-set-node-tarfiles Note1], so all of the node&rsquo;s directories will be accessible to you. If the directory does not exist on the image or was not created by the unarchiving of a previous tar file, the installation will fail [#tb-set-node-tarfiles Note2].</li>
+<li><em>tarfile&rdquo; - An existing tar file located in a project directory (e.g. <code>/proj</code> or <code>/groups</code>) or an &ldquo;http&rdquo;, &ldquo;https&rdquo;, or &ldquo;ftp&rdquo; URL. In the case of URLs, they are downloaded when the experiment is swapped in and cached in the experiment&rsquo;s directory for future use. In either case, the tar file name is &ldquo;required</em> to have one of the following extensions: .tar, .tar.Z, .tar.gz, or .tgz. Note that the tar file could have been created anywhere; however, if you want the unarchived files to have valid DeterLab user and group id&rsquo;s, you should create the tar file on <code>ops</code> or an experimental node.</li>
+</ul></li>
+</ul>
+
+<p><em>Example usage:</em></p>
+
+<pre><code># Overwrite files in /bin and /sbin.
+tb-set-node-tarfiles $node0 /bin /proj/foo/mybinmods.tar /sbin /proj/foo/mysbinmods.tar
+
+# Programmatically generate the list of tarballs.
+set tb [list]
+# Add a tarball located on a web site.
+lappend tb / http://foo.bar/bazzer.tgz
+# Add a tarball located in the DETER NFS space.
+lappend tb /usr/local /proj/foo/tarfiles/bar.tar.gz
+# Use 'eval' to expand the 'tb' list into individual
+# arguments to the tb-set-node-tarfiles command.
+eval tb-set-node-tarfiles $node1 $tb
+</code></pre>
+
+<p><em>See also:</em></p>
+
+<ul>
+<li>[#tb-set-node-rpms <code>tb-set-node-rpms</code>]</li>
+<li>[wiki:Tutorial/CustomOS Custom disk images]</li>
+</ul>
+
+<p><em>Notes:</em></p>
+
+<ol>
+<li>Because the files are installed as root, care must be taken to protect the tar file so it cannot be replaced with a trojan that allowed less privileged users to become root.</li>
+<li>Currently, you can only tell how/why an installation failed by examining the node&rsquo;s console log on bootup.</li>
+</ol>
+
+<hr />
+
+<h1 id="link-loss-commands:562ecb98141e1876082147d56278e2ee">Link Loss Commands</h1>
+
+<p>This is the NS syntax for creating a link:</p>
+
+<pre><code>$ns duplex-link $node1 $node2 100Mb 150ms DropTail
+</code></pre>
+
+<p>Note that it does not allow for specifying link loss rates. DETER does, however, support link loss. The following commands can be used to specify link loss rates.</p>
+
+<h2 id="tb-set-link-loss:562ecb98141e1876082147d56278e2ee">tb-set-link-loss</h2>
+
+<p><code>tb-set-link-loss</code><em><code>src</code>&ldquo;&ldquo;<code>dst</code>&ldquo;&ldquo;<code>loss</code><em>[[BR]]
+<code>tb-set-link-loss</code></em><code>link</code>&ldquo;&ldquo;<code>loss</code></em></p>
+
+<p><code>tb-set-link-loss $node1 $node2 0.05</code>[[BR]]
+<code>tb-set-link-loss $link1 0.02</code></p>
+
+<p>where:
+<em>src&rdquo;, &ldquo;dst</em> - Two nodes to describe the link.[[BR]]
+<em>link</em> - The link to set the rate for.[[BR]]
+<em>loss</em> - The loss rate (between 0 and 1).</p>
+
+<p>Notes:</p>
+
+<ul>
+<li>There are two syntaxes available. The first specifies a link by a source/destination pair. The second explicitly specifies the link.</li>
+<li>The source/destination pair is incapable of describing an individual link in the case of multiple links between two nodes. Use the second syntax for this case.</li>
+</ul>
+
+<h2 id="tb-set-lan-loss:562ecb98141e1876082147d56278e2ee">tb-set-lan-loss</h2>
+
+<p><code>tb-set-lan-loss</code><em><code>lan</code>&ldquo;&ldquo;<code>loss</code></em></p>
+
+<p><code>tb-set-lan-loss $lan1 0.3</code></p>
+
+<p>Where:
+<em>lan</em> - The lan to set the loss rate for.[[BR]]
+<em>loss</em> - The loss rate (between 0 and 1).</p>
+
+<p>Notes:</p>
+
+<ul>
+<li>This command sets the loss rate for the entire LAN.</li>
+</ul>
+
+<h2 id="tb-set-node-lan-delay:562ecb98141e1876082147d56278e2ee">tb-set-node-lan-delay</h2>
+
+<p><code>tb-set-node-lan-delay</code><em><code>node</code>&ldquo;&ldquo;<code>lan</code>&ldquo;&ldquo;<code>delay</code></em></p>
+
+<p><code>tb-set-node-lan-delay $node0 $lan0 40ms</code></p>
+
+<p>Where:
+<em>node</em> - The node we are modifying the delay for.[[BR]]
+<em>lan</em> - Which LAN the node is in that we are affecting.[[BR]]
+<em>delay</em> - The new node to switch delay (see below).</p>
+
+<p>Notes:</p>
+
+<ul>
+<li>This command changes the delay between the node and the switch of the LAN. This is only half of the trip a packet must take. The packet will also traverse the switch to the destination node, possibly incurring additional latency from any delay parameters there.</li>
+<li>If this command is not used to overwrite the delay, then the delay for a given node to switch link is taken as one half of the delay passed to <code>make-lan</code>. Thus in a LAN where no <code>tb-set-node-delay</code> calls are made, the node-to-node latency will be the latency passed to <code>make-lan</code>.</li>
+<li>The behavior of this command is not defined when used with nodes that are in the same LAN multiple times.</li>
+<li>Delays of less than 2ms (per trip) are too small to be accurately modeled at this time, and will be silently ignored. As a convenience, a delay of 0ms can be used to indicate that you do not want added delay; the two interfaces will be &ldquo;directly&rdquo; connected to each other.</li>
+</ul>
+
+<h2 id="tb-set-node-lan-bandwidth:562ecb98141e1876082147d56278e2ee">tb-set-node-lan-bandwidth</h2>
+
+<p><code>tb-set-node-lan-bandwidth</code><em><code>node</code>&ldquo;&ldquo;<code>lan</code>&ldquo;&ldquo;<code>bandwidth</code></em></p>
+
+<p><code>tb-set-node-lan-bandwidth $node0 $lan0 20Mb</code></p>
+
+<p>Where:
+<em>node</em> - The node we are modifying the bandwidth for.[[BR]]
+<em>lan</em> - Which LAN the node is in that we are affecting.[[BR]]
+<em>bandwidth</em> - The new node to switch bandwidth (see below).</p>
+
+<p>Notes:</p>
+
+<ul>
+<li>This command changes the bandwidth between the node and the switch of the LAN. This is only half of the trip a packet must take. The packet will also traverse the switch to the destination node which may have a lower bandwidth.</li>
+<li>If this command is not used to overwrite the bandwidth, then the bandwidth for a given node to switch link is taken directly from the bandwidth passed to <code>make-lan</code>.</li>
+<li>The behavior of this command is not defined when used with nodes that are in the same LAN multiple times.</li>
+</ul>
+
+<h2 id="tb-set-node-lan-loss:562ecb98141e1876082147d56278e2ee">tb-set-node-lan-loss</h2>
+
+<p><code>tb-set-node-lan-loss</code><em><code>node</code>&ldquo;&ldquo;<code>lan</code>&ldquo;&ldquo;<code>loss</code></em></p>
+
+<p><code>tb-set-node-lan-loss $node0 $lan0 0.05</code></p>
+
+<p>Where:
+<em>node</em> - The node we are modifying the loss for.[[BR]]
+<em>lan</em> - Which LAN the node is in that we are affecting.[[BR]]
+<em>loss</em> - The new node to switch loss (see below).</p>
+
+<p>Notes:</p>
+
+<ul>
+<li>This command changes the loss probability between the node and the switch of the LAN. This is only half of the trip a packet must take. The packet will also traverse the switch to the destination node which may also have a loss chance. Thus for packet going to switch with loss chance <em>A&rdquo; and then going on the destination with loss chance &ldquo;B</em>, the node-to-node loss chance is <code>(1-(1-A)(1-B))</code>.</li>
+<li>If this command is not used to overwrite the loss, then the loss for a given node to switch link is taken from the loss rate passed to the <code>make-lan</code> command. If a loss rate of <em>L&rdquo; is passed to <code>make-lan</code> then the node to switch loss rate for each node is set to <code>(1-sqrt(1-L))</code>. Because each packet will have two such chances to be lost, the node-to-loss rate comes out as the desired &ldquo;L</em>.</li>
+<li>The behavior of this command is not defined when used with nodes that are in the same LAN multiple times.</li>
+</ul>
+
+<h2 id="tb-set-node-lan-params:562ecb98141e1876082147d56278e2ee">tb-set-node-lan-params</h2>
+
+<p><code>tb-set-node-lan-params</code><em><code>node</code>&ldquo;&ldquo;<code>lan</code>&ldquo;&ldquo;<code>delay</code>&ldquo;&ldquo;<code>bandwidth</code>&ldquo;&ldquo;<code>loss</code></em></p>
+
+<p><code>tb-set-node-lan-params $node0 $lan0 40ms 20Mb 0.05</code></p>
+
+<p>Where:
+<em>node</em> - The node we are modifying the loss for.[[BR]]
+<em>lan</em> - Which LAN the node is in that we are affecting.[[BR]]
+<em>delay</em> - The new node to switch delay.[[BR]]
+<em>bandwidth</em> - The new node to switch bandwidth.[[BR]]
+<em>loss</em> - The new node to switch loss.</p>
+
+<p>Notes:</p>
+
+<ul>
+<li>This command is exactly equivalent to calling each of the above three commands appropriately. See above for more information.</li>
+</ul>
+
+<h2 id="tb-set-link-simplex-params:562ecb98141e1876082147d56278e2ee">tb-set-link-simplex-params</h2>
+
+<p><code>tb-set-link-simplex-params</code><em><code>link</code>&ldquo;&ldquo;<code>src</code>&ldquo;&ldquo;<code>delay</code>&ldquo;&ldquo;<code>bw</code>&ldquo;&ldquo;<code>loss</code></em></p>
+
+<p><code>tb-set-link-simplex-params $link1 $srcnode 100ms 50Mb 0.2</code></p>
+
+<p>Where:
+<em>link</em> - The link we are modifying.[[BR]]
+<em>src</em> - The source, defining which direction we are modifying.[[BR]]
+<em>delay</em> - The source to destination delay.[[BR]]
+<em>bw</em> - The source to destination bandwidth.[[BR]]
+<em>loss</em> - The source to destination loss.</p>
+
+<p>Notes:</p>
+
+<ul>
+<li>This commands modifies the delay characteristics of a link in a single direction. The other direction is unchanged.</li>
+<li>This command only applies to links. Use <code>tb-set-lan-simplex-params</code> below for LANs.</li>
+</ul>
+
+<h2 id="tb-set-lan-simplex-params:562ecb98141e1876082147d56278e2ee">tb-set-lan-simplex-params</h2>
+
+<p><code>tb-set-lan-simplex-params</code><em><code>lan</code>&ldquo;&ldquo;<code>node</code>&ldquo;&ldquo;<code>todelay</code>&ldquo;&ldquo;<code>tobw</code>&ldquo;&ldquo;<code>toloss</code>&ldquo;&ldquo;<code>fromdelay</code>&ldquo;&ldquo;<code>frombw</code>&ldquo;&ldquo;<code>fromloss</code></em></p>
+
+<p><code>tb-set-lan-simplex-params $lan1 $node1 100ms 10Mb 0.1 5ms 100Mb 0</code></p>
+
+<p>Where:
+<em>lan</em> - The lan we are modifying.[[BR]]
+<em>node</em> - The member of the lan we are modifying.[[BR]]
+<em>todelay</em> - Node to lan delay.[[BR]]
+<em>tobw</em> - Node to lan bandwidth.[[BR]]
+<em>toloss</em> - Node to lan loss.[[BR]]
+<em>fromdelay</em> - Lan to node delay.[[BR]]
+<em>frombw</em> - Lan to node bandwidth.[[BR]]
+<em>fromloss</em> - Lan to node loss.</p>
+
+<p>Notes:</p>
+
+<ul>
+<li>This command is exactly like <code>tb-set-node-lan-params</code> except that it allows the characteristics in each direction to be chosen separately. See all the notes for <code>tb-set-node-lan-params</code>.</li>
+</ul>
+
+<h2 id="tb-set-endnodeshaping:562ecb98141e1876082147d56278e2ee">tb-set-endnodeshaping</h2>
+
+<p><code>tb-set-endnodeshaping</code><em><code>link-or-lan</code>&ldquo;&ldquo;<code>enable</code></em></p>
+
+<p><code>tb-set-endnodeshaping $link1 1</code>[[BR]]
+<code>tb-set-endnodeshaping $lan1 1</code></p>
+
+<p>Where:
+<em>link-or-lan</em> - The link or LAN we are modifying.[[BR]]
+<em>enable</em> - Set to 1 to enable, 0 to disable.</p>
+
+<p>Notes:</p>
+
+<ul>
+<li>This command specifies whether [wiki:linkdelays end node shaping] is used on the specified link or LAN (instead of a delay node).</li>
+<li>Disabled by default for all links and LANs.</li>
+<li>Only available when running the standard DeterLab FreeBSD or Linux kernels.</li>
+<li>See [wiki:linkdelays End Node Traffic Shaping and Multiplexed Links] for more details.</li>
+</ul>
+
+<h2 id="tb-set-noshaping:562ecb98141e1876082147d56278e2ee">tb-set-noshaping</h2>
+
+<p><code>tb-set-noshaping</code><em><code>link-or-lan</code>&ldquo;&ldquo;<code>enable</code></em></p>
+
+<p><code>tb-set-noshaping $link1 1</code>[[BR]]
+<code>tb-set-noshaping $lan1 1</code></p>
+
+<p>Where:
+<em>link-or-lan</em> - The link or LAN we are modifying.[[BR]]
+<em>enable</em> - Set to 1 to disable bandwidth shaping, 0 to enable.</p>
+
+<p>Notes:</p>
+
+<ul>
+<li>This command specifies whether link bandwidth shaping should be enforced on the specified link or LAN. When enabled, bandwidth limits indicated for a link or LAN will not be enforced.</li>
+<li>Disabled by default for all links and LANs. That is, link bandwidth shaping <em>is</em> enforced on all links and LANs by default.</li>
+<li>If the delay and loss values for a <code>tb-set-noshaping</code> link are zero (the default), then no delay node or end-node delay pipe will be associated with the link or LAN.</li>
+<li>*This command is a hack. * The primary purpose for this command is to subvert the topology mapper (<code>assign</code>). <code>Assign</code> always observes the physical bandwidth constraints of the testbed. By using <code>tb-set-noshaping</code>, you can convince <code>assign</code> that links are low-bandwidth and thus get your topology mapped, but then not actually have the links shaped.</li>
+</ul>
+
+<h2 id="tb-use-endnodeshaping:562ecb98141e1876082147d56278e2ee">tb-use-endnodeshaping</h2>
+
+<p><code>tb-use-endnodeshaping</code><em><code>enable</code></em></p>
+
+<p><code>tb-use-endnodeshaping 1</code></p>
+
+<p>Where:
+<em>enable</em> - Set to 1 to enable end-node traffic shaping on all links and LANs.</p>
+
+<p>Notes:
+  * This command allows you to use end-node traffic shaping globally, without having to specify per link or LAN with <code>tb-set-endnodeshaping</code>.
+  * See [wiki:linkdelays End Node Traffic Shaping and Multiplexed Links] for more details.</p>
+
+<h2 id="tb-force-endnodeshaping:562ecb98141e1876082147d56278e2ee">tb-force-endnodeshaping</h2>
+
+<p><code>tb-force-endnodeshaping</code><em><code>enable</code></em></p>
+
+<p><code>tb-force-endnodeshaping 1</code></p>
+
+<p>Where:
+<em>enable</em> - Set to 1 to force end-node traffic shaping on all links and LANs.</p>
+
+<p>Notes:
+  * This command allows you to specify non-shaped links and LANs at creation time, but still control the shaping parameters later (e.g., increase delay, decrease bandwidth) after the experiment is swapped in.
+  * This command forces allocation of end-node shaping infrastructure for all links. There is no equivalent to force delay node allocation.
+  * See [wiki:linkdelays End Node Traffic Shaping and Multiplexed Links] for more details.</p>
+
+<h2 id="tb-set-multiplexed:562ecb98141e1876082147d56278e2ee">tb-set-multiplexed</h2>
+
+<p><code>tb-set-multiplexed</code>_<code>link</code>&ldquo;&ldquo;<code>allow</code>_``</p>
+
+<p><code>tb-set-multiplexed $link1 1</code></p>
+
+<p>Where:
+<em>link</em> - The link we are modifying.[[BR]]
+&lsquo;allow&rdquo; - Set to 1 to allow multiplexing of the link, 0 to disallow.</p>
+
+<p>Notes:
+  * This command allows a link to be multiplexed over a physical link along with other links.
+  * Disabled by default for all links.
+  * Only available when running the standard DETER FreeBSD (not Linux) and only for links (not LANs).
+  * See [wiki:linkdelays End Node Traffic Shaping and Multiplexed Links] for more details.</p>
+
+<h2 id="tb-set-vlink-emulation:562ecb98141e1876082147d56278e2ee">tb-set-vlink-emulation</h2>
+
+<p><code>tb-set-vlink-emulation</code>_<code>style</code>_``</p>
+
+<p><code>tb-set-vlink-emulation $link1 vlan</code></p>
+
+<p>Where:
+<em>style</em> - One of &ldquo;vlan&rdquo; or &ldquo;veth-ne&rdquo;</p>
+
+<p>Notes:
+  * It seems to be necessary to set the virtual link emulation style to vlan for multiplexed links to work under linux.</p>
+
+<hr />
+
+<h1 id="virtual-type-commands:562ecb98141e1876082147d56278e2ee">Virtual Type Commands</h1>
+
+<p>Virtual Types are a method of defining fuzzy types, i.e. types that can be fulfilled by multiple different physical types. The advantage of virtual types, also known as <em>vtypes</em>, is that all nodes of the same vtype will usually be the same physical type of node. In this way, vtypes allows logical grouping of nodes.</p>
+
+<p>As an example, imagine we have a network with internal routers connecting leaf nodes. We want the routers to all have the same hardware, and the leaf nodes to all have the same hardware, but the specifics do not matter. We have the following fragment in our NS file:</p>
+
+<pre><code>...
+tb-make-soft-vtype router {pc600 pc850}
+tb-make-soft-vtype leaf {pc600 pc850}
+
+tb-set-hardware $router1 router
+tb-set-hardware $router2 router
+tb-set-hardware $leaf1 leaf
+tb-set-hardware $leaf2 leaf
+</code></pre>
+
+<p>Here we have set up two soft (see below) vtypes: router and leaf. Our router nodes are then specified to be of type <em>router&rdquo;, and the leaf nodes of type &ldquo;leaf</em>. When the experiment is swapped in, the testbed will attempt to make router1 and router2 be of the same type, and similarly, leaf1 and leaf2 of the same type. However, the routers/leafs may be pc600s or they may be pc850s, whichever is easier to fit in to the available resources.</p>
+
+<p>As a basic use, vtypes can be used to request nodes that are all the same type, but can be of any available type:</p>
+
+<pre><code>...
+tb-make-soft-vtype N {pc600 pc850}
+
+tb-set-hardware $node1 N
+tb-set-hardware $node2 N
+</code></pre>
+
+<p>Vtypes come in two varieties: hard and soft.
+* <em>Soft</em> - With soft vtypes, the testbed will try to make all nodes of that vtype the same physical type, but may do otherwise if resources are tight.
+* <em>Hard</em> - Hard vtypes behave just like soft vtypes except that the testbed will give higher priority to vtype consistency and swapping in will fail if the vtypes cannot be satisfied.</p>
+
+<p>Therefore, if you use soft vtypes you are more likely to swap in but there is a chance your node of a specific vtype will not all be the same. If you use hard vtypes, all nodes of a given vtype will be the same, but swapping in may fail.</p>
+
+<p>Further, you can have weighted soft vtypes. Here you assign a weight from 0 to 1 exclusive to your vtype. The testbed will give higher priority to consistency in the higher weighted vtypes. The primary use of this is to rank multiple vtypes by importance of consistency. Soft vtypes have a weight of 0.5 by default.</p>
+
+<p>As a final note, when specifying the types of a vtype, use the most specific type possible. For example, the following command is not very useful:</p>
+
+<pre><code>tb-make-soft-vtype router {pc pc600}
+</code></pre>
+
+<p>This is because pc600 is a sub type of pc. You may very well end up with two routers as type pc with different hardware, as pc covers multiple types of hardware.</p>
+
+<h2 id="tb-make-soft-vtype:562ecb98141e1876082147d56278e2ee">tb-make-soft-vtype</h2>
+
+<p><code>tb-make-soft-vtype</code>_<code>vtype</code>&ldquo;<code>{</code>&ldquo;<code>types</code>_<code>}</code>[[BR]]
+<code>tb-make-hard-vtype</code>_<code>vtype</code>&ldquo;<code>{</code>&ldquo;<code>types</code>_<code>}</code>[[BR]]
+<code>tb-make-weighted-vtype</code>_<code>vtype</code>&ldquo;&ldquo;<code>weight</code>&ldquo;<code>{</code>&ldquo;<code>types</code>_<code>}</code></p>
+
+<p><code>tb-make-soft-vtype router {pc600 pc850}</code>[[BR]]
+<code>tb-make-hard-vtype leaf {pc600 pc850}</code>[[BR]]
+<code>tb-make-weighted-vtype A 0.1 {pc600 pc850}</code></p>
+
+<p>Where:
+<em>vtype</em> - The name of the vtype to create.[[BR]]
+<em>types</em> - One or more physical types.[[BR]]
+<em>weight&rdquo; - The weight of the vtype, 0 &lt; &ldquo;weight</em> &lt; 1.</p>
+
+<p>Notes:</p>
+
+<ul>
+<li>These commands create vtypes. See notes above for a description of vtypes and the difference between soft and hard.</li>
+<li><code>tb-make-soft-vtype</code> creates vtypes with weight 0.5.</li>
+<li>vtype commands must appear before <code>tb-set-hardware</code> commands that use them.</li>
+<li>Do not use <code>tb-fix-node</code> with nodes that have a vtype.</li>
+</ul>
+
+<h1 id="misc-commands:562ecb98141e1876082147d56278e2ee">Misc. Commands</h1>
+
+<h2 id="tb-fix-node:562ecb98141e1876082147d56278e2ee">tb-fix-node</h2>
+
+<p><code>tb-fix-node</code><em><code>vnode</code>&ldquo;&ldquo;<code>pnode</code></em></p>
+
+<p><code>tb-fix-node $node0 pc42</code></p>
+
+<p>Where:
+<em>vnode</em> - The node we are fixing.[[BR]]
+<em>pnode</em> - The physical node we want used.</p>
+
+<p>Notes:
+  * This command forces the virtual node to be mapped to the specified physical node. Swap in will fail if this cannot be done.
+  * Do not use this command on nodes that are a virtual type.</p>
+
+<h2 id="tb-fix-interface:562ecb98141e1876082147d56278e2ee">tb-fix-interface</h2>
+
+<p><code>tb-fix-interface</code><em><code>vnode</code>&ldquo;&ldquo;<code>vlink</code>&ldquo;&ldquo;<code>iface</code></em></p>
+
+<p><code>tb-fix-interface $node0 $link0 &quot;eth0&quot;</code></p>
+
+<p>Where:
+<em>vnode</em> - The node we are fixing.[[BR]]
+<em>vlink</em> - The link connecting to that node that we want to set.[[BR]]
+<em>iface</em> - The DETER name for the interface that is to be used.</p>
+
+<p>Notes:
+  * The interface names used are the ones in the DeterLab database - we can make no guarantee that the OS image that boots on the node assigns the same name.
+  * Different types of nodes have different sets of interfaces, so this command is most useful if you are also using <code>tb-fix-node</code> and/or <code>tb-set-hardware</code> on the <code>vnode</code>.</p>
+
+<h2 id="tb-set-uselatestwadata:562ecb98141e1876082147d56278e2ee">tb-set-uselatestwadata</h2>
+
+<p><code>tb-set-uselatestwadata 0</code>[[BR]]
+<code>tb-set-uselatestwadata 1</code></p>
+
+<p>Notes:</p>
+
+<ul>
+<li>This command indicates which widearea data to use when mapping widearea nodes to links. The default is 0, which says to use the aged data. Setting it to 1 says to use the most recent data.</li>
+</ul>
+
+<h2 id="tb-set-wasolver-weights:562ecb98141e1876082147d56278e2ee">tb-set-wasolver-weights</h2>
+
+<p><code>tb-set-wasolver-weights</code><em><code>delay bw plr</code></em></p>
+
+<p><code>tb-set-wasolver-weights 1 10 500</code></p>
+
+<p>Where:
+<em>delay</em> - The weight to give delay when solving.[[BR]]
+<em>bw</em> - The weight to give bandwidth when solving.[[BR]]
+<em>plr</em> - The weight to give lossrate when solving.</p>
+
+<p>Notes:
+  * This command sets the relative weights to use when assigning widearea nodes to links. Specifying a zero says to ignore that particular metric when doing the assignment. Setting all three to zero results in an essentially random selection.</p>
+
+<h2 id="tb-set-node-failure-action:562ecb98141e1876082147d56278e2ee">tb-set-node-failure-action</h2>
+
+<p><code>tb-set-node-failure-action</code><em><code>node action</code></em></p>
+
+<p><code>tb-set-node-failure-action $nodeA &quot;fatal&quot;</code>[[BR]]
+<code>tb-set-node-failure-action $nodeB &quot;nonfatal&quot;</code></p>
+
+<p>Where:
+<em>node</em> - The node name.[[BR]]
+<em>action</em> - One of &ldquo;fatal&rdquo; or &ldquo;nonfatal&rdquo;</p>
+
+<p>Notes:
+  * This command sets the failure mode for a node. When an experiment is swapped in, the default action is to abort the swapin if any nodes fail to come up normally. This is the &ldquo;fatal&rdquo; mode. You may also set a node to &ldquo;nonfatal&rdquo; which will cause node bootup failures to be reported, but otherwise ignored during swapin. Note that this can result in your experiment not working properly if a dependent node fails, but typically you can arrange your software to deal with this.</p>
+
+<p>[wiki:CoreReference &lt; Back to Core Reference]</p>
+
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>

@@ -1,0 +1,289 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <h1></h1>
+  
+
+<p>[wiki:OrchestratorWritingAgents &lt; MAGI Advanced Tutorial: Write your own MAGI Agents] | [wiki:OrchestratorReference Orchestrator Reference &gt;]</p>
+
+<p>[[TOC]]</p>
+
+<p>In [wiki:OrchestratorWritingAgents Advanced Tutorial: Writing MAGI Agents], you saw how to create a basic agent. The sample agent created a single file on a test node. This document will explain how to use configuration in the AAL file to configure an agent at runtime.</p>
+
+<h1 id="setting-agent-configuration:ac0483d4b3f54fb305e58b297b98b2b8">Setting Agent Configuration</h1>
+
+<p>This document will expand the sample code of our <code>FileCreator</code> example. For reference, here is the agent code:</p>
+
+<pre><code>from magi.util.agent import DispatchAgent, agentmethod
+from magi.util.processAgent import initializeProcessAgent
+
+# The FileCreator agent implementation, derived from DispatchAgent.
+class FileCreator(DispatchAgent):
+    def __init__(self):
+        DispatchAgent.__init__(self)
+        self.filename = '/tmp/newfile'
+
+    # A single method which creates the file named by self.filename.
+    # (The @agentmethod() decorator is not required, but is encouraged.
+    #  it does nothing of substance now, but may in the future.)
+    @agentmethod()
+    def createFile(self, msg):
+        *Create a file on the host.*
+        # open and immediately close the file to create it.
+        open(self.filename, 'w').close()
+
+# the getAgent() method must be defined somewhere for all agents.
+# The Magi daemon invokes this mehod to get a reference to an
+# agent. It uses this reference to run and interact with an agent
+# instance.
+def getAgent():
+    agent = FileCreator()
+    return agent
+
+# In case the agent is run as a separate process, we need to
+# create an instance of the agent, initialize the required
+# parameters based on the received arguments, and then call the
+# run method defined in DispatchAgent.
+if __name__ == &quot;__main__&quot;:
+    agent = FileCreator()
+    initializeProcessAgent(agent, sys.argv)
+    agent.run()
+</code></pre>
+
+<p>If we reset the <code>self.filename</code> variable in the agent <em>before</em> invoking <code>createFile</code> in the AAL, we can change the file that is created.</p>
+
+<p>The base class <code>DispatchAgent</code> itself is derived from a class that will let us do this. The Agent class implements two methods:
+* <code>setConfiguration</code> -  Sets the passed parameters as class instance variables.
+* <code>confirmConfiguration</code> - This method is meant to be re-implemented in your agent if you need confirm the variables set are valid for your agent.</p>
+
+<p>To set the <code>self.filename</code> variable in the FileCreator Agents, we modify the AAL to include a call to the Agent method <code>setConfiguration</code>, passing in a list of key-value pairs. (In the following example, it is a single key-value pair.)</p>
+
+<pre><code>- type: event
+  agent: myFileCreators
+  method: setConfiguration
+  args:
+     filename: /tmp/myCreatedFile
+</code></pre>
+
+<p>Note that you do not specify self when referencing an Agent variable. We make sure to place this event in the AAL event stream prior to the <code>createFile</code> event. The complete AAL file is:</p>
+
+<pre><code>streamstarts: [main]
+
+groups:
+    myFileCreatorGroup: [NODES]
+
+agents:
+    myFileCreators:
+        group: myFileCreatorGroup
+        # (note: the &quot;PATH&quot; argument is the agent directory. The
+        # directory must contain an IDL and agent implementation. It must
+        # also contain a *__init__.py* file, which is required
+        # for it to be considered as a valid python package.)
+        path: PATH/FileCreator
+        execargs: []
+
+eventstreams:
+    main:
+        - type: event
+          agent: myFileCreators
+          method: setConfiguration
+          args:
+             filename: /tmp/myCreatedFile
+
+        - type: event
+          agent: myFileCreators
+          method: createFile
+          args: {}
+</code></pre>
+
+<p>Now when we run the Agent again (possibly using <code>agentTool</code> to restart the Magi daemons), we see the following events:</p>
+
+<pre><code>$ magi_orchestrator.py --project $project --experiment $experiment --events ./myEvents.aal -o run.log -v
+stream initialization : sent : joinGroup myFileCreatorGroup --&gt; __ALL__
+stream initialization : done : trigger GroupBuildDone myFileCreatorGroup  complete.
+stream initialization : sent : loadAgent myFileCreators --&gt; myFileCreatorGroup
+stream initialization : done : trigger AgentLoadDone  myFileCreators complete.
+stream initialization : DONE : complete.
+stream main           : sent : setConfiguration(['/tmp/myCreatedFile ... ) --&gt; myFileCreatorGroup
+stream main           : sent : createFile(None) --&gt; myFileCreatorGroup
+stream main           : DONE : complete.
+$ ssh myNode.myExperiment.myGroup ls -l /tmp/myCreatedFile
+-rw-r--r-- 1 root root 0 Mar  5 13:55 /tmp/myCreatedFile
+$
+</code></pre>
+
+<p>And we see that our specified file, <em>/tmp/myCreatedFile</em> was created.</p>
+
+<h1 id="confirming-valid-configuration:ac0483d4b3f54fb305e58b297b98b2b8">Confirming Valid Configuration</h1>
+
+<p>This works well, but the input to the Agent is free-form. What if the user gives invalid input, like the wrong type or data that is not in a valid range? This is where the Agent <code>confirmConfiguration</code> method comes into play.</p>
+
+<p><code>confirmConfiguration</code> should be written for any Agent that wants to validate its state. It gets invoked in the AAL file after the user invokes <code>setConfiguration</code>.</p>
+
+<p><em>Note:</em> The concept of an Agent confirming user input will change in future releases of MAGI. The Orchestrator (or other MAGI/Montage components) will use the interface specification in the Agent’s IDL file to ensure the input to the agent is valid.</p>
+
+<p>Suppose our sample agent wanted to allow the user to create a file in only the <em>/local</em> directory on the host machine. The <code>confirmConfiguration</code> method that does this is:</p>
+
+<pre><code>def confirmConfiguration(self):
+    '''Make sure the user input is a string value and starts with
+    &quot;/local&quot;.'''
+    if not isinstance(self.filename, (str, unicode)):
+        return False
+
+    if not self.filename.startswith('/local'):
+        return False
+
+    return True
+</code></pre>
+
+<p>When we add this method to our sample Agent, and run the experiment with the existing AAL file, which contains configuration that does not start with <em>/local</em>, the Orchestrator gives us an error while executing the event stream:</p>
+
+<pre><code>$ magi_orchestrator.py --project $project --experiment $experiment --events ./myEvents.aal -o run.log -v
+stream initialization : sent : joinGroup myFileCreatorGroup --&gt; __ALL__
+stream initialization : done : trigger GroupBuildDone myFileCreatorGroup  complete.
+stream initialization : sent : loadAgent myFileCreators --&gt; myFileCreatorGroup
+stream initialization : done : trigger AgentLoadDone  myFileCreators complete.
+stream initialization : DONE : complete.
+stream main           : sent : setConfiguration(['/tmp/myCreatedFile ... ) --&gt; myFileCreatorGroup
+stream unknown        : exit : method setConfiguration returned False on agent unknown in group unknown and on node(s): moat.
+$
+</code></pre>
+
+<p>The Orchestrator exited with an error, as it should.</p>
+
+<p>If we now modify the AAL file to include a valid configuration, the Orchestrator succeeds. The updated AAL fragment is:</p>
+
+<pre><code>- type: event
+  agent: myFileCreators
+  method: setConfiguration
+  args:
+     filename: /local/myGreatFile
+</code></pre>
+
+<p>When we run the Orchestrator with the modified AAL, it succeeds as the agent configuration is now valid:</p>
+
+<pre><code>$ magi_orchestrator.py --project $project --experiment $experiment --events ./myEvents.aal -o run.log -v
+stream initialization : sent : joinGroup myFileCreatorGroup --&gt; __ALL__
+stream initialization : done : trigger GroupBuildDone myFileCreatorGroup  complete.
+stream initialization : sent : loadAgent myFileCreators --&gt; myFileCreatorGroup
+stream initialization : done : trigger AgentLoadDone  myFileCreators complete.
+stream initialization : DONE : complete.
+stream main           : sent : setConfiguration(['/local/myGreatFile ... ) --&gt; myFileCreatorGroup
+stream main           : sent : createFile(None) --&gt; myFileCreatorGroup
+stream main           : DONE : complete.
+$
+</code></pre>
+
+<p>And the “valid” file has been created on the machine:</p>
+
+<pre><code>$ ssh myNode.myExperiment.myGroup ls -l /local
+total 4
+drwxrwxr-x 2 glawler Deter 4096 Mar  5 08:35 logs
+-rw-r--r-- 1 root    root     0 Mar  5 14:33 myGreatFile
+$
+</code></pre>
+
+<h1 id="triggers-and-event-stream-sequence-points:ac0483d4b3f54fb305e58b297b98b2b8">Triggers and Event Stream Sequence Points</h1>
+
+<p>If you run the AAL and Agent code above, you may see that it does not actually work. One small needed detail has been left out of the AAL file. Normally the Orchestrator will run through the events in the AAL as fast is it can. If we used the event streams in the AAL file as it now stands:</p>
+
+<pre><code>eventstreams:
+    main:
+        - type: event
+          agent: myFileCreators
+          method: setConfiguration
+          args:
+              filename: /local/myGreatFile
+
+        - type: event
+          agent: myFileCreators
+          method: createFile
+          args: {}
+</code></pre>
+
+<p>The Orchestrator will send two messages to the Agents in rapid succession: the <code>setConfiguration</code> and <code>createFile</code> event messages. If the <code>setConfiguration</code> call returns <em>False</em>, which it will given invalid input, the Orchestrator will not receive the message because would have sent the messages and exited.</p>
+
+<p>Therefore, we need a way to tell the Orchestrator to wait for a response from <code>setConfiguration</code> before continuing. This is done by inserting a small pause, using a trigger which times out after 3 seconds:</p>
+
+<pre><code># Wait 3 seconds for a response to setConfiguration
+# timeout value is in milliseconds.
+- type: trigger
+  triggers: [{timeout: 3000}]
+</code></pre>
+
+<p>If we insert this trigger between <code>setConfiguration</code> and <code>createFile</code>, the Orchestrator will receive the error message from the agent and exit on error.</p>
+
+<p>The full AAL file now is:</p>
+
+<pre><code>streamstarts: [main]
+
+groups:
+    myFileCreatorGroup: [witch, moat]
+
+agents:
+    myFileCreators:
+        group: myFileCreatorGroup
+        path: PATH/FileCreator
+        execargs: []
+
+eventstreams:
+    main:
+        - type: event
+          agent: myFileCreators
+          method: setConfiguration
+          args:
+              filename: /local/myGreatFile
+
+        - type: trigger
+          triggers: [{timeout: 3000}]
+
+        - type: event
+          agent: myFileCreators
+          method: createFile
+          args: {}
+</code></pre>
+
+<p>But how do we know that waiting for 3 seconds is a long enough time to wait? Wouldn’t it be better if we could tell the Orchestrator to wait for a response from the agent before continuing?</p>
+
+<p>We can do this using a named trigger. We add a trigger statement to the <code>setConfiguration</code> event clause and modify the trigger to wait for that event before continuing to process the event stream:</p>
+
+<pre><code>- type: event
+  agent: myFileCreators
+  trigger: configDone
+  method: setConfiguration
+  args:
+      filename: /local/myGreatFile
+
+# Wait for the event &quot;configDone&quot; from all fileCreator agents.
+- type: trigger
+  triggers: [{event: configDone, agent: myFileCreators}]
+</code></pre>
+
+<p>Now when <code>setConfiguration</code> is called on the Agent, the daemon will send a trigger with the event <code>configDone</code> after the method has returned. With this modified trigger, the Orchestrator will wait for the trigger event <code>configDone</code> before processing the next event in the event stream.</p>
+
+<p>Here is the Orchestrator output now. Note that <code>setConfiguration</code> now “fires” a trigger (sends a trigger) and the Orchestrator waits until the trigger is resolved before moving on.</p>
+
+<pre><code>$ magi_orchestrator.py --project $project --experiment $experiment --events ./myEvents.aal -o run.log -v
+stream initialization : sent : joinGroup myFileCreatorGroup --&gt; __ALL__
+stream initialization : done : trigger GroupBuildDone myFileCreatorGroup  complete.
+stream initialization : sent : loadAgent myFileCreators --&gt; myFileCreatorGroup
+stream initialization : done : trigger AgentLoadDone  myFileCreators complete.
+stream initialization : DONE : complete.
+stream main           : sent : setConfiguration(['/local/myGreatFile ... ) --&gt; myFileCreatorGroup  (fires trigger: configDone)
+stream main           : done : trigger configDone  complete.
+stream main           : sent : createFile(None) --&gt; myFileCreatorGroup
+stream main           : DONE : complete.
+$
+</code></pre>
+
+<p>For reference, the new agent implementation, AAL file, and IDL, file can be downloaded as a tar file here: [[attachment:FileCreator-withconfig.tbz]].</p>
+
+<p>[wiki:OrchestratorWritingAgents &lt; MAGI Advanced Tutorial: Write your own MAGI Agents] | [wiki:OrchestratorReference Orchestrator Reference &gt;]</p>
+
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>

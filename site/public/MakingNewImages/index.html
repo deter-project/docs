@@ -1,0 +1,51 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <h1></h1>
+  
+
+<h1 id="hints-for-making-new-os-images:255c74d6fba8949dcc794fce6a61ef06">Hints for Making New OS Images</h1>
+
+<p>First, 40% of our nodes are physically located 400 miles away from the boss and users servers. Please, <em>never</em> try to create an image from a node located in Berkeley instead of one located at ISI.  The ones located at Berkeley and their types all begin with the letter <em>b&rdquo;, eg &ldquo;bpc183&rdquo; for a node,  &ldquo;bpc2133</em> for a type.</p>
+
+<p>Secondly, after you have created an image, try loading it back and watching what happens through the serial port.</p>
+
+<p>Consider creating a <em>two</em> node experiment, one to create the image and the other to load it back.</p>
+
+<p>There is a command called &ldquo;os<em>load&rdquo; available on the _users</em> server:</p>
+
+<pre><code> users% which os_load
+ /usr/testbed/bin/os_load
+ users% os_load -h
+ option -h not recognized
+ os_load [options] node [node ...]
+ os_load [options] -e pid,eid
+ where:
+     -i    - Specify image name; otherwise load default image
+     -p    - Specify project for finding image name (-i)
+     -s    - Do *not* wait for nodes to finish reloading
+     -m    - Specify internal image id (instead of -i and -p)
+     -r    - Do *not* reboot nodes; do that yourself
+     -e    - Reboot all nodes in an experiment
+   node    - Node to reboot (pcXXX)
+</code></pre>
+
+<p>while the second node is reloading, watch its progress in real time using the console command from the <em>users</em> server, ie</p>
+
+<pre><code>users% console pc193
+</code></pre>
+
+<p>A third general suggestion is that if you think you&rsquo;ve got a good image, but it flounders while coming up , you can create another experiment with an ns directive that says &ldquo;Even if you think the node has not booted, let my experiment swap in anyway;&rdquo; then you may be able to log in through the console and figure out what went wrong. An example of this is:</p>
+
+<pre><code>tb-set-node-failure-action $nodeA &quot;nonfatal&quot;
+</code></pre>
+
+<p>A fourth suggestion is to create whole disk images on a smaller machine rather than a single partition image.</p>
+
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>

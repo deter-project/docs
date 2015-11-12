@@ -1,0 +1,226 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <h1></h1>
+  
+
+<p>[[TOC]]</p>
+
+<p>For our example, we are configuring a HP 2810-48G switch.  These commands should also work with the HP5400zl series.</p>
+
+<p>Keep in mind, this is an example configuration.  You site may:
+* Not require full remote access to your ESXi machine (no DRAC or iLO connection).
+* Use IPMI in place of Serial and Power controllers.</p>
+
+<h1 id="a-note-about-public-ip-addresses-for-boss-and-users:32fbf8789d2a34955fcbca214957b873">A note about public IP addresses for boss and users</h1>
+
+<p>We will be unable to offer your site support if you do not setup your boss and users nodes with public IP addresses.  Although the setup below is using NATed addresses, your chances for a quick and easy cluster setup go down dramatically when you do not allocate two public, static IP addresses for boss and users.  Using DHCP for the public interfaces of your testbed will cause numerous problems because it changes routing and DNS in ways that are incompatible with the DETER software.  We have limited resources and debugging is best performed in real time with remote access to your cluster.</p>
+
+<h1 id="network-overview:32fbf8789d2a34955fcbca214957b873">Network Overview</h1>
+
+<p>There are a number of different networks and hosts involved with a traditional Emulab setup.</p>
+
+<p>For servers, we will have three machines hosted on a VMWare server:</p>
+
+<ul>
+<li>Boss   hosts the web interface, main testbed logic, and database.</li>
+<li>Users  exports filesystems and acts as a general login machine.</li>
+<li>Router routes between the various networks.</li>
+</ul>
+
+<p>We also have on the network:
+* HP 2810 Ethernet Switch Management Interface
+* Dell Remote Access Card for VMWare server
+* VMWare management interface
+* Power Controller (APC7902)
+* Serial Controller (IBM X330 + Obsolete Cyclades multi-port serial card)</p>
+
+<h1 id="initial-ports:32fbf8789d2a34955fcbca214957b873">Initial Ports</h1>
+
+<p>|| Port || Device ||
+|| 1      || Uplink to Internet ||
+|| 2      || Port for Dell Remote Access Card (DRAC) for the VMWare server (PowerEdge 2950) ||
+|| 3      || Trunked port for the VMWare installation on the PowerEdge 2950 ||
+|| 4      || APC 7902 Power Controller ||
+|| 5      || Serial Controller  ||
+|| 6-9    || Control Network ports for our testbed nodes ||</p>
+
+<h1 id="vlans:32fbf8789d2a34955fcbca214957b873">VLANS</h1>
+
+<p>Here is the list of reserved VLANs used by DETER.</p>
+
+<p>|| VLAN || IP Range || Use ||
+|| 2002 || Depends (our minibed is behind a NAT on 10.0.23.0/24) || Internet VLAN ||
+|| 2003 || 192.168.0.0/22 || Control Network VLAN ||
+|| 2004 || 192.168.254.0/24 || Control Hardware VLAN ||
+|| 2005 || 192.168.253.0/24 || Users Network ||
+|| 2006 || 192.168.252.0/24 || Boss Network ||
+|| 2007 || 192.168.224.0/20 || Node IPMI Network (On smaller sites, IPMI can be done via the Control Hardware VLAN)  ||</p>
+
+<h1 id="diagram:32fbf8789d2a34955fcbca214957b873">Diagram</h1>
+
+<p>Here is an example diagram of a very small DETER setup.  It uses a traditional power controller and serial console server.  Newer small sites will have IPMI contollers located on the Control Hardware network to enable remote console and power control of the testbed nodes.</p>
+
+<p>[[Image(Mini DETER Network.png)]]</p>
+
+<h1 id="switch-configuration:32fbf8789d2a34955fcbca214957b873">Switch Configuration</h1>
+
+<p>Here is the configuration from the HP Procurve 2810 at the ISI mini testbed.  Please note that the max-vlans number can be, and should be, increased on switches that are capable of more (5400 series).  We use a trunked interface (port 3) to hook into our VMWare ESXi server.</p>
+
+<p><em>Also make sure spanning tree is turned off.  Experimental traffic shaping relies on bridging ports between VLANs.</em></p>
+
+<pre><code>hostname &quot;hp1&quot; 
+max-vlans 256 
+interface 1 
+   name &quot;UPLINK&quot; 
+exit
+interface 2 
+   name &quot;VMWARE_DRAC&quot; 
+exit
+interface 3 
+   name &quot;VMWARE&quot; 
+exit
+interface 4 
+   name &quot;POWER_CONTROLLER&quot; 
+exit
+interface 5 
+   name &quot;SERIAL_CONTROLLER&quot; 
+exit
+ip default-gateway 192.168.254.254 
+snmp-server community &quot;public&quot; Unrestricted 
+snmp-server community &quot;private&quot; manager Unrestricted 
+vlan 1 
+   name &quot;DEFAULT_VLAN&quot; 
+   untagged 13-48 
+   no ip address 
+   no untagged 1-12 
+   exit 
+vlan 2003 
+   name &quot;CONTROL&quot; 
+   untagged 6-12 
+   tagged 3
+   ip igmp
+   exit 
+vlan 2004 
+   name &quot;CONTROLHW&quot; 
+   untagged 4-5 
+   ip address 192.168.254.1 255.255.255.0 
+   tagged 3 
+   exit 
+vlan 2002 
+   name &quot;INTERNET&quot; 
+   untagged 1-2 
+   tagged 3 
+   exit 
+vlan 2006 
+   name &quot;BOSS&quot; 
+   tagged 3
+   ip igmp
+   exit 
+management-vlan 2004 
+</code></pre>
+
+<h1 id="vmware-network-setup:32fbf8789d2a34955fcbca214957b873">VMWare Network Setup</h1>
+
+<p>Here is an example of using two NICs.  One NIC is connected to the Internet and the other is connected to the testbed switch.</p>
+
+<p>[[Image(Two NIC ESXi.png)]]</p>
+
+<h2 id="boss-vm:32fbf8789d2a34955fcbca214957b873">Boss VM</h2>
+
+<ul>
+<li>em0 is on INTERNET</li>
+<li>em1 is on BOSS</li>
+</ul>
+
+<h2 id="users-vm:32fbf8789d2a34955fcbca214957b873">Users VM</h2>
+
+<ul>
+<li>em0 is on INTERNET</li>
+<li>em1 is on USERS</li>
+</ul>
+
+<h2 id="router-vm:32fbf8789d2a34955fcbca214957b873">Router VM</h2>
+
+<ul>
+<li>em0 is on USERS</li>
+<li>em1 is on BOSS</li>
+<li>em2 is on CONTROL</li>
+<li>em3 is on CONTROLHW</li>
+</ul>
+
+<h2 id="hp-switch-igmp-debugging:32fbf8789d2a34955fcbca214957b873">HP Switch IGMP debugging</h2>
+
+<pre><code>minibed# show ip igmp
+
+ Status and Counters - IP Multicast (IGMP) Status
+
+ VLAN ID : 1
+ VLAN Name : DEFAULT_VLAN
+  IGMP is not enabled
+
+ VLAN ID : 2
+ VLAN Name : _5
+  IGMP is not enabled
+
+ VLAN ID : 2003
+ VLAN Name : CONTROL
+ Querier Address : 192.168.1.254
+
+  Active Group Addresses Reports Queries Querier Access Port
+  ---------------------- ------- ------- -------------------
+
+ VLAN ID : 2004
+ VLAN Name : HWCONTROL
+  IGMP is not enabled
+
+ VLAN ID : 2005
+ VLAN Name : USERS
+  IGMP is not enabled
+
+ VLAN ID : 2006
+ VLAN Name : BOSS
+ Querier Address : 192.168.252.254
+
+  Active Group Addresses Reports Queries Querier Access Port
+  ---------------------- ------- ------- -------------------
+  234.5.6.30             29      29      48                 
+
+
+minibed# 
+</code></pre>
+
+<p>If either the BOSS vlan or CONTROL vlan show up without IGMP support, you can enable it:</p>
+
+<pre><code>minibed# config
+minibed(config)# vlan 2003
+minibed(vlan-2003)# ip igmp
+minibed(vlan-2003)# vlan 2006
+minibed(vlan-2006)# ip igmp
+minibed(vlan-2006)# exit
+minibed(config)# exit
+minibed# write memory
+minibed# 
+</code></pre>
+
+<h2 id="setting-vswtich-igmp-version:32fbf8789d2a34955fcbca214957b873">Setting vSwtich IGMP Version</h2>
+
+<p>I am not sure if this is necessary.  ESXi defaults to IGMP version 3.  We currently need IGMP version 2 support on our vSwitch.  The enable this, follow the following steps in the vSphere client:</p>
+
+<ul>
+<li>Click on the server</li>
+<li>Click on the &ldquo;Configuration Tab&rdquo;</li>
+<li>Click on &ldquo;Advanced Settings&rdquo; in the &ldquo;Software&rdquo; group</li>
+<li>Select &ldquo;Net&rdquo; in the &ldquo;Advanced Settings&rdquo; dialog box tree</li>
+<li>Set &ldquo;Net.IGMPVersion&rdquo; to &ldquo;2&rdquo;</li>
+</ul>
+
+<p>[[Image(vSwitch IGMP.png)]]</p>
+
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>

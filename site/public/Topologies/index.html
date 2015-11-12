@@ -1,0 +1,151 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <h1></h1>
+  
+
+<p>[wiki:CoreGuide &lt; Core Guide] | [wiki:UsingNodes Using Your Nodes &gt;]</p>
+
+<p>The following are various topologies you can use to experiment with DeterLab Core.</p>
+
+<p>[[TOC]]</p>
+
+<h1 id="toy-topologies:d3fbf34d48fc7486fe81021cd7fc167c">Toy topologies</h1>
+
+<h2 id="lan:d3fbf34d48fc7486fe81021cd7fc167c">LAN</h2>
+
+<p>[[Image(lan.png)]]</p>
+
+<pre><code>set ns [new Simulator]
+source tb_compat.tcl
+
+# Change this to a number of nodes you want
+set NODES 5
+
+set lanstr &quot;&quot;
+for {set i 0} {$i &lt; $NODES} {incr i} {
+    set node($i) [$ns node]
+    append lanstr &quot;$node($i) &quot;
+}
+
+# Change the BW and delay if you want
+set lan0 [$ns make-lan &quot;$lanstr&quot; 100Mb 0ms]
+
+$ns rtproto Static
+$ns run
+</code></pre>
+
+<h2 id="ring:d3fbf34d48fc7486fe81021cd7fc167c">Ring</h2>
+
+<p>[[Image(ring.png)]]</p>
+
+<pre><code>set ns [new Simulator]
+source tb_compat.tcl
+
+# Change this to a number of nodes you want
+set NODES 5
+
+set node(0) [$ns node]
+for {set i 1} {$i &lt; $NODES} {incr i} {
+    set node($i) [$ns node]
+    set lastindex [expr $i-1]
+
+    # Change BW and delay if you want
+    set Link$i [$ns duplex-link $node($i) $node($lastindex) 100Mb 0ms DropTail]
+}
+
+set lastindex [expr $i-1]
+
+# Change BW and delay if you want
+set Link$i [$ns duplex-link $node(0) $node($lastindex) 100Mb 0ms DropTail]
+
+$ns rtproto Static
+$ns run
+</code></pre>
+
+<h2 id="dumbbell:d3fbf34d48fc7486fe81021cd7fc167c">Dumbbell</h2>
+
+<p>[[Image(dumbbell.png)]]</p>
+
+<pre><code>set ns [new Simulator]
+source tb_compat.tcl
+
+# Change this to a number of nodes you want
+set NODES 10
+
+set rem 0
+set l 0
+for {set i 0} {$i &lt; 2} {incr i} {
+   set node($rem) [$ns node]
+   for {set j 1} {$j &lt; $NODES/2} {incr j} {
+    set index [expr $rem+$j]
+    set node($index) [$ns node]
+
+    # Change BW and delay if you want
+    set Link$l [$ns duplex-link $node($rem) $node($index) 100Mb 0ms DropTail]
+
+    set l [expr $l+1]
+   }
+  set rem [expr $rem+$NODES/2]
+}
+set rem [expr $NODES/2]
+
+# Change BW and delay if you want
+set Link$l [$ns duplex-link $node($rem) $node(0) 100Mb 0ms DropTail]
+
+$ns rtproto Static
+$ns run
+</code></pre>
+
+<h2 id="tree:d3fbf34d48fc7486fe81021cd7fc167c">Tree</h2>
+
+<p>[[Image(tree.png)]]</p>
+
+<pre><code>set ns [new Simulator]
+source tb_compat.tcl
+
+# Change fanout if you want but bear in mind that some of
+# our nodes have only 5 interfaces, so max # of experimental
+# interfaces (and fan out) is 4
+set FANOUT 3
+
+# Change depth if you want
+set DEPTH 3
+
+set node(0) [$ns node]
+set lastj 0
+set f $FANOUT
+set lastl 0
+for {set i 0} {$i &lt; $DEPTH} {incr i} {
+    for {set j 1} {$j &lt;= $f} {incr j} {
+    set index [expr $lastj+$j]
+    set node($index) [$ns node]
+    set lastindex [expr ($index-1)/$FANOUT]
+
+    # Change BW and delay if you want
+    set Link$lastl [$ns duplex-link $node($index) $node($lastindex) 100Mb 0ms DropTail]
+    set lastl [expr $lastl+1]
+   }
+set f [expr $f*$FANOUT]
+set lastj [expr $lastj+$j-1]
+}
+
+$ns rtproto Static
+$ns run
+</code></pre>
+
+<h1 id="real-as-topologies:d3fbf34d48fc7486fe81021cd7fc167c">Real AS topologies</h1>
+
+<p>Because most of our PCs have up to 4 experimental interfaces, note that some of these topologies may have to be modified to have a fan out of at most 4.</p>
+
+<p><a href="http://www.cs.purdue.edu/homes/fahmy/software/rf2ns/topo/">http://www.cs.purdue.edu/homes/fahmy/software/rf2ns/topo/</a></p>
+
+<p>[wiki:CoreGuide &lt; Core Guide] | [wiki:UsingNodes Using Your Nodes &gt;]</p>
+
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>

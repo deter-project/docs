@@ -1,0 +1,58 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <h1></h1>
+  
+
+<h1 id="table-edumaterial-types:a0b9f415ddc2c0365bb4969e21246c37">Table edumaterial_types</h1>
+
+<p>Purpose: store types of material we have
+* type: encoded type
+* description: textual description of type like slides, HTML lecture, homework, CCTF</p>
+
+<h1 id="table-edumaterial-shared:a0b9f415ddc2c0365bb4969e21246c37">Table edumaterial_shared</h1>
+
+<p>Purpose: store all shared materials
+* ID: unique ID
+* type: encoded type
+* access: student/teacher
+* title
+* location folder or binary content
+* author contact: uid</p>
+
+<h1 id="table-edumaterial-tags:a0b9f415ddc2c0365bb4969e21246c37">Table edumaterial_tags</h1>
+
+<ul>
+<li>material ID from edumaterial_shared</li>
+<li>tag: enables searching</li>
+</ul>
+
+<h1 id="table-class-assignments:a0b9f415ddc2c0365bb4969e21246c37">Table class_assignments</h1>
+
+<p>Purpose: Record what is assigned per class, allow for versioning of materials specific to class
+* ID: unique ID
+* title
+* location folder or binary folder
+* PID of the class that&rsquo;s adopting it (idx?)
+* GID of the group that&rsquo;s assigned to (idx?)
+* state: prepared/assigned/expired
+* due_on: date when it is due
+* after_due: show/hide</p>
+
+<h1 id="table-student-assignments:a0b9f415ddc2c0365bb4969e21246c37">Table student_assignments</h1>
+
+<p>Purpose: Record what is assigned per student, allow for submissions
+* ID: unique ID
+* assignment_ID: ID from class_assignments
+* uid: uid from users
+* state: submitted/not submitted
+* submission_time: datetime
+* submission: binary record or folder where submitted materials are</p>
+
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>

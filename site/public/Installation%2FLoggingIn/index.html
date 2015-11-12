@@ -1,0 +1,74 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <h1></h1>
+  
+
+<h1 id="the-web-interface:d76db1a3b6e7bfd4362c42e124e52b5e">The Web Interface</h1>
+
+<p>This is in reference to the web interface.  Go to <a href="https://www.yousite">https://www.yousite</a> and login.</p>
+
+<h1 id="logging-in:d76db1a3b6e7bfd4362c42e124e52b5e">Logging in</h1>
+
+<p>The testbed setup process creates a default user called <em>elabman_&rsquo; with the same password as &ldquo;&lsquo;deterbiuld&rdquo;&rsquo; on boss (unless you have set a &lsquo;_root</em> password on boss which will take precedence for historical reasons) at the time of install (the password hash is copied and stored in the database).</p>
+
+<h1 id="creating-the-first-project:d76db1a3b6e7bfd4362c42e124e52b5e">Creating the First Project</h1>
+
+<p>When you login as <em>elabman</em> you will automatically be presented with a &ldquo;Create First Project&rdquo; form.  At the top of the page after &ldquo;Contact US&rdquo; you should see a green dot.  Click this dot to enter into administrative mode.  It should now be red and an administration menu item will appear.</p>
+
+<p>You can now fill out the form to create the first project and user.  The project will be automatically approved and created upon submission.  You should now log out and login as the user you created for the first project.  Do <em>not</em> continue to use the elabman user.</p>
+
+<h1 id="setup-mailing-lists-on-users:d76db1a3b6e7bfd4362c42e124e52b5e">Setup Mailing Lists on users</h1>
+
+<p>A lot of errors are only set out as email.  It is important to properly setup the email lists on users:</p>
+
+<pre><code>root@users:/etc/mail/lists # ls -lart
+total 28
+-rw-r--r--  1 root  mailnull    0 Jan 11 18:38 testbed-www
+-rw-r--r--  1 root  mailnull    0 Jan 11 18:38 testbed-testsuite
+-rw-r--r--  1 root  mailnull    0 Jan 11 18:38 testbed-stated
+-rw-r--r--  1 root  mailnull    0 Jan 11 18:38 testbed-ops
+-rw-r--r--  1 root  mailnull    0 Jan 11 18:38 testbed-logs
+-rw-r--r--  1 root  mailnull    0 Jan 11 18:38 testbed-audit
+-rw-r--r--  1 root  mailnull    0 Jan 11 18:38 testbed-approval
+drwxr-xr-x  3 root  wheel     512 Jan 11 18:38 ..
+-rw-r-----  1 root  mailnull   90 Jan 11 21:27 emulab-widearea-users
+-rw-r-----  1 root  mailnull  233 Jan 14 15:09 emulab-allusers
+-rw-r-----  1 root  mailnull  149 Jan 14 15:09 emulab-project-leaders
+-rw-r-----  1 root  mailnull  155 Jan 14 15:09 emulab-ops-users
+-rw-r-----  1 root  mailnull   81 Jan 14 15:09 testbed-users
+drwxr-x---  2 root  mailnull  512 Jan 14 15:09 .
+root@users:/etc/mail/lists # echo 'user@bounce' &gt;&gt; testbed-www
+root@users:/etc/mail/lists # echo 'user@bounce' &gt;&gt; testbed-ops
+root@users:/etc/mail/lists # echo 'user@bounce' &gt;&gt; testbed-logs
+root@users:/etc/mail/lists # echo 'user@bounce' &gt;&gt; testbed-audit
+root@users:/etc/mail/lists # echo 'user@bounce' &gt;&gt; testbed-approval
+</code></pre>
+
+<h1 id="enabling-full-administrative-access:d76db1a3b6e7bfd4362c42e124e52b5e">Enabling full administrative access</h1>
+
+<p>By default, the first testbed user does not have access to boss.  The script <em>tbadmin</em> will give this user (or any other), full administrative access to the testbed.  For example, if jhickey is the user I created as the head of the first testbed project, I can enable full access by simply running:</p>
+
+<pre><code>[deterbuild@boss ~/testbed/account]$ sudo /usr/testbed/sbin/tbadmin jhickey
+Giving jhickey Red Dot on the web interface
+Setting local password and shell
+chpass: user information updated
+Adding /usr/testbed/sbin to shell rc files
+Adding user jhickey to group wheel in the database
+User jhickey is already in group wheel, skipping ...
+Updating groups for jhickey on control nodes
+Processing user jhickey: emulab-ops testbed
+Adding extra groups to list: tbadmin wheel
+Updating user jhickey record on local node.
+Updating user jhickey record on users.mini-isi.deterlab.net.
+Group Update Completed!
+[deterbuild@boss ~/testbed/account]$
+</code></pre>
+
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>

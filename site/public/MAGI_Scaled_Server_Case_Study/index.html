@@ -1,0 +1,212 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <h1></h1>
+  
+
+<p>[wiki:MAGI_Simple_Client_Case_Study &lt; MAGI Simple Client Case Study] | [wiki:MAGI_Feedback_Case_Study MAGI Feedback Case Study &gt;]</p>
+
+<p>[[TOC]]
+In this example we demonstrate how to set up client server traffic generators in a larger topology.</p>
+
+<p>This case study is identical to [[wiki:MAGI_Simple_Client_Case_Study|the Simple Server Case Study]] except the topology is significantly larger.</p>
+
+<h1 id="event-streams:5eeff5f3291547027ed684f3e2ed52d7">Event Streams</h1>
+
+<p>As in the [[wiki:MAGI_Simple_Client_Case_Study#EventStreams|simpler case]], this example has three events streams; the server stream, the client stream, and the cleanup stream.</p>
+
+<h1 id="mapping-to-the-topology:5eeff5f3291547027ed684f3e2ed52d7">Mapping to the Topology</h1>
+
+<p>The groups directive in the AAL file allows mapping an agent behavior to one or more nodes.</p>
+
+<pre><code>groups:
+   client_group: [clientnode-1, clientnode-2, clientnode-3, clientnode-4, clientnode-5,
+                     clientnode-6, clientnode-7, clientnode-8, clientnode-9, clientnode-10,
+                     clientnode-11, clientnode-12, clientnode-13, clientnode-14, clientnode-15,
+                     clientnode-16, clientnode-17, clientnode-18, clientnode-19, clientnode-20,
+                     clientnode-21, clientnode-22, clientnode-23, clientnode-24, clientnode-25,
+                     clientnode-26, clientnode-27, clientnode-28, clientnode-29, clientnode-30,
+                     clientnode-31, clientnode-32, clientnode-33, clientnode-34, clientnode-35,
+                     clientnode-36, clientnode-37, clientnode-38, clientnode-39, clientnode-40,
+                     clientnode-41, clientnode-42, clientnode-43, clientnode-44, clientnode-45,
+                     clientnode-46, clientnode-47, clientnode-48, clientnode-49, clientnode-50 ]
+   server_group: &amp;slist [ servernode-1, servernode-2, servernode-3, servernode-4, servernode-5 ]
+</code></pre>
+
+<p>In this example, we observe that there are two groups: <em>client<em>group</em>&rsquo; which consists of all 50 clientnodes, and &lsquo;_server_group</em> which consists of 5 servernodes.</p>
+
+<p>Additionally, we use YAML pointers to annotate the server_group as <em>slist</em>. The slist annotation is used to refer to the list of servers for configuring the client_agent in the section below.</p>
+
+<h1 id="configuring-the-agents:5eeff5f3291547027ed684f3e2ed52d7">Configuring the Agents</h1>
+
+<p>There are two types of agents, a client_agent and a server_agent. Each agent description consists of at least three directives; group, path and execargs.</p>
+
+<ul>
+<li><code>group</code>: indicates the set of nodes that the client_agent should be deployed on.</li>
+<li><code>path</code>: indicates the path to the agent code (also called an agent module).</li>
+
+<li><p><code>execargs</code>: can be used to parameterize the agents at load time. The agents may be reconfigured later in the AAL also using the <code>setConfiguration</code> method.</p>
+
+<p>agents:
+  client_agent:
+    group: client_group
+    path: /share/magi/modules/http_client/http_client.tar.gz
+    execargs: {servers: *slist, interval: &lsquo;5&rsquo;, sizes: &lsquo;minmax(1000,10000)&rsquo;}</p>
+
+<p>server_agent:
+    group: server_group
+    path: /share/magi/modules/apache/apache.tar.gz
+    execargs: []</p></li>
+</ul>
+
+<h1 id="server-stream:5eeff5f3291547027ed684f3e2ed52d7">Server Stream</h1>
+
+<p>The server event stream consists of three states.</p>
+
+<ol>
+<li>The <em>start</em> state which generates a trigger, called <code>serverStarted</code>, once all the server agents are activated on the experiment nodes.</li>
+<li>It then enters the <em>wait</em> state where it waits for a trigger from the client event stream.</li>
+<li>Once the trigger is received, it enters the <em>stop</em> state, where the server is deactivated or terminated.</li>
+</ol>
+
+<p>The AAL description is the same as the one used in the [attachment:casestudy_clientserver.aal?format=raw Simple Client case study].</p>
+
+<h1 id="client-stream:5eeff5f3291547027ed684f3e2ed52d7">Client Stream</h1>
+
+<p>The client event stream consists of five states.</p>
+
+<ol>
+<li>First, the client agent implementation is parameterized by the configuration state. This occurs as part of the agent loading process on all 50 nodes.</li>
+<li>The client stream then synchronizes with the server stream by waiting for the <code>serverStarted</code> trigger from the server nodes.</li>
+<li>Once it receives the trigger the client agent is activated in the start state. Each client_agent fetches web pages for one of the listed servers.</li>
+<li>Next, the client stream waits for a period (\Delta) t and then terminates the client agents in the stop state.</li>
+<li>On termination, the client agents sends a <code>clientStopped</code> trigger that allows the server stream to synchronize and terminate the servers only after all the client have terminated.</li>
+</ol>
+
+<h1 id="running-the-experiment:5eeff5f3291547027ed684f3e2ed52d7">Running the Experiment</h1>
+
+<h2 id="step-1-swap-in-the-experiment:5eeff5f3291547027ed684f3e2ed52d7">Step 1: Swap in the experiment</h2>
+
+<p>Swap in the experiment using this network description file: [attachment:cs55_topology.tcl?format=raw cs55_topology.tcl]</p>
+
+<h2 id="step-2-set-up-your-environment:5eeff5f3291547027ed684f3e2ed52d7">Step 2: Set up your environment</h2>
+
+<p>Set up your environment. Assuming your experiment is named <em>myExp&rdquo;, your DETER project is &ldquo;myProj&rdquo;, and the AAL file is called &ldquo;procedure.aal</em>.</p>
+
+<pre><code>PROJ=myExp
+EXP=myProj
+AAL=procedure.aal
+</code></pre>
+
+<h2 id="step-3-run-the-orchestrator:5eeff5f3291547027ed684f3e2ed52d7">Step 3: Run the Orchestrator</h2>
+
+<p>Once the experiment is swapped in, run the orchestrator, giving it the AAL above and the experiment and project name.</p>
+
+<pre><code>&gt; /share/magi/current/magi_orchestrator.py --experiment $EXP --project $PROJ --events $AAL
+</code></pre>
+
+<p>Once run, you will see the orchestrator step through the events in the AAL file. The example output below uses the project “montage” with experiment “caseClientServer”:</p>
+
+<p>[[Image(cs55_orch.png)]]</p>
+
+<ol>
+<li>The Orchestrator enacts an internally defined stream called <code>initilization</code> that is responsible for establishing the server_group and the client_group and loading the agents. Once the agents are loaded, as indicated by the received trigger <code>AgentLoadDone</code>, The initialization stream is complete.</li>
+<li>Now the serverstream, clientstream and the cleanup stream start concurrently. The serverstream sends the startServer event to the server_group. All members of the server_group start the server and fire a trigger serverStarted.</li>
+<li>The clienstream on receiving the trigger serverStarted from the server_group, sends the startClient event to the client_group. One minute later, the clientstream sends the event stopClient to the client_group and terminates the clientstream. All members of the client_group, terminate the client_agent and generate a clientStopped trigger which is sent back to the orchestrator.</li>
+<li>Once the serverstream receives the clientStopped trigger from the client_group, it sends out the stopServer event on the server_group. Once all the servers are stopped, the members of the server_group respond with a serverStopped trigger, which is forwarded to the cleanupstream.</li>
+<li>On receiving the serverStopped trigger, the cleanupstream enacts an internally define stream called exit that is responsible for unloading agents and tearing down the groups.</li>
+</ol>
+
+<p>The experiment artifacts, the procedure and topology file that were used for the casestudy are attached below. Additionally, we have attached a detailed orchestration log that lists triggers from the clientnodes and the servernodes in the experiment.
+* <em>Procedure:</em> [attachment:casestudy_clientserver55.aal?format=raw casestudy_clientserver55.aal]
+* <em>Topology:</em> [attachment:casestudy_clientserver55.tcl?format=raw casestudy_clientserver55.tcl]
+* <em>Archive Logs:</em> <a href="http://montage.deterlab.net/magi/_downloads/cs55_exparchive.tar.gz">casestudy_clientserver55.tar.gz</a>
+* <em>Orchestration:</em> [attachment:casestudy_clientserver55.orch.log?format=raw casestudy_clientserver55.orch.log]</p>
+
+<h1 id="visualizing-experiment-results:5eeff5f3291547027ed684f3e2ed52d7">Visualizing Experiment Results</h1>
+
+<p><em>Note:</em> This process is the same as for the Simple Client case - we are reproducing here for your convenience.</p>
+
+<p>In order to visualize the traffic on the network, modify the above mentioned procedure to add another stream called “monitorstream”. This stream deploys a packet sensor agent on the router node to measure the aggregated traffic between the server nodes and the client nodes. The packet sensor agent records the traffic data using MAGI’s data management layer.</p>
+
+<pre><code>monitor_group: [router]
+
+monitor_agent:
+  group: monitor_group
+  path: /share/magi/modules/pktcounters/pktCountersAgent.tar.gz
+  execargs: {}
+
+monitorstream:
+    - type: trigger
+      triggers: [ { event: serverStarted } ]
+
+    - type: event
+      agent: monitor_agent
+      method: startCollection
+      trigger: collectionServer
+      args: {}
+
+    - type: trigger
+      triggers: [ { event: clientStopped } ]
+
+    - type: event
+      agent: monitor_agent
+      method: stopCollection
+      args: {}
+</code></pre>
+
+<p>The recorded data is then pulled out by the below mentioned tools to create a traffic plot.</p>
+
+<p>In order to populate the traffic data, re-run the experiment using the updated procedure. The updated procedure file and the corresponding logs are attached below.</p>
+
+<p>The aggregated traffic can then be plotted in two ways:</p>
+
+<p>Offline: A plot of the traffic flowing through the router node connecting the clients and the servers can be generated using the MAGI Graph Creation Tool.</p>
+
+<pre><code>&gt; GRAPHCONF=cs55_magi_graph.conf
+&gt; /share/magi/current/magi_graph.py -e $EXP -p $PROJ -c $GRAPHCONF -o cs_traffic_plot.png
+</code></pre>
+
+<p>[[Image(cs55_traffic_plot.png,460px)]]</p>
+
+<p>Real Time: A real time simulated traffic plot using canned data from a pre-run experiment can be visualized <a href="http://tau.isi.edu/magidemos/casestudy/clientserver55/traffic.html">here</a>.</p>
+
+<p>A similar plot using live data can be plotted by visiting the same web page, and additionally passing it the hostname of the database config node of your experiment.</p>
+
+<p>You can find the database config node for your experiment by reading your experiment’s configuration file, similar to the following.</p>
+
+<pre><code>&gt; cat /proj/myProject/exp/myExperiment/experiment.conf
+
+
+
+
+dbdl:
+  configHost: node-1
+
+expdl:
+  experimentName: myExperiment
+  projectName: myProject
+</code></pre>
+
+<p>Then edit the simulated traffic plot URL, passing it the hostname.</p>
+
+<pre><code>host=node-1.myExperiment.myProject
+
+http://&lt;web-host&gt;/traffic.html?host=node-1.myExperiment.myProject
+</code></pre>
+
+<p>The procedure, graph configuration, and archived log files that were used for the visualization of this case study are attached below.
+* <em>Procedure:</em> [attachment:casestudy_clientserver55_monitor.aal?format=raw casestudy_clientserver55_monitor.aal]
+* <em>Topology:</em> [attachment:cs55_topology.tcl?format=raw cs55_topology.tcl]
+* <em>Archived Logs:</em> [attachment:casestudy_clientserver55_monitor.tar.gz]
+* <em>Graph Config:</em> [attachment:casestudy_clientserver55_magi_graph.conf?format=raw casestudy_clientserver55_magi_graph.conf]</p>
+
+<p>[wiki:MAGI_Simple_Client_Case_Study &lt; MAGI Simple Client Case Study] | [wiki:MAGI_Feedback_Case_Study MAGI Feedback Case Study &gt;]</p>
+
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>

@@ -1,0 +1,71 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <h1></h1>
+  
+
+<p>[wiki:OrchestratorReference &lt; Orchestrator Reference] | [wiki:MAGI_Agent_Library MAGI Agent Library &gt;]</p>
+
+<p>[[TOC]]</p>
+
+<h1 id="magi-system-organization:c0772d7f1bd6e6bcf3cabfa9534ad65f">MAGI System Organization</h1>
+
+<p>The MAGI system is divided into <em>magicore_&rsquo; and &lsquo;_magimodules</em>.</p>
+
+<p>The <em>magicore</em> consists of the group communication, control, and data management infrastructure.</p>
+
+<p>The latest available version for use on DeterLab may be found on <code>users</code> at:</p>
+
+<pre><code>/share/magi/current/
+</code></pre>
+
+<p>The <em>magimodules</em> are agent function implementations that enable a particular behavior on the experiment nodes.</p>
+
+<p>The agents along with supporting documentation and file are located on <code>users</code> at:</p>
+
+<pre><code>/share/magi/modules
+</code></pre>
+
+<p>(Cris: dirs in modules currently read:
+* apache
+* attackreplay
+* curl_reporter
+* flooder
+* http_client
+* http_server
+* loadGenerator
+* nodeStats
+* pktcounters
+* runcmd
+* runshell
+* tb_compat.tcl
+* tcpdump</p>
+
+<p>but none of these were listed in the agent library. what&rsquo;s the difference?)</p>
+
+<h2 id="logs:c0772d7f1bd6e6bcf3cabfa9534ad65f">Logs</h2>
+
+<p>You can find helpful logs in these locations in <code>users</code>:</p>
+
+<p>LOG_DIR:: Check experiment configuration file. Default: /var/log/magi
+ MAGI Bootstrap Log:: /tmp/magi_bootstrap.log
+ MAGI Daemon Log:: $LOG_DIR/daemon.log
+ MongoDB Log:: $LOG_DIR/mongo.log</p>
+
+<h2 id="configuration-files:c0772d7f1bd6e6bcf3cabfa9534ad65f">Configuration Files</h2>
+
+<p>The following configuration files are available in <code>users</code>:</p>
+
+<p>Experiment Configuration:: /proj/<project_name>/exp/<experiment_name>/experiment.conf
+ CONF_DIR:: Check experiment configuration file. Default: /var/log/magi
+ Node Configuration:: $CONF_DIR/node.conf</p>
+
+<p>[wiki:OrchestratorReference &lt; Orchestrator Reference] | [wiki:MAGI_Agent_Library MAGI Agent Library &gt;]</p>
+
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>

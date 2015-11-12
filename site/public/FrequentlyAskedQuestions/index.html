@@ -1,0 +1,57 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <h1></h1>
+  
+
+<p>[[TOC]]</p>
+
+<h1 id="why-can-t-i-log-in:c4fabe97791607c05945a14a19e0884f">Why can&rsquo;t I log in?</h1>
+
+<p>Too many failed attempts to log into the web interface will result in your account being locked.  You will get a message saying that your account has been frozen if you trigger it.  If you are a student, please contact your TA.  Otherwise, please <a href="http://www.deter-project.org/contact_deter">contact us</a>.</p>
+
+<p>You must use your actual account name, not an email address, to log into <code>users.isi.deterlab.net</code>.  Also, too many failed attempts to log into <code>users.isi.deterlab.net</code> will result in an IP address ban.  We automatically whitelist all IP addresses that have successfully logged into the <a href="https://www.isi.deterlab.net">web interface</a> and this list is synchronized every 15 minutes.  So if you find yourself banned from connecting to <code>users.isi.deterlab.net</code> please log into the <a href="https://www.isi.deterlab.net">web interface</a> and then wait.</p>
+
+<h1 id="how-do-i-copy-files-from-my-workstation-to-a-node-in-an-experiment:c4fabe97791607c05945a14a19e0884f">How do I copy files from my workstation to a node in an experiment?</h1>
+
+<p>Your home directory from <code>users</code> is available on the nodes in your experiment. Copy your files to <code>users.isi.deterlab.net</code> using scp or sftp to make them available on your nodes.</p>
+
+<h1 id="how-can-i-copy-files-from-a-node-in-the-testbed-to-my-workstation:c4fabe97791607c05945a14a19e0884f">How can I copy files from a node in the testbed to my workstation?</h1>
+
+<p>The reverse of the previous question: copy the files you want to your home directory, then download them from <code>users.isi.deterlab.net</code> using scp or sftp.</p>
+
+<h1 id="how-can-i-install-software-on-my-nodes:c4fabe97791607c05945a14a19e0884f">How can I install software on my nodes?</h1>
+
+<p>The currently supported operating system images (see the <a href="https://www.isi.deterlab.net/showosid_list.php3">Recommended list</a> for currently supported images) images have access to full package repositories on a local mirror. Depending on your OS you can use <code>yum</code>, <code>apt-get</code>, or <code>pkg_add</code> to install software that has been pre-packaged for each OS.</p>
+
+<p>If there is no package for the software you wish to install, you can install from source. Copy the source tarball to the testbed (see [#HowdoIcopyfilesfrommyworkstationtoanodeinanexperiment How do I copy files from my workstation to a node in an experiment?] or use <code>wget</code> or <code>curl</code> on <code>users</code>), then follow the package&rsquo;s installation instructions.</p>
+
+<p>While we will do everything we can to assist any issues you face, we do not have the resources to help individual users install software.</p>
+
+<h1 id="how-do-i-connect-the-web-browser-on-my-workstation-to-the-inner-boss-within-an-emulab-in-emulab-experiment:c4fabe97791607c05945a14a19e0884f">How do I connect the web browser on my workstation to the inner boss within an Emulab-in-Emulab experiment?</h1>
+
+<p>See [wiki:ElabElabSshProxy Setting Up FoxyProxy].</p>
+
+<h1 id="i-try-to-swap-in-and-get-the-error-admission-control-project-experiment-has-too-many-nodes-allocated:c4fabe97791607c05945a14a19e0884f">I try to swap in and get the error: Admission Control: $project/$experiment has too many nodes allocated!</h1>
+
+<p>If you are a class user: the maximum number of nodes that a class can allocated is limited (see [wiki:ClassResourceLimits Class Resource Limits] for details). Wait for some of your classmates to free up resources before trying to swap in again.</p>
+
+<p>You are less likely to encounter this during non-peak hours (late night and early morning) and when deadlines are distant.</p>
+
+<p>If you are <em>not</em> a class user: please [/newticket file a ticket] because something is broken.</p>
+
+<h1 id="i-try-to-swap-out-and-get-the-error-usr-testbed-bin-nfree-please-cleanup-the-previous-errors:c4fabe97791607c05945a14a19e0884f">I try to swap out and get the error: /usr/testbed/bin/nfree: Please cleanup the previous errors.</h1>
+
+<p>This may not be so frequent an error, but can arise when the experiment deliberately brings an interface down without bringing it back up prior to swap out.  Try scheduling the link back up before the end of experiment.</p>
+
+<h1 id="your-site-claims-that-my-new-password-is-in-the-dictionary-i-checked-the-dictionary-and-qwerty1234-is-not-in-it:c4fabe97791607c05945a14a19e0884f">Your site claims that my new password is in the dictionary.  I checked the dictionary and &lsquo;qwerty1234&rsquo; is not in it.</h1>
+
+<p>Please see our [wiki:Passwords Passwords page].</p>
+
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>

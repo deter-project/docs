@@ -1,0 +1,121 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <h1></h1>
+  
+
+<h1 id="overview:69b0f018cc79dc54d5cbf6dcee5834e1">Overview</h1>
+
+<p>The <a href="https://wiki.emulab.net/wiki/elabinelab">Emulab page on ElabInElab</a> makes for very useful background reading.</p>
+
+<p>The following sections are derived from notes by Keith, expanding on the Emulab docs as they pertain to us:</p>
+
+<h1 id="history:69b0f018cc79dc54d5cbf6dcee5834e1">History</h1>
+
+<p>The historic behavior is that an emulab-in-emulab would steal an experimental interface and use it as the control interface. Nobody ever does that anymore.  We added another ns-commnd to have the inner nodes use the regular control interfaces. This extension doesn&rsquo;t seem to be documented:    <code>tb-elabinelab-singlenet</code></p>
+
+<p>Some of what they say there may not work here anymore. e.g. we&rsquo;ve never tried the stuff that immediately attempts to swap in an experiment once the inner elab finishes building.</p>
+
+<p>Another important ns command, which is not described in that document, is</p>
+
+<pre><code>namespace eval TBCOMPAT {
+#   set elabinelab_maxpcs &lt;n&gt; where n is the number of client pc's
+    set elabinelab_maxpcs 0
+}
+</code></pre>
+
+<h1 id="sample-ns-file:69b0f018cc79dc54d5cbf6dcee5834e1">Sample NS File</h1>
+
+<p>A complete ns file to create an Emulab-in-Emulab with the operating system FBSD9-ENE with 3 pc&rsquo;s would look like this:</p>
+
+<pre><code>source tb_compat.tcl
+set ns [new Simulator]
+
+tb-elab-in-elab 1
+tb-elabinelab-singlenet
+
+set os FBSD9-ENE    
+
+namespace eval TBCOMPAT {
+    set elabinelab_maxpcs 3
+    set elabinelab_nodeos(&quot;boss&quot;) $os
+    set elabinelab_nodeos(&quot;ops&quot;) $os
+}
+
+$ns run
+</code></pre>
+
+<h1 id="creating-the-emulab-in-emulab:69b0f018cc79dc54d5cbf6dcee5834e1">Creating the Emulab-In-Emulab</h1>
+
+<p>So you create an experiment with this as an ns file and swap it in.</p>
+
+<p>The build may fail; if it fails, it still declares the experiment to be swapped in but you have to do some manual intervention.</p>
+
+<p>On the real boss run</p>
+
+<p><code>os_load  -i  FBSD9-ENE  &lt;whatever the myboss and myops node in your experiment are&gt;</code></p>
+
+<p>Wait until both nodes have reloaded and come up so that you can ssh into them.</p>
+
+<p>Then, on the real boss, run the command</p>
+
+<p><code>elabinelab &lt;your PID&gt; &lt;your EID&gt;</code></p>
+
+<p><em>Do not interrupt this</em>.  It will take 30-40 minutes, if it works. Shorter if it fails.  If it fails try again, including this os_load.</p>
+
+<h1 id="interacting-with-your-elab-in-elab:69b0f018cc79dc54d5cbf6dcee5834e1">Interacting With Your elab-in-elab</h1>
+
+<p>You should be able to ssh into from users or boss.isi into nodes called myboss and myops in your experiment.  The creator is given admin privs on the inside even if the creator doesn&rsquo;t have on the outside.</p>
+
+<p>You can use firefox with the foxyproxy extension to interact with the web server on the inside as described in:   <a href="https://trac.deterlab.net/wiki/ElabElabSshProxy">https://trac.deterlab.net/wiki/ElabElabSshProxy</a></p>
+
+<p>There is still a bug that ought to be fixed - eventually - that used to cause some nodes in an e-in-e to not
+get properly os-loaded.</p>
+
+<p>If a node is sufficiently dicombobulated that the inside boss can&rsquo;t ssh to it, nor send it a ping-of-death,
+as would happen if it started by being powered off for energy savings by the outside boss,
+the inside boss requests the outside boss to power cycle them, which, in the case of nodes using the older serial-controlled RPC power controllers failed because the power cycle command won&rsquo;t work if it is already off.</p>
+
+<p>The bug is that power cycle on this controllers should always work, and this needs to be fixed in <code>boss.isi:/usr/testbed/lib/power_rpc27</code>.</p>
+
+<p>However, Keith says that all of the pc&rsquo;s that used to use serial power controllers are either unracked
+or in hwdead (pc114, pc133) so that this is not currently an issue.  It might be if they get revived for an
+education cluster.</p>
+
+<h1 id="how-it-works-and-exercising-a-new-version:69b0f018cc79dc54d5cbf6dcee5834e1">How It Works, and Exercising a New Version</h1>
+
+<p>If you&rsquo;ve specified the ns-command</p>
+
+<pre><code>        tb-elab-in-elab 1
+</code></pre>
+
+<p>in your NS file, then, as implied above <code>tbswap</code> runs <code>boss:/usr/testbed/sbin/elabinelab</code> on your behalf.</p>
+
+<p>This dumps some information from the database into <code>/proj/&lt;YourProj&gt;/exp/&lt;YourId&gt;/dbstate.tar.gz</code></p>
+
+<p>It copies <code>boss:/usr/testbed/etc/rc.mkelab</code> to the inside users node and runs it, and then does the same for the boss, which are wrapper scripts that retrieve and install the source.</p>
+
+<p>If there is a file <code>/proj/&lt;YourProj&gt;/exp/&lt;YourID&gt;/rc.mkelab</code> it will use that one instead, which will allow you to build the next generation version without disrupting the working one.</p>
+
+<p>The standard version will similarly by default retrieve the source from <code>boss:/usr/testbed/src/emulab-src.tar.gz</code> , but if there is a file <code>/proj/&lt;YourProj&gt;/exp/&lt;YourID&gt;/emulab-src.tar.gz</code> then it will use <em>that</em> version instead.</p>
+
+<h1 id="another-note:69b0f018cc79dc54d5cbf6dcee5834e1">Another Note</h1>
+
+<p>The tcl that gets invoked in parsing the nsfile for the encompassing experiment is <code>users:/usr/testbed/lib/ns2ir/elabinelab.ns</code></p>
+
+<h1 id="current-brokenness:69b0f018cc79dc54d5cbf6dcee5834e1">Current Brokenness</h1>
+
+<p>The upgrade to FreeBSD10.1 compatible sources required importing a new version of imagezip, which seems to have
+broken the frisbeeimage program which an inner boss uses to fetch images from an outer boss.</p>
+
+<p>So, you have to manually copy the images you need from the outer boss to the inner one, in order to get inner nodes
+to load.  And you&rsquo;ll have to do a sched_reload of all pc&rsquo;s before you can get them into an experiment once
+having copied your default image.  I hope to remove this paragraph in the next month or so.  (sklower)</p>
+
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>

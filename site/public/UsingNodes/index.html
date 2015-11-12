@@ -1,0 +1,147 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <h1></h1>
+  
+
+<p>[[TOC]]
+[wiki:Topologies &lt; Sample Topologies] | [wiki:LegoTG Generating Traffic in LegoTG &gt;]</p>
+
+<h1 id="know-your-deter-servers:346b9e50ca891863d0f276733701095f">Know your DETER servers</h1>
+
+<p>Here are the most important things to know.</p>
+
+<ul>
+<li><code>www.isi.deterlab.net</code> is the primary web interface for the testbed.</li>
+<li><code>users.isi.deterlab.net</code> is the host through which the testbed nodes are accessed and it is primary file server.</li>
+<li><code>scratch</code> is the local package mirror for CentOS, Ubuntu, and FreeBSD.</li>
+</ul>
+
+<h1 id="hostnames-for-your-nodes:346b9e50ca891863d0f276733701095f">Hostnames for your nodes</h1>
+
+<p>We set up names for your nodes in DNS and <code>/etc/hosts</code> files for use on the nodes in the experiment. Since our nodes have multiple interfaces (the control network, and, depending on the experiment, possibly several experimental interfaces) determining which name refers to which interface can be somewhat confusing. The rules below should help you figure this out.</p>
+
+<ul>
+<li><em>From users.isi.deterlab.net</em> - We set up names in the form of <code>node.expt.proj.isi.deterlab.net</code> in DNS, so that they are visible anywhere on the Internet. This name always refers to the node&rsquo;s control network interface, which is the only one reachable from <code>users.isi.deterlab.net</code>. You can use <code>node.expt.proj</code> as a shorthand.</li>
+<li><em>On the nodes themselves</em> - There are three basic ways to refer to the interfaces of a node. The first is stored in DNS, and the second two are stored on the node in the <code>/etc/hosts</code> file.
+
+<ol>
+<li><em>Fully-qualified hostnames&rdquo; - These names are the same ones visible from the outside world, and referred to by attaching the full domain name: ie. <code>node.expt.proj.isi.deterlab.net</code>. (Note that, since we put &ldquo;.isi.deterlab.net</em> in the nodes&rsquo; domain search paths, you can use <code>node.expt.proj</code> as a shorthand.) This name always refers to the control network.</li>
+<li><em>node-link form</em> - You can refer to an individual experimental interface by suffixing it with the name of the link or LAN (as defined in your NS file) that it is a member of. For example, <code>nodeA-link0</code> or <code>server-serverLAN</code>. This is the preferred way to refer to experimental interfaces, since it uniquely and unambiguously identifies an interface.</li>
+<li><em>Short form&rdquo; - If a node is directly connected to the node you&rsquo;re on, you can refer to that node simply with its name (eg. <code>nodeA</code>.) Note that this differs from the fully- qualified name in that no domain is given. We also create short names for nodes you are not directly connected to. However, if two nodes are connected with more than one interface, or there is more than one route between them, there is no guarantee that the short name has been associated with the one is on the best (ie. shortest or highest bandwidth) path - so, if there is ambiguity, we strongly suggest that you use the &ldquo;node-link</em> form.</li>
+</ol></li>
+</ul>
+
+<p><em>NOTE:</em> It is a bad idea to pick virtual node names in your topology that clash with the physical node names in the testbed, such as &ldquo;pc45&rdquo;.</p>
+
+<h1 id="logging-into-your-node:346b9e50ca891863d0f276733701095f">Logging into your Node</h1>
+
+<p>By the time you receive the email message listing your nodes, the DETER configuration system will have ensured that your nodes are fully configured and ready to use. If you have selected one of the DETER-supported operating system images ([wiki:OSImages see supported images]), this configuration process includes:
+    * loading fresh disk images so that each node is in a known clean state;
+    * rebooting each node so that it is running the OS specified in the NS script;
+    * configuring each of the network interfaces so that each one is &ldquo;up&rdquo; and talking to its virtual LAN (VLAN);
+    * creating user accounts for each of the project members;
+    * mounting the projects NFS directory in /proj so that project files are easily shared amongst all the nodes in the experiment;
+    * creating a /etc/hosts file on each node so that you may refer to the experimental interfaces of other nodes by name instead of IP number;
+    * configuring all of the delay parameters;
+    * configuring the serial console lines so that project members may access the console ports from users.isi.deterlab.net.</p>
+
+<p>As this point you may log into any of the nodes in your experiment. You will need to use [wiki:DETERSSH Secure Shell (ssh)] to log into <em>users.isi.deterlab.net</em>
+Your login name and password will be the same as your Web Interface login and password.  <em>Please note that although you can log into the web interface using your email address instead of your login name, you must use your login name when logging into users.isi.deterlab.net.</em></p>
+
+<p>Once logged into users you can then [wiki:DETERSSH ssh] to your nodes.  You should use the `qualified name&rsquo; from the nodes mapping table so that you do not form dependencies on any particular physical node.  For more information on using SSH with DETER, please take a look at the [wiki:DETERSSH DETER SSH] wiki page.</p>
+
+<h1 id="how-do-i-install-software-onto-my-node:346b9e50ca891863d0f276733701095f">How do I install software onto my node?</h1>
+
+<p>Each [wiki:OSImages Supported Operating System] have packages mirrored on a host called scratch and each operating system is configured to use this system to fetch packages from.  Information for specific operating systems is documented there.</p>
+
+<h2 id="how-do-i-copy-files-onto-my-node:346b9e50ca891863d0f276733701095f">How do I copy files onto my node?</h2>
+
+<p>Your home directory on users is automatically mounted via NFS on every node in your experiment.  As are your project directory in /proj and a special filesystem called /share.</p>
+
+<h1 id="i-need-root-access:346b9e50ca891863d0f276733701095f">I need <em>root</em> access!</h1>
+
+<p>If you need to customize the configuration, or perhaps reboot nodes, you can use the &ldquo;sudo&rdquo; command, located in <code>/usr/local/bin</code> on FreeBSD and &lsquo;/usr/bin&rsquo; Linux. All users are added to the Administrators group on [wiki:Windows Windows XP] nodes. Our policy is very liberal; you can customize the configuration in any way you like, provided it does not interfere with the operation of the testbed. As as example, to reboot a node that is running FreeBSD:</p>
+
+<pre><code>    /usr/local/bin/sudo reboot
+</code></pre>
+
+<p>Also, every testbed node has an automatically generated root password.  Simply click on a node in the &ldquo;Reserved Nodes&rdquo; for your experiment and look at the &ldquo;root_password&rdquo; attribute.</p>
+
+<h1 id="can-i-access-the-nodes-console-serialconsole:346b9e50ca891863d0f276733701095f">Can I access the nodes console? #SerialConsole</h1>
+
+<p>Yes. Each of the PCs has its own serial console line connected to a [wiki:Tutorial/WalkThrough#serialserver serial server].  You can connect to a nodes serial console through the &ldquo;users&rdquo; machine, using our <code>console</code> program located in &lsquo;/usr/testbed/bin&rsquo;. For example, to connect over serial line to &ldquo;pc001&rdquo; in your experiment, ssh into <em>users.isi.deterlab.net</em>, and then type <code>console pc001</code> at the Unix prompt. You may then interact with the serial console (hit &ldquo;enter&rdquo; to elicit output from the target machine).</p>
+
+<p>To exit the console program, type <code>Ctrl-]</code>; its just a telnet session.</p>
+
+<p>In any case, all console output from each node is saved so that you may look at it it later. For each node, the console log is stored as <code>/var/log/tiplogs/pcXXX.run</code>. This <em>run</em> file is created when nodes are first allocated to an experiment, and the Unix permissions of the run files permit only members of the project to view them. When the nodes are deallocated, the run files are cleared, so if you want to save them, you must do so before terminating the experiment.</p>
+
+<p>In addition, you can view the console logs from the web interface, on the Show Experiment page. Of course, you may not interact with the console, but you can at least view the current log.</p>
+
+<p>Escape codes for Dell serial consoles are documented [wiki:DellSerialConsole here].</p>
+
+<h1 id="my-node-is-wedged:346b9e50ca891863d0f276733701095f">My node is wedged!</h1>
+
+<p>Power cycling a node is easy since every node on the testbed is connected to a [wiki:Tutorial/WalkThrough#powercontroller power controller].  If you need to power cycle a node, log on to users.isi.deterlab.net and use the &ldquo;node_reboot&rdquo; command:</p>
+
+<pre><code>    node_reboot &lt;node&gt; [node ... ]
+</code></pre>
+
+<p>where <code>node</code> is the physical name, as listed in the node mapping table. You may provide more than one node on the command line. Be aware that you may power cycle only nodes in projects that you are member of. Also, <code>node_reboot</code> does its very best to perform a clean reboot before resorting to cycling the power to the node. This is to prevent the damage that can occur from constant power cycling over a long period of time. For this reason, <code>node_reboot</code> may delay a minute or two if it detects that the machine is still responsive to network transmission. In any event, please try to reboot your nodes first (see above).
+You may also reboot all the nodes in an experiment by using the <code>-e</code> option to specify the project and experiment names. For example:</p>
+
+<pre><code>    node_reboot -e testbed,multicast
+</code></pre>
+
+<p>will reboot all of the nodes reserved in the &ldquo;multicast&rdquo; experiment in the &ldquo;testbed&rdquo; project. This option is provided as a shorthand method for rebooting large groups of nodes.</p>
+
+<h1 id="i-want-to-load-a-fresh-operating-system-on-my-node:346b9e50ca891863d0f276733701095f">I want to load a fresh operating system on my node</h1>
+
+<p>Scrogging your disk is certainly not as common, but it does happen. You can either swap your experiment out and then back in (which will allocate another group of nodes), or if you prefer you can reload the disk image yourself. You will of course lose anything you have stored on that disk; it is a good idea to store only data that can be easily recreated, or else store it in your project directory in <code>/proj</code>.</p>
+
+<p>Reloading your disk with a fresh copy of an image is easy, and requires no intervention by DETER staff:</p>
+
+<pre><code>    os_load [-i ImageName] [-p Project] &lt;node&gt; [node ... ]
+</code></pre>
+
+<p>If you do not specify an image name, the default image for that node type will be loaded (typically Ubuntu1004-STD).  For testbed wide images, you do not have to specify a project.  The os_load command will wait (not exit) until the nodes have been reloaded, so that you do not need to check the console lines of each node to determine when the load is done.</p>
+
+<p>For example, to load the image &lsquo;testpc167&rsquo; which is in the project &lsquo;DeterTest&rsquo; onto pc167, we type:</p>
+
+<pre><code>users &gt; os_load -i testpc167 -p DeterTest pc167
+osload (pc167): Changing default OS to [OS 998: DeterTest,testpc167]
+osload: Updating image signature.
+Setting up reload for pc167 (mode: Frisbee)
+osload: Issuing reboot for pc167 and then waiting ...
+reboot (pc167): Attempting to reboot ...
+reboot (pc167): Successful!
+reboot: Done. There were 0 failures.
+reboot (pc167): child returned 0 status.
+osload (pc167): still waiting; it has been 1 minute(s)
+osload (pc167): still waiting; it has been 2 minute(s)
+osload (pc167): still waiting; it has been 3 minute(s)
+osload (pc167): still waiting; it has been 4 minute(s)
+osload: Done! There were 0 failures.
+users &gt;
+</code></pre>
+
+<h1 id="i-only-want-certain-types-of-nodes-for-my-experiment:346b9e50ca891863d0f276733701095f">I only want certain types of nodes for my experiment</h1>
+
+<p>The NS command <em>tb-set-hardware</em> only lets you pick one type of hardware.  If you are fine with a couple of different kinds of hardware, say you just want nodes that are at ISI part of the testbed, you can define a virtual node type in your NS file.  For more information on virtual types, please refer to the [wiki:nscommands#VirtualTypeCommands Virtual Type Commands] section of the NS command reference.  Here is a quick example:</p>
+
+<pre><code>tb-make-soft-vtype ISI {pc2133 pc3000 pc3060 pc3100} 
+tb-make-soft-vtype UCB {bpc2133 bpc3000 bpc3060}
+
+tb-set-hardware $atISI ISI
+tb-set-hardware $atUCB UCB
+</code></pre>
+
+<p>[wiki:Topologies &lt; Sample Topologies] | [wiki:LegoTG Generating Traffic in LegoTG &gt;]</p>
+
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>

@@ -1,0 +1,65 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <h1></h1>
+  
+
+<h1 id="updating-the-deter-meta-packages:27f00a33a70067e897ba594ec65a64fc">Updating the DETER meta packages</h1>
+
+<p>The dependencies are installed via a special meta package.  This is already installed on the stock images, so if you get a conflict let us know.</p>
+
+<pre><code> cd testbed/install/ports                                                                                                    
+ sudo make install                                                                                                           
+ cd /usr/ports/misc/instant-deter                                                                                            
+ sudo make deinstall                                                                                                         
+ sudo make reinstall                                                                                                         
+</code></pre>
+
+<h1 id="updating-the-codebase:27f00a33a70067e897ba594ec65a64fc">Updating the codebase</h1>
+
+<p>In order to update the codebase, running the install script is not necessary.</p>
+
+<pre><code>cd ~/testbed
+git pull
+sudo rm -rf ~/obj
+mkdir ~/obj
+cd ~/obj
+../testbed/configure --with-TBDEFS=../testbed/defs-&lt;your defs&gt;
+gmake
+sudo gmake [boss|users]-install
+sudo gmake post-install # on boss
+</code></pre>
+
+<h2 id="updating-the-database-on-boss:27f00a33a70067e897ba594ec65a64fc">Updating the database on boss</h2>
+
+<p>There is a database update script, testbed/db/dbupdate.in, that will run the various update scripts against your existing database on boss.  These scripts are located in testbed/sql/updates.  Please make sure to backup your database before running:</p>
+
+<pre><code>~/obj/db/dbupdate tbdb
+</code></pre>
+
+<h2 id="updating-switch-node-and-interface-types:27f00a33a70067e897ba594ec65a64fc">Updating switch node and interface types</h2>
+
+<p>In order to add our switch to the database, we need to setup node and interface types for them.</p>
+
+<p>We provide some SQL to make this easy.  The script switch-types-create defines the following:</p>
+
+<ul>
+<li>Node types for hp5412 (which included hp5406), hp2810, and nortel5510 switch types.</li>
+<li>Interfaces for generic inter-switch trunks (if your site has more than one switch) named &ldquo;trunk_100MbE&rdquo;, &ldquo;trunk_1GbE&rdquo;, and &ldquo;trunk_10GbE&rdquo;.</li>
+</ul>
+
+<p>For other switch types, please refer to the <a href="https://users.emulab.net/trac/emulab/wiki/install/switches-db.html">Emulab Documentation</a>.</p>
+
+<p>These are <em>loaded by boss-install</em> script, but if you need to load them by hand:</p>
+
+<pre><code>mysql tbdb &lt; ~&lt;builduser&gt;/testbed/sql/interface-types-create.sql
+mysql tbdb &lt; ~&lt;builduser&gt;/testbed/sql/node-types-create.sql
+</code></pre>
+
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>
