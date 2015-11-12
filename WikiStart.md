@@ -2,8 +2,8 @@
 
 # Getting an Account
 
-* [wiki:Policy The DeterLab usage policy]
-* [wiki:GettingStarted Registering to use DeterLab]
+* [The DeterLab usage policy](Policy.md)
+* [Registering to use DeterLab](GettingStarted.md)
 
 # Getting Started
 
