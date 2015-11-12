@@ -1,0 +1,118 @@
+html, body {
+  font-family: Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif, 'Segoe UI Emoji', 'Segoe UI Symbol';
+  padding: 0;
+  margin: 0;
+  overflow: auto;
+}
+
+#topbar {
+  overflow: auto;
+  height: 30px;
+  line-height: 30px;
+  background-color: #222;
+  color: #cacaca;
+  padding: 5px;
+  border-bottom: 2px #FDB813 solid;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+#topbar > img , #topbar > h1 {
+  float: left;
+  margin: 0 5px;
+}
+
+#topbar > h1 {
+  color: #cacaca;
+  font-size: 16pt;
+  font-weight: 200;
+}
+
+#posts {
+  width: 200px;
+  background: #2b2c2d;
+  color: #cacaca;
+  padding: 10px;
+  position: absolute;
+  left: 0;
+  top: 42px;
+  bottom: 0;
+}
+
+ol ol {
+  margin-left: 10px !important;
+}
+
+#posts a, 
+#posts a:link, 
+#posts a:hover, 
+#posts a:active, 
+#posts a:visited {
+  color: #cacaca;
+  text-decoration: none;
+}
+
+.navlisthead {
+ color: #FDB813;
+ font-weight: bold;
+}
+
+.navlistitem {
+  margin: 5px;
+  cursor: pointer;
+}
+
+.dlist {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#doclist {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#content {
+  overflow: hidden;
+  padding: 5px;
+  background-color: #fff;
+  position: absolute;
+  left: 200px;
+  top: 42px;
+  right: 0;
+  bottom: 0;
+}
+
+#content_logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 200px;
+  width: 400px;
+}
+
+a, 
+a:link, 
+a:hover, 
+a:active, 
+a:visited {
+  color: #c08702;
+  text-decoration: none;
+}
+
+#content > object {
+  overflow: hidden;
+  padding: 5px;
+  height: 100%;
+  width: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 200;
+  /*color: #7e5901;*/
+  color: #333;
+}

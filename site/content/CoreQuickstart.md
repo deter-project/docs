@@ -1,5 +1,10 @@
-[[TOC]]
-[wiki:Documentation < Documentation] | [wiki:CoreGuide Core Guide >]
++++
+tags = ["getting_started"]
+tags_weight = 1
+date = "2015-11-12T07:54:14-08:00"
+draft = true
+title = "Core Quickstart"
++++
 
 This page describes basic information about DeterLab and its core functionality.
 

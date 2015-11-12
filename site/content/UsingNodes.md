@@ -1,5 +1,10 @@
-[[TOC]]
-[wiki:Topologies < Sample Topologies] | [wiki:LegoTG Generating Traffic in LegoTG >]
++++
+tags = ["getting_started"]
+tags_weight = 4
+date = "2015-11-12T07:54:14-08:00"
+draft = true
+title = "Using Nodes"
++++
 
 # Know your DETER servers
 Here are the most important things to know.

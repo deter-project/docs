@@ -1,4 +1,10 @@
-[wiki:CoreQuickstart < Core Quick Start] | [wiki:Topologies Sample Topologies >]
++++
+tags = ["getting_started"]
+tags_weight = 2
+date = "2015-11-12T07:54:14-08:00"
+draft = true
+title = "Core Guide"
++++
 
 In this tutorial we begin with a small 3-5 node experiment, so that you will become familiar with NS syntax and the practical aspects of DeterLab operation. Usually, you will want to incorporate another system such as the [wiki:OrchestratorQuickstart MAGI Orchestrator] for more fully fleshed out experiments. But this is a good starting point for those new to DeterLab.
 

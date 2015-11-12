@@ -1,6 +1,6 @@
 # Deterlab Usage Policy
 
- ## Be a good citizen
+## Be a good citizen
  Deter is a shared resource.  We expect users to be good citizens by not abusing or wasting the resources we make available to them for free.  We ask that you:
 * *Read the tutorial* -  [wiki:Tutorial It is right here] - and give us feedback!
 * *Do not share accounts* - We will close accounts that we suspect to be shared.

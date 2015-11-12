@@ -1,9 +1,29 @@
 <!DOCTYPE html>
 <html>
-<p> Yo </p>
-<body>
-  {{ range first 10 .Data.Pages }}
-    <h1>{{ .Title }}</h1>
-  {{ end }}
+<head>
+<link rel="stylesheet" type="text/css" href="/css/main.css" />
+<script src="/js/main.js"></script>
+</head>
+<body onload="doLoad()" onhashchange="doLoad()">
+  <div id="topbar">
+    <img src="img/DETER_logo_white.png" width=30 />
+    <h1> Deter Docs </h1>
+  </div>
+  <div id="posts">
+    <ol class="dlist">
+      <li class="navlisthead"><span>Getting Started</span></li>
+      <ol id="doclist">
+      {{ range sort .Site.Taxonomies.tags.getting_started}}
+      <li class="navlistitem">
+        <span onclick="navItemClick({{.Page.RelPermalink}})">{{ .Page.Title }}</span>
+      </li>
+      {{ end }}
+      </ol>
+    </ol>
+  </div>
+  <div id="content">
+    <img id="content_logo" src="img/DETER_logotype_White.png" />
+  </div>
+  </div>
 </body>
 </html>

@@ -1,8 +1,12 @@
-[wiki:CoreGuide < Core Guide] | [wiki:UsingNodes Using Your Nodes >]
++++
+tags = ["getting_started"]
+tags_weight = 3
+date = "2015-11-12T07:54:14-08:00"
+draft = true
+title = "Sample Topologies"
++++
 
 The following are various topologies you can use to experiment with DeterLab Core.
-
-[[TOC]]
 
 # Toy topologies
 

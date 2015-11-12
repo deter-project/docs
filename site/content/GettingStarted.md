@@ -2,7 +2,7 @@
 
 Researchers from academia, government, and industry -- as well as educators from academic institutions -- may apply for a DeterLab project account. A student must have their professor or appropriate faculty member apply for an account, and once it is activated the student can then apply for membership to that project.
 
-*Note*: For more information on using DeterLab for education, please refer to the  [DeterLab Education Site](https://education.deterlab.net/).
+*Note*: For more information on using DeterLab for education, please refer to the  <a href="https://education.deterlab.net" target="_blank">DeterLab Education Site</a>.
 
 # To Register
 DETER accounts are grouped by projects, therefore the project leader or PI must first request a project, then other users apply for membership to that project.
