@@ -1,0 +1,40 @@
+[[TracGuideToc]]
+
+The TracGuide is meant to serve as a starting point for all documentation regarding Trac usage and development. The guide is a free document, a collaborative effort, and a part of the [Trac Project](http://trac.edgewall.org) itself.
+
+# Table of Contents
+
+Currently available documentation:
+* *User Guide*
+   * TracWiki — How to use the built-in Wiki.
+   * TracTimeline — The timeline provides a historic perspective on a project.
+   * TracRss — RSS content syndication in Trac.
+   * _The Version Control Subsystem_
+     * TracBrowser — Browsing source code with Trac.
+     * TracChangeset — Viewing changes to source code.
+     * TracRevisionLog — Viewing change history.
+   * _The Ticket Subsystem_
+     * TracTickets — Using the issue tracker.
+     * TracReports — Writing and using reports.
+     * TracQuery — Executing custom ticket queries.
+     * TracRoadmap — The roadmap helps tracking project progress.
+* *Administrator Guide*
+   * TracInstall — How to install and run Trac.
+   * TracUpgrade — How to upgrade existing installations.
+   * TracAdmin — Administering a Trac project.
+   * TracImport — Importing tickets from other bug databases.
+   * TracIni — Trac configuration file reference. 
+   * TracPermissions — Access control and permissions.
+   * TracInterfaceCustomization — Customizing the Trac interface.
+   * TracPlugins — Installing and managing Trac extensions.
+   * TracLogging — The Trac logging facility.
+   * TracNotification — Email notification.
+   * TracWorkflow — Configurable Ticket Workflow.
+   * TracRepositoryAdmin — Management of Source Code Repositories.
+* [trac:TracFaq Trac FAQ] — A collection of Frequently Asked Questions (on the project website).
+* [trac:TracDev Trac Developer Documentation] — Developer documentation
+
+# Support and Other Sources of Information
+If you are looking for a good place to ask a question about Trac, look no further than the [MailingList](http://trac.edgewall.org/wiki/MailingList). It provides a friendly environment to discuss openly among Trac users and developers.
+
+See also the TracSupport page for more information resources.

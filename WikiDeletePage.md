@@ -1,0 +1,13 @@
+Existing wiki pages can be completely deleted using the _Delete Page'' or the ''Delete this Version_ buttons at the bottom of the wiki page. These buttons are only visible for users with `WIKI_DELETE` permissions.
+*Note:* Deleting a wiki page is an irreversible operation.
+
+If you want to delete a page because you actually re-created a new page with the same content but a different name, it is recommended to keep the page and use it as a redirection page instead of completely deleting it, as to not frustrate the visitor with broken links when coming to the site from a search engine. 
+
+In this situation, chances are that you actually wanted to [[WikiNewPage#renaming|rename]] the page instead of doing a copy + delete. 
+The _Rename_ operation also offers you the possibility to create a redirection page.
+A redirection page is a short page that  contains a link such as  “See SomeOtherPage”. 
+
+However, deleting specific versions or even complete pages can make sense to remove spam or other abusive submissions.
+
+----
+See also: TracWiki, TracPermissions

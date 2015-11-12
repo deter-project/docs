@@ -1,0 +1,10 @@
+# Existing Users
+If you're already a DeterLab user, then the best way to contact our technical support team is via our support ticketing system. You should first read our Technical Support Policy [link to DeterLab Technical Support page], which also includes information about how to create a ticket.
+
+# Prospective Users
+
+If you're not a DeterLab user yet, please contact us to learn more about DeterLab, whether for [cyber-security research](http://www.deter-project.org/participate-deter-research-community), for  [educational usage](http://www.deter-project.org/participate-deter-educational-community), or for [scientific collaboration](http://www.deter-project.org/collaborate-deter-project-research) with the DETER Project.
+
+If you've already learned about DeterLab, have read the Usage Guidelines [link to usage policy], and are ready to get started, then the next step for the project leader to regsiter the project for use of DeterLab. The [regsitration form](https://www.isi.deterlab.net/newproject.php) provides the DETER project staff with the information needed to confirm your eligibility to use DeterLab, and set up the initial user account for the project leader. The project leader is often the principle investigator of a research group that will be using DeterLab; or university faculty or staff who will be teaching a course using DeterLab's  [educational facilities](http://www.deter-project.org/deterlab-cyber-security-education); or a leader of a research group that will be collaborating with the DETER Project. 
+
+After the project leader fill out the  [new project registration form](https://www.isi.deterlab.net/newproject.php) and the registration is approved, the project leader will be contacted by email with specific information about user credentials, access, and user management.
