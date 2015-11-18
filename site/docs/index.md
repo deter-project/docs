@@ -1,0 +1,20 @@
+These pages constitute the end-user documentation for DETERLab documentation.
+
+## What is DETERLab?
+
+DETERLab is a state-of-the-art scientific computing facility for cyber-security researchers engaged in research, development, discovery, experimentation, and testing of innovative cyber-security technology. To date, DETERLab-based projects have included behavior analysis and defensive technologies including DDoS attacks, worm and botnet attacks, encryption, pattern detection, and intrusion-tolerant storage protocols.
+
+## Important Links
+
+* <a href="https://www.isi.deterlab.net">Testbed</a> - this is the web interface to DETERLab (requires <a href="https://trac.deterlab.net/wiki/GettingStarted">registration</a>)
+* <a href="https://trac.deterlab.net">Support</a> - this website provides support for DETERLab using a ticketing system.
+
+
+## Organization
+
+DETERLab docs are organized by the dominant systems (Core, Orchestrator and Containers) and then each system includes:
+
+* **Quickstart** - Gives a summary of the system and an overview of the steps involved to use it.
+* **Guide** - Provides details on the most common, basic ways to use the system. It serves as a basic tutorial and reference.
+* **Reference** - Includes references to configuration, commands and other reference materials
+* **Ad hoc topics** - More advanced topics for more complicated features of the system.

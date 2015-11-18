@@ -1,0 +1,173 @@
+## The agent implementation and addressing information 
+groups:
+  server_group: &slist [s-0, s-1, s-2, s-3, s-4, s-5, s-6, s-7, s-8, s-9]
+  noise_group: [uc-0, uc-1, uc-2, uc-3, uc-4, uc-5, uc-6, uc-7, uc-8, uc-9, uc-10, uc-11, uc-12, uc-13, uc-14, uc-15, uc-16, uc-17, uc-18, uc-19, uc-20, 
+                   uc-21, uc-22, uc-23, uc-24, uc-25, uc-26, uc-27, uc-28, uc-29, uc-30, uc-31, uc-32, uc-33, uc-34, uc-35, uc-36, uc-37, uc-38, uc-39, uc-40, 
+                   uc-41, uc-42, uc-43, uc-44, uc-45, uc-46, uc-47, uc-48, uc-49]
+  sensor_group: [rc]
+  control_group: [c-0]  
+
+agents:
+  server_agent:
+    group: server_group
+    path: /share/magi/modules/apache/apache.tar.gz 
+    execargs: []
+    
+  noise_agent:
+    group: noise_group
+    path: /share/magi/modules/http_client/http_client.tar.gz
+    execargs: {servers: *slist, interval: '2', sizes: '120000'}
+
+  monitor_agent:
+    group: sensor_group
+    path: /proj/montage/modules/pktcounters/pktCountersAgent.tar.gz
+    execargs: {interval: 2}
+    
+  control_agent:
+    group: control_group
+    path: /share/magi/modules/http_client/http_client.tar.gz
+    execargs: {servers: *slist, interval: '2', sizes: '4000000'}
+
+    
+## The mapping from the AAL procedure to the experiment apparatus 
+
+streamstarts: [ serverStream, noiseStream, noiseModifyStream, controlClientStream, controlStream, durationStream ]
+
+eventstreams:
+  serverStream: 
+      - type: event
+        agent: server_agent 
+        method: startServer
+        args: {}
+        trigger: serverStarted 
+
+      - type: trigger
+        triggers: [ { event: noiseStopped } ] 
+        
+      - type: trigger
+        triggers: [ { event: controlClientStopped } ] 
+
+      - type: event
+        agent: server_agent 
+        method: stopServer 
+        args: {} 
+        trigger: serverStopped 
+
+  noiseStream:      
+      - type: trigger
+        triggers: [ { event: serverStarted } ] 
+
+      - type: event
+        agent: noise_agent 
+        method: startClient
+        args: {}
+        trigger: noiseStarted 
+
+      - type: trigger
+        triggers: [ { event: monitorStopped } ] 
+
+      - type: event
+        agent: noise_agent
+        method: stopClient
+        trigger: noiseStopped 
+        args: {}
+
+  noiseModifyStream:
+      - type: trigger
+        triggers: [ { event: noiseStarted, target: 'modifyNoiseLoop'  } ] 
+  
+  modifyNoiseLoop:
+      - type: event
+        agent: noise_agent
+        method: changeTraffic
+        args: {stepsize: 50000}
+
+      - type: trigger
+        triggers: [ { timeout: 2000, target: 'modifyNoiseLoop' } ]
+        
+  controlClientStream:      
+      - type: trigger
+        triggers: [ { event: serverStarted } ] 
+
+      - type: event
+        agent: control_agent 
+        method: startClient
+        args: {}
+        trigger: controlClientStarted 
+
+      - type: trigger
+        triggers: [ { event: monitorStopped } ] 
+
+      - type: event
+        agent: control_agent
+        method: stopClient
+        args: {}
+        trigger: controlClientStopped 
+            
+  controlStream:
+      - type: trigger
+        triggers: [ { event: controlClientStarted } ] 
+
+      - type: event
+        agent: monitor_agent
+        method: startCollection
+        args: {}
+        trigger: monitorStarted 
+
+      - type: trigger
+        triggers: [ { timeout: 0, target: 'controlLoop' } ]
+                     
+  controlLoop: 
+      - type: trigger
+        triggers: [ { timeout: 1600 } ]
+        
+      - type: event
+        agent: monitor_agent
+        method: sense
+        trigger: intfSensed 
+        args:
+          peerNode: rs
+          trafficDirection: in
+          thresholdLow: 10100000
+          thresholdHigh: 10400000
+                  
+      - type: trigger
+        triggers: [ { event: intfSensed, result: -1, target: 'increaseTraffic' }, 
+        { event: intfSensed, result: 1, target: 'reduceTraffic' }, 
+        { event: intfSensed, result: 0, target: 'controlLoop'}]
+        
+  increaseTraffic:
+      - type: event
+        agent: control_agent 
+        method: increaseTraffic
+        args: {stepsize: 200000}
+        
+      - type: trigger
+        triggers: [ { timeout: 0, target: 'controlLoop' } ]
+  
+  reduceTraffic:
+      - type: event
+        agent: control_agent 
+        method: reduceTraffic
+        args: {stepsize: 200000}
+        
+      - type: trigger
+        triggers: [ { timeout: 0, target: 'controlLoop' } ]
+        
+  durationStream:
+      - type: trigger
+        triggers: [ {event: monitorStarted} ] 
+
+      - type: trigger
+        triggers: [ { timeout: 300000 } ]
+          
+      - type: event
+        agent: monitor_agent
+        method: stopCollection
+        trigger: monitorStopped 
+        args: {} 
+    
+      - type: trigger
+        triggers: [ {event: serverStopped, target: exit} ] 
+
+################################################

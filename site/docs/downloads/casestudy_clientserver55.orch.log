@@ -1,0 +1,518 @@
+06-21 01:20:51 root         INFO     set log level to info (20)
+06-21 01:20:51 magi.messaging.transportTCP INFO     connect clientnode-1.csbig.montage:18808
+06-21 01:20:51 magi.messaging.transportTCP INFO     If connection fails, it will retry shortly.
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     orch sends args:
+  group: server_group
+  nodes: [servernode-1, servernode-2, servernode-3, servernode-4, servernode-5]
+method: joinGroup
+version: 1.0
+
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     orch sends args:
+  group: client_group
+  nodes: [clientnode-1, clientnode-2, clientnode-3, clientnode-4, clientnode-5, clientnode-6,
+    clientnode-7, clientnode-8, clientnode-9, clientnode-10, clientnode-11, clientnode-12,
+    clientnode-13, clientnode-14, clientnode-15, clientnode-16, clientnode-17, clientnode-18,
+    clientnode-19, clientnode-20, clientnode-21, clientnode-22, clientnode-23, clientnode-24,
+    clientnode-25, clientnode-26, clientnode-27, clientnode-28, clientnode-29, clientnode-30,
+    clientnode-31, clientnode-32, clientnode-33, clientnode-34, clientnode-35, clientnode-36,
+    clientnode-37, clientnode-38, clientnode-39, clientnode-40, clientnode-41, clientnode-42,
+    clientnode-43, clientnode-44, clientnode-45, clientnode-46, clientnode-47, clientnode-48,
+    clientnode-49, clientnode-50]
+method: joinGroup
+version: 1.0
+
+06-21 01:20:51 magi.messaging.worker INFO     Request to add new transport TCPTransport clientnode-1.csbig.montage:18808 to map
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-1'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'server_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['servernode-2'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     trigger set 'nodes' not complete. Waiting on set(['servernode-4', 'servernode-5', 'servernode-3', 'servernode-1'])
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-50'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-24'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-43'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-5'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-22'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-35'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-42'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'server_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['servernode-1'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     trigger set 'nodes' not complete. Waiting on set(['servernode-4', 'servernode-5', 'servernode-3'])
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-11'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-23'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-40'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-27'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-33'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-37'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-3'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-26'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-8'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-25'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'server_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['servernode-3'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     trigger set 'nodes' not complete. Waiting on set(['servernode-4', 'servernode-5'])
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-36'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-9'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-10'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-49'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-15'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-19'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-6'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-28'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-48'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-39'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-7'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-17'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-32'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-29'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-14'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-16'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-41'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-12'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'server_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['servernode-4'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     trigger set 'nodes' not complete. Waiting on set(['servernode-5'])
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-18'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-20'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-4'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-13'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-44'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-38'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-34'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-31'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-30'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-2'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-45'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-47'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-21'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-46'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'server_group', 'event': 'GroupBuildDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['servernode-5'])})
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     trigger firing {'group': 'server_group', 'event': 'GroupBuildDone'}, target is None, isTimeout False
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     trigger firing {'group': 'client_group', 'event': 'GroupBuildDone'}, target is None, isTimeout False
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     orch sends args:
+  code: server_agent_code
+  dock: server_agent_dock
+  execargs: []
+  name: server_agent
+  path: /share/magi/modules/apache/apache.tar.gz
+method: loadAgent
+version: 1.0
+
+06-21 01:20:51 magi.orchestrator.orchestrator INFO     orch sends args:
+  code: client_agent_code
+  dock: client_agent_dock
+  execargs:
+    interval: '5'
+    servers: [servernode-1, servernode-2, servernode-3, servernode-4, servernode-5]
+    sizes: minmax(1000,10000)
+  name: client_agent
+  path: /share/magi/modules/http_client/http_client.tar.gz
+method: loadAgent
+version: 1.0
+
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-1'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-50'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-24'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-43'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-3'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-5'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-22'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-35'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-42'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-11'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-23'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-40'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-27'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-8'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-12'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-49'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-15'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-19'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-6'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-48'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-39'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-28'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-14'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-16'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-18'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-20'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-4'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-44'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-33'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-7'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-17'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-31'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-30'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-47'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-21'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-46'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-26'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-32'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-25'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-36'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-29'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-9'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-10'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-37'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-38'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-13'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-34'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-2'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-45'])})
+06-21 01:20:52 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-41'])})
+06-21 01:20:54 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'server_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['servernode-3'])})
+06-21 01:20:54 magi.orchestrator.orchestrator INFO     trigger set 'nodes' not complete. Waiting on set(['servernode-4', 'servernode-5', 'servernode-2', 'servernode-1'])
+06-21 01:20:54 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'server_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['servernode-2'])})
+06-21 01:20:54 magi.orchestrator.orchestrator INFO     trigger set 'nodes' not complete. Waiting on set(['servernode-4', 'servernode-5', 'servernode-1'])
+06-21 01:20:54 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'server_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['servernode-1'])})
+06-21 01:20:54 magi.orchestrator.orchestrator INFO     trigger set 'nodes' not complete. Waiting on set(['servernode-4', 'servernode-5'])
+06-21 01:20:55 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'server_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['servernode-4'])})
+06-21 01:20:55 magi.orchestrator.orchestrator INFO     trigger set 'nodes' not complete. Waiting on set(['servernode-5'])
+06-21 01:20:55 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentLoadDone', 'name': 'server_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['servernode-5'])})
+06-21 01:20:55 magi.orchestrator.orchestrator INFO     trigger firing {'event': 'AgentLoadDone', 'name': 'server_agent'}, target is None, isTimeout False
+06-21 01:20:55 magi.orchestrator.orchestrator INFO     trigger firing {'event': 'AgentLoadDone', 'name': 'client_agent'}, target is None, isTimeout False
+06-21 01:20:55 magi.orchestrator.orchestrator INFO     orch sends args: {}
+method: startServer
+trigger: serverStarted
+version: 1.0
+
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'serverStarted'}, sets: defaultdict(<type 'set'>, {'nodes': set(['servernode-1']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     trigger firing {'event': 'serverStarted'}, target is None, isTimeout False
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     orch sends args: {}
+method: startClient
+version: 1.0
+
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'serverStarted'}, sets: defaultdict(<type 'set'>, {'nodes': set(['servernode-2']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'serverStarted'}, sets: defaultdict(<type 'set'>, {'nodes': set(['servernode-3']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'serverStarted'}, sets: defaultdict(<type 'set'>, {'nodes': set(['servernode-5']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'serverStarted'}, sets: defaultdict(<type 'set'>, {'nodes': set(['servernode-4']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-1']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-43']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-24']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-5']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-49']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-22']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-15']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-35']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-42']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-19']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-11']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-6']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-23']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-40']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-28']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-27']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-39']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-7']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-17']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-8']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-48']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-33']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-37']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-3']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-26']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-32']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-25']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-36']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-29']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-9']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-10']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-50']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-14']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-16']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-41']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-12']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-18']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-20']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-4']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-13']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-44']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-38']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-34']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-31']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-30']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-2']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-45']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-47']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-21']), 'retVal': set([True])})
+06-21 01:20:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'startClient'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-46']), 'retVal': set([True])})
+06-21 01:21:56 magi.orchestrator.orchestrator INFO     trigger firing {}, target is None, isTimeout True
+06-21 01:21:56 magi.orchestrator.orchestrator INFO     orch sends args: {}
+method: stopClient
+trigger: clientStopped
+version: 1.0
+
+06-21 01:21:56 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-1']), 'retVal': set([True])})
+06-21 01:21:56 magi.orchestrator.orchestrator INFO     trigger firing {'event': 'clientStopped'}, target is None, isTimeout False
+06-21 01:21:56 magi.orchestrator.orchestrator INFO     orch sends args: {}
+method: stopServer
+trigger: serverStopped
+version: 1.0
+
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-43']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-5']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-49']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-50']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-24']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-22']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-15']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-35']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-42']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-19']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-11']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-6']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-23']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-40']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-28']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-48']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-27']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-33']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-39']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-7']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-17']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-8']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-37']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-3']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-26']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-32']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-25']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-36']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-29']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-9']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-10']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-14']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-16']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-41']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-12']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-18']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-20']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-4']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-13']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-44']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-38']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-34']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-31']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-30']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-2']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-45']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-47']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-21']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'clientStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-46']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'serverStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['servernode-3']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     trigger firing {'event': 'serverStopped'}, target is exit, isTimeout False
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'serverStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['servernode-2']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     orch sends args:
+  code: server_agent_code
+  dock: server_agent_dock
+  execargs: []
+  name: server_agent
+  path: /share/magi/modules/apache/apache.tar.gz
+method: unloadAgent
+version: 1.0
+
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     orch sends args:
+  code: client_agent_code
+  dock: client_agent_dock
+  execargs:
+    interval: '5'
+    servers: [servernode-1, servernode-2, servernode-3, servernode-4, servernode-5]
+    sizes: minmax(1000,10000)
+  name: client_agent
+  path: /share/magi/modules/http_client/http_client.tar.gz
+method: unloadAgent
+version: 1.0
+
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'serverStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['servernode-1']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'serverStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['servernode-4']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'serverStopped'}, sets: defaultdict(<type 'set'>, {'nodes': set(['servernode-5']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-1'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-1']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'server_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['servernode-2'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     trigger set 'nodes' not complete. Waiting on set(['servernode-4', 'servernode-5', 'servernode-3', 'servernode-1'])
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['servernode-2']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-50'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-50']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-24'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-24']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-43'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-43']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-5'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-5']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-49'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-49']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-22'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-22']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-15'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-15']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-35'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-35']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-42'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-42']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-19'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-19']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'server_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['servernode-1'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     trigger set 'nodes' not complete. Waiting on set(['servernode-4', 'servernode-5', 'servernode-3'])
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['servernode-1']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-11'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-11']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-6'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-6']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-23'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-23']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-40'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-40']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-27'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-27']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-39'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-39']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-7'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-7']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-17'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-17']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-28'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-28']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-48'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-48']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-33'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-33']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-37'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-37']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-3'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-3']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-26'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-26']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-8'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-8']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-32'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-32']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-25'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-25']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'server_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['servernode-3'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     trigger set 'nodes' not complete. Waiting on set(['servernode-4', 'servernode-5'])
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['servernode-3']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-36'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-36']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-29'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-29']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-9'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-9']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-10'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-10']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-14'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-14']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-16'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-16']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-41'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-41']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-12'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-12']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'server_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['servernode-4'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     trigger set 'nodes' not complete. Waiting on set(['servernode-5'])
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['servernode-4']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-18'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-18']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-20'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-20']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-4'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-4']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-13'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-13']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-44'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-44']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-38'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-38']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-34'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-34']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-31'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-31']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-30'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-30']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-2'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-2']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-45'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-45']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-47'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-47']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-21'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-21']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'client_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-46'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-46']), 'retVal': set([True])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'AgentUnloadDone', 'name': 'server_agent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['servernode-5'])})
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     trigger firing {'event': 'AgentUnloadDone', 'name': 'server_agent'}, target is None, isTimeout False
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     trigger firing {'event': 'AgentUnloadDone', 'name': 'client_agent'}, target is None, isTimeout False
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     orch sends args:
+  group: server_group
+  nodes: [servernode-1, servernode-2, servernode-3, servernode-4, servernode-5]
+method: leaveGroup
+version: 1.0
+
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     orch sends args:
+  group: client_group
+  nodes: [clientnode-1, clientnode-2, clientnode-3, clientnode-4, clientnode-5, clientnode-6,
+    clientnode-7, clientnode-8, clientnode-9, clientnode-10, clientnode-11, clientnode-12,
+    clientnode-13, clientnode-14, clientnode-15, clientnode-16, clientnode-17, clientnode-18,
+    clientnode-19, clientnode-20, clientnode-21, clientnode-22, clientnode-23, clientnode-24,
+    clientnode-25, clientnode-26, clientnode-27, clientnode-28, clientnode-29, clientnode-30,
+    clientnode-31, clientnode-32, clientnode-33, clientnode-34, clientnode-35, clientnode-36,
+    clientnode-37, clientnode-38, clientnode-39, clientnode-40, clientnode-41, clientnode-42,
+    clientnode-43, clientnode-44, clientnode-45, clientnode-46, clientnode-47, clientnode-48,
+    clientnode-49, clientnode-50]
+method: leaveGroup
+version: 1.0
+
+06-21 01:21:57 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'event': 'unloadAgent'}, sets: defaultdict(<type 'set'>, {'nodes': set(['servernode-5']), 'retVal': set([True])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-1'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'server_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['servernode-3'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     trigger set 'nodes' not complete. Waiting on set(['servernode-4', 'servernode-5', 'servernode-2', 'servernode-1'])
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'server_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['servernode-1'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     trigger set 'nodes' not complete. Waiting on set(['servernode-4', 'servernode-5', 'servernode-2'])
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'server_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['servernode-2'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     trigger set 'nodes' not complete. Waiting on set(['servernode-4', 'servernode-5'])
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-50'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-24'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-43'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-5'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-49'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-22'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-15'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-35'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-42'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-19'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-11'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-6'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-23'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-40'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-27'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-39'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-7'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-17'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-8'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-28'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-48'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-33'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-3'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-26'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-32'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-25'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-36'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-29'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-9'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-10'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-14'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-16'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-41'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-12'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'server_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['servernode-4'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     trigger set 'nodes' not complete. Waiting on set(['servernode-5'])
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-18'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-20'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-4'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-13'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-44'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-38'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-34'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-31'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-30'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-2'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-45'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-47'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-21'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-46'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'client_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['clientnode-37'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     incoming trigger: TriggerData args: {'group': 'server_group', 'event': 'GroupTeardownDone'}, sets: defaultdict(<type 'set'>, {'nodes': set(['servernode-5'])})
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     trigger firing {'group': 'server_group', 'event': 'GroupTeardownDone'}, target is None, isTimeout False
+06-21 01:21:58 magi.orchestrator.orchestrator INFO     trigger firing {'group': 'client_group', 'event': 'GroupTeardownDone'}, target is None, isTimeout False

@@ -1,0 +1,64 @@
+site_name: DETERLab Documentation
+site_description: User documentation for the DETERLab testbed
+theme: readthedocs
+site_favicon: favicon.ico
+
+pages:
+- Welcome to the DETERLab Documentation: index.md
+#- About These Pages: about_these_pages.md
+#- Style Guide: style-guide.md
+- Glossary: glossary.md
+- DETERLab Core:
+    - Core Quickstart: core/core-quickstart.md
+    - Core Guide: core/core-guide.md
+    - Sample Topologies: core/sample-topologies.md
+    - Using Your Nodes: core/using-nodes.md
+    - Generating Traffic: core/generating-traffic.md
+    - End Node Traffic Shaping: core/link-delays.md 
+    - Using Shared Materials: core/sharing.md 
+- Core Reference:
+    - DETERLab Commands: core/deterlab-commands.md
+    - NS Commands Extensions: core/ns-commands.md
+    - Understanding Swapping (Node Use Policies): core/swapping.md
+    - Accessing testbeds using SSH: core/DETERSSH.md
+    - DETERLab Node Types: core/node-types.md
+    - Using the Serial Console: core/serial-console.md
+    - Dell Serial Console: core/dell-serial-console.md
+    - OS Images: core/os-images.md
+    - Creating Custom Images: core/custom-images.md
+    - Windows XP: core/windows.md
+    - Legacy Tools: core/legacy-tools.md
+- Orchestrator:
+    - Orchestrator Quickstart: orchestrator/orchestrator-quickstart.md
+    - Orchestrator Guide: orchestrator/orchestrator-guide.md
+    - Orchestrator Case Studies: orchestrator/orchestrator-case-studies.md
+    - Simple Client Server Case Study: orchestrator/simple-client-server.md
+    - Scaled Client Server Case Study: orchestrator/scaled-client-server.md
+    - Feedback Case Study: orchestrator/feedback.md
+    - Writing Your Own MAGI Agents: orchestrator/writing-agents.md
+    - Configuring a MAGI Agent at Runtime: orchestrator/agent-configuration.md
+    - Orchestrator Reference: orchestrator/orchestrator-reference.md
+    - MAGI System Files: orchestrator/system-files.md
+    - MAGI Agent Library: orchestrator/agent-library.md
+    - MAGI Tools: orchestrator/magi-tools.md
+- Containers:
+    - Containers Quickstart: containers/containers-quickstart.md
+    - Containers Guide: containers/containers-guide.md
+    - Containers Reference: containers/containers-reference.md
+- Other Features:
+    - Federation: federation/index.md
+    - ABAC: abac/index.md
+- Miscellaneous:
+    - DETERLab Rooms: ISIUCB.md
+- About:
+    - Release Notes: about/release-notes.md
+    - Contributing: about/contributing.md
+    - License: about/license.md
+
+markdown_extensions:
+    - toc:
+        permalink: 
+    - admonition:
+
+copyright: Copyright &copy; 2016 <a href="https://www.deter-project.org/">DETER Project</a>.
+

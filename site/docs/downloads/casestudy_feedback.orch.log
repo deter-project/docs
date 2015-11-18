@@ -1,0 +1,897 @@
+stream initialization : sent : (10:54:36) joinGroup server_group --> __ALL__ 
+stream initialization : sent : (10:54:36) joinGroup sensor_group --> __ALL__ 
+stream initialization : sent : (10:54:36) joinGroup control_group --> __ALL__ 
+stream initialization : sent : (10:54:36) joinGroup noise_group --> __ALL__ 
+stream initialization : done : (10:54:37) trigger  GroupBuildDone  server_group  complete.
+stream initialization : done : (10:54:37) trigger  GroupBuildDone  sensor_group  complete.
+stream initialization : done : (10:54:37) trigger  GroupBuildDone  control_group  complete.
+stream initialization : done : (10:54:37) trigger  GroupBuildDone  noise_group  complete.
+stream initialization : sent : (10:54:37) loadAgent server_agent --> server_group 
+stream initialization : sent : (10:54:37) loadAgent control_agent --> control_group 
+stream initialization : sent : (10:54:37) loadAgent monitor_agent --> sensor_group 
+stream initialization : sent : (10:54:37) loadAgent noise_agent --> noise_group 
+stream initialization : done : (10:55:33) trigger  AgentLoadDone   complete.
+stream initialization : done : (10:55:33) trigger  AgentLoadDone   complete.
+stream initialization : done : (10:55:33) trigger  AgentLoadDone   complete.
+stream initialization : done : (10:55:33) trigger  AgentLoadDone   complete.
+stream initialization : DONE : (10:55:33) complete.
+stream serverStream   : sent : (10:55:33) startServer(None) --> server_group  (fires trigger: serverStarted)
+stream noiseStream    : done : (10:55:34) trigger  serverStarted   complete.
+stream controlClie... : done : (10:55:34) trigger  serverStarted   complete.
+stream noiseStream    : sent : (10:55:34) startClient(None) --> noise_group  (fires trigger: noiseStarted)
+stream controlClie... : sent : (10:55:34) startClient(None) --> control_group  (fires trigger: controlClientStarted)
+stream noiseModify... : done : (10:55:34) trigger  noiseStarted   complete.
+stream noiseModify... : jump : (10:55:34) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:55:34) changeTraffic([50000]) --> noise_group 
+stream controlStream  : done : (10:55:34) trigger  controlClientStarted   complete.
+stream controlStream  : sent : (10:55:34) startCollection(None) --> sensor_group  (fires trigger: monitorStarted)
+stream controlStream  : jump : (10:55:34) Execution path of stream has jumped to target: controlLoop.
+stream durationStream : done : (10:55:35) trigger  monitorStarted   complete.
+stream controlStream  : sent : (10:55:36) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream noiseModify... : jump : (10:55:36) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:55:36) changeTraffic([50000]) --> noise_group 
+stream controlStream  : done : (10:55:36) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:55:36) Execution path of stream has jumped to target: increaseTraffic.
+stream controlStream  : sent : (10:55:36) increaseTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:55:36) Execution path of stream has jumped to target: controlLoop.
+stream controlStream  : sent : (10:55:38) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream noiseModify... : jump : (10:55:38) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:55:38) changeTraffic([50000]) --> noise_group 
+stream controlStream  : done : (10:55:38) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:55:38) Execution path of stream has jumped to target: controlLoop.
+stream controlStream  : sent : (10:55:40) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream noiseModify... : jump : (10:55:40) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:55:40) changeTraffic([50000]) --> noise_group 
+stream controlStream  : done : (10:55:40) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:55:40) Execution path of stream has jumped to target: reduceTraffic.
+stream controlStream  : sent : (10:55:40) reduceTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:55:40) Execution path of stream has jumped to target: controlLoop.
+stream controlStream  : sent : (10:55:42) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream noiseModify... : jump : (10:55:42) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:55:42) changeTraffic([50000]) --> noise_group 
+stream controlStream  : done : (10:55:43) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:55:43) Execution path of stream has jumped to target: reduceTraffic.
+stream controlStream  : sent : (10:55:43) reduceTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:55:43) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:55:44) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:55:44) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:55:44) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:55:45) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:55:45) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:55:46) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:55:46) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:55:46) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:55:47) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:55:47) Execution path of stream has jumped to target: increaseTraffic.
+stream controlStream  : sent : (10:55:47) increaseTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:55:47) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:55:48) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:55:48) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:55:48) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:55:49) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:55:49) Execution path of stream has jumped to target: increaseTraffic.
+stream controlStream  : sent : (10:55:49) increaseTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:55:49) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:55:50) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:55:50) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:55:50) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:55:51) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:55:51) Execution path of stream has jumped to target: increaseTraffic.
+stream controlStream  : sent : (10:55:51) increaseTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:55:51) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:55:52) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:55:52) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:55:53) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:55:53) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:55:53) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:55:54) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:55:54) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:55:55) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:55:55) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:55:55) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:55:56) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:55:56) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:55:57) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:55:57) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:55:57) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:55:58) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:55:58) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:55:59) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:55:59) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:55:59) Execution path of stream has jumped to target: increaseTraffic.
+stream controlStream  : sent : (10:55:59) increaseTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:55:59) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:56:00) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:56:00) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:56:01) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:56:01) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:56:01) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:56:02) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:56:02) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:56:03) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:56:03) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:56:03) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:56:04) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:56:04) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:56:05) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:56:05) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:56:05) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:56:06) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:56:06) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:56:07) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:56:08) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:56:08) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:56:08) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:56:08) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:56:09) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:56:09) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:56:09) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:56:10) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:56:10) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:56:11) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:56:12) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:56:12) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:56:12) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:56:12) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:56:13) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:56:14) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:56:14) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:56:14) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:56:14) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:56:15) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:56:16) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:56:16) Execution path of stream has jumped to target: reduceTraffic.
+stream controlStream  : sent : (10:56:16) reduceTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:56:16) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:56:16) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:56:16) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:56:17) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:56:18) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:56:18) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:56:18) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:56:18) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:56:19) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:56:20) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:56:20) Execution path of stream has jumped to target: reduceTraffic.
+stream controlStream  : sent : (10:56:20) reduceTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:56:20) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:56:20) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:56:20) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:56:21) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:56:22) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:56:22) Execution path of stream has jumped to target: reduceTraffic.
+stream controlStream  : sent : (10:56:22) reduceTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:56:22) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:56:22) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:56:22) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:56:24) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:56:24) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:56:24) Execution path of stream has jumped to target: reduceTraffic.
+stream controlStream  : sent : (10:56:24) reduceTraffic([200000]) --> control_group 
+stream noiseModify... : jump : (10:56:24) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:56:24) changeTraffic([50000]) --> noise_group 
+stream controlStream  : jump : (10:56:24) Execution path of stream has jumped to target: controlLoop.
+stream controlStream  : sent : (10:56:26) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream noiseModify... : jump : (10:56:26) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:56:26) changeTraffic([50000]) --> noise_group 
+stream controlStream  : done : (10:56:26) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:56:26) Execution path of stream has jumped to target: increaseTraffic.
+stream controlStream  : sent : (10:56:26) increaseTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:56:26) Execution path of stream has jumped to target: controlLoop.
+stream controlStream  : sent : (10:56:28) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream noiseModify... : jump : (10:56:28) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:56:28) changeTraffic([50000]) --> noise_group 
+stream controlStream  : done : (10:56:28) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:56:28) Execution path of stream has jumped to target: increaseTraffic.
+stream controlStream  : sent : (10:56:28) increaseTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:56:28) Execution path of stream has jumped to target: controlLoop.
+stream controlStream  : sent : (10:56:30) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream noiseModify... : jump : (10:56:30) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:56:30) changeTraffic([50000]) --> noise_group 
+stream controlStream  : done : (10:56:30) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:56:30) Execution path of stream has jumped to target: controlLoop.
+stream controlStream  : sent : (10:56:32) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream noiseModify... : jump : (10:56:32) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:56:32) changeTraffic([50000]) --> noise_group 
+stream controlStream  : done : (10:56:33) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:56:33) Execution path of stream has jumped to target: reduceTraffic.
+stream controlStream  : sent : (10:56:33) reduceTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:56:33) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:56:34) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:56:34) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:56:34) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:56:35) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:56:35) Execution path of stream has jumped to target: reduceTraffic.
+stream controlStream  : sent : (10:56:35) reduceTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:56:35) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:56:36) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:56:36) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:56:36) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:56:37) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:56:37) Execution path of stream has jumped to target: reduceTraffic.
+stream controlStream  : sent : (10:56:37) reduceTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:56:37) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:56:38) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:56:38) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:56:38) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:56:39) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:56:39) Execution path of stream has jumped to target: reduceTraffic.
+stream controlStream  : sent : (10:56:39) reduceTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:56:39) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:56:40) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:56:40) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:56:40) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:56:41) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:56:41) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:56:42) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:56:42) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:56:43) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:56:43) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:56:43) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:56:44) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:56:44) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:56:45) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:56:45) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:56:45) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:56:46) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:56:46) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:56:47) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:56:47) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:56:47) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:56:48) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:56:48) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:56:49) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:56:49) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:56:49) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:56:50) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:56:50) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:56:51) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:56:51) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:56:51) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:56:52) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:56:52) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:56:53) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:56:53) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:56:53) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:56:54) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:56:54) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:56:55) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:56:55) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:56:55) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:56:56) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:56:56) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:56:57) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:56:58) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:56:58) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:56:58) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:56:58) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:56:59) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:57:00) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:57:00) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:57:00) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:57:00) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:57:01) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:57:02) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:57:02) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:57:02) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:57:02) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:57:03) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:57:04) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:57:04) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:57:04) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:57:04) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:57:05) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:57:06) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:57:06) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:57:06) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:57:06) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:57:07) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:57:08) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:57:08) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:57:08) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:57:08) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:57:09) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:57:10) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:57:10) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:57:10) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:57:10) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:57:11) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:57:12) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:57:12) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:57:12) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:57:12) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:57:14) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:57:14) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:57:14) Execution path of stream has jumped to target: reduceTraffic.
+stream controlStream  : sent : (10:57:14) reduceTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:57:14) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:57:14) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:57:14) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:57:16) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:57:16) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:57:16) Execution path of stream has jumped to target: reduceTraffic.
+stream controlStream  : sent : (10:57:16) reduceTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:57:16) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:57:16) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:57:16) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:57:18) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream noiseModify... : jump : (10:57:18) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:57:18) changeTraffic([50000]) --> noise_group 
+stream controlStream  : done : (10:57:18) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:57:18) Execution path of stream has jumped to target: reduceTraffic.
+stream controlStream  : sent : (10:57:18) reduceTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:57:18) Execution path of stream has jumped to target: controlLoop.
+stream controlStream  : sent : (10:57:20) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream noiseModify... : jump : (10:57:20) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:57:20) changeTraffic([50000]) --> noise_group 
+stream controlStream  : done : (10:57:20) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:57:20) Execution path of stream has jumped to target: controlLoop.
+stream controlStream  : sent : (10:57:22) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream noiseModify... : jump : (10:57:22) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:57:22) changeTraffic([50000]) --> noise_group 
+stream controlStream  : done : (10:57:23) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:57:23) Execution path of stream has jumped to target: increaseTraffic.
+stream controlStream  : sent : (10:57:23) increaseTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:57:23) Execution path of stream has jumped to target: controlLoop.
+stream controlStream  : sent : (10:57:24) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream noiseModify... : jump : (10:57:24) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:57:24) changeTraffic([50000]) --> noise_group 
+stream controlStream  : done : (10:57:25) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:57:25) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:57:26) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:57:26) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:57:26) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:57:27) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:57:27) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:57:28) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:57:28) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:57:28) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:57:29) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:57:29) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:57:30) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:57:30) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:57:30) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:57:31) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:57:31) Execution path of stream has jumped to target: reduceTraffic.
+stream controlStream  : sent : (10:57:31) reduceTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:57:31) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:57:32) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:57:32) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:57:33) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:57:33) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:57:33) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:57:34) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:57:34) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:57:35) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:57:35) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:57:35) Execution path of stream has jumped to target: reduceTraffic.
+stream controlStream  : sent : (10:57:35) reduceTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:57:35) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:57:36) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:57:36) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:57:37) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:57:37) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:57:37) Execution path of stream has jumped to target: increaseTraffic.
+stream controlStream  : sent : (10:57:37) increaseTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:57:37) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:57:38) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:57:38) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:57:39) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:57:39) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:57:39) Execution path of stream has jumped to target: increaseTraffic.
+stream controlStream  : sent : (10:57:39) increaseTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:57:39) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:57:40) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:57:40) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:57:41) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:57:41) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:57:41) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:57:42) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:57:42) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:57:43) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:57:43) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:57:43) Execution path of stream has jumped to target: reduceTraffic.
+stream controlStream  : sent : (10:57:43) reduceTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:57:43) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:57:44) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:57:44) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:57:45) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:57:45) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:57:45) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:57:46) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:57:46) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:57:47) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:57:48) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:57:48) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:57:48) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:57:48) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:57:49) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:57:50) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:57:50) Execution path of stream has jumped to target: reduceTraffic.
+stream controlStream  : sent : (10:57:50) reduceTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:57:50) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:57:50) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:57:50) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:57:51) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:57:52) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:57:52) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:57:52) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:57:52) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:57:53) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:57:54) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:57:54) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:57:54) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:57:54) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:57:55) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:57:56) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:57:56) Execution path of stream has jumped to target: increaseTraffic.
+stream controlStream  : sent : (10:57:56) increaseTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:57:56) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:57:56) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:57:56) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:57:58) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:57:58) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:57:58) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:57:58) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:57:58) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:58:00) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:58:00) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:58:00) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:58:00) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:58:00) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:58:02) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream noiseModify... : jump : (10:58:02) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:58:02) changeTraffic([50000]) --> noise_group 
+stream controlStream  : done : (10:58:02) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:58:02) Execution path of stream has jumped to target: controlLoop.
+stream controlStream  : sent : (10:58:04) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:58:04) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:58:04) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:58:04) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:58:04) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:58:06) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream noiseModify... : jump : (10:58:06) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:58:06) changeTraffic([50000]) --> noise_group 
+stream controlStream  : done : (10:58:06) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:58:06) Execution path of stream has jumped to target: controlLoop.
+stream controlStream  : sent : (10:58:08) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream noiseModify... : jump : (10:58:08) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:58:08) changeTraffic([50000]) --> noise_group 
+stream controlStream  : done : (10:58:08) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:58:08) Execution path of stream has jumped to target: controlLoop.
+stream controlStream  : sent : (10:58:10) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream noiseModify... : jump : (10:58:10) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:58:10) changeTraffic([50000]) --> noise_group 
+stream controlStream  : done : (10:58:11) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:58:11) Execution path of stream has jumped to target: controlLoop.
+stream controlStream  : sent : (10:58:12) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream noiseModify... : jump : (10:58:12) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:58:12) changeTraffic([50000]) --> noise_group 
+stream controlStream  : done : (10:58:13) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:58:13) Execution path of stream has jumped to target: reduceTraffic.
+stream controlStream  : sent : (10:58:13) reduceTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:58:13) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:58:14) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:58:14) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:58:14) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:58:15) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:58:15) Execution path of stream has jumped to target: reduceTraffic.
+stream controlStream  : sent : (10:58:15) reduceTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:58:15) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:58:16) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:58:16) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:58:16) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:58:17) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:58:17) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:58:18) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:58:18) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:58:19) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:58:19) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:58:19) Execution path of stream has jumped to target: increaseTraffic.
+stream controlStream  : sent : (10:58:19) increaseTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:58:19) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:58:20) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:58:20) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:58:21) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:58:21) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:58:21) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:58:22) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:58:22) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:58:23) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:58:23) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:58:23) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:58:24) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:58:24) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:58:25) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:58:25) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:58:25) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:58:26) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:58:26) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:58:27) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:58:27) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:58:27) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:58:28) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:58:28) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:58:29) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:58:29) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:58:29) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:58:30) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:58:30) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:58:31) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:58:32) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:58:32) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:58:32) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:58:32) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:58:33) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:58:34) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:58:34) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:58:34) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:58:34) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:58:35) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:58:36) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:58:36) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:58:36) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:58:36) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:58:37) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:58:38) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:58:38) Execution path of stream has jumped to target: reduceTraffic.
+stream controlStream  : sent : (10:58:38) reduceTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:58:38) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:58:38) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:58:38) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:58:39) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:58:40) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:58:40) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:58:40) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:58:40) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:58:41) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:58:42) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:58:42) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:58:42) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:58:42) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:58:43) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:58:44) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:58:44) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:58:44) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:58:44) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:58:45) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:58:46) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:58:46) Execution path of stream has jumped to target: increaseTraffic.
+stream controlStream  : sent : (10:58:46) increaseTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:58:46) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:58:46) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:58:46) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:58:48) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:58:48) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:58:48) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:58:48) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:58:48) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:58:50) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:58:50) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:58:50) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:58:50) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:58:50) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:58:52) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:58:52) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:58:52) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:58:52) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:58:52) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:58:54) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream noiseModify... : jump : (10:58:54) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:58:54) changeTraffic([50000]) --> noise_group 
+stream controlStream  : done : (10:58:54) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:58:54) Execution path of stream has jumped to target: controlLoop.
+stream controlStream  : sent : (10:58:56) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream noiseModify... : jump : (10:58:56) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:58:56) changeTraffic([50000]) --> noise_group 
+stream controlStream  : done : (10:58:57) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:58:57) Execution path of stream has jumped to target: reduceTraffic.
+stream controlStream  : sent : (10:58:57) reduceTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:58:57) Execution path of stream has jumped to target: controlLoop.
+stream controlStream  : sent : (10:58:58) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream noiseModify... : jump : (10:58:58) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:58:58) changeTraffic([50000]) --> noise_group 
+stream controlStream  : done : (10:58:59) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:58:59) Execution path of stream has jumped to target: reduceTraffic.
+stream controlStream  : sent : (10:58:59) reduceTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:58:59) Execution path of stream has jumped to target: controlLoop.
+stream controlStream  : sent : (10:59:00) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream noiseModify... : jump : (10:59:00) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:59:00) changeTraffic([50000]) --> noise_group 
+stream controlStream  : done : (10:59:01) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:59:01) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:59:02) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:59:02) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:59:02) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:59:03) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:59:03) Execution path of stream has jumped to target: increaseTraffic.
+stream controlStream  : sent : (10:59:03) increaseTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:59:03) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:59:04) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:59:04) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:59:05) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:59:05) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:59:05) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:59:06) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:59:06) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:59:07) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:59:07) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:59:07) Execution path of stream has jumped to target: reduceTraffic.
+stream controlStream  : sent : (10:59:07) reduceTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:59:07) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:59:08) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:59:08) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:59:09) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:59:09) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:59:09) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:59:10) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:59:10) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:59:11) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:59:11) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:59:11) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:59:12) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:59:12) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:59:13) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:59:13) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:59:13) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:59:14) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:59:14) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:59:15) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:59:15) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:59:15) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:59:16) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:59:16) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:59:17) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:59:17) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:59:17) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:59:18) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:59:18) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:59:19) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:59:19) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:59:19) Execution path of stream has jumped to target: reduceTraffic.
+stream controlStream  : sent : (10:59:19) reduceTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:59:19) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:59:20) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:59:20) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:59:21) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:59:22) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:59:22) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:59:22) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:59:22) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:59:23) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:59:24) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:59:24) Execution path of stream has jumped to target: increaseTraffic.
+stream controlStream  : sent : (10:59:24) increaseTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:59:24) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:59:24) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:59:24) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:59:25) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:59:26) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:59:26) Execution path of stream has jumped to target: increaseTraffic.
+stream controlStream  : sent : (10:59:26) increaseTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:59:26) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:59:26) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:59:26) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:59:27) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:59:28) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:59:28) Execution path of stream has jumped to target: increaseTraffic.
+stream controlStream  : sent : (10:59:28) increaseTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:59:28) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:59:28) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:59:28) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:59:29) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:59:30) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:59:30) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:59:30) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:59:30) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:59:32) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:59:32) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:59:32) Execution path of stream has jumped to target: reduceTraffic.
+stream controlStream  : sent : (10:59:32) reduceTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:59:32) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:59:32) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:59:32) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:59:34) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:59:34) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:59:34) Execution path of stream has jumped to target: reduceTraffic.
+stream controlStream  : sent : (10:59:34) reduceTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:59:34) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:59:34) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:59:34) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:59:36) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:59:36) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:59:36) Execution path of stream has jumped to target: increaseTraffic.
+stream controlStream  : sent : (10:59:36) increaseTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:59:36) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:59:36) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:59:36) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:59:38) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:59:38) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:59:38) Execution path of stream has jumped to target: increaseTraffic.
+stream controlStream  : sent : (10:59:38) increaseTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:59:38) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:59:38) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:59:38) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:59:40) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:59:40) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:59:40) Execution path of stream has jumped to target: increaseTraffic.
+stream controlStream  : sent : (10:59:40) increaseTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:59:40) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:59:40) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:59:40) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:59:42) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream noiseModify... : jump : (10:59:42) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:59:42) changeTraffic([50000]) --> noise_group 
+stream controlStream  : done : (10:59:42) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:59:42) Execution path of stream has jumped to target: reduceTraffic.
+stream controlStream  : sent : (10:59:42) reduceTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:59:42) Execution path of stream has jumped to target: controlLoop.
+stream controlStream  : sent : (10:59:44) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream noiseModify... : jump : (10:59:44) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:59:44) changeTraffic([50000]) --> noise_group 
+stream controlStream  : done : (10:59:45) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:59:45) Execution path of stream has jumped to target: reduceTraffic.
+stream controlStream  : sent : (10:59:45) reduceTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:59:45) Execution path of stream has jumped to target: controlLoop.
+stream controlStream  : sent : (10:59:46) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream noiseModify... : jump : (10:59:46) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:59:46) changeTraffic([50000]) --> noise_group 
+stream controlStream  : done : (10:59:47) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:59:47) Execution path of stream has jumped to target: reduceTraffic.
+stream controlStream  : sent : (10:59:47) reduceTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:59:47) Execution path of stream has jumped to target: controlLoop.
+stream controlStream  : sent : (10:59:48) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream noiseModify... : jump : (10:59:48) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:59:48) changeTraffic([50000]) --> noise_group 
+stream controlStream  : done : (10:59:49) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:59:49) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:59:50) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:59:50) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:59:51) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:59:51) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:59:51) Execution path of stream has jumped to target: reduceTraffic.
+stream controlStream  : sent : (10:59:51) reduceTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:59:51) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:59:52) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:59:52) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:59:53) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:59:53) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:59:53) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:59:54) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:59:54) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:59:55) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:59:55) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:59:55) Execution path of stream has jumped to target: increaseTraffic.
+stream controlStream  : sent : (10:59:55) increaseTraffic([200000]) --> control_group 
+stream controlStream  : jump : (10:59:55) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:59:56) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:59:56) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:59:57) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:59:57) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:59:57) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (10:59:58) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (10:59:58) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (10:59:59) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (10:59:59) trigger  intfSensed   complete.
+stream controlStream  : jump : (10:59:59) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (11:00:00) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (11:00:00) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (11:00:01) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (11:00:01) trigger  intfSensed   complete.
+stream controlStream  : jump : (11:00:01) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (11:00:03) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (11:00:03) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (11:00:03) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (11:00:03) trigger  intfSensed   complete.
+stream controlStream  : jump : (11:00:03) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (11:00:05) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (11:00:05) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (11:00:05) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (11:00:05) trigger  intfSensed   complete.
+stream controlStream  : jump : (11:00:05) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (11:00:07) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (11:00:07) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (11:00:07) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (11:00:08) trigger  intfSensed   complete.
+stream controlStream  : jump : (11:00:08) Execution path of stream has jumped to target: increaseTraffic.
+stream controlStream  : sent : (11:00:08) increaseTraffic([200000]) --> control_group 
+stream controlStream  : jump : (11:00:08) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (11:00:09) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (11:00:09) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (11:00:09) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (11:00:10) trigger  intfSensed   complete.
+stream controlStream  : jump : (11:00:10) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (11:00:11) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (11:00:11) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (11:00:11) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (11:00:12) trigger  intfSensed   complete.
+stream controlStream  : jump : (11:00:12) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (11:00:13) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (11:00:13) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (11:00:13) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (11:00:14) trigger  intfSensed   complete.
+stream controlStream  : jump : (11:00:14) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (11:00:15) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (11:00:15) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (11:00:15) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (11:00:16) trigger  intfSensed   complete.
+stream controlStream  : jump : (11:00:16) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (11:00:17) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (11:00:17) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (11:00:17) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (11:00:18) trigger  intfSensed   complete.
+stream controlStream  : jump : (11:00:18) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (11:00:19) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (11:00:19) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (11:00:19) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (11:00:20) trigger  intfSensed   complete.
+stream controlStream  : jump : (11:00:20) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (11:00:21) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (11:00:21) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (11:00:22) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (11:00:22) trigger  intfSensed   complete.
+stream controlStream  : jump : (11:00:22) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (11:00:23) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (11:00:23) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (11:00:24) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (11:00:24) trigger  intfSensed   complete.
+stream controlStream  : jump : (11:00:24) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (11:00:25) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (11:00:25) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (11:00:26) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (11:00:26) trigger  intfSensed   complete.
+stream controlStream  : jump : (11:00:26) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (11:00:27) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (11:00:27) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (11:00:28) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (11:00:28) trigger  intfSensed   complete.
+stream controlStream  : jump : (11:00:28) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (11:00:29) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (11:00:29) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (11:00:30) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (11:00:30) trigger  intfSensed   complete.
+stream controlStream  : jump : (11:00:30) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (11:00:31) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (11:00:31) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (11:00:32) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream controlStream  : done : (11:00:33) trigger  intfSensed   complete.
+stream controlStream  : jump : (11:00:33) Execution path of stream has jumped to target: controlLoop.
+stream noiseModify... : jump : (11:00:33) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (11:00:33) changeTraffic([50000]) --> noise_group 
+stream controlStream  : sent : (11:00:34) sense(['rs',  10400000,  ' ... ) --> sensor_group  (fires trigger: intfSensed)
+stream durationStream : sent : (11:00:35) stopCollection(None) --> sensor_group  (fires trigger: monitorStopped)
+stream noiseModify... : jump : (11:00:35) Execution path of stream has jumped to target: modifyNoiseLoop.
+stream noiseModify... : sent : (11:00:35) changeTraffic([50000]) --> noise_group 
+stream controlStream  : done : (11:00:35) trigger  intfSensed   complete.
+stream controlStream  : jump : (11:00:35) Execution path of stream has jumped to target: reduceTraffic.
+stream controlStream  : sent : (11:00:35) reduceTraffic([200000]) --> control_group 
+stream controlStream  : jump : (11:00:35) Execution path of stream has jumped to target: controlLoop.
+stream noiseStream    : done : (11:00:35) trigger  monitorStopped   complete.
+stream controlClie... : done : (11:00:35) trigger  monitorStopped   complete.
+stream noiseStream    : sent : (11:00:35) stopClient(None) --> noise_group  (fires trigger: noiseStopped)
+stream controlClie... : sent : (11:00:35) stopClient(None) --> control_group  (fires trigger: controlClientStopped)
+stream noiseStream    : DONE : (11:00:35) complete.
+stream controlClie... : DONE : (11:00:35) complete.
+stream serverStream   : done : (11:00:35) trigger  noiseStopped   complete.
+stream serverStream   : done : (11:00:35) trigger  controlClientStopped   complete.
+stream serverStream   : sent : (11:00:35) stopServer(None) --> server_group  (fires trigger: serverStopped)
+stream serverStream   : DONE : (11:00:35) complete.
+stream durationStream : done : (11:00:36) trigger  serverStopped   complete.
+stream durationStream : jump : (11:00:36) Execution path of stream has jumped to target: exit.
+stream exit           : sent : (11:00:36) unloadAgent server_agent --> server_group 
+stream exit           : sent : (11:00:36) unloadAgent control_agent --> control_group 
+stream exit           : sent : (11:00:36) unloadAgent monitor_agent --> sensor_group 
+stream exit           : sent : (11:00:36) unloadAgent noise_agent --> noise_group 
+stream exit           : done : (11:00:36) trigger  AgentUnloadDone   complete.
+stream exit           : done : (11:00:36) trigger  AgentUnloadDone   complete.
+stream exit           : done : (11:00:36) trigger  AgentUnloadDone   complete.
+stream exit           : done : (11:00:36) trigger  AgentUnloadDone   complete.
+stream exit           : sent : (11:00:36) leaveGroup server_group --> __ALL__ 
+stream exit           : sent : (11:00:36) leaveGroup sensor_group --> __ALL__ 
+stream exit           : sent : (11:00:36) leaveGroup control_group --> __ALL__ 
+stream exit           : sent : (11:00:36) leaveGroup noise_group --> __ALL__ 
+stream exit           : done : (11:00:37) trigger  GroupTeardownDone  server_group  complete.
+stream exit           : done : (11:00:37) trigger  GroupTeardownDone  sensor_group  complete.
+stream exit           : done : (11:00:37) trigger  GroupTeardownDone  control_group  complete.
+stream exit           : done : (11:00:37) trigger  GroupTeardownDone  noise_group  complete.
+stream exit           : DONE : (11:00:37) complete.
