@@ -7,7 +7,7 @@ pages:
 - Welcome to the DETERLab Documentation: index.md
 #- About These Pages: about_these_pages.md
 #- Style Guide: style-guide.md
-- Glossary: glossary.md
+- Glossary: glossary.html
 - DETERLab Core:
     - Core Quickstart: core/core-quickstart.md
     - Core Guide: core/core-guide.md
