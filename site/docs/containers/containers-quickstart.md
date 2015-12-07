@@ -13,7 +13,7 @@ Containers present researchers with more resources while preserving the DETERLab
 
 A little more completely, the Containers system lays out the virtual computers into a physical layout of computers and uses the resource allocation system to allocate that physical layout.  Then the system installs and configures the appropriate virtualization technologies in that environment to create the virtual environment.
 
-![Model of a DETERLab Container](img/container-model.png)
+![Model of a DETERLab Container](/img/container-model.png)
 
 As in physical DETERLab experiments, the experiment's topology is written in an extended version of DETER's ns2 syntax, or in <a href="http://fedd.deterlab.net/wiki/TopDl">topdl</a>, a topology description language.  
 

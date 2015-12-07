@@ -88,3 +88,8 @@ ul.wy-breadcrumbs li + li {
 	color: #000;
 	font-weight: normal;
 }
+
+.section .toc ul li li {
+	list-style-type: square;
+	margin-bottom: 0; 
+}
