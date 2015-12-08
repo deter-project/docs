@@ -32,6 +32,7 @@ nav.stickynav {
 
 .wy-side-nav-search {
     background-color: #343131;
+    margin-bottom: 0;
 }
 
 .wy-side-nav-search > a, .wy-side-nav-search .wy-dropdown > a {

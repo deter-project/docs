@@ -95,8 +95,10 @@
           {% include "breadcrumbs.html" %}
         -->
           <div role="navigation" aria-label="breadcrumbs navigation">
+            <!--
             {% if current_page %}
               {% for doc in current_page.ancestors %}
+
                 {% if doc.link %}
                   <h1><a href="{{ doc.link|e }}">{{ doc.title }}</a> &raquo;</h1>
                 {% else %}
@@ -104,6 +106,7 @@
                 {% endif %}
               {% endfor %}
             {% endif %}
+          -->
             {% if current_page %}<h1>{{ current_page.title }}</h1>{% endif %}
           </div>
           <div role="main">
