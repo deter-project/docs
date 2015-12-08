@@ -3,6 +3,41 @@ body {
 	font-family: Arial,Verdana,"Bitstream Vera Sans",Helvetica,sans-serif;
 }
 
+header {
+	background-color: #000; 
+	height: 75px;
+	width: 100%;
+}
+
+header h1 {
+ text-decoration:none;
+ border:0;
+ width : 100%;
+ height : 75px;
+ margin : 0;
+ padding : 0;
+ background : url(/img/logo.svg) no-repeat 0 0;
+ background-size: contain;
+}
+ 
+header h1 a {
+ display : block;
+ height : 75px;
+ text-indent : -9999px; 
+}
+
+nav.stickynav {
+    top: 75px;
+}
+
+.wy-side-nav-search {
+    background-color: #343131;
+}
+
+.wy-side-nav-search > a, .wy-side-nav-search .wy-dropdown > a {
+	display: none;
+}
+
 h3, h4, h5, h6 {
 	color: inherit;
 	font-weight: 600;
@@ -40,10 +75,6 @@ h3 code {
 
 .wy-nav-content-wrap {
 	margin-left: 350px;
-}
-
-.wy-side-nav-search {
-	background-color: #555;
 }
 
 .wy-side-nav-search > a, .wy-side-nav-search .wy-dropdown > a {

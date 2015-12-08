@@ -1,6 +1,7 @@
-site_name: DETERLab Documentation
+site_name: Home
 site_description: User documentation for the DETERLab testbed
 theme: readthedocs
+theme_dir: 'readthedocs_custom'
 site_favicon: favicon.ico
 
 pages:
