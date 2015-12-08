@@ -1,4 +1,4 @@
-site_name: Home
+site_name: DETERLab Docs
 site_description: User documentation for the DETERLab testbed
 theme: readthedocs
 theme_dir: 'readthedocs_custom'
