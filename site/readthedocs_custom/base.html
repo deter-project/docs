@@ -56,17 +56,17 @@
 </head>
 
 <body class="wy-body-for-nav" role="document">
-
+<!--
 	<header>
 		<h1 class="logo"><a href="/">DETERLab Docs</a></h1>
 	</header>
-
+-->
   <div class="wy-grid-for-nav">
 
     {# SIDE NAV, TOGGLES ON MOBILE #}
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
       <div class="wy-side-nav-search">
-        <a href="{{ homepage_url }}" class="icon icon-home"> {{ site_name }}</a>
+        <a href="{{ homepage_url }}" class="icon"><img class="logo" style="float:left" src="/img/doc-logo.png"/> <span class="title">{{ site_name }}</span></a>
         {% include "searchbox.html" %}
       </div>
 

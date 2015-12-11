@@ -5,11 +5,11 @@ This information should be adjusted for the ported docs and turned into a readme
 These pages are created with [mkdocs](http://www.mkdocs.org/) version 0.14.0, a static documentation site generator. 
 
 ## Site Location and Directory Layout
-This site is kept in the [operations repository](repositories.md#operations-repo), under the directory `sysadmin.deterlab.net`. The pages are generated from markdown files in `sysadmin.deterlab.net/docs/`.
+This site is kept in the **deter-project** repository, under the directory `docs`. The pages are generated from markdown files in `site/docs/`.
 
 ## Updating a Page
 
-To update a page, edit the file in docs/. Run the command `mkdocs serve` in the `sysadmin.deterlab.net/` directory. This will start a local web browser which you can use to preview your changes. If you are making multiple changes, it is convenient to keep this preview server running, because it will automatically pick up, render, and display changes as you make them.
+To update a page, edit the file in docs/. Run the command `mkdocs serve` in the `site/` directory. This will start a local web browser which you can use to preview your changes. If you are making multiple changes, it is convenient to keep this preview server running, because it will automatically pick up, render, and display changes as you make them.
 
 Once you are happy with your changes, commit them and then push them to the live server (see [below](#pushing-changes-to-the-live-server)).
 
@@ -18,11 +18,19 @@ Once you are happy with your changes, commit them and then push them to the live
 To create a new page, create a file in docs/ and then add a corresponding line in the `pages` section of `sysadmin.deterlab.net/mkdocs.yml`. This configuration file is of the format:
 
 ```yaml
-site_name: DETER Owner Manual
-pages:
-- Welcome to the DETER Owner Manual: index.md
-- About These Pages: about_these_pages.md
+site_name: DETERLab Docs
+site_description: User documentation for the DETERLab testbed
 theme: readthedocs
+theme_dir: 'readthedocs_custom'
+site_favicon: favicon.ico
+
+pages:
+- Welcome to the DETERLab Documentation: index.md
+#- About These Pages: about_these_pages.md
+#- Style Guide: style-guide.md
+- Glossary: glossary.md
+- DETERLab Core:
+    - Core Quickstart: core/core-quickstart.md
 ```
 
 In the `pages` section, the left half of the line is the page's human-readable name, while the right half is the name of the file in docs/. You can change the order of the page listing in the sidebar by changing the order of the items in the .yml file.
@@ -32,6 +40,14 @@ Once you are happy with your changes, add your new file and the mkdocs.yml to th
 ## Renaming a Page
 
 This would simply be a matter of renaming the file in docs/, and making corresponding changes in mkdocs.yml, as well as in any other files in docs/ which reference the original name. Note that if you rename a page, you may want to run `mkdocs build --clean` instead of `mkdocs build` when you [regenerate the site](#pushing-changes-to-the-live-server).
+
+## Customizing Docs
+
+If you are customizing these docs for your own organization, here are some general guidelines for making them your own. Changing the logo and colors requires a small amount of HTML and CSS knowledge:
+
+* In general, you can do a find/replace in the `site/docs` directory replacing 'DETERLab' with your own organization name.
+* The `base.html` file in the `readthedocs_custom' directory includes customizations to the layout and is where the doc-logo.png is included. Replace the png with your own using a PNG file around 24px by 24px. 
+* Colors are controlled in the docs/css/extra.css file.
 
 ## Pushing Changes to the Live Server
 
