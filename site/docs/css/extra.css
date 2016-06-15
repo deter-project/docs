@@ -28,6 +28,10 @@ body {
 	line-height: 24px;
 }
 
+.wy-breadcrumbs li {
+	font-weight: bold;
+}
+
 
 h3, h4, h5, h6 {
 	color: inherit;
@@ -67,12 +71,6 @@ h3 code {
 
 .wy-menu-vertical a, .wy-menu-vertical span {
 	color: #F2F2F2;
-}
-
-ul.wy-breadcrumbs li + li {
-	font-size: 150%;
-	font-weight: bold;
-	line-height: 1.4;
 }
 
 .wy-plain-list-disc li, .rst-content .section ul li, .rst-content .toctree-wrapper ul li, article ul li {
@@ -131,4 +129,13 @@ ul.wy-breadcrumbs li + li {
 
 .wy-nav-top a {
 	color: #fdb813;
+}
+
+.wy-side-nav-search {
+	position: fixed;
+	width: 300px;
+}
+
+.wy-menu.wy-menu-vertical {
+	margin-top: 95px;
 }

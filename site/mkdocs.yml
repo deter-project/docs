@@ -2,6 +2,7 @@ site_name: DETERLab Docs
 site_description: User documentation for the DETERLab testbed
 theme: readthedocs
 theme_dir: 'readthedocs_custom'
+#theme_dir: 'readthedocshm'
 site_favicon: favicon.ico
 
 pages:
@@ -17,6 +18,7 @@ pages:
     - Generating Traffic: core/generating-traffic.md
     - End Node Traffic Shaping: core/link-delays.md 
     - Using Shared Materials: core/sharing.md 
+    - User Do's and Don'ts: core/user-guidelines.md 
 - Core Reference:
     - DETERLab Commands: core/deterlab-commands.md
     - NS Commands Extensions: core/ns-commands.md
@@ -49,12 +51,22 @@ pages:
 - Other Features:
     - Federation: federation/index.md
     - ABAC: abac/index.md
+- Education Materials:
+    - Education Materials Overview: education/index.md
+    - Guidelines for Teachers: education/guidelines-for-teachers.md
+    - Class Support: education/class-support.md
+    - Course Setup: education/course-setup.md
+    - Good Teaching Practices: education/good-teaching-practices.md
+    - Connect With Other Teachers: education/connect-with-teachers.md
+    - Guidelines for Students: education/guidelines-for-students.md
+    - Student Introduction to DETERLab: education/student-intro.md
+    - Public Materials: education/public-materials.md
 - Miscellaneous:
     - DETERLab Rooms: ISIUCB.md
-- About:
-    - Release Notes: about/release-notes.md
-    - Contributing: about/contributing.md
-    - License: about/license.md
+#- About:
+#    - Release Notes: about/release-notes.md
+#    - Contributing: about/contributing.md
+#    - License: about/license.md
 
 markdown_extensions:
     - toc:

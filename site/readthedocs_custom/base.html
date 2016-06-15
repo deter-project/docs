@@ -60,9 +60,13 @@
   <div class="wy-grid-for-nav">
 
     {# SIDE NAV, TOGGLES ON MOBILE #}
+
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
       <div class="wy-side-nav-search">
-        <a href="{{ homepage_url }}" class="icon"><img class="logo" style="float:left" src="/img/doc-logo.png"/> <span class="title">{{ site_name }}</span></a>
+        <a href="{{ homepage_url }}" class="icon">
+          <!--REPLACE LOGO FILE HERE -->
+          <img class="logo" style="float:left" src="/img/doc-logo.png"/> 
+          <span class="title">{{ site_name }}</span></a>
         {% include "searchbox.html" %}
       </div>
 
@@ -87,24 +91,7 @@
       {# PAGE CONTENT #}
       <div class="wy-nav-content">
         <div class="rst-content">
-          <!--
           {% include "breadcrumbs.html" %}
-        -->
-          <div role="navigation" aria-label="breadcrumbs navigation">
-            <!--
-            {% if current_page %}
-              {% for doc in current_page.ancestors %}
-
-                {% if doc.link %}
-                  <h1><a href="{{ doc.link|e }}">{{ doc.title }}</a> &raquo;</h1>
-                {% else %}
-                  <h1>{{ doc.title }} &raquo;</h1>
-                {% endif %}
-              {% endfor %}
-            {% endif %}
-          -->
-            {% if current_page %}<h1>{{ current_page.title }}</h1>{% endif %}
-          </div>
           <div role="main">
             <div class="section">
               {% block content %}
@@ -123,7 +110,21 @@
   </div>
 
 {% include "versions.html" %}
+  <!-- this makes the active part of the navigation sidebar scroll to top -->
+<script type="text/javascript">
+$(document).ready(function () {
 
+  if ($("a").hasClass("current")) {
+    var container = $("nav"),
+    scrollTo = $("a.current");
+
+    container.scrollTop(
+    scrollTo.offset().top - container.offset().top + container.scrollTop() - 120
+    );
+    
+    }
+});
+</script>
 </body>
 </html>
 {% if current_page and current_page.is_homepage %}

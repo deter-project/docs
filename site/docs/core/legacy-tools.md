@@ -18,7 +18,7 @@ Developed and maintained by University of Delaware, this tool contains:
 ## Legitimate Traffic Generators
 
 ### <a name="seer"></a>SEER
-The Security Experimentation EnviRonment (SEER), developed by SPARTA, Inc., is a GUI-based user interface to DeterLab, helping an experimenter to set up, script, and perform experiments in the DETER environment. The SEER back-end includes tools to generate legitimate traffic using Harpoon or custom-made Web, DNS, Ping, IRC, FTP and VoIP agents. Note that this tool is no longer supported and is offered as-is.
+The Security Experimentation EnviRonment (SEER), developed by SPARTA, Inc., is a GUI-based user interface to DETERLab, helping an experimenter to set up, script, and perform experiments in the DETER environment. The SEER back-end includes tools to generate legitimate traffic using Harpoon or custom-made Web, DNS, Ping, IRC, FTP and VoIP agents. Note that this tool is no longer supported and is offered as-is.
 
 * **Website**: <http://seer.deterlab.net/trac> 
 * **Runs on**: All platforms, written in Java 
