@@ -2,6 +2,10 @@ body {
 	font-family: Arial,Verdana,"Bitstream Vera Sans",Helvetica,sans-serif;
 }
 
+.wy-plain-list-decimal li, .rst-content .section ol li, .rst-content ol.arabic li, article ol li  {
+	font-size: 16px;
+}
+
 .wy-side-nav-search {
     background-color: #343131;
 }
@@ -50,6 +54,15 @@ hr {
 	border-color: inherit;
 }
 
+pre {
+	padding: 16px;
+  overflow: auto;
+  /*font-size: 95%;*/
+  line-height: 1.45;
+  background-color: #f7f7f7;
+  border-radius: 3px;
+}
+
 code, .rst-content tt {
 	color: #555;
 	font-size: 1em;
@@ -57,7 +70,6 @@ code, .rst-content tt {
 	background-color: transparent;
 	line-height: 1.5em;
 	border: none;
-	font-weight: bold;
 }
 
 h3 code {
@@ -75,6 +87,7 @@ h3 code {
 
 .wy-plain-list-disc li, .rst-content .section ul li, .rst-content .toctree-wrapper ul li, article ul li {
 	margin-bottom: 10px;
+	font-size: 16px;
 }
 
 .rst-content dl:not(.docutils) dt {

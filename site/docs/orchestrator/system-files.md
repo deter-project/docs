@@ -1,22 +1,33 @@
-## MAGI System Organization
-
 The MAGI system is divided into **magicore** and **magimodules**.
+
+### magicore
 
 The **magicore** consists of the group communication, control, and data management infrastructure.
 
 The latest available version for use on DETERLab may be found on `users` at:
 
-```
+~~~~
 /share/magi/current/
-```
+~~~~
 
+The MAGI codebase is also available at a publically accessible repository.
+~~~~
+https://github.com/deter-project/magi.git
+~~~~
+
+### magimodules
 The **magimodules** are agent function implementations that enable a particular behavior on the experiment nodes.
 
 The agents along with supporting documentation and file are located on `users` at:
 
-```
+~~~~
 /share/magi/modules
-```
+~~~~
+
+The MAGi modules are also available at a publically accessible repository.
+~~~~
+https://github.com/deter-project/magi-modules.git
+~~~~
 
 ### Logs
 You can find helpful logs in these locations in `users`

@@ -32,18 +32,23 @@ pages:
     - Windows XP: core/windows.md
     - Legacy Tools: core/legacy-tools.md
 - Orchestrator:
+    #- Orchestrator TOC: orchestrator/index.md
     - Orchestrator Quickstart: orchestrator/orchestrator-quickstart.md
     - Orchestrator Guide: orchestrator/orchestrator-guide.md
     - Orchestrator Case Studies: orchestrator/orchestrator-case-studies.md
     - Simple Client Server Case Study: orchestrator/simple-client-server.md
     - Scaled Client Server Case Study: orchestrator/scaled-client-server.md
     - Feedback Case Study: orchestrator/feedback.md
-    - Writing Your Own MAGI Agents: orchestrator/writing-agents.md
-    - Configuring a MAGI Agent at Runtime: orchestrator/agent-configuration.md
+    - Specialized User: orchestrator/writing-agents.md
+    - Orchestrator Data Management: orchestrator/data-management.md
+    - MAGI Configuration: orchestrator/orchestrator-config.md
+  #  - Configuring a MAGI Agent at Runtime: orchestrator/agent-configuration.md
     - Orchestrator Reference: orchestrator/orchestrator-reference.md
-    - MAGI System Files: orchestrator/system-files.md
+    - MAGI System Organization: orchestrator/system-files.md
     - MAGI Agent Library: orchestrator/agent-library.md
     - MAGI Tools: orchestrator/magi-tools.md
+    - MAGI Development Codebase: orchestrator/magi-dev.md
+    - MAGI Desktop: orchestrator/magi-desktop.md
 - Containers:
     - Containers Quickstart: containers/containers-quickstart.md
     - Containers Guide: containers/containers-guide.md
