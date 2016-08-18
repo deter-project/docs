@@ -56,6 +56,7 @@ pages:
 - Other Features:
     - Federation: federation/index.md
     - ABAC: abac/index.md
+    - Competitions: competitions/index.md
 - Education Materials:
     - Education Materials Overview: education/index.md
     - Guidelines for Teachers: education/guidelines-for-teachers.md
