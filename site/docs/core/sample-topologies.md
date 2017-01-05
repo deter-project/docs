@@ -3,9 +3,9 @@ The following are various topologies you can use to experiment with DETERLab Cor
 ## Toy topologies
 
 ### LAN
-```
-![LAN Topology](/img/lan.png "LAN Topology")
 
+![LAN Topology](/img/lan.png "LAN Topology")
+```
 	set ns [new Simulator]
 	source tb_compat.tcl
 
