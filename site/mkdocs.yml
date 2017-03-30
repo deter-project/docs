@@ -1,4 +1,4 @@
-site_name: DETERLab Docs
+site_name: DETERLab Documentation
 site_description: User documentation for the DETERLab testbed
 theme: readthedocs
 theme_dir: 'readthedocs_custom'
@@ -79,5 +79,7 @@ markdown_extensions:
         permalink: 
     - admonition:
 
-copyright: Copyright &copy; 2016 <a href="https://www.deter-project.org/">DETER Project</a>.
+copyright: Copyright &copy; 2017 <a href="https://www.deter-project.org/">DETER Project</a>.
 
+#extra:
+#  support: contact@partners.org
