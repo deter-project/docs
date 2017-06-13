@@ -4,6 +4,7 @@ theme: readthedocs
 theme_dir: 'readthedocs_custom'
 #theme_dir: 'readthedocshm'
 site_favicon: favicon.ico
+site_dir: '_site'
 
 pages:
 - Welcome to the DETERLab Documentation: index.md
@@ -53,6 +54,9 @@ pages:
     - Containers Quickstart: containers/containers-quickstart.md
     - Containers Guide: containers/containers-guide.md
     - Containers Reference: containers/containers-reference.md
+- DeterLab Tools: 
+    - Tools Index: tools/index.md
+    - Internet Atlas: tools/internet-atlas.md
 - Other Features:
     - Federation: federation/index.md
     - ABAC: abac/index.md
