@@ -185,3 +185,7 @@ ul.subnav li ul li a:before {
 .wy-menu.wy-menu-vertical {
 	margin-top: 95px;
 }
+
+.rst-content .section ol li p:last-child {
+	margin-bottom: 12px;
+}
