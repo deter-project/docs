@@ -1,3 +1,4 @@
+# Core Guide
 
 In this tutorial we begin with a small 3-5 node experiment, so that you will become familiar with NS syntax and the practical aspects of DETERLab operation. Usually, you will want to incorporate another system such as the
 [MAGI Orchestrator](/orchestrator/orchestrator-quickstart/) for more fully fleshed out experiments. But this is a good starting point for those new to DETERLab.

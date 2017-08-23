@@ -1,3 +1,5 @@
+# DETERLab Commands
+
 The following commands are available from the commandline on `users.isi.deterlab.net`. 
 
 !!! note

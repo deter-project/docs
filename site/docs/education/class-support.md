@@ -1,3 +1,5 @@
+# Class Support
+
 Classes use DETERLab differently than researchers do. Both groups can use DETERLab's full range of tools and resources, but we limit the amount of accidental sharing students do and assign them accounts that we can reuse. In order to do that we need your help in keeping track of who is using DETERLab for your classes and broadly what resources you will be using. The details are below.
 
 If you run into a problem when using DETERLab in your classes please let us know. If you come up with a better solution than the ones we described below we'd really like to hear about it!

@@ -1,3 +1,5 @@
+# MAGI Development Codebase
+
 The MAGI codebase is maintained in three branches.
 
 - **Current/Released**: Stable released version

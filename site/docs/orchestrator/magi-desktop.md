@@ -1,3 +1,5 @@
+# MAGI Desktop
+
 ## Step 1: Install the following dependencies. 
 
 The source code for all of these is available on Deter Ops (```users.deterlab.net```) under ``/share/magi/tarfiles/``:

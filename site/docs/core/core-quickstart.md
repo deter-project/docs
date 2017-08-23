@@ -1,3 +1,5 @@
+# Core Quickstart
+
 This page describes basic information about DETERLab and its core functionality.
 
 ## What is DETERLab?

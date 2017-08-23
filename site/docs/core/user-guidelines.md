@@ -1,3 +1,5 @@
+# User Do's and Don'ts
+
 **If you are a student: DO read the [Student Introduction to DETERLab](/education/student-intro/).**
 
 ## Preserving our Control Network

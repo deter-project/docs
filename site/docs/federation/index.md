@@ -1,4 +1,6 @@
-# What is Federation?
+# Federation
+
+## What is Federation?
 
 The DETER federation architecture is a model and mechanism for creating experiments that span multiple testbeds. We have written <a href="http://fedd.deterlab.net/wiki/FeddPubs">several papers</a> about the architecture. This site is the home for our implementation, fedd. 
 

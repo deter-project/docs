@@ -1,3 +1,5 @@
+# Configuring a MAGI Agent at Runtime
+
 In <a href="/orchestrator/writing-agents/">Writing MAGI Agents</a>, you saw how to create a basic agent. The sample agent created a single file on a test node. This document will explain how to use configuration in the AAL file to configure an agent at runtime.
 
 ## Setting Agent Configuration

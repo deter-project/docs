@@ -1,3 +1,5 @@
+# Guidelines for Teachers
+
 Welcome to the DETERLab's site for teacher support in education. The DETERLab testbed has been used in many security classes to demonstrate and complement concepts taught in class. Such practices enhance student learning and promote interest in the material. This page provides guidelines to teachers on DETERLab's support for class activities that differs from our support to research users. It further provides guidelines on using our DETERLab's UI to find, adopt and contribute teaching materials.
 
 [DETER's support for classes](/education/class-support/) - Read this if you plan to teach a class with DETERLab testbed.

@@ -1,3 +1,5 @@
+# Student Introduction to DETERLab
+
 **Contributors: Peter A. H. Peterson, UCLA. pahp@... David Morgan, USC. davidmor@...**
 
 ## What is DETERLab?

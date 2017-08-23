@@ -1,3 +1,5 @@
+# Creating Custom Operating System Images
+
 ## What is an Operating System ID (OSID) versus an Image ID?
 
 In order to make the best use of custom operating system images, it is important to understand the difference between these two concepts.

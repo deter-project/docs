@@ -2,4 +2,4 @@
 
 This page links to information on useful tools available for DETERLab:
 
-- Internet Atlas Tool 
+- [Internet Atlas Tool](/tools/internet-atlas/) 

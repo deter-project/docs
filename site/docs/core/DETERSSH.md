@@ -1,3 +1,5 @@
+# Accessing testbeds using SSH
+
 Each node on the testbed is reachable via <a href="http://en.wikipedia.org/wiki/Secure_Shell">SSH</a>.  One main difference between DETER and Emulab is that DETER nodes are not accessible directly from the internet.  In order to log into your nodes, you must first log into '''users.isi.deterlab.net''' using your DETER username (not your email address) and password (or your SSH public key).  From users you can log into your nodes.  To save on connections, you might want to look into using <a href="http://en.wikipedia.org/wiki/GNU_Screen">GNU screen</a> on `users`.  Also refer to the <a href="#tips-and-tricks">Tips and Tricks</a> section below for ways to make accessing DETER easier.
 
 ## Uploading files to DETER

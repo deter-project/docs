@@ -1,3 +1,5 @@
+# MAGI Tools
+
 The following tools are available for MAGI experiments in DETERLab:
 
 <ul>

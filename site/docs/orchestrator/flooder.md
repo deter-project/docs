@@ -1,4 +1,4 @@
-# Using Flooder
+# Flooder Case Study
 In this experiment we demonstrate how one can setup a flooding agent and a victim server. 
 
 We demonstrate three aspects of MAGI: 

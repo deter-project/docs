@@ -1,4 +1,4 @@
-## Generating Traffic with LegoTG
+# Generating Traffic with LegoTG
 
 LegoTG is a flexible framework for pulling together the appropriate software for the traffic generation process. The key insight of LegoTG is that the definition of "realism" in traffic generation is entirely dependent on the experiment/scenario. LegoTG itself does not determine what "realistic" traffic means for a particular experiment or scenario. Rather, the definition of realism must come from the LegoTG user.
 

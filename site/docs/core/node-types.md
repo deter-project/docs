@@ -1,3 +1,5 @@
+# Node Types
+
 This is not a complete list of all node types available at DETERLab, but below are the primary types.
 
 * <a href="#dl380g3">dl380g3</a>

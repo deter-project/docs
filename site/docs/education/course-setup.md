@@ -1,3 +1,5 @@
+# Course Setup
+
 Since we apply different access control ([see about this topic](#access-control)) for educational projects, we really need to hear from you if you're planning to run a class on DETERLab. This is the procedure you should follow:
 
 ## Actions at the Start/End of a Class

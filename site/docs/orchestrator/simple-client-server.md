@@ -1,3 +1,5 @@
+# Simple Client Server Case Study
+
 In this example, we demonstrate how to set up client and server traffic generators with only one server and one client. (In the <a href="/orchestrator/scaled-client-server/">Scaled Server Case Study</a>, we will show how the same procedure can be used for a significantly larger topology.)
 
 We demonstrate three aspects of MAGI: specifying multiple event streams, synchronizing with triggers, and a special target called ```exit``` to unload agents.

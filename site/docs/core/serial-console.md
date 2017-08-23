@@ -1,3 +1,5 @@
+# Using the Serial Console
+
 ## Determining which nodes to connect to
 
 You can determine the nodes allocated to your experiment by looking at the **Reserved Nodes** table on the *Show Experiment* page on the web interface.  DETERLab nodes are generally named 'pcXXX' for nodes at <a href="/ISIUCB/">ISI</a> and 'bpcXXX' for node at <a href="/ISIUCB/">UCB</a>.

@@ -1,3 +1,4 @@
+# DETERLab Rooms
 
 DETERLab has three machine rooms. Nodes are split more or less evenly between the ISI, USC, and Berkeley. A 10 Gigabit link from ISI to USC and another 10 Gigabit link from ISI to Berkeley provides complete connectivity.
 

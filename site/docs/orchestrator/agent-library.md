@@ -1,3 +1,5 @@
+# MAGI Agent Library
+
 Every node has a daemon running with a series of Agents on it. These Agents are each executed in their own thread or process. They are provided with a defined interface with which to send and receive messages to other objects in the experiment. The MAGI daemon will route messages to the agent based on the routing information in the message. The daemon supports group-based, name-based, and “dock”-based routing. (A dock is like a port for a traditional daemon; an agent listens on a dock.) Once a message is delivered to an agent, the format of the message data is then up to the agent itself.
 
 Most agents will not need to parse messages directly, however, because the MAGI Agent Library supports a number of useful abstractions implemented in base classes from which Agent authors can derive. These are described in detail below.

@@ -1,3 +1,5 @@
+# Feedback Case Study
+
 ## Introduction
 
 This case study demonstrates our system’s ability to do real-time feedback from the experiment using triggers. We show how information from the experiment may be used to extend the Orchestrator autonomy and deterministically control dynamic experiments. This is an example where the active state of an experiment is a driving input to the control. The data management layer too plays an important role in enabling the flow of information.

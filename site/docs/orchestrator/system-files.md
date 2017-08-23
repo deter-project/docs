@@ -1,6 +1,8 @@
+# MAGI System Organization
+
 The MAGI system is divided into **magicore** and **magimodules**.
 
-### magicore
+## magicore
 
 The **magicore** consists of the group communication, control, and data management infrastructure.
 
@@ -15,7 +17,7 @@ The MAGI codebase is also available at a publically accessible repository.
 https://github.com/deter-project/magi.git
 ~~~~
 
-### magimodules
+## magimodules
 The **magimodules** are agent function implementations that enable a particular behavior on the experiment nodes.
 
 The agents along with supporting documentation and file are located on `users` at:
@@ -29,7 +31,7 @@ The MAGi modules are also available at a publically accessible repository.
 https://github.com/deter-project/magi-modules.git
 ~~~~
 
-### Logs
+## Logs
 You can find helpful logs in these locations in `users`
 
 * **LOG_DIR**
@@ -48,7 +50,7 @@ You can find helpful logs in these locations in `users`
 
     `$LOG_DIR/mongo.log`
 
-### Configuration Files
+## Configuration Files
 The following configuration files are available in `users`:
 
 *  **Agent**

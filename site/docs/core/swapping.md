@@ -1,3 +1,5 @@
+# Understanding Swapping (Node Use Policies)
+
 ## What are DETERLab's use policies?
 
 As a courtesy to other experimenters, we ask that experiments be swapped out or terminated when they are no longer in active use. There are a limited number of nodes available, and node reservations are exclusive, so it is important to free nodes that will be idle so that others may use them. In summary, our policy is that experiments should be swapped out when they are not in use. We encourage you to do that yourself. In general, if experiments are idle for several hours, the system will automatically swap them out, or send you mail about it, and/or an operator may manually swap them out. The actual grace period will differ depending on the size of the experiment, the current demand for resources, and other factors (such as whether you've been a good DETERLab citizen in the past!). If you mark your experiment "non-idle-swappable" at creation time or before swapin, and testbed-ops approves your justification, we will make every effort to contact you before swapping it, since local node state could be lost on swapout. Please see full details below.

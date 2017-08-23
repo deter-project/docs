@@ -1,3 +1,5 @@
+# MAGI Configuration
+
 ## Experiment Configuration
 
 The MAGI experiment-wide configuration (```experiment.conf```) is a YAML-based configuration file. A customized ```experiment.conf``` can be provided to the MAGI bootstrap process.

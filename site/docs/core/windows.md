@@ -1,3 +1,5 @@
+# Windows XP
+
 Microsoft **Windows XP** is supported as one of the operating system types for experiment nodes in DETER.
 
 As much as possible, we have left Windows XP "stock". Some Windows services are shut down: Messenger, SSDP Discovery Service, Universal Plug and Play Device Host, and Remote Registry. Other setting changes are described under <a href="#Network_config">Network config</a> and <a href="#Routing">Routing</a> below.

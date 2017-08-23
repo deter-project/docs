@@ -1,3 +1,5 @@
+# Dell Serial Console
+
 Most of the machines at DETERLab are Dell servers.  When connected via the serial console, some special key sequences are available.  Please refer to the <a href="/core/node-types/">node types</a> page for more information on the types of machines available through DETERLab.
 
 

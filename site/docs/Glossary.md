@@ -1,4 +1,4 @@
-
+# DETERLab Glossary
 <ul class="definition-list">
   <li class="term">Agent Abstraction Language (AAL)</li>
   <li class="definition">A YAML based descriptive language that the <a href="/orchestrator/orchestrator-quickstart/">MAGI Orchestrator</a> uses to describe an experiment’s procedural workflow. The entire experiment procedure needs to be expressed as part of an AAL file. Find more information in the <a href="/orchestrator/orchestrator-guide/#step-1-write-the-aal-file">Orchestrator Guide</a>.</li>

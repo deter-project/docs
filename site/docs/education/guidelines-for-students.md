@@ -1,3 +1,5 @@
+# Guidelines for Students
+
 - Read [Student Introduction to DETERLab](/education/student-intro/) - especially the **[Things to keep in mind](/education/student-intro/#things-to-keep-in-mind)** section.
 - Read [User DOs and DON'Ts](/core/user-guidelines/).
 - Contact your TA or instructor first with DETERLab problems. They can help you with password reset, inability to log on, inability to swap in and many other problems. They will pass any they cannot solve to the Testbed Ops team. Do NOT contact Ops directly.

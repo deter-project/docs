@@ -1,3 +1,5 @@
+# Scaled Client Server Case Study
+
 In this example we demonstrate how to set up client server traffic generators in a larger topology.
 
 This case study is identical to <a href="/orchestrator/simple-client-server/">Simple Client Case Study</a> except the topology is significantly larger.

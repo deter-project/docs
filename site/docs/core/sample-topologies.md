@@ -1,3 +1,5 @@
+# Sample Topologies
+
 The following are various topologies you can use to experiment with DETERLab Core.
 
 ## Toy topologies

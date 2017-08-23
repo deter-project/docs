@@ -1,13 +1,15 @@
+# Specialized User
+
 This page gives you a brief introduction on writing your own Magi Agent. It is designed to give you sample code, briefly explain it, then show you the pieces needed to run it. After reading this page you should be able to write and run a basic MAGI Agent. Further details and more advanced agent information may be found in the Magi Agent Library document (link).
 
-# Basic Agent Information
+## Basic Agent Information
 
 An Agent runs in two modes: a threaded mode and a process mode.
 
 - **Threaded** mode: The MAGI Daemon loads python codes directly, and runs the Agent in a thread in its own process space.
 - **Process** mode: The MAGI Daemon runs the agent in a process space separate from itself and communicates with the Agent via a pipe or a socket.
 
-# `DispatchAgent` class
+## `DispatchAgent` class
 
 In most cases you will want to use the Orchestrator (link) and an AAL file (link) to run and coordinate your Agent actions. In order to get the basic Agent control (via remote procedure calls), you'll need to derive your agent from the `DispatchAgent` base class.
 
@@ -15,7 +17,7 @@ The `DispatchAgent` implements the simple remote procedure call (RPC) mechanism 
 
 The `DispatchAgent` code simply loops, parsing incoming messages, looking for an event message. When it finds one, it attempts to call the method specified in the message with the arguments given. You needn't worry about message handling or parsing when you derive from `DispatchAgent`, you can simply write your code and call that code from the AAL.
 
-# Basic Elements of Writing a Client
+## Basic Elements of Writing a Client
 
 To write and execute your agent you need the following three things:
 
@@ -23,13 +25,13 @@ To write and execute your agent you need the following three things:
 - An Interface Description Language (IDL) file to describe the Agent function and specify things the MAGI Daemon needs to know to load and execute the Agent code (among these is the location of the Agent code and the execution mode).
 - An AAL file (as described [here](/orchestrator/orchestrator-guide/#step-1-write-the-aal-file))
 
-# Deploying and Executing a Sample Agent
+## Deploying and Executing a Sample Agent
 
-## Step 1: Create a local directory named "FileCreator"
+### Step 1: Create a local directory named "FileCreator"
 
 MAGI Agents are usually contained in a single directory.
 
-## Step 2: Create the Agent implementation code file
+### Step 2: Create the Agent implementation code file
 
 Copy the following Agent implementation code to the file "FileCreator/FileCreator.py".
 
@@ -77,7 +79,7 @@ This example Agent code has the following characteristics:
       agent.run()
 ~~~~
 
-## Step 3: Create the IDL file
+### Step 3: Create the IDL file
 
 Copy the IDL below to a file named 'FileCreator/FileCreator.idl'.
 
@@ -110,7 +112,7 @@ The following example IDL file has the following characteristics:
          type: string
 ~~~~
 
-## Step 4: Create the AAL file
+### Step 4: Create the AAL file
 
 Copy the sample AAL code below to a file named "FileCreator/myEvents.aal".
 
@@ -145,7 +147,7 @@ Make sure to:
     - The AAL is in YAML format; therefore, it cannot have tabs. If you cut and paste the above code, make sure to remove any possible inserted tabs.
     - Because your Agent code is on an NFS-mounted filesystem, all MAGI Daemons may read the code directly.
 
-## Step 5: Run Orchestrator
+### Step 5: Run Orchestrator
 
 Run the MAGI Orchestrator to run the event streams in your AAL file - and thus your agent code:
 
@@ -185,15 +187,15 @@ Where `myNode.myExperiment.myGroup` is the domain name of a node on which you ex
 
 You may download the sample code as a tar file here: [FileCreator.tbz] (attach).
 
-# Runtime Agent Configuration
+## Runtime Agent Configuration
 
 The sample Agent `FileCreator` always creates the same file, each time it is run. What if you wanted to create a different file? Or a series of files? It is possible to specify Agent configuration in an AAL file - configuration that can modify the internal variables of your Agent at run time. See [MAGI Agent Configuration](/orchestrator/agent-configuration/) for details.
 
-# Troubleshooting
+## Troubleshooting
 
 Look at the Magi Daemon log file at `/var/log/magi/daemon.log` on your control and test nodes looking for errors. If there are syntax errors in Agent execution, they may show up here.
 
-## Error: You see a 'No such file' error
+### Error: You see a 'No such file' error
 
 You may see an error indicating there is no such file as follows:
 
@@ -203,10 +205,10 @@ Run-time exception in agent <Daemon(daemon, started 140555403872000)> on node(s)
 
 **Solution:** You probably did not specify the correct "mainfile" in the IDL file. It must not be pathed out and must match the name of the main Agent implementation file, for example, "myAgent.py".
 
-## Error: You see a "no attribute 'getAgent'" message
+### Error: You see a "no attribute 'getAgent'" message
 
 **Solution:** The Magi Daemon needs the well-known method `getAgent` to exist in the Agent module. Add it to your Agent code.
 
-## Error: 'module' object has no attribute 'getAgent'
+### Error: 'module' object has no attribute 'getAgent'
 
 **Solution:** Make sure your agent defines (and exports or make available) a `getAgent` method and that it returns an instance of your agent.

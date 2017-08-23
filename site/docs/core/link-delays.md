@@ -1,4 +1,4 @@
-## Per-Link Traffic Shaping ("linkdelays")
+# Per-Link Traffic Shaping ("linkdelays")
 
 In order to conserve nodes, it is possible to specify that instead of doing traffic shaping on separate delay nodes (which eats up a node for every two shaped links), it be done on the nodes that are actually generating the traffic.
 

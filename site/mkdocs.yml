@@ -12,6 +12,7 @@ pages:
 #- Style Guide: style-guide.md
 - Glossary: Glossary.md
 - Support:
+    - Registering with DETERLab: support/registering.md
     - Getting Help: support/getting-help.md
     - FAQs: support/faqs.md
     - Passwords: support/passwords.md

@@ -1,3 +1,5 @@
+# Good Teaching Practices
+
 - Ask your students to contact a TA or you first with problems, then the TA or you can contact us with any new issues. Some teachers have even offered to take points off if a student contacts DETER Ops directly.
 - Make it clear to students that they are using a shared testbed, and should not leave their work for the last day before the deadline.
 - Ask students to promptly swap out experiments if they will not use them for at least an hour. They should read [student guidelines](/education/guidelines-for-students/) to learn how to save their work and retrieve it on the next swap in.
