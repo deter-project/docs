@@ -1,6 +1,9 @@
 # Getting Help with DETER
 
-Summary: take *all* of the details about your problem (project/experiment id, logs, error output, etc) and [file a ticket](https://trac.deterlab.net/newticket) - you must log in again with your DeterLab username and password.
+**Summary:** take *all* of the details about your problem (project/experiment IDs, logs, error output, etc) and [file a ticket](https://trac.deterlab.net/newticket) in our Trac issue-tracking system.
+
+!!! note
+    You must log into Trac using your DETERLab username and password.
 
 ## What to do first if you are having trouble?
 
@@ -13,7 +16,7 @@ Summary: take *all* of the details about your problem (project/experiment id, lo
 
 Please include the following information in your ticket for best results:
 
-- Your DeterLab username
+- Your DETERLab username
 - Your project name
 - Your experiment (if applicable)
     - Include a link in this format: [experiment:pid:eid] where pid is the project name and eid is the experiment name.
@@ -25,10 +28,10 @@ Please include the following information in your ticket for best results:
 
 ### Step 2: Create a new support ticket
 
-- Go to [the new ticket page](https://trac.deterlab.net/newticket) and log in again with your DeterLab username and password. Note: you will receive an **Error:Forbidden** message when you first click the link. This is expected (the ticket system currently requires a separate login).
+- Go to [the new ticket page](https://trac.deterlab.net/newticket) and log in again with your DETERLab username and password. Note: you will receive an **Error:Forbidden** message when you first click the link. This is expected (the ticket system currently requires a separate login).
 - Fill in all the details you gathered in the previous step as well as the following:
     - *Summary*: Use a brief description of the issue
-    - *Reporter*: Use your DeterLab username (this should be pre-filled)
+    - *Reporter*: Use your DETERLab username (this should be pre-filled)
     - *Message*: This is where you include the project name and all of the other details you collected in the previous step.
     - *Attachments*: You may include screenshots and any other files (logs, etc) that could be useful to us in understanding your issue.
 
@@ -39,6 +42,6 @@ You may use the View Tickets button in the navigation bar to find any tickets yo
 ### Tips for the fastest response
 
 - If you are reporting a support problem, do not email us. Instead, follow the instructions above for filing a support ticket.
-- If for some reason you must email us, DeterLab testbed operations may be reached at **testbed-ops at deterlab.net**.
+- If for some reason you must email us, DETERLab testbed operations may be reached at **testbed-ops at deterlab.net**.
 - Response to this email is typically slower than response to a ticket.
 - Always send email to the testbed-ops address and not just an individual who responded to you. Then, if the individual is not available, someone will still be aware of your email.

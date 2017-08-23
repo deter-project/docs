@@ -189,3 +189,7 @@ ul.subnav li ul li a:before {
 .rst-content .section ol li p:last-child {
 	margin-bottom: 12px;
 }
+
+#mkdocs-search-results {
+	padding: 20px;
+}

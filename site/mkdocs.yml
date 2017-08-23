@@ -11,11 +11,12 @@ pages:
 #- About These Pages: about_these_pages.md
 #- Style Guide: style-guide.md
 - Glossary: Glossary.md
-- Meta-data:
-    - FAQs: faqs.md
-    - Passwords: passwords.md
-    - Usage Policy: usage-policy.md
-    - Getting Help: getting-help.md
+- Support:
+    - Getting Help: support/getting-help.md
+    - FAQs: support/faqs.md
+    - Passwords: support/passwords.md
+    - Usage Policy: support/usage-policy.md
+    - Elab-in-Elab: support/elab-elab-ssh-proxy.md
 - DETERLab Core:
     - Core Quickstart: core/core-quickstart.md
     - Core Guide: core/core-guide.md
