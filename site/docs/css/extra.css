@@ -32,6 +32,10 @@ body {
 	line-height: 24px;
 }
 
+li.toctree-l3 {
+	display: none;
+}
+
 .wy-breadcrumbs li {
 	font-weight: bold;
 }
