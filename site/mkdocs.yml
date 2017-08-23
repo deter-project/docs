@@ -11,6 +11,11 @@ pages:
 #- About These Pages: about_these_pages.md
 #- Style Guide: style-guide.md
 - Glossary: Glossary.md
+- Meta-data:
+    - FAQs: faqs.md
+    - Passwords: passwords.md
+    - Usage Policy: usage-policy.md
+    - Getting Help: getting-help.md
 - DETERLab Core:
     - Core Quickstart: core/core-quickstart.md
     - Core Guide: core/core-guide.md
@@ -18,6 +23,7 @@ pages:
     - Using Your Nodes: core/using-nodes.md
     - Generating Traffic: core/generating-traffic.md
     - End Node Traffic Shaping: core/link-delays.md 
+    - Risky Experiments: core/risky-experiment.md
     - Using Shared Materials: core/sharing.md 
     - User Do's and Don'ts: core/user-guidelines.md 
 - Core Reference:
@@ -40,6 +46,7 @@ pages:
     - Simple Client Server Case Study: orchestrator/simple-client-server.md
     - Scaled Client Server Case Study: orchestrator/scaled-client-server.md
     - Feedback Case Study: orchestrator/feedback.md
+    - Flooder Case Study: orchestrator/flooder.md
     - Specialized User: orchestrator/writing-agents.md
     - Orchestrator Data Management: orchestrator/data-management.md
     - MAGI Configuration: orchestrator/orchestrator-config.md

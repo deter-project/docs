@@ -6,7 +6,7 @@ In this tutorial we begin with a small 3-5 node experiment, so that you will bec
     If you are a student, go to the <http://education.deterlab.net> site for classroom-specific instructions.
 
 ## Node Use Policy
-Please make sure to read our <a href="https://trac.deterlab.net/wiki/Policy">guidelines for using nodes in DETERLab</a>. These guidelines help keep DETERLab an effective environment for all users.
+Please make sure to read our <a href="/usage-policy/">guidelines for using nodes in DETERLab</a>. These guidelines help keep DETERLab an effective environment for all users.
 
 
 ## DETERLab Environment
