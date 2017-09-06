@@ -21,7 +21,7 @@ First, we will describe a star topology.
 
 For this example we will use the standard DETER topology descriptions.  If you are new to designing topologies, walk through the basic tutorial in the <a href="/core/core-guide/">Core Guide</a>.  The Containers system is largely compatible with the physical DETER interface.
 
-Download the <a href="/downloads/example1.tcl">DETERLab-compatible ns2 description of this topology at this link</a> to your home directory on ```users.isi.deterlab.net```.  It is a simple loop, along with the standard DETER boilerplate.  This file will be used to create a 10-node (9 satellites and one central node) physical experiment on DETER, although there are not many physical nodes on DETER with 10 interfaces (one interface for control traffic).
+Download the <a href="/downloads/example1.tcl">DETERLab-compatible ns2 description of this topology at this link</a> to your home directory on ```users.deterlab.net```.  It is a simple loop, along with the standard DETER boilerplate.  This file will be used to create a 10-node (9 satellites and one central node) physical experiment on DETER, although there are not many physical nodes on DETER with 10 interfaces (one interface for control traffic).
 
 The following is the topology description:
 
@@ -54,7 +54,7 @@ The following is the topology description:
 
 Now we will run a command so the Containers system will build the containerized experiment on top of a new DETERLab physical experiment.  
 
-Run the following command from the shell on ```users.isi.deterlab.net``` and refer to the example topology you just saved in your home.  
+Run the following command from the shell on ```users.deterlab.net``` and refer to the example topology you just saved in your home.  
 
 ```
 $ /share/containers/containerize.py DeterTest example1 ~/example1.tcl 

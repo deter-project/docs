@@ -8,7 +8,7 @@ You can determine the nodes allocated to your experiment by looking at the **Res
 
 Every node on the testbed has serial console access enabled.  
 
-To connect to a node's serial console, you must first log into `users.isi.deterlab.net` and use the **console** command located in `/usr/testbed/bin` (which should be in every user's PATH by default).  
+To connect to a node's serial console, you must first log into `users.deterlab.net` and use the **console** command located in `/usr/testbed/bin` (which should be in every user's PATH by default).  
 
 To connect to a particular node, type `console pcXXX` where *pcXXX* is a node allocated to your experiment.
 

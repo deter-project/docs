@@ -1,6 +1,6 @@
 # DETERLab Commands
 
-The following commands are available from the commandline on `users.isi.deterlab.net`. 
+The following commands are available from the commandline on `users.deterlab.net`. 
 
 !!! note
     Commands should be pre-pended with the path: `/usr/testbed/bin`.

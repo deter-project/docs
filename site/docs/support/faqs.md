@@ -5,16 +5,16 @@
 Too many failed attempts to log into the web interface will result in your account being locked. You will get a message saying that your account has been frozen if you trigger it. If you are a student, please contact your TA. Otherwise, please ​[contact us](http://www.deter-project.org/contact_deter).
 
 Also:
-- You must use your **actual account name**, not an email address, to log into `users.isi.deterlab.net`. 
-- Too many failed attempts to log into `users.isi.deterlab.net` will result in an **IP address ban**. We automatically whitelist all IP addresses that have successfully logged into the [​web interface](https://www.isi.deterlab.net/) and this list is synchronized every 15 minutes. So if you find yourself banned from connecting to `users.isi.deterlab.net` please log into the ​web interface and then wait 15 minutes.
+- You must use your **actual account name**, not an email address, to log into `users.deterlab.net`. 
+- Too many failed attempts to log into `users.deterlab.net` will result in an **IP address ban**. We automatically whitelist all IP addresses that have successfully logged into the [​web interface](https://www.isi.deterlab.net/) and this list is synchronized every 15 minutes. So if you find yourself banned from connecting to `users.deterlab.net` please log into the ​web interface and then wait 15 minutes.
 
 ## How do I copy files from my workstation to a node in an experiment?
 
-Your home directory from `users` is available on the nodes in your experiment. Copy your files to `users.isi.deterlab.net` using `scp` or `sftp` to make them available on your nodes.
+Your home directory from `users` is available on the nodes in your experiment. Copy your files to `users.deterlab.net` using `scp` or `sftp` to make them available on your nodes.
 
 ## How can I copy files from a node in the testbed to my workstation?
 
-The reverse of the previous question: copy the files you want to your home directory, then download them from `users.isi.deterlab.net` using `scp` or `sftp`.
+The reverse of the previous question: copy the files you want to your home directory, then download them from `users.deterlab.net` using `scp` or `sftp`.
 
 ## How can I install software on my nodes?
 

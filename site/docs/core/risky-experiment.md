@@ -7,7 +7,10 @@ We define as a risky experiment each experiment that either uses some type of ma
 - Malware overwhelming critical infrastructure in DETER, such as users and boss machines and control network
 - Malware from the outside world infecting experimental machines and spreading in DETER or propagating back to the outside (with implications of DETER unwittingly participating in attacks).
 
-We have developed strategies to contain experiment risk while allowing users to observe phenomena of interest to them. This means that containment is customized for each experiment. This customization is performed automatically depending on information a user specifies on Begin Experiment Web page.
+We have developed strategies to contain experiment risk while allowing users to observe phenomena of interest to them. This means that containment is customized for each experiment. This customization is performed automatically depending on information a user specifies on the "Begin Experiment Web" page.
+
+!!! important
+    A "risky experiment" in DETERLab is a **heavyweight** mechanism. We request that you only implement it if other approaches, such as SSH tunnels, do not work.
 
 Please [file a ticket](https://trac.deterlab.net/newticket) (you must log in to Trac with your DETERLab username and password) if you run into any problems. This code is still being developed and we welcome your feedback.
 

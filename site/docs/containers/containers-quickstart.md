@@ -47,7 +47,7 @@ sample of topology
 
 ### 2. Run containerized experiment with the containerize.py command
 
-The Containers system will build the containerized experiment on top of an existing <a href="/core/core-guide/"> DETERLab physical experiment</a> by running the ```containerize.py``` command from the shell on ```users.isi.deterlab.net```, as in the following example:
+The Containers system will build the containerized experiment on top of an existing <a href="/core/core-guide/"> DETERLab physical experiment</a> by running the ```containerize.py``` command from the shell on ```users.deterlab.net```, as in the following example:
 ```
  $ /share/containers/containerize.py DeterTest example1 ~/example1.tcl 
 ```

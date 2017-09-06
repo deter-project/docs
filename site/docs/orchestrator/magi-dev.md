@@ -22,7 +22,7 @@ sudo python /share/magi/dev/magi_bootstrap.py
 
 This will install MAGI from the development code base.
 
-Also, if you run MAGI tools from the Deter Ops (``users.isi.deterlab.net``) machine, then make the tools point to the development code base:
+Also, if you run MAGI tools from the Deter Ops (``users.deterlab.net``) machine, then make the tools point to the development code base:
 ~~~~
 export PYTHONPATH=/share/magi/dev_src
 /share/magi/dev/magi_orchestrator.py -c bridgeNode -f eventsFile

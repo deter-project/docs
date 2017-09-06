@@ -229,7 +229,7 @@ d. If you need to create new users on your experimental nodes, you may log in as
 
 You can visualize the experiment by going to your experiment page (from My DETERLab, click the EID link for your experiment) and clicking the *Visualization* tab. From this page you can also change the NS file by clicking on the *NS File* tab or modify parameters by clicking *Modify Traffic Shaping* in the left sidebar.
 
-An alternative method is to log into `users.isi.deterlab.net` and use the <a href="/core/deterlab-commands/#delay_config:ChangethelinkshapingcharacteristicsforalinkorLAN">delay_config</a> program. This program requires that you know the symbolic names of the individual links. This information is available on the experiment page. 
+An alternative method is to log into `users.deterlab.net` and use the <a href="/core/deterlab-commands/#delay_config:ChangethelinkshapingcharacteristicsforalinkorLAN">delay_config</a> program. This program requires that you know the symbolic names of the individual links. This information is available on the experiment page. 
 
 ### Step 5: Configure and run your experiment.
 

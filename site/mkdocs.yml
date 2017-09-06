@@ -17,7 +17,6 @@ pages:
     - FAQs: support/faqs.md
     - Passwords: support/passwords.md
     - Usage Policy: support/usage-policy.md
-    - Elab-in-Elab: support/elab-elab-ssh-proxy.md
 - DETERLab Core:
     - Core Quickstart: core/core-quickstart.md
     - Core Guide: core/core-guide.md

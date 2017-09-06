@@ -14,7 +14,7 @@ The basic steps in creating an orchestrated experiment are:
 1. Write the AAL file that describes the experiment's workflows.
 2. Include a special start command in your topology.
 3. Create or use a physical experiment in DETERLab.
-4. Run the Orchestrator tool on a physical experiment on ```users.isi.deterlab.net```.
+4. Run the Orchestrator tool on a physical experiment on ```users.deterlab.net```.
 
 The following sections describe each step in detail.
 
@@ -270,7 +270,7 @@ The MAGI Orchestrator tool, ```magi_orchestrator.py```, is a tool that reads the
 3. **Executes Event Streams** - Next, the Orchestrator concurrently executes all the event streams listed as part of ```streamstarts```.
 The Orchestrator has a predefined event stream called ```exit```. The purpose of this event stream is to unload all the agents and disjoin groups. All workflows should end with executing this stream for a clean exit.
 
-From your home directory on ```users.isi.deterlab.net```, run the following command:
+From your home directory on ```users.deterlab.net```, run the following command:
 
 ```
 /share/magi/current/magi_orchestrator.py --control clientnode.myExp.myProj --events procedure.aal

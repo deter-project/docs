@@ -4,7 +4,7 @@
 Here are the most important things to know.
 
  * `www.isi.deterlab.net` is the primary web interface for the testbed.
- * `users.isi.deterlab.net` is the host through which the testbed nodes are accessed and it is primary file server.
+ * `users.deterlab.net` is the host through which the testbed nodes are accessed and it is primary file server.
  * `scratch` is the local package mirror for CentOS, Ubuntu, and FreeBSD.
 
 
@@ -12,7 +12,7 @@ Here are the most important things to know.
 
 We set up names for your nodes in DNS and `/etc/hosts` files for use on the nodes in the experiment. Since our nodes have multiple interfaces (the control network, and, depending on the experiment, possibly several experimental interfaces) determining which name refers to which interface can be somewhat confusing. The rules below should help you figure this out.
 
-  * **From users.isi.deterlab.net** - We set up names in the form of `node.expt.proj.isi.deterlab.net` in DNS, so that they are visible anywhere on the Internet. This name always refers to the node's control network interface, which is the only one reachable from `users.isi.deterlab.net`. You can use `node.expt.proj` as a shorthand.
+  * **From users.deterlab.net** - We set up names in the form of `node.expt.proj.isi.deterlab.net` in DNS, so that they are visible anywhere on the Internet. This name always refers to the node's control network interface, which is the only one reachable from `users.deterlab.net`. You can use `node.expt.proj` as a shorthand.
   * **On the nodes themselves** - There are three basic ways to refer to the interfaces of a node. The first is stored in DNS, and the second two are stored on the node in the `/etc/hosts` file.
     1. *Fully-qualified hostnames* - These names are the same ones visible from the outside world, and referred to by attaching the full domain name: ie. `node.expt.proj.isi.deterlab.net`. (Note that, since we put *.isi.deterlab.net* in the nodes' domain search paths, you can use `node.expt.proj` as a shorthand.) This name always refers to the control network.
     1. *node-link form* - You can refer to an individual experimental interface by suffixing it with the name of the link or LAN (as defined in your NS file) that it is a member of. For example, `nodeA-link0` or `server-serverLAN`. This is the preferred way to refer to experimental interfaces, since it uniquely and unambiguously identifies an interface.
@@ -31,13 +31,13 @@ We set up names for your nodes in DNS and `/etc/hosts` files for use on the node
     * mounting the projects NFS directory in /proj so that project files are easily shared amongst all the nodes in the experiment;
     * creating a /etc/hosts file on each node so that you may refer to the experimental interfaces of other nodes by name instead of IP number;
     * configuring all of the delay parameters;
-    * configuring the serial console lines so that project members may access the console ports from users.isi.deterlab.net.
+    * configuring the serial console lines so that project members may access the console ports from users.deterlab.net.
 
-As this point you may log into any of the nodes in your experiment. You will need to use <a href="/core/DETERSSH/">Secure Shell (ssh)</a> to log into `users.isi.deterlab.net`
+As this point you may log into any of the nodes in your experiment. You will need to use <a href="/core/DETERSSH/">Secure Shell (ssh)</a> to log into `users.deterlab.net`
 Your login name and password will be the same as your Web Interface login and password.  
 
 !!! note
-    Although you can log into the web interface using your email address instead of your login name, you must use your login name when logging into `users.isi.deterlab.net`.
+    Although you can log into the web interface using your email address instead of your login name, you must use your login name when logging into `users.deterlab.net`.
 
 Once logged into users you can then SSH to your nodes.  You should use the `qualified name' from the nodes mapping table so that you do not form dependencies on any particular physical node.  For more information on using SSH with DETER, please take a look at the <a href="/core/DETERSSH/">DETER SSH</a> wiki page.
 
@@ -59,7 +59,7 @@ Also, every testbed node has an automatically generated root password.  Simply c
 
 ## <a name="SerialConsole"></a>Can I access the nodes console?
 
-Yes. Each of the PCs has its own serial console line connected to a <a href="/core/dell-serial-console/">serial server</a>.  You can connect to a nodes serial console through the `users` machine, using our `console` program located in '/usr/testbed/bin'. For example, to connect over serial line to "pc001" in your experiment, SSH into `users.isi.deterlab.net`, and then type `console pc001` at the Unix prompt. You may then interact with the serial console (hit "enter" to elicit output from the target machine).
+Yes. Each of the PCs has its own serial console line connected to a <a href="/core/dell-serial-console/">serial server</a>.  You can connect to a nodes serial console through the `users` machine, using our `console` program located in '/usr/testbed/bin'. For example, to connect over serial line to "pc001" in your experiment, SSH into `users.deterlab.net`, and then type `console pc001` at the Unix prompt. You may then interact with the serial console (hit "enter" to elicit output from the target machine).
 
 To exit the console program, type `Ctrl-]`; it's just a telnet session.
 
@@ -71,7 +71,7 @@ Escape codes for Dell serial consoles are documented <a href="/core/dell-serial-
   
 ## My node is wedged!
 
-Power cycling a node is easy since every node on the testbed is connected to a power controller.  If you need to power cycle a node, log on to users.isi.deterlab.net and use the "node_reboot" command:
+Power cycling a node is easy since every node on the testbed is connected to a power controller.  If you need to power cycle a node, log on to users.deterlab.net and use the "node_reboot" command:
 
   	node_reboot <node> [node ... ]
 

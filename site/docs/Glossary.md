@@ -90,7 +90,7 @@
   <li class="definition">A description of the various elements of a computer network. In DETERLab, your experiment requires a topology in NS syntax that describes the links, nodes, etc of your experiment.</li>
   <li class="term">triggers</li>
   <li class="definition">In the <a href="/orchestrator/orchestrator-quickstart/">MAGI Orchestrator</a>, these are synchronization and/or branching points in a stream of events.</li>
-  <li class="term">users network (<tt>users.isi.deterlab.net</tt>)</li>
+  <li class="term">users network (<tt>users.deterlab.net</tt>)</li>
   <li class="definition">DETERLab's file server that serves as a shell host for testbed users. </li>
   <li class="term">YAML</li>
   <li class="definition">A simple format for describing data, used as the syntax for many configuration files throughout DETERLab systems. In general, just follow configuration file documentation, but if you are curious about specifications, you may find the latest here: <a href="http://www.yaml.org/spec/1.2/spec.html" class="ext-link">http://www.yaml.org/spec/1.2/spec.html</a></li>

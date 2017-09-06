@@ -8,7 +8,7 @@ This section describes the command line interface to the Containers system.
 
 ### containerize.py
 
-The ```containerize.py``` command creates a DETERLab experiment made up of containers.  The ```containerize.py``` program is available from ```/share/containers/containerize.py``` on ```users.isi.deterlab.net```.  A sample invocation is:
+The ```containerize.py``` command creates a DETERLab experiment made up of containers.  The ```containerize.py``` program is available from ```/share/containers/containerize.py``` on ```users.deterlab.net```.  A sample invocation is:
 
 ```
 $ /share/containers/containerize.py MyProject MyExperiment ~/mytopology.tcl
@@ -344,7 +344,7 @@ The site configuration file controls how all experiments are containerized acros
 
 The site configuration file is an attribute-value pair file parsed by a python ConfigParser that sets overall container parameters.  Many of these have legacy internal names.
 
-The default site configuration is in ```/share/containers/site.conf``` on ```users.isi.deterlab.net```.
+The default site configuration is in ```/share/containers/site.conf``` on ```users.deterlab.net```.
 
 Acceptable values (and their DETERLab defaults) are:
 

@@ -1,24 +1,24 @@
 # Accessing testbeds using SSH
 
-Each node on the testbed is reachable via <a href="http://en.wikipedia.org/wiki/Secure_Shell">SSH</a>.  One main difference between DETER and Emulab is that DETER nodes are not accessible directly from the internet.  In order to log into your nodes, you must first log into '''users.isi.deterlab.net''' using your DETER username (not your email address) and password (or your SSH public key).  From users you can log into your nodes.  To save on connections, you might want to look into using <a href="http://en.wikipedia.org/wiki/GNU_Screen">GNU screen</a> on `users`.  Also refer to the <a href="#tips-and-tricks">Tips and Tricks</a> section below for ways to make accessing DETER easier.
+Each node on the testbed is reachable via <a href="http://en.wikipedia.org/wiki/Secure_Shell">SSH</a>.  One main difference between DETER and Emulab is that DETER nodes are not accessible directly from the internet.  In order to log into your nodes, you must first log into '''users.deterlab.net''' using your DETER username (not your email address) and password (or your SSH public key).  From users you can log into your nodes.  To save on connections, you might want to look into using <a href="http://en.wikipedia.org/wiki/GNU_Screen">GNU screen</a> on `users`.  Also refer to the <a href="#tips-and-tricks">Tips and Tricks</a> section below for ways to make accessing DETER easier.
 
 ## Uploading files to DETER
 
-You can upload files to users.isi.deterlab.net via <a href="http://en.wikipedia.org/wiki/Secure_Shell#File_transfer_protocols_using_SSH">SCP</a>  or <a href="http://en.wikipedia.org/wiki/Secure_Shell#File_transfer_protocols_using_SSH">SFTP</a>.  Files in your home directory and in your project directory will be made available to you on all of your testbed nodes via <a href="http://en.wikipedia.org/wiki/Network_File_System_%28protocol%29">NFS</a>.
+You can upload files to users.deterlab.net via <a href="http://en.wikipedia.org/wiki/Secure_Shell#File_transfer_protocols_using_SSH">SCP</a>  or <a href="http://en.wikipedia.org/wiki/Secure_Shell#File_transfer_protocols_using_SSH">SFTP</a>.  Files in your home directory and in your project directory will be made available to you on all of your testbed nodes via <a href="http://en.wikipedia.org/wiki/Network_File_System_%28protocol%29">NFS</a>.
 
 ## An Example Session with Windows and Putty
 
 <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/">Putty</a> is a free, lightweight SSH client for Windows.  Here is an example session in which I connect to my experimental node "node0" in my experiment "jjh-ubuntu1004" in the project "DeterTest".
 
-First we connect to '''users.isi.deterlab.net''':
+First we connect to '''users.deterlab.net''':
 
 ![](/img/putty_session_one.png "Screenshot of default Putty session.")
 
-We then enter in our just our username and password (the same password as the DETERLab web interface).  Trying to use your email address or something like *jjh@users.isi.deterlab.net* will '''not''' work:
+We then enter in our just our username and password (the same password as the DETERLab web interface).  Trying to use your email address or something like *jjh@users.deterlab.net* will '''not''' work:
 
 ![](/img/putty_session_two.png)
 
-Now we have successfully logged into users.isi.deterlab.net:
+Now we have successfully logged into users.deterlab.net:
 
 ![](/img/putty_session_three.png)
 
@@ -30,7 +30,7 @@ From users, we now ssh into our experimental node, "node0.jjh-ubuntu.detertest":
 
 ### Listing your nodes from the command line ###
 
-When logged into `users.isi.deterlab.net`, the `node_list` command will list the names of all your nodes.  You can log into your nodes using either the pcXXX name or the full experimental name.
+When logged into `users.deterlab.net`, the `node_list` command will list the names of all your nodes.  You can log into your nodes using either the pcXXX name or the full experimental name.
 
 ```
   [jhickey@users ~]$ node_list
@@ -48,14 +48,14 @@ When logged into `users.isi.deterlab.net`, the `node_list` command will list the
 If you are, for example, running an internal web server on one of your DETER nodes, you can access it via SSH through users.  For example to redirect port 80 on pcXXX to your local machine on port 8080 you would do:
 
 ```
-    ssh -L 8080:pcXXX:80 username@users.isi.deterlab.net
+    ssh -L 8080:pcXXX:80 username@users.deterlab.net
 ```
 
 Once logged in, you should be able to access the web server on your DETER node by going to http://localhost:8080.  For more information on port forwarding with SSH, please refer to the SSH man page.
 
 ### SSH port forwarding with Putty
 
-To use putty for port forwarding, configure putty to open a connection to ```users.isi.deterlab.net```
+To use putty for port forwarding, configure putty to open a connection to ```users.deterlab.net```
 
 ![](/img/putty1.png)
 
@@ -97,11 +97,11 @@ It is possible to log directly into testbed nodes with a little SSH configuratio
 
 ```
     Host pc*.isi.deterlab.net
-        ProxyCommand ssh users.isi.deterlab.net nc %h %p
+        ProxyCommand ssh users.deterlab.net nc %h %p
         StrictHostKeyChecking no
 
     Host *.MyProject.isi.deterlab.net
-        ProxyCommand ssh users.isi.deterlab.net nc %h %p
+        ProxyCommand ssh users.deterlab.net nc %h %p
         StrictHostKeyChecking no
 ```
 
@@ -132,7 +132,7 @@ For example:
     4 packages can be updated.
     2 updates are security updates.
 
-    Last login: Wed Nov 10 20:13:15 2010 from users.isi.deterlab.net
+    Last login: Wed Nov 10 20:13:15 2010 from users.deterlab.net
     node0:~> 
 ```
 
@@ -141,7 +141,7 @@ For example:
 You can log in multiple times using the same SSH connection.  This dramatically speeds up creating new connections.  To enable SSH connection multiplexing, add the following lines to ~/.ssh/config.  If you are on a multiuser machine, you may want to store the control socket someplace other than /tmp.
 
 ```
-    Host users.isi.deterlab.net
+    Host users.deterlab.net
         ControlMaster auto
         ControlPath /tmp/%r@%h:%p
 ```
@@ -157,7 +157,7 @@ To verify that it is working, you can use the '''-v''' option:
     debug1: Applying options for *
     debug1: Reading configuration data /etc/ssh_config
     debug1: auto-mux: Trying existing master
-    Last login: Wed Nov 10 20:51:43 2010 from users.isi.deterlab.net
+    Last login: Wed Nov 10 20:51:43 2010 from users.deterlab.net
     node0:~> 
 ```
 
