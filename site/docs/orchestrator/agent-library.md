@@ -7,8 +7,10 @@ Most agents will not need to parse messages directly, however, because the MAGI 
 ###  Agent Execution Models
 
 There are two execution models supported by the daemon for Agents: 
-* ** Thread-based**  - A thread-based Agent is loaded and runs in the process space of the daemon. The daemon communicates with a thread-based agent directly
-* ** Process-based**  - A process-based Agent is started as a separate process. The daemon communicates with it via standard interprocess communication techniques: a pipe or a socket.
+
+* **Thread-based**  - A thread-based Agent is loaded and runs in the process space of the daemon. The daemon communicates with a thread-based agent directly.
+
+* **Process-based**  - A process-based Agent is started as a separate process. The daemon communicates with it via standard interprocess communication techniques: a pipe or a socket.
 
 Here is a list outlining the differences between the execution models.
 
