@@ -256,7 +256,7 @@ where:
 
 !!! note
     * The OSID may either by one of the standard OS's we provide or a custom OSID, created via the web interface.
-    * If no OS is specified for a node, a default OS is chosen based on the nodes type. This is currently `'Ubuntu1004-STD`' for PCs.
+    * If no OS is specified for a node, a default OS is chosen based on the nodes type. This is currently `'Ubuntu1604-STD`' for PCs.
     * The currently available standard OS types are listed in the <a href="/core/os-images/">OS Images</a> page.
 
 ### tb-set-node-rpms

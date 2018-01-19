@@ -366,7 +366,7 @@ Acceptable values (and their DETERLab defaults) are:
 
 * ```qemu_host_os```
 
-    OSID to request for qemu container nodess. Default: ```Ubuntu1204-64-STD```
+    OSID to request for qemu container nodess. Default: ```Ubuntu1604-STD```
 
 * ```exec_root```
 

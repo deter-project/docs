@@ -90,7 +90,7 @@ Reloading your disk with a fresh copy of an image is easy, and requires no inter
 
   	os_load [-i ImageName] [-p Project] <node> [node ... ]
 
-If you do not specify an image name, the default image for that node type will be loaded (typically Ubuntu1004-STD).  For testbed wide images, you do not have to specify a project.  The os_load command will wait (not exit) until the nodes have been reloaded, so that you do not need to check the console lines of each node to determine when the load is done.
+If you do not specify an image name, the default image for that node type will be loaded (typically Ubuntu1604-STD).  For testbed wide images, you do not have to specify a project.  The os_load command will wait (not exit) until the nodes have been reloaded, so that you do not need to check the console lines of each node to determine when the load is done.
 
 For example, to load the image 'testpc167' which is in the project 'DeterTest' onto pc167, we type:
 

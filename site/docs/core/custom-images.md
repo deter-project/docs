@@ -33,8 +33,8 @@ A typical approach to creating your own disk image is using one of the default i
 
 1. Create a single-node Linux or FreeBSD experiment. In your NS file, use the appropriate `tb-set-node-os` command, as in the following example:
 
-        tb-set-node-os $nodeA FBSD7-STD
-        tb-set-node-os $nodeA Ubuntu1004-STD
+        tb-set-node-os $nodeA FBSD-STD
+        tb-set-node-os $nodeA Ubuntu-STD
 
 1. After your experiment has swapped in (you have received the email saying it is running), log into the node and load all of the software packages that you wish to load. If you want to install the latest version of the Linux kernel on one of our standard disk images, or on your own custom Linux image, be sure to arrange for any programs that need to be started at boot time. It is a good idea to reboot the node and make sure that everything is running as expected when it comes up.
 1. If you are creating a Windows-based image, you **must** "prepare" the node. The final thing to do before grabbing the image is to login on the <a href="/core/using-nodes/#SerialConsole">console</a>, drop to single user mode, and run the `prepare` script. This is described in detail in the <a href="/core/windows/#Custom_images">custom Windows images</a> section of the Windows page.

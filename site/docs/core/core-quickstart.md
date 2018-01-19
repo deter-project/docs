@@ -53,8 +53,8 @@ Every experiment in DETERLab is based on a network topology file written in NS f
     set lan0 [$ns make-lan "$nodeD $nodeC $nodeB " 100Mb 0ms]
     
     # Set the OS on a couple.
-    tb-set-node-os $nodeA FBSD7-STD
-    tb-set-node-os $nodeC Ubuntu1004-STD         
+    tb-set-node-os $nodeA FBSD-STD
+    tb-set-node-os $nodeC Ubuntu-STD         
 
     $ns rtproto Static
     
