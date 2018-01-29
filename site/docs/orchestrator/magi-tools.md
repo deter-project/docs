@@ -11,6 +11,7 @@ The following tools are available for MAGI experiments in DETERLab:
 ## <a id="magi_status.py"></a>``magi_status.py``: Check status of a MAGI experiment, reboot MAGI daemon, download logs
 
 Use ```magi_status.py``` to:
+
 * check MAGI’s status on experiment nodes
 * reboot MAGI daemon process
 * download logs from experiment nodes
@@ -63,7 +64,7 @@ If the tool is asked to download logs, it just does that, and does not fetch the
 
 ## <a id="magi_graph.py"></a>``magi_graph.py``: Create graphs for a MAGI experiment
 
-``magi_graph.py`` is a graph generator for experiments executed on DETERLab using MAGI. The tool fetches the required data using MAGI’s data management layer and generates a graph in PNG format. This tool may be executed from either the Deter Ops machine or a remote computer with access to internet. The data to be plotted and other graph features are configurable.
+``magi_graph.py`` is a graph generator for experiments executed on DETERLab using MAGI. The tool fetches the required data using MAGI’s data management layer and generates a graph in PNG format. This tool may be executed from either the DETER Ops machine or a remote computer with access to internet. The data to be plotted and other graph features are configurable.
 
 The various commandline options are as follows:
 

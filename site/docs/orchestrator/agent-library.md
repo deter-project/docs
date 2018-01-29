@@ -26,10 +26,10 @@ Here is a list outlining the differences between the execution models.
 * ** Pro** : Agents may be written in languages other than Python.
 * ** Pro** : May kill off agent individually from the shell
 * ** Con** : Heavier weight if invoking a new interpreter for each Agent for scripted languages
-* ** Con** : Message transceiver is more complex, in particular if a library for the language has not been written. (
+* ** Con** : Message transceiver is more complex, in particular if a library for the language has not been written.
 
 !!! note
-    As of now, only Python is supported. We are working on adding support for other languages.)
+    As of now, only Python is supported. We are working on adding support for other languages.
 
 ###  Interface Description Language (IDL)
 
@@ -37,10 +37,10 @@ Agent authors must write an IDL that matches the interface exported by their age
 
 The IDL should specify: 
 * agent execution model (thread or process);
-* any public agent variables and their types, ranges, or enumerated values; 
+* any variables exposed by the agent and their types, ranges, or enumerated values; 
 * any public methods and the method arguments and their types; 
 * “help” strings for each method and agent variable which explain their purpose; 
-* and finally any Agent library from which they derive.
+* any Agent library from which they derive.
 
 This may seem like a lot to specify, but the Agent Library supplies IDL for base Agents --  so in practice much of the IDL specification will be supplied to the Agent author.
 
@@ -228,7 +228,7 @@ def getCmd(self, destination)
 
 Where ```destination``` is a server host name from which the agent should request traffic. 
 
-The ```TrafficClientAgent``` class implements the following event-callable methods: ```startClient()``` and ```stopClient()}}. Neither method takes any arguments. These methods may be invoked from an AAL and start and stop the client respectively.
+The ```TrafficClientAgent``` class implements the following event-callable methods: ```startClient()``` and ```stopClient()```. Neither method takes any arguments. These methods may be invoked from an AAL and start and stop the client respectively.
 
 The base class contains a number of variables which control how often ```getCmd``` is called and which servers should be contacted: 
 * ```servers```: A list of server hostnames
