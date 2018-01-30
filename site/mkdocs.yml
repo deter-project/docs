@@ -17,6 +17,7 @@ pages:
     - FAQs: support/faqs.md
     - Passwords: support/passwords.md
     - Usage Policy: support/usage-policy.md
+    - Configuring E-lab in E-lab: support/elab-elab-ssh-proxy.md
 - DETERLab Core:
     - Core Quickstart: core/core-quickstart.md
     - Core Guide: core/core-guide.md
@@ -91,7 +92,7 @@ markdown_extensions:
         permalink: 
     - admonition:
 
-copyright: Copyright &copy; 2017 <a href="https://www.deter-project.org/">DETER Project</a>.
+copyright: Copyright &copy; 2018 <a href="https://www.deter-project.org/">DETER Project</a>.
 
 #extra:
 #  support: contact@partners.org
