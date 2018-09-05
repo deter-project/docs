@@ -3,8 +3,8 @@ set ns [new Simulator]
 
 # Create the center node (named by its variable name)
 set center [$ns node]
-# The center node is a process
-tb-add-node-attribute $center containers:node_type process
+# The center node is an OpenVZ node
+tb-add-node-attribute $center containers:node_type open_vz
 
 # Connect 9 satellites
 for { set i 0} { $i < 9 } { incr i} {

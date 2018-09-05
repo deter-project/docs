@@ -3,8 +3,6 @@ set ns [new Simulator]
 
 # Create the center node (named by its variable name)
 set center [$ns node]
-# The center node is a process
-tb-add-node-attribute $center containers:node_type process
 tb-add-node-attribute $center containers:openvz_template ubuntu-12.04-x86_64
 
 # Connect 9 satellites
@@ -18,5 +16,5 @@ for { set i 0} { $i < 9 } { incr i} {
 }
 
 # Creation boilerplate
-$ns rtptoto Static
+$ns rtproto Static
 $ns run

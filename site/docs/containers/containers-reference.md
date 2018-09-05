@@ -31,7 +31,6 @@ If container types have been assigned to nodes using the ```containers:node_type
 | ```embedded_pnode``` | Physical Node |
 | ```qemu``` | Qemu VM |
 | ```openvz``` | Openvz Container |
-| ```process``` | ViewOS process |
 
 The ```containerize.py``` command takes several parameters that can change its behavior:
 
@@ -61,7 +60,7 @@ The ```containerize.py``` command takes several parameters that can change its b
 
 * ```--end-node-shaping```
 
-     Attempt to do end node traffic shaping even in containers connected by VDE switches.  This works with qemu nodes, but not process nodes.  Topologies that include both openvz nodes and qemu nodes that shape traffic should use this.  See the <a href="#interconnections-vde-switches-and-local-networking">discussion below</a>.
+     Attempt to do end node traffic shaping even in containers connected by VDE switches.  This works with qemu nodes.  Topologies that include both openvz nodes and qemu nodes that shape traffic should use this.  See the <a href="#interconnections-vde-switches-and-local-networking">discussion below</a>.
 
 * ```--vde-switch-shaping```
 
@@ -386,7 +385,7 @@ Acceptable values (and their DETERLab defaults) are:
 
 * ```switched_containers```
 
-    A list of the containers that are networked with VDE switches.  Default: ```qemu,process```
+    A list of the containers that are networked with VDE switches.  Default: ```qemus```
 
 * ```openvz_template_dir```
 
@@ -424,18 +423,6 @@ Different container types have some quirks.  This section lists limitations of e
 
 Qemu nodes are limited to 7 experimental interfaces.  They currently run only Ubuntu 12.04 32 bit operating systems.
 
-### ViewOS Processes
-
-These have no way to log in or work as conventional machines.  Process tree rooted in the <a href="/containers/containers-guide/#start-commands">start command</a> is created, so a service will run with its own view of the network.  It does not have an address on the control net.
-
-Because of a bug in their internal routing, multi-homed processes do not respond correctly for requests on some interfaces.  A ViewOS process does not recognize its other addresses when a packet arrives on a different interface.  A picture makes this clearer:
-
-![Diagram of a ViewOS process](/img/viewos.png)
-
-Container A can ping Interface X (10.0.0.1) of the ViewOS container successfully, but if Container A tries to ping Interface Y (10.0.1.2), the ViewOS container will not reply. In fact it will send ARP requests on Interface Y looking for its own address.
-
-For this reason, ViewOS processes are best used as lightweight forwarders.
-
 ### Physical Nodes
 
 Physical nodes can be incorporated into experiments, but should only use modern versions of Ubuntu, to allow the Containers system to run their <a href="/containers/containers-guide/#start-commands">start commands</a> correctly and to initialize their routing tables.
@@ -463,8 +450,6 @@ That flexibility incurs a cost in overhead.  Each delay element and the VDE swit
 The alternative mechanism is to do the traffic shaping inside the nodes, using <a href="http://www.linuxfoundation.org/collaborate/workgroups/networking/netem">Linux traffic shaping</a>.  In this case, traffic outbound from a container is delayed in the container for the full transit time to the next hop.  The next node does the same.  End-node shaping all happens in the kernel so it is relatively inexpensive at run time.
 
 Qemu nodes can make use of either end-node shaping or VDE shaping, and use VDE shaping by default.  The ```--end-node-shaping``` and ```--vde-switch-shaping``` options to ```containerize.py``` force the choice in qemu.
-
-ViewOS processes can only use VDE shaping.  Their network stack emulation is not rich enough to include traffic shaping.
 
 Openvz nodes only use end-node traffic shaping.  They have no native VDE support so interconnecting openvz containers to VDE switches would include both extra kernel crossings and extra context switches.  Because a primary attraction of VDE switches is their efficiency, the Containers system does not implement VDE interconnections to openvz.
 
