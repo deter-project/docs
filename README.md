@@ -1,6 +1,22 @@
 # docs
 DeterLab Documentation Sources
 
+# Install proper mkdoc version in a virtual environment
+
+This site was built with an older version of mkdocs. In order to build or update the
+site, you'll need to install the proper version of mkdocs, `0.14.0`. 
+
+Note that you should install `mkdocs` via pip and not your native package manager, lest you
+get an outdated version of `mkdocs`. Create a virtual python enviroment and install mkdocs there.
+
+```shell
+virtualenv docs_env
+source docs_env/bin/activate
+pip install mkdocs==0.14.0
+```
+
+When you are done editing the site, clear the environment with ```deactivate```.
+
 ## Building
 ```
 cd site
