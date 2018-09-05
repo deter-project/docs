@@ -41,7 +41,7 @@ The following is the topology description:
 	}
 
 	# Creation boilerplate
-	$ns rtptoto Static
+	$ns rtproto Static
 	$ns run
 ```
 
@@ -219,7 +219,6 @@ To change the container type that ```containerize.py``` assigns to nodes, use th
 | ```embedded_pnode``` | Physical Node |
 | ```qemu``` | Qemu VM |
 | ```openvz``` | Openvz Container |
-| ```process``` | ViewOS process |
 
 You can try this on our <a href="/downloads/example1.tcl">example topology</a>:
 
@@ -240,8 +239,6 @@ Access it via http://www.isi.deterlab.net//showexp.php3?pid=DeterTest&eid=exampl
 
 The qemu experiment looks much like the openvz experiment above, at this small scale.  Qemu nodes more completely emulate hardware and the kernels are independent, unlike openvz containers.  For example, a program can load kernel modules in a qemu VM, which it cannot do in an openvz container.  The qemu containers load the Ubuntu 12.04 (32 bit) distribution by default.
 
-We can also swap in the experiment using ViewOS processes, but processes cannot be manipulated from outside.  They are too lightweight to allow an SSH login, though they will run a start command.
-
 ### Mixing Containers
 
 Mixing containers requires you to assign container types in the topology description.  This is done by attaching an attribute to nodes.  The attribute is named ```containers:node_type``` and it takes the same values as the <a href="/containers/containers-guide#UsingOtherContainerTypes">--default-container parameter to containerize.py</a>.  If the experiment definition is in <a href="http://fedd.isi.deterlab.net/wiki/TopDl">topdl</a>, the attribute can be attached using the <a href="http://fedd.deterlab.net/wiki/TopdlLibrary#SharedFunctions">standard topdl routines</a>.  Attaching the attribute in ns2 is done using the DETERLab ```tb-add-node-attribute``` command.
@@ -250,7 +247,7 @@ Mixing containers requires you to assign container types in the topology descrip
 tb-add-node-attribute $node containers:node_type openvz
 ```
 
-Using this command in an ns2 topology description will set ```node``` to be placed in an openvz container.  Using this feature, we can modify our <a href="/downloads/example1.tcl">first example topology</a> to consist of qemu nodes and a single process container in the center.  Process nodes can have unlimited interfaces, but we cannot log into them.  The <a href="/downloads/example3.tcl">new topology file</a> looks like this:
+Using this command in an ns2 topology description will set ```node``` to be placed in an openvz container.  Using this feature, we can modify our <a href="/downloads/example1.tcl">first example topology</a> to consist of qemu nodes and a single OpenVZ container in the center.  The <a href="/downloads/example3.tcl">new topology file</a> looks like this:
 
 ```
 	source tb_compat.tcl
@@ -258,8 +255,8 @@ Using this command in an ns2 topology description will set ```node``` to be plac
 
 	# Create the center node (named by its variable name)
 	set center [$ns node]
-	# The center node is a process
-	tb-add-node-attribute $center containers:node_type process
+	# The center node is an openvz VM
+	tb-add-node-attribute $center containers:node_type openvz
 
 	# Connect 9 satellites
 	for { set i 0} { $i < 9 } { incr i} {
@@ -272,7 +269,7 @@ Using this command in an ns2 topology description will set ```node``` to be plac
 	}
 
 	# Creation boilerplate
-	$ns rtptoto Static
+	$ns rtproto Static
 	$ns run
 ```
 
@@ -284,7 +281,7 @@ Containerized experiment DeterTest/example3 successfully created!
 Access it via http://www.isi.deterlab.net//showexp.php3?pid=DeterTest&eid=example3
 ```
 
-When we swap it in, the experiment will have 10 satellite containers in qemu VMs and a central process that only forwards packets.  Again, you cannot log in to a process container, but you can use the qemu nodes as though they were physical machines.
+When we swap it in, the experiment will have 10 satellite containers in qemu VMs and a central OpenVZ VM that forwards packets.  
 
 Another interesting mixture of containers is to include a physical node.  Here is a <a href="example4.tcl">modified version of our mixed topology</a> that places the ```n-8``` satellite on a physical computer by setting its ```containers:node_type``` to ```embedded_pnode```.
 
@@ -300,12 +297,12 @@ Follow the url to the DETERLab experiment page and look at the *Visualization* t
 
 ![Screenshot of the Visualization tab for this experiment](/img/embedded_pnode.png)
 
-The physical node ```n-8``` shows up in the DETERLab visualization and otherwise acts as a physical node that is in a 10-node topology.  This experiment uses three different container types: physical nodes, ViewOS processes, and Qemu VMs.
+The physical node ```n-8``` shows up in the DETERLab visualization and otherwise acts as a physical node that is in a 10-node topology.  This experiment uses three different container types: physical nodes, ViewOS processes, and Qemu VMs. (Note that ViewOS containers are not currently supported on DETER.)
 
 
 #### Limitations on Mixing Containers
 
-At the moment, Qemu VMs and ViewOS processes are the only containers that can share a physical node.  Physical node containers are mapped one-to-one to physical nodes by definition.  Qemu and OpenVZ use different underlying operating system images in DETERLab, therefore they cannot share physical hardware.  Neither ViewOS processes nor Qemu VMs can share a physical machine with OpenVZ VMs.
+Physical node containers are mapped one-to-one to physical nodes by definition.  Qemu and OpenVZ use different underlying operating system images in DETERLab, therefore they cannot share physical hardware.  Qemu VMs cannot share a physical machine with OpenVZ VMs. If these container types are mixed in an experiment, they will always be assigned different physical nodes. 
 
 The first invocation of ```tb-add-node-attribute``` takes precedence.  It is best to only call ```tb-add-node-attribute``` once per attribute assigned on each node.
 
@@ -319,12 +316,12 @@ Openvz uses templates to look like various Linux installations.  The choices of 
 | -------- | ------------ | --------- |
 | centos-6-x86 | CentOS 6 | 32 bit |
 | centos-6-x86_64 | CentOS 6 | 64 bit |
-| ubuntu-10.04-x86 | Ubuntu 10.04 LTS | 32 bit |
-| ubuntu-10.04-x86_64 | Ubuntu 10.04 LTS | 64 bit |
 | ubuntu-12.04-x86 | Ubuntu 12.04 LTS | 32 bit |
 | ubuntu-12.04-x86_64 | Ubuntu 12.04 LTS | 64 bit |
+| ubuntu-14.04-x86 | Ubuntu 14.04 LTS | 32 bit |
+| ubuntu-14.04-x86_64 | Ubuntu 14.04 LTS | 64 bit |
 
-The default template is ```ubuntu-10.04-x86```.
+The default template is ```ubuntu-14.04-x86_64```.
 
 To set a template across an entire topology, give ```--openvz-template``` and the template name from the list above.  Invoking ```containerize.py``` on <a href="/downloads/example1.tcl">our original example</a> as below will instantiate the experiment under 64-bit Ubuntu 12.04:
 
@@ -359,8 +356,6 @@ Each of these parameters can be set on individual nodes using attributes.  Use `
 
 	# Create the center node (named by its variable name)
 	set center [$ns node]
-	# The center node is a process
-	tb-add-node-attribute $center containers:node_type process
 	tb-add-node-attribute $center containers:openvz_template ubuntu-12.04-x86_64
 
 	# Connect 9 satellites
@@ -611,7 +606,7 @@ Remember that ```--size``` sets a default pass size and that sizes have preceden
 
 These per-pass variables and user-specified pass specifications give users fine grained control over the paritioning process, even if they do not want to do the partitioning themselves.
 
-If no ```containers:PartitionPass``` attributes are specified in the topology, and no ```containers:Partition``` attributes are specified either, ```containerize.py}} carries out -- at most -- two passes.  Pass 0 paritions all openvz containers and pass 1 partitions all qemu and process containers.
+If no ```containers:PartitionPass``` attributes are specified in the topology, and no ```containers:Partition``` attributes are specified either, ```containerize.py}} carries out -- at most -- two passes.  Pass 0 paritions all openvz containers and pass 1 partitions all qemu containers.
 
 ## Further Reading
 

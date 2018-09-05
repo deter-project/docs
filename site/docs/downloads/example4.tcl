@@ -3,8 +3,6 @@ set ns [new Simulator]
 
 # Create the center node (named by its variable name)
 set center [$ns node]
-# The center node is a process
-tb-add-node-attribute $center containers:node_type process
 
 # Connect 9 satellites
 for { set i 0} { $i < 9 } { incr i} {
@@ -12,9 +10,9 @@ for { set i 0} { $i < 9 } { incr i} {
     set n($i) [$ns node]
     # Satellites are qemu nodes - except for n-9 which is physical
     if { $i < 8 } { 
-  tb-add-node-attribute $n($i) containers:node_type qemu
+        tb-add-node-attribute $n($i) containers:node_type qemu
     } else {
-  tb-add-node-attribute $n($i) containers:node_type embedded_pnode
+        tb-add-node-attribute $n($i) containers:node_type embedded_pnode
     }
 
     # Connect center to $n($i)
@@ -22,5 +20,5 @@ for { set i 0} { $i < 9 } { incr i} {
 }
 
 # Creation boilerplate
-$ns rtptoto Static
+$ns rtproto Static
 $ns run

@@ -2,3 +2,4 @@
 *.swo
 public
 _site/
+docs_env/

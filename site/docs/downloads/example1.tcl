@@ -12,6 +12,6 @@ source tb_compat.tcl
        ns duplex-link $center $n($i) 100Mb 10ms DropTail
    }
    
-   # Creation boilerplate
-   $ns rtptoto Static
-   $ns run
+# Creation boilerplate
+$ns rtproto Static
+$ns run

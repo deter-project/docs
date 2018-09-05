@@ -32,7 +32,6 @@ The Containers system framework supports multiple kinds of containers, but at th
 | Physical Machine | Complete fidelity | 1 per physical machine |
 | <a href="http://wiki.qemu.org/Main_Page">Qemu virtual Machine</a> | Virtual hardware | 10's of containers per physical machine |
 | <a href="http://openvz.org">Openvz container</a> | Partitioned resources in one Linux kernel | 100's of contatiners per physical machine |
-| <a href="http://wiki.virtualsquare.org/wiki/index.php/Introduction#View_OS">ViewOS process</a> | Process with isolated network stack | 1000's of containers per physical machine | 
 
 ## How do I use Containers?
 
