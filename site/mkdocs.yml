@@ -1,10 +1,10 @@
 site_name: DETERLab Documentation
 site_description: User documentation for the DETERLab testbed
-theme: readthedocs
-theme_dir: 'readthedocs_custom'
-#theme_dir: 'readthedocshm'
-site_favicon: favicon.ico
+theme:
+    name: readthedocs
+    custom_dir: readthedocs_custom
 site_dir: '_site'
+extra_css: [css/extra.css]
 
 pages:
 - Welcome to the DETERLab Documentation: index.md
