@@ -2,7 +2,7 @@
 
 ## Why can't I log in?
 
-Too many failed attempts to log into the web interface will result in your account being locked. You will get a message saying that your account has been frozen if you trigger it. If you are a student, please contact your TA. Otherwise, please ​[contact us](http://www.deter-project.org/contact_deter).
+Too many failed attempts to log into the web interface will result in your account being locked. You will get a message saying that your account has been frozen if you trigger it. If you are a student, please contact your TA. Otherwise, please ​[contact us](https://www.deter-project.org/contact).
 
 Also:
 - You must use your **actual account name**, not an email address, to log into `users.deterlab.net`. 

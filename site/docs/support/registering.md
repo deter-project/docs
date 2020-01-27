@@ -22,7 +22,7 @@ DETER accounts are grouped by projects, therefore the project leader or PI must 
     - Instructors should indicate this project is for educational purposes. Once the project is created, you will receive further instructions including how to create accounts for your students.
 - Upon submission, your application must be **approved by the DETER Executive Committee**; this generally takes a few days. They may contact you and ask for clarification.
 - You will receive an **email notification upon approval** and your user account will be active. You may then [log in](https://www.isi.deterlab.net) with the username and password you entered on the form.
-- If you are curious about the progress on your application, [you may ​contact us](http://www.deter-project.org/contact_deter).
+- If you are curious about the progress on your application, [you may ​contact us](https://www.deter-project.org/contact).
 
 ## Getting a User Account to Join an Existing Project
 
@@ -42,4 +42,4 @@ If you are a student taking a class that uses DETERLab:
 
 ## If you need assistance
 
-If you run into trouble, please ​[contact us](http://www.deter-project.org/contact_deter) and we will be happy to assist.
+If you run into trouble, please ​[contact us](https://www.deter-project.org/contact) and we will be happy to assist.
