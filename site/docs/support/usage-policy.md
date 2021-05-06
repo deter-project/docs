@@ -28,4 +28,4 @@ DETER is a shared resource. We expect users to be good citizens by not abusing o
 
 DETER is a resource shared by users around the world. While we do our best to keep experiments separated from each other, we can not provide any guarantee of privacy between projects. If you are concerned about privacy, please make sure you understand how to use UNIX permissions and encrypt your files when they are stored on our main file server. Feel free to contact us if you have any questions.
 
-Usage is also governed by the University of Southern California’s [​Privacy Policy](http://policies.usc.edu/p2admOpBus/privacy_personal_information.html).
+Usage is also governed by the University of Southern California’s [Privacy Policy](https://policy.usc.edu/info-privacy/).

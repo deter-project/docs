@@ -10,10 +10,9 @@ the blocks defined in base.html and its included child templates.
 #}
 
 {%- block site_name %}
-    <a href="{{ nav.homepage.url }}" class="icon">
+    <a href="{{ nav.homepage.url|url }}"> <!-- class="icon"-->
       <!--REPLACE LOGO FILE HERE -->
-      <img class="logo" style="float:left" src="/img/doc-logo.png"/> 
-      <span class="title">{{ config.site_name }}</span></a>
+      <img class="logo" style="float:left" src="/img/doc-logo.png"/>{{ config.site_name }}</a>
 {%- endblock %}
 
 {%- block scripts %}

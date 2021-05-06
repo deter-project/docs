@@ -6,7 +6,7 @@ theme:
 site_dir: '_site'
 extra_css: [css/extra.css]
 
-pages:
+nav:
 - Welcome to the DETERLab Documentation: index.md
 #- About These Pages: about_these_pages.md
 #- Style Guide: style-guide.md
@@ -89,7 +89,7 @@ pages:
 
 markdown_extensions:
     - toc:
-        permalink: 
+        permalink: True
     - admonition:
 
 copyright: Copyright &copy; 2018 <a href="https://www.deter-project.org/">DETER Project</a>.
