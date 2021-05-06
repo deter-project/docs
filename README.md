@@ -12,7 +12,7 @@ get an outdated version of `mkdocs`. Create a virtual python enviroment and inst
 ```shell
 virtualenv docs_env
 source docs_env/bin/activate
-pip install mkdocs==0.14.0
+pip install mkdocs
 ```
 
 When you are done editing the site, clear the environment with ```deactivate```.
