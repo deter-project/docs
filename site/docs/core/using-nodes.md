@@ -7,6 +7,7 @@ Here are the most important things to know.
  * `users.deterlab.net` is the host through which the testbed nodes are accessed and it is primary file server.
  * `scratch` is the local package mirror for CentOS, Ubuntu, and FreeBSD.
 
+## Accessing your nodes
 
 ## Modes of use
 
@@ -23,3 +24,4 @@ We have developed three toolkits to help you with experiment design and *automat
 Second, if you use image Ubuntu-DEW on your nodes, all the commands you type and snippets of their outputs will be saved in your project directory. You can use the tool `flight_log`, which is automatically installed in that image, to remind yourself of the commands you ran in the past and to select those you want to include in a Bash script. The script will be automatically generated for you. More information about this direction is in [DEW YouTube channel](https://www.youtube.com/channel/UCocyRn8Lk40f_1giKrDnRLQ/).
 
 Third, you can use our [MAGI orchestrator](https://docs.deterlab.net/orchestrator/orchestrator-guide/) to create scripts that will be more robust and readable than Bash scripts.
+
