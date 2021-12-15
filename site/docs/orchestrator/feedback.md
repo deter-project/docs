@@ -16,7 +16,7 @@ The solution is not dependent on the experiment topology. We deploy a traffic mo
 
 To demonstrate this case study, we set up an experiment topology similar to the one seen in the following figure, with 50 noise generating clients and 10 servers. We also tested a scaled up version of the experiment with 300 noise generating agents and 100 servers. However, due to the resource constraints on the testbed, we recommend you try this case with the smaller topology first. The scaling up of the experiment may be achieved with very simple modifications.
 
-![Example topology](/img/fb_topology.png)
+![Example topology](../img/fb_topology.png)
 
 We use two kinds of agents:
 
@@ -141,7 +141,7 @@ Once the experiment is swapped in, run the Orchestrator, giving it this AAL: <a 
 
 Once run, you will see the orchestrator step through the events in the AAL file. The example output below uses the project “montage” with experiment “caseFeedback”:
 
-![Feedback output](/img/fb_orch.png)
+![Feedback output](../img/fb_orch.png)
 
 1. The Orchestrator enacts an internally defined stream called initialization that is responsible for establishing all the groups and loading the agents. Once the agents are loaded, as indicated by the received trigger ```AgentLoadDone```, the initialization stream is complete.
 2. Now all of the six above mentioned streams start concurrently.
@@ -156,18 +156,14 @@ Once run, you will see the orchestrator step through the events in the AAL file.
 
 The experiment artifacts, the procedure and topology file that were used for the casestudy are attached below. Additionally, we have attached a detailed orchestration log that lists triggers from the clientnodes and the servernodes in the experiment.
 
-* **Procedure:** <a href="/downloads/casestudy_feedback.aal">casestudy_feedback.aal</a>
-* **Topology:** <a href="/downloads/casestudy_feedback.tcl">casestudy_feedback.tcl</a>
-* **Archive Logs:** <a href="/downloads/casestudy_feedback.tar.gz">casestudy_feedback.tar.gz</a>
-* **Orchestration:** <a href="/downloads/casestudy_feedback.orch.log">casestudy_feedback.orch.log</a>
+* **Procedure:** <a href="../../downloads/casestudy_feedback.aal">casestudy_feedback.aal</a>
+* **Topology:** <a href="../../downloads/casestudy_feedback.tcl">casestudy_feedback.tcl</a>
+* **Archive Logs:** <a href="../../downloads/casestudy_feedback.tar.gz">casestudy_feedback.tar.gz</a>
+* **Orchestration:** <a href="../../downloads/casestudy_feedback.orch.log">casestudy_feedback.orch.log</a>
 
 ## Visualizing Experiment Results
 
 Offline: A traffic plot may be generated using the <a href="http://montage.deterlab.net/magi/tools.html#magigraph">MAGI Graph Creation Tool</a>.
-
-Real Time: A real time simulated traffic plot using canned data from a pre-run experiment may be visualized <a href="http://tau.isi.edu/magidemos/casestudy/feedback/traffic.html">here</a>.
-
-A similar plot using live data may be plotted by <a href="http://tau.isi.edu/magidemos/casestudy/feedback/traffic.html">visiting the same web page</a>, and additionally passing it the hostname of the database config node of your experiment.
 
 You can find the database config node for your experiment by reading your experiment’s configuration file, similar to the following.
 

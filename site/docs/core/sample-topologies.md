@@ -6,7 +6,7 @@ The following are various topologies you can use to experiment with DETERLab Cor
 
 ### LAN
 
-![LAN Topology](/img/lan.png "LAN Topology")
+![LAN Topology](../img/lan.png "LAN Topology")
 ```
 	set ns [new Simulator]
 	source tb_compat.tcl
@@ -28,7 +28,7 @@ The following are various topologies you can use to experiment with DETERLab Cor
 ```
 ### Ring
 
-![Ring Topology](/img/ring.png "Ring Topology")
+![Ring Topology](../img/ring.png "Ring Topology")
 ```
     set ns [new Simulator]
     source tb_compat.tcl
@@ -55,7 +55,7 @@ The following are various topologies you can use to experiment with DETERLab Cor
 ```
 ### Dumbbell
 
-![Dumbbell Topology](/img/dumbbell.png "Dumbbell Topology")
+![Dumbbell Topology](../img/dumbbell.png "Dumbbell Topology")
 ```
 	set ns [new Simulator]
 	source tb_compat.tcl
@@ -88,7 +88,7 @@ The following are various topologies you can use to experiment with DETERLab Cor
 ```
 ### Tree
 
-![Tree Topology](/img/tree.png "Tree Topology")
+![Tree Topology](../img/tree.png "Tree Topology")
 ```
 	set ns [new Simulator]
 	source tb_compat.tcl

@@ -1,6 +1,6 @@
 # Configuring a MAGI Agent at Runtime
 
-In <a href="/orchestrator/writing-agents/">Writing MAGI Agents</a>, you saw how to create a basic agent. The sample agent created a single file on a test node. This document will explain how to use configuration in the AAL file to configure an agent at runtime.
+In <a href="../writing-agents/">Writing MAGI Agents</a>, you saw how to create a basic agent. The sample agent created a single file on a test node. This document will explain how to use configuration in the AAL file to configure an agent at runtime.
 
 ## Setting Agent Configuration
 
@@ -294,4 +294,4 @@ Here is the Orchestrator output now. Note that ```setConfiguration``` now “fir
   $
 ```
 
-For reference, the new agent implementation, AAL file, and IDL, file can be downloaded as a tar file here: <a href="/downloads/FileCreator-withconfig.tbz">FileCreator-withconfig.tbz</a>.
+For reference, the new agent implementation, AAL file, and IDL, file can be downloaded as a tar file here: <a href="../../downloads/FileCreator-withconfig.tbz">FileCreator-withconfig.tbz</a>.

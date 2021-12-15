@@ -2,14 +2,14 @@
 
 In order to conserve nodes, it is possible to specify that instead of doing traffic shaping on separate delay nodes (which eats up a node for every two shaped links), it be done on the nodes that are actually generating the traffic.
 
-Under FreeBSD, just like normal delay nodes, end node (sometimes called "per-link") traffic shaping uses IPFW to direct traffic into the proper Dummynet pipe. On each node in a duplex link or LAN, a set of IPFW rules and Dummynet pipes is set up. As traffic enters or leaves your node, IPFW looks at the packet and stuffs it into the proper Dummynet pipe. At the proper time, Dummynet takes the packet and sends it on its way.
+If you are running FreeBSD on your nodes, end node traffic shaping uses IPFW to direct traffic into the proper Dummynet pipe. On each node in a duplex link or LAN, a set of IPFW rules and Dummynet pipes is set up. As traffic enters or leaves your node, IPFW looks at the packet and stuffs it into the proper Dummynet pipe. At the proper time, Dummynet takes the packet and sends it on its way.
 
 Under Linux, end node traffic shaping is performed by the packet scheduler modules, part of the kernel NET3 implementation. Each packet is added to the appropriate scheduler queue tree and shaped as specified in your NS file. Note that Linux traffic shaping currently only supports the drop-tail queueing discipline; gred and red are not available yet.
 
 To specify end node shaping in your NS file, simply set up a normal link or LAN, and then mark it as wanting to use end node traffic shaping. For example: 
 
-    set link0 [$ns duplex-link $nodeA $nodeD 50Mb 0ms DropTail]
-    set lan0  [$ns make-lan "nodeA nodeB nodeC" 1Mb 100ms]
+    set link0 [$ns duplex-link $nodeA $nodeD 10Mb 0ms DropTail]
+    set lan0  [$ns make-lan "nodeA nodeB nodeC" 1Mb 0ms]
 
     tb-set-endnodeshaping $link0 1
     tb-set-endnodeshaping $lan0 1
@@ -68,7 +68,7 @@ As a concrete example, consider the following NS file which creates a router and
     $ns rtproto Static
 
 
-Since each node has four 100Mbs interfaces, the above mapping would not be possible without the use of multiplexed links. However, since each link is defined to use 30Mbs, by using multiplexed links, the 12 links can be shared over the four physical interfaces, without oversubscribing the 400Mbs aggregate bandwidth available to the node that is assigned to the router. '' Note: while it may sound a little like channel bonding, it is not!''
+Since each node has four 100Mbs interfaces, the above mapping would not be possible without the use of multiplexed links. However, since each link is defined to use 30Mbs, by using multiplexed links, the 12 links can be shared over the four physical interfaces, without oversubscribing the 400Mbs aggregate bandwidth available to the node that is assigned to the router. 
 
 ## FreeBSD Technical Discussion
 

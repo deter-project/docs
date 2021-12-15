@@ -23,7 +23,7 @@ To write and execute your agent you need the following three things:
 
 - The Agent code to implement the Agent. Also, every Agent must implement a method named `getAgent` which returns an instance of the Agent to run. The MAGI Daemon uses this method to get an instance of the Agent to run in a local thread and communicate with the Agent instance.
 - An Interface Description Language (IDL) file to describe the Agent function and specify things the MAGI Daemon needs to know to load and execute the Agent code (among these is the location of the Agent code and the execution mode).
-- An AAL file (as described [here](/orchestrator/orchestrator-guide/#step-1-write-the-aal-file))
+- An AAL file (as described [here](../orchestrator-guide/#step-1-write-the-aal-file))
 
 ## Deploying and Executing a Sample Agent
 
@@ -189,7 +189,7 @@ You may download the sample code as a tar file here: [FileCreator.tbz] (attach).
 
 ## Runtime Agent Configuration
 
-The sample Agent `FileCreator` always creates the same file, each time it is run. What if you wanted to create a different file? Or a series of files? It is possible to specify Agent configuration in an AAL file - configuration that can modify the internal variables of your Agent at run time. See [MAGI Agent Configuration](/orchestrator/agent-configuration/) for details.
+The sample Agent `FileCreator` always creates the same file, each time it is run. What if you wanted to create a different file? Or a series of files? It is possible to specify Agent configuration in an AAL file - configuration that can modify the internal variables of your Agent at run time. See [MAGI Agent Configuration](../agent-configuration/) for details.
 
 ## Troubleshooting
 

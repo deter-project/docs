@@ -1,13 +1,10 @@
 # Orchestrator Guide
 
-In this tutorial we walk you through setting up a basic orchestrated experiment. This page also includes common advanced topics. Detailed descriptions of the commands and configuration files are available in the <a href="/orchestrator/orchestrator-reference/">reference section</a>. 
-
-!!! note
-    If you are a student, go to the <a href="http://education.deterlab.net">education.deterlab.net</a> site for classroom-specific instructions.
+In this tutorial we walk you through setting up a basic orchestrated experiment. This page also includes common advanced topics. Detailed descriptions of the commands and configuration files are available in the <a href="../orchestrator-reference/">reference section</a>. 
 
 ## Basic MAGI Tutorial 
 
-In this tutorial, we demonstrate how to set up client and server traffic generators with only one server and one client. (For more complex examples, see the <a href="/orchestrator/orchestrator-case-studies/">Case Studies</a>.)
+In this tutorial, we demonstrate how to set up client and server traffic generators with only one server and one client. (For more complex examples, see the <a href="../orchestrator-case-studies/">Case Studies</a>.)
 
 The basic steps in creating an orchestrated experiment are:
 
@@ -119,7 +116,7 @@ Example:
         - type: trigger
           triggers: { [ timeout: 60000 ] }  # wait for 60 seconds
 
-You may find several specific examples of declaring groups, agents, events, and triggers in the <a href="/orchestrator/orchestrator-case-studies/">Case Studies</a>. 
+You may find several specific examples of declaring groups, agents, events, and triggers in the <a href="../orchestrator-case-studies/">Case Studies</a>. 
 
 For this basic tutorial, save this code to a file named ```procedure.aal``` and save it to the experiment folder.
 
@@ -132,7 +129,7 @@ This example has three events streams; the server stream, the client stream, and
 
 The coordination between the events can be illustrated as follows:
 
-![Example of events streams in Orchestrator](/img/cs_workflow.png)
+![Example of events streams in Orchestrator](../img/cs_workflow.png)
 
 Event streams can be synchronized using *event-based triggers* (such as after the server has started) or *time-based triggers* (such as wait for 30 seconds). The triggers are indicated as *wait* states (in gray). Forming the groups and loading the agents, which are also automated by the orchestrator tool, are not illustrated above.
 
@@ -221,11 +218,11 @@ cleanup:
 
 ```
 
-You can see all of the code together in this file: <a href="/downloads/casestudy_clientserver.aal">casestudy_clientserver.aal</a>.
+You can see all of the code together in this file: <a href="../../downloads/casestudy_clientserver.aal">casestudy_clientserver.aal</a>.
 
 ### Step 2: Swap in the the physical experiment using topology with MAGI start command 
 
-Swap in the experiment using this network description file: <a href="/downloads/casestudy_clientserver.tcl">casestudy_clientserver.tcl</a>.
+Swap in the experiment using this network description file: <a href="../../downloads/casestudy_clientserver.tcl">casestudy_clientserver.tcl</a>.
 
 This start command installs MAGI and supporting tools on all nodes at startup.
 

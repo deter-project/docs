@@ -1,9 +1,6 @@
 # Containers Guide
 
-In this tutorial we walk you through setting up a basic containerized experiment. This page also includes common advanced topics. Detailed descriptions of the commands and configuration files are available in the <a href="/containers/containers-reference/">reference section</a>. 
-
-!!! note
-    If you are a student, go to the <http://education.deterlab.net> site for classroom-specific instructions.
+In this tutorial we walk you through setting up a basic containerized experiment. This page also includes common advanced topics. Detailed descriptions of the commands and configuration files are available in the <a href="../containers-reference/">reference section</a>. 
 
 ## Basic Containers Tutorial
 
@@ -11,17 +8,17 @@ This tutorial will set up a containerized experiment with a star topology. We'll
 
 ### Getting started
 
-You will need a DETERLab account and be a member of a project. If you need help, see <a href="/core/core-guide/">the Core Guide</a>. 
+You will need a DETERLab account and be a member of a project. If you need help, see *Opening Account* documentation on the left sidebar.
 
 ### Step 1: Design the topology
 
 First, we will describe a star topology.
  
-![Visualization of star topology](/img/visualization-small.png)
+![Visualization of star topology](../img/visualization-small.png)
 
-For this example we will use the standard DETER topology descriptions.  If you are new to designing topologies, walk through the basic tutorial in the <a href="/core/core-guide/">Core Guide</a>.  The Containers system is largely compatible with the physical DETER interface.
+For this example we will use the standard DETER topology descriptions.  If you are new to designing topologies, walk through the basic tutorial in our [topology guide](../core/topology.md).  The Containers system is largely compatible with the physical DETER interface.
 
-Download the <a href="/downloads/example1.tcl">DETERLab-compatible ns2 description of this topology at this link</a> to your home directory on ```users.deterlab.net```.  It is a simple loop, along with the standard DETER boilerplate.  This file will be used to create a 10-node (9 satellites and one central node) physical experiment on DETER, although there are not many physical nodes on DETER with 10 interfaces (one interface for control traffic).
+Download the <a href="../../downloads/example1.tcl">DETERLab-compatible ns2 description of this topology at this link</a> to your home directory on ```users.deterlab.net```.  It is a simple loop, along with the standard DETER boilerplate.  This file will be used to create a 10-node (9 satellites and one central node) physical experiment on DETER, although there are not many physical nodes on DETER with 10 interfaces (one interface for control traffic).
 
 The following is the topology description:
 
@@ -67,7 +64,7 @@ This command creates an experiment called ```experiment1``` in the ```DeterTest`
 !!! note
     As with any DETERLab experiment, you must be a member of the project with appropriate rights to create an experiment in it.  ```containerize.py``` expects there to be no experiment with that name, and it will fail if one exists.  To remove an experiment you may terminate it through the web interface or use the ```endexp``` command.  Terminating an experiment is more final than swapping one out, so be sure that you want to replace the old experiment.  You may also resolve the conflict by renaming your new containerized experiment.
 
-The last parameter is the file containing the topology.  In this tutorial, we are referring to the ns2 file in <a href="example1.tcl">our example</a> but you may also use a <a href="http://fedd.deterlab.net/wiki/TopDl">topdl</a> description.  An ns2 description must end in ```.tcl``` or ```.ns```.
+The last parameter is the file containing the topology.  In this tutorial, we are referring to the ns2 file in <a href="../../downloads/example1.tcl">our example</a> but you may also use a <a href="http://fedd.deterlab.net/wiki/TopDl">topdl</a> description.  An ns2 description must end in ```.tcl``` or ```.ns```.
 
 With these default parameters ```containerize.py``` will put each node into an <a href="http://openvz.org">Openvz container</a> with at most 10 containers per physical node.
 
@@ -76,7 +73,7 @@ The output of the above command should be something like the following:
 ```
 users:~$ /share/containers/containerize.py DeterTest example1 ~/example1.tcl 
 Containerized experiment DeterTest/example1 successfully created!
-Access it via http://www.isi.deterlab.net//showexp.php3?pid=DeterTest&eid=example1
+Access it via http://www.isi.deterlab.net/showexp.php3?pid=DeterTest&eid=example1
 ```
 
 Now we can see what a containerized experiment looks like.
@@ -85,11 +82,11 @@ Now we can see what a containerized experiment looks like.
 
 Follow the link provided in the ```containerize.py``` output. You will see a standard DETER experiment page that looks like this:
 
-![Screenshot of the Experiment page](/img/experiment-page.png)
+![Screenshot of the Experiment page](../img/experiment-page.png)
 
 You may be surprised to see that DETER thinks the experiment has only one node:
 
-![Highlighting single-node visualization](/img/hilighted.png)
+![Highlighting single-node visualization](../img/hilighted.png)
 
 The Containers system has rewritten the description file and stored additional information in the experiment's per-experiment directory that will be used to create the 10 node experiment inside the single-node DETER experiment.  
 
@@ -121,21 +118,21 @@ This looks nothing like the file we gave to ```containerize.py```, but it does s
 The ```containers``` sub-directory of a containerized experiment holds information specific to a containerized experiment. There are a few useful bits of data in that per-experiment containers directory that we can look at.
 
 * **Copy of the topology file:** First, a copy of the topology that we gave to ```containerize.py``` is available in ```/proj/DeterTest/exp/example1/containers/experiment.tcl```.  If the experiment is created from a topdl file, the filename will be ```containers/experiment.tcl```.
-* **Visualization of experiment:** A simple visualization of the experiment is in ```containers/visualization.png```.  This is annotated with node and network names as well as interface IP addresses.  The topology depiction <a href="/containers/containers-guide/#step-1-design-the-topology">above</a> is an example.  To view a <a href="/img/visualization.png">larger version, click here</a>.
+* **Visualization of experiment:** A simple visualization of the experiment is in ```containers/visualization.png```.  This is annotated with node and network names as well as interface IP addresses.  The topology depiction <a href="../containers-guide/#step-1-design-the-topology">above</a> is an example.  To view a <a href="../../img/visualization.png">larger version, click here</a>.
 * **IP-to-hostname mapping:** The ```containers/hosts``` file is a copy of the IP-to-hostname mapping found on each virtual machine in the topology.  It can be useful in converting IP addresses back to names.  It is installed in ```/etc/hosts``` or the equivalent on each machine.
 * **PID/EID:** The two files ```/var/containers/pid``` and ```/var/containers/eid``` contain the project name and experiment name.  Scripts can make use of these.
 
-The rest of the contents of that directory are primarily used internally by the implementation, but a more detailed listing is in the <a href="/containers/containers-reference/#Per-experimentDirectory">Containers Reference</a>.
+The rest of the contents of that directory are primarily used internally by the implementation, but a more detailed listing is in the <a href="../containers-reference/#Per-experimentDirectory">Containers Reference</a>.
 
 ### Step 3: Swap-in resources
 
-At this point, as with any DETER experiment, the topology does not yet have any resources attached.  To get the resources, swap the experiment in from the web interface or using the ```swapexp``` command. See the <a href="/core/core-guide/">DETERLab Core Guide</a> for more information.
+At this point, as with any DETER experiment, the topology does not yet have any resources attached.  To get the resources, swap the experiment in from the web interface or using the ```swapexp``` command. See the <a href="../../core/deterlab-commands/">DETERLab Commands</a> for more information.
 
 ### Step 4: Verify virtual topology and access nodes
 
 Once you have been notified that the physical experiment has finished its swap-in, the Containers system starts converting the physical topology into the virtual topology. 
 
-At this time, you must manually verify when the virtual topology has been created by ping-ing or trying to SSH into individual nodes of an experiment. There is also a <a href="/containers/containers-guide/#StartCommands">workaround suggested below</a>. We are working towards offering a better notification system.
+At this time, you must manually verify when the virtual topology has been created by ping-ing or trying to SSH into individual nodes of an experiment. We are working towards offering a better notification system.
 
 Once the containerized elements have all started, the nodes are available as if they were physical nodes.  For example, we may access node ```n-0``` of the experiment we swapped in by running:
 
@@ -147,7 +144,7 @@ Be sure that you replace ```example1``` with the experiment name you passed to `
 
 When the SSH succeeds, you will have access to an Ubuntu 10.04 32-bit node with the same directories mounted as in a physical DETERLab experiment. Containerized nodes access the control net as well. Your home directory will be mounted, so your SSH keys will work for accessing the machine.
 
-Use the <a href="/core/using-nodes/#hostnames-for-your-nodes">same node naming conventions</a> as physical DETERLab experiments to ping and access other nodes.
+Use the <a href="../../core/interact/">same node naming conventions</a> as physical DETERLab experiments to ping and access other nodes.
 
 Here is a ping from ```n-0``` to ```center``` and ```n-1``` that confirms the containerized experiment is working as we expect.
 
@@ -178,7 +175,7 @@ At this point you can load and run software and generally experiment normally.
 
 #### Start Commands
 
-DETERLab Core provides a facility to run a command when a physical experiment starts, called <a href="/core/core-guide/#starting-your-application-automatically">start commands</a>.  A containerized experiment offers a similar facility with a few differences:
+DETERLab Core provides a facility to run a command when a physical experiment starts, called <a href="../../core/ns-commands/#tb-set-node-startcmd">start commands</a>.  A containerized experiment offers a similar facility with a few differences:
 
  * The start commands are not coordinated across nodes.  In a physical experiment, the start commands all execute when the last node has reported to the testbed that it has completed booting.  In a containerized experiment, the start commands run when the containerized node has come up.
  * Logs from the start command are available in ```/var/containers/log/start_command.out``` and ```/var/containers/log/start_command.err```.  This is true on embedded pnodes as well.
@@ -204,7 +201,7 @@ If you make the script above the start command of all nodes, the Containers syst
 
 ### Step 4: Releasing Resources
 
-As with a physical DETER experiment, release resources by swapping the experiment out using the web interface or the ```swapexp``` command (see the <a href="/core/core-guide/">Core Guide</a> for more information.  If you are using the <a href="/containers/containers-guide/#StartCommands">startcommand workaround</a> to detect startup, clear the startup directory when you swap the experiment out.
+As with a physical DETER experiment, release resources by swapping the experiment out using the web interface or the ```swapexp``` command. 
 
 ## Advanced Topics
 
@@ -220,7 +217,7 @@ To change the container type that ```containerize.py``` assigns to nodes, use th
 | ```qemu``` | Qemu VM |
 | ```openvz``` | Openvz Container |
 
-You can try this on our <a href="/downloads/example1.tcl">example topology</a>:
+You can try this on our <a href="../../downloads/example1.tcl">example topology</a>:
 
 ```
 users:~$ /share/containers/containerize.py --default-container qemu DeterTest example2 ~/example1.tcl 
@@ -229,7 +226,7 @@ Requested a QEMU node with more than 7 experimental interfaces.  Qemu nodes
 can only support 7 experimental interfaces.
 ```
 
-The Containers system is now using qemu containers to build our experiment.  Unfortunately qemu containers only support 7 experimental interfaces, an internal limit on the number of interfaces the virtual hardware supports.  Run the command again but use the attached <a href="/downloads/example2.tcl"</a>version of the topology with fewer satellites</a> to containerize without error.
+The Containers system is now using qemu containers to build our experiment.  Unfortunately qemu containers only support 7 experimental interfaces, an internal limit on the number of interfaces the virtual hardware supports.  Run the command again but use the attached <a href="../../downloads/example2.tcl"</a>version of the topology with fewer satellites</a> to containerize without error.
 
 ```
 $ /share/containers/containerize.py --default-container qemu DeterTest example2 ~/example2.tcl 
@@ -241,13 +238,13 @@ The qemu experiment looks much like the openvz experiment above, at this small s
 
 ### Mixing Containers
 
-Mixing containers requires you to assign container types in the topology description.  This is done by attaching an attribute to nodes.  The attribute is named ```containers:node_type``` and it takes the same values as the <a href="/containers/containers-guide#UsingOtherContainerTypes">--default-container parameter to containerize.py</a>.  If the experiment definition is in <a href="http://fedd.isi.deterlab.net/wiki/TopDl">topdl</a>, the attribute can be attached using the <a href="http://fedd.deterlab.net/wiki/TopdlLibrary#SharedFunctions">standard topdl routines</a>.  Attaching the attribute in ns2 is done using the DETERLab ```tb-add-node-attribute``` command.
+Mixing containers requires you to assign container types in the topology description.  This is done by attaching an attribute to nodes.  The attribute is named ```containers:node_type``` and it takes the same values as the <a href="../containers-guide/#UsingOtherContainerTypes">--default-container parameter to containerize.py</a>.  If the experiment definition is in <a href="http://fedd.isi.deterlab.net/wiki/TopDl">topdl</a>, the attribute can be attached using the <a href="http://fedd.deterlab.net/wiki/TopdlLibrary#SharedFunctions">standard topdl routines</a>.  Attaching the attribute in ns2 is done using the DETERLab ```tb-add-node-attribute``` command.
 
 ```
 tb-add-node-attribute $node containers:node_type openvz
 ```
 
-Using this command in an ns2 topology description will set ```node``` to be placed in an openvz container.  Using this feature, we can modify our <a href="/downloads/example1.tcl">first example topology</a> to consist of qemu nodes and a single OpenVZ container in the center.  The <a href="/downloads/example3.tcl">new topology file</a> looks like this:
+Using this command in an ns2 topology description will set ```node``` to be placed in an openvz container.  Using this feature, we can modify our <a href="../../downloads/example1.tcl">first example topology</a> to consist of qemu nodes and a single OpenVZ container in the center.  The <a href="../../downloads/example3.tcl">new topology file</a> looks like this:
 
 ```
 	source tb_compat.tcl
@@ -283,7 +280,7 @@ Access it via http://www.isi.deterlab.net//showexp.php3?pid=DeterTest&eid=exampl
 
 When we swap it in, the experiment will have 10 satellite containers in qemu VMs and a central OpenVZ VM that forwards packets.  
 
-Another interesting mixture of containers is to include a physical node.  Here is a <a href="example4.tcl">modified version of our mixed topology</a> that places the ```n-8``` satellite on a physical computer by setting its ```containers:node_type``` to ```embedded_pnode```.
+Another interesting mixture of containers is to include a physical node.  Here is a <a href="../../downloads/example4.tcl">modified version of our mixed topology</a> that places the ```n-8``` satellite on a physical computer by setting its ```containers:node_type``` to ```embedded_pnode```.
 
 After running that experiment you should have output similar to the following:
 
@@ -295,7 +292,7 @@ Access it via http://www.isi.deterlab.net//showexp.php3?pid=DeterTest&eid=exampl
 
 Follow the url to the DETERLab experiment page and look at the *Visualization* tab:
 
-![Screenshot of the Visualization tab for this experiment](/img/embedded_pnode.png)
+![Screenshot of the Visualization tab for this experiment](../img/embedded_pnode.png)
 
 The physical node ```n-8``` shows up in the DETERLab visualization and otherwise acts as a physical node that is in a 10-node topology.  This experiment uses three different container types: physical nodes, ViewOS processes, and Qemu VMs. (Note that ViewOS containers are not currently supported on DETER.)
 
@@ -323,7 +320,7 @@ Openvz uses templates to look like various Linux installations.  The choices of 
 
 The default template is ```ubuntu-14.04-x86_64```.
 
-To set a template across an entire topology, give ```--openvz-template``` and the template name from the list above.  Invoking ```containerize.py``` on <a href="/downloads/example1.tcl">our original example</a> as below will instantiate the experiment under 64-bit Ubuntu 12.04:
+To set a template across an entire topology, give ```--openvz-template``` and the template name from the list above.  Invoking ```containerize.py``` on <a href="../../downloads/example1.tcl">our original example</a> as below will instantiate the experiment under 64-bit Ubuntu 12.04:
 
 ```
 users:~$ /share/containers/containerize.py --openvz-template ubuntu-12.04-x86_64 DeterTest example1 ~/example1.tcl 
@@ -348,7 +345,7 @@ Containerized experiment DeterTest/example1 successfully created!
 Access it via http://www.isi.deterlab.net//showexp.php3?pid=DeterTest&eid=example1
 ```
 
-Each of these parameters can be set on individual nodes using attributes.  Use ```containers:openvz_template``` to set a template on a node and use ```containers:openvz_diskspace``` to set the disk space. <a href="/downloads/example5.tcl">This example topology</a> sets these openvz parameters per node:
+Each of these parameters can be set on individual nodes using attributes.  Use ```containers:openvz_template``` to set a template on a node and use ```containers:openvz_diskspace``` to set the disk space. <a href="../../downloads/example5.tcl">This example topology</a> sets these openvz parameters per node:
 
 ```
 	source tb_compat.tcl
@@ -387,7 +384,7 @@ The Containers system has a more limited ability to set qemu parameters.  Right 
 
 The image URL must be reachable from inside DETERLab.  The image must be a qcow2 image, optionally bzip2ed.  Facilities to snapshot and store such images are in development.
 
-If you are using a qemu image that is not booting into containers, make sure <a href="/containers/containers-reference/#BootableQemuImages">grub is properly configured</a>.
+If you are using a qemu image that is not booting into containers, make sure grub is properly configured.
 
 Qemu images also mount users' home directories the same as DETERLab physical nodes do.  In order to do this scalably, the Qemu VMs mount the users' directories from the physical node.  The DETER infrastructure cannot support exporting users' directories to thousands of containers.
 
@@ -413,9 +410,9 @@ Containerized experiment DeterTest/example1 successfully created!
 Access it via http://www.isi.deterlab.net//showexp.php3?pid=DeterTest&eid=example1
 ```
 
-This command calls ```containerize.py``` on our <a href="/downloads/example1.tcl">original topology</a> with a low packing factor.  The result is the same nodes spread across more physical machines, as we can see from the DETERLab web interface (on the *Visualization* tab):
+This command calls ```containerize.py``` on our <a href="../../downloads/example1.tcl">original topology</a> with a low packing factor.  The result is the same nodes spread across more physical machines, as we can see from the DETERLab web interface (on the *Visualization* tab):
 
-![Screenshot of the Visualization tab for this experiment](/img/loose.png)
+![Screenshot of the Visualization tab for this experiment](../img/loose.png)
 
 You will want to balance how many physical machines you use against how precisely you want to mimic them.
 
@@ -431,7 +428,7 @@ For example in an experiment with many containers dedicated only to forwarding p
 
 In exchange for providing greater control on packing, there is a price.  When a *set* of containers is packed, the Containers system takes into account both the nodes to be packed and their interconnections.  When *subsets* of containers are packed, the system cannot consider the interconnections between subsets.  In some cases, the packing of subsets can lead to a DETERLab experiment that cannot be created successfully.  This danger is mitigated by the fact that containers that are packed together are often related in ways that limit the number of connections between that set and another.
 
-To explore packing, we need to use a <a href="/downloads/example6.tcl">larger topology</a>:
+To explore packing, we need to use a <a href="../../downloads/example6.tcl">larger topology</a>:
 
 ```
 	source tb_compat.tcl
@@ -459,7 +456,7 @@ To explore packing, we need to use a <a href="/downloads/example6.tcl">larger to
 
 This creates three 20-node sub networks attached to a single central router.  It looks like this:
 
-![Visualization of three 20-node subnetworks attached to a single central router](/img/packing-small.png)
+![Visualization of three 20-node subnetworks attached to a single central router](../img/packing-small.png)
 
 Each node in the topology is assigned a ```containers::PackingPass``` attribute that groups them into subsets.  The ```containers:PackingPass``` attribute must be assigned an integer value.  The nodes in each packing pass are considered "together" when packing.  Each pass can be assigned different parameters.  The passes are carried out in order, though that is rarely important.
 
@@ -490,7 +487,7 @@ users:~$ /share/containers/container_image.py --experiment DeterTest/example6 --
 
 The output shows the topology with boxes drawn around the containers that share a physical node:
 
-![Indicates containers in this topology](/img/example6-smaller.png)
+![Indicates containers in this topology](../img/example6-smaller.png)
 
 That partitioning is surprising in that ```lan-1``` is split into three partitions of 6 & 7 nodes rather than two partitions of 10.  Similarly ```lan-2``` is split into five groups of 4 rather than four groups of 5.  
 
@@ -518,7 +515,7 @@ Access it via http://www.isi.deterlab.net//showexp.php3?pid=DeterTest&eid=exampl
 
 These parameters result in this packing, which fits in fewer nodes, but has the slight imbalances of splitting ```lan-1``` into 9 and 11 containers and ```lan-2``` into 4,5,and 6 container partitions.  Again, this asymmetry is an attempt to consider the internode networking costs.
 
-![Visualization of packing in fewer nodes](/img/example6.2-smaller.png)
+![Visualization of packing in fewer nodes](../img/example6.2-smaller.png)
 
 If the packing constraints are exact - 11 containers on ```lan-1``` is unacceptable - a second choice is to use the ```--nodes-only``` option.  This sets the cost of each arc in the graph to 0.  Metis ignores such arcs altogether, so the partitions are completely even.  This may cause trouble in more complex network topologies.
 
@@ -532,7 +529,7 @@ Access it via http://www.isi.deterlab.net//showexp.php3?pid=DeterTest&eid=exampl
 
 is
 
-![How the topology looks when packing only nodes](/img/example6.3-smaller.png)
+![How the topology looks when packing only nodes](../img/example6.3-smaller.png)
 
 which has symmetric partitions.
 
@@ -548,11 +545,11 @@ Access it via http://www.isi.deterlab.net//showexp.php3?pid=DeterTest&eid=exampl
 
 packs pass 0 into one physical machine, pass 1 into one physical machine, pass 2 into two physical machines and pass 3 into four physcial machines.  The result looks like:
 
-![How the topology looks using per-pass sizing](/img/example6.2-smaller.png)
+![How the topology looks using per-pass sizing](../img/example6.2-smaller.png)
 
 Partitions have different numbers of containers in them because metis is considering network constraints as well.  As with using packing, adding ```--nodes-only``` restores symmetry:
 
-![How the toplogy looks using nodes only for per-pass sizing](/img/example6.3-smaller.png)
+![How the toplogy looks using nodes only for per-pass sizing](../img/example6.3-smaller.png)
 
 
 The ```--pass-pack``` option is a per-pass generalization of the ```--packing``` option.  The options that can be specified per-pass are:
@@ -564,7 +561,7 @@ The ```--pass-pack``` option is a per-pass generalization of the ```--packing```
 | ```--pnode-types``` | ```--pass-pnodes``` | *pass*:*pnode*[,*pnode*...] (semicolon separated) | --pass-pnodes 0:MicroCloud;1:bpc2133,pc2133 |
 | ```--nodes-only``` | ```--pass-nodes-only``` | *pass* (comma-separated) | --pass-nodes-only 1,3,5 |
 
-The single-pass version sets a default so that this invocation on <a href="/downloads/example6.tcl">our 4 pass topology</a>:
+The single-pass version sets a default so that this invocation on <a href="../../downloads/example6.tcl">our 4 pass topology</a>:
 
 ```
 users:~$ /share/containers/containerize.py --packing 5 --pass-pack 0:1,1:20 DeterTest example6 ~/example6.tcl 
@@ -582,7 +579,7 @@ Containerized experiment DeterTest/example6 successfully created!
 Access it via http://www.isi.deterlab.net//showexp.php3?pid=DeterTest&eid=example6
 ```
 
-will allocate either bpc2133 or pc2133 nodes to containers assigned by pass 0 and Microcloud physical nodes to the containers partitioned in pass 1.  The rest will be allocated as the <a href="/containers/containers-reference/#SiteConfigurationFile">site configuration</a> specifies.  The single quotes around the ```--pass-pnodes``` option protects the semi-colon from the shell.  Another choice is to specify the command as:
+will allocate either bpc2133 or pc2133 nodes to containers assigned by pass 0 and Microcloud physical nodes to the containers partitioned in pass 1.  The rest will be allocated as the <a href="../containers-reference/#SiteConfigurationFile">site configuration</a> specifies.  The single quotes around the ```--pass-pnodes``` option protects the semi-colon from the shell.  Another choice is to specify the command as:
 
 ```
 users:~$ /share/containers/containerize.py --pass-pack 0:1,1:20,2:10,3:5 --pass-pnodes 0:pc2133,bpc2133 --pass-pnodes 1:MicroCloud DeterTest example6 ~/example6.tcl 
@@ -600,7 +597,7 @@ Access it via http://www.isi.deterlab.net//showexp.php3?pid=DeterTest&eid=exampl
 
 Produces:
 
-![An example of mixing and matching sizes and packing factors](/img/example6.4-smaller.png)
+![An example of mixing and matching sizes and packing factors](../img/example6.4-smaller.png)
 
 Remember that ```--size``` sets a default pass size and that sizes have precedence over packing.  If you specify ```--size```, no ```--packing``` or ```--pass-packing``` value will take effect.  To mix packing and sizes, use ```--pack-size``` for each sized pass, rather than ```--size```.
 
@@ -610,4 +607,4 @@ If no ```containers:PartitionPass``` attributes are specified in the topology, a
 
 ## Further Reading
 
-Hopefully these illustrative examples have given you an idea of how to use the containers system and what it is capable of.  More details are available from <a href="/containers/containers-reference/">the reference guide</a>.  Please see <a href="https://trac.deterlab.net/wiki/GettingHelp"> Getting Help</a> if you have difficulties.
+Hopefully these illustrative examples have given you an idea of how to use the containers system and what it is capable of.  More details are available from <a href="../containers-reference/">the reference guide</a>.  Please see <a href="https://trac.deterlab.net/wiki/GettingHelp"> Getting Help</a> if you have difficulties.

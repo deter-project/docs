@@ -15,7 +15,9 @@ For example, to start an experiment, you would use:
 The DETERLab XMLRPC server can be accessed via two different transport layers: SSH and SSL.
 
 **How to use SSH keys**
-Follow [these directions](/core/DETERSSH/) if you are unfamiliar with using SSH.
+
+You can edit your profile on DETERLab (from *My DeterLab* select *Profile* tab and then select *Edit SSH keys*) to upload your public key. After that you will be able to SSH into DETERLab without supplying your password.
+
 
 **How to use SSL**
 You need to request a certificate from the [DETERLab website](https://www.isi.deterlab.net/index.php3) in order to use the SSL based server. 

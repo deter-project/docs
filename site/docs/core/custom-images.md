@@ -14,7 +14,7 @@ We provide a number of supported testbed images here at DETERLab.  These images 
 
 Most new operating system images that we support are whole disk images, which is different from the more traditional scheme of using partition 1 for FreeBSD and partition 2 for Linux.  To view what nodes a particular operating system image runs on and what sort of partition scheme it uses, please refer to the <a href="https://www.isi.deterlab.net/showimageid_list.php3">Image ID list page</a>.
 
-The supported testbed images are listed in the <a href="/os-images/">Operating System Images</a> documentation page. 
+The supported testbed images are listed on DETERLab (click on *Experimentation* from the top menu, then on *Images*).
 
 ## <a name="CustomOS"></a>Custom OS Images
 
@@ -25,7 +25,7 @@ Once you have created a custom disk image (and the associated <a href="https://w
 !!! note
     Experience has shown that it is much faster to load a disk image on 10 nodes at once, then it is to load a bunch of RPMS or tarballs on each node as it boots. So while it may seem like overkill to create your own disk image, we can assure you it is not.
 
-The most common approach is to use the <a href="https://www.isi.deterlab.net/newimageid_ez.php3">New Image Descriptor</a> form to create a disk image that contains a customized version of a standard Linux or the FreeBSD image. All you need to do is enter the node name in the form, and the testbed system will create the image for you automatically, notifying you via email when it is finished. You can then use that image in subsequent experiments by specifying the descriptor name in your NS file with the <a href="/core/ns-commands/#tb-set-node-os">`tb-set-node-os`</a> command. When the experiment is configured, the proper image will be loaded on each node automatically by the system.
+The most common approach is to use the <a href="https://www.isi.deterlab.net/newimageid_ez.php3">New Image Descriptor</a> form to create a disk image that contains a customized version of a standard Linux or the FreeBSD image. All you need to do is enter the node name in the form, and the testbed system will create the image for you automatically, notifying you via email when it is finished. You can then use that image in subsequent experiments by specifying the descriptor name in your NS file with the <a href="ns-commands/#tb-set-node-os">`tb-set-node-os`</a> command. When the experiment is configured, the proper image will be loaded on each node automatically by the system.
 
 ## Creating Your Custom Image 
 
@@ -37,7 +37,6 @@ A typical approach to creating your own disk image is using one of the default i
         tb-set-node-os $nodeA Ubuntu-STD
 
 1. After your experiment has swapped in (you have received the email saying it is running), log into the node and load all of the software packages that you wish to load. If you want to install the latest version of the Linux kernel on one of our standard disk images, or on your own custom Linux image, be sure to arrange for any programs that need to be started at boot time. It is a good idea to reboot the node and make sure that everything is running as expected when it comes up.
-1. If you are creating a Windows-based image, you **must** "prepare" the node. The final thing to do before grabbing the image is to login on the <a href="/core/using-nodes/#SerialConsole">console</a>, drop to single user mode, and run the `prepare` script. This is described in detail in the <a href="/core/windows/#Custom_images">custom Windows images</a> section of the Windows page.
 1. Note the physical (`pcXXX`) name of the machine used!
 1. Create an image descriptor and image using the <a href="https://www.isi.deterlab.net/newimageid_ez.php3">New Image Descriptor</a> form.
 1. Wait for the email saying the image creation is done.
@@ -50,7 +49,7 @@ A typical approach to creating your own disk image is using one of the default i
 
         os_load -p <proj> -i <imageid> <node>
 
-    This program will run in the foreground, waiting until the image has been loaded. At that point you should log in and make sure everything is working okay. You might want to watch the console line as well (see the <a href="/core/using-nodes/#SerialConsole">Node Console section</a>). If you want to load the default image, then simply run:
+    This program will run in the foreground, waiting until the image has been loaded. At that point you should log in and make sure everything is working okay. If you want to load the default image, then simply run:
 
         os_load <node>
 

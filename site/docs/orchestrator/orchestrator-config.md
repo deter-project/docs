@@ -114,7 +114,7 @@ By default, MAGI setups an unsharded setup with a centralized collector. All the
 
 All the collector nodes need to be MAGI-enabled. The data manager configuration needs to have a collector mapping for each of the MAGI-enabled experiment nodes. If one is not provided, any sensors on a node that does not have a mapped collector, would end up collecting at the default collector.
 
-The <a href="/orchestrator/data-management/">Data Management</a> section has more information about MAGI’s data management layer.
+The <a href="../data-management/">Data Management</a> section has more information about MAGI’s data management layer.
 
 !!!note
     The ports are not configurable, they are only for informational purpose.

@@ -269,7 +269,6 @@ tb-set-node-rpms $node0 rpm1 rpm2 rpm3
 !!! note
     * This command sets which RPMs are to be installed on the node when it first boots after being assigned to an experiment.
     * Each RPM can be either a path to a file or a URL. Paths must be to files that reside in the ```/proj``` or ```/groups``` directory. You are not allowed to place your RPMs in your home directory. ```http(s)://``` and ```ftp://``` URLs will be fetched into the experiment's directory, and re-distributed from there.
-    * See the <a href="/core/core-guide/#installing-rpms-automatically">Core Guide</a> for more information.
 
 ### tb-set-node-startcmd
 ```
@@ -280,7 +279,6 @@ tb-set-node-startcmd $node0 "mystart.sh -a >& /tmp/node0.log"
 
 !!! note
     * Specify a script or program to be run when the node is booted.
-    * See the <a href="/core/core-guide/">Core Guide</a> for more information.
 
 ### tb-set-node-cmdline
 ```

@@ -1,6 +1,6 @@
 # Orchestrator Quickstart
 
-This page describes basic information about the MAGI Orchestrator and provides a high-level overview of how to use it. More details are available in the <a href="/orchestrator/orchestrator-guide/">Orchestrator Guide</a>.
+This page describes basic information about the MAGI Orchestrator and provides a high-level overview of how to use it. More details are available in the <a href="../orchestrator-guide/">Orchestrator Guide</a>.
 
 ## What is the MAGI Orchestrator?
 
@@ -42,11 +42,11 @@ The following is an example of an event in the AAL file:
   args: {}
 ```
 
-You'll find more detailed information about writing the AAL file in the <a href="/orchestrator/orchestrator-guide/">Orchestrator Guide</a>.
+You'll find more detailed information about writing the AAL file in the <a href="../orchestrator-guide/">Orchestrator Guide</a>.
 
 ### 3. Run the ```magi_orchestrator.py``` tool on a physical experiment in DETERLab
 
-Similar to <a href="/containers/containers-quickstart/">Containers</a>, you run the Orchestrator tool in conjunction with a swapped-in physical experiment in DETERLab. ```magi_orchestrator.py``` reads the procedure's AAL file and orchestrates an experiment based on the specified procedures.
+Similar to <a href="../../containers/containers-quickstart/">Containers</a>, you run the Orchestrator tool in conjunction with a swapped-in physical experiment in DETERLab. ```magi_orchestrator.py``` reads the procedure's AAL file and orchestrates an experiment based on the specified procedures.
 
 You would run a command similar to the following on ```users```:
 
@@ -66,6 +66,6 @@ As with all DETERLab experiment, when you are ready to stop working on an experi
 
 For more detailed information about the Orchestrator, read the following:
 
-* <a href="/orchestrator/orchestrator-guide/">Orchestrator Guide</a> - This guide walks you through a basic example of using the Orchestrator and includes some advanced topics.
-* <a href="/orchestrator/orchestrator-case-studies/">Orchestrator Case Studies</a> - Includes details of real-world examples of using Orchestrator.
-* <a href="/orchestrator/orchestrator-reference/">Orchestrator Reference</a> - This reference includes commands, configuration details and logs.
+* <a href="../orchestrator-guide/">Orchestrator Guide</a> - This guide walks you through a basic example of using the Orchestrator and includes some advanced topics.
+* <a href="../orchestrator-case-studies/">Orchestrator Case Studies</a> - Includes details of real-world examples of using Orchestrator.
+* <a href="../orchestrator-reference/">Orchestrator Reference</a> - This reference includes commands, configuration details and logs.

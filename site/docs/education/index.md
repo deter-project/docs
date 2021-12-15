@@ -1,6 +1,6 @@
 # Education Materials Overview
 
-DETERLab is dedicated to supporting cyber security education. Since its inception, DETERLab has been used by 358 research projects, from 262 institutions and involving 918 researchers, from 203 locations and 46 countries.
+DETERLab is dedicated to supporting cyber security education. Since its inception, DETERLab has been extensively used by classes all over the world. You can view up to date statistics on educational use of DETERLab  [here](https://isi.deterlab.net/education.php).
 
 DETERLab offers excellent support for teaching. Instructors can:
 

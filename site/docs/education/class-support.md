@@ -4,14 +4,14 @@ Classes use DETERLab differently than researchers do. Both groups can use DETERL
 
 If you run into a problem when using DETERLab in your classes please let us know. If you come up with a better solution than the ones we described below we'd really like to hear about it!
 
-[Course Setup](/education/course-setup/) - What we need from you to set up a DETERLab course.
+[Course Setup](../course-setup/) - What we need from you to set up a DETERLab course.
 
-[Course Wrap-Up](/education/course-setup/#course-wrap-up) - Actions to take at the end of your course
+[Course Wrap-Up](../course-setup/#course-wrap-up) - Actions to take at the end of your course
 
-[Course Hand-Off](/education/course-setup/#course-hand-off-to-another-instructor) - How to have a different instructor re-use the same course at your institution
+[Course Hand-Off](../course-setup/#course-hand-off-to-another-instructor) - How to have a different instructor re-use the same course at your institution
 
-[Managing Your Course](/education/course-setup/#managing-a-class) - How add/remove students, unfreeze accounts, add assignments, etc.
+[Managing Your Course](../course-setup/#managing-a-class) - How add/remove students, unfreeze accounts, add assignments, etc.
 
-[Access Control](/education/course-setup/#access-control) - Changes we made to the testbed to enforce students' individual work
+[Access Control](../course-setup/#access-control) - Changes we made to the testbed to enforce students' individual work
 
-[Resource Limits](/education/course-setup/#resource-limits) - Fair sharing of resources
+[Resource Limits](../course-setup/#resource-limits) - Fair sharing of resources
