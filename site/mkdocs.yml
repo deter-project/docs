@@ -8,84 +8,45 @@ extra_css: [css/extra.css]
 
 pages:
 - Welcome to the DETERLab Documentation: index.md
-#- About These Pages: about_these_pages.md
-#- Style Guide: style-guide.md
 - Glossary: Glossary.md
+- Quickstart: quickstart.md
+- Opening Account: 
+  - Research users: support/research.md
+  - Class users: support/class.md
+- Running Experiments:
+  - Create a topology: core/topology.md
+  - Create an experiment: core/create.md
+  - Swap in an experiment: core/swapin.md
+  - Use your nodes: core/interact.md
+  - Swap out or terminate: core/swapout.md
+  - User DOs and DON'Ts: core/user-guidelines.md
+- Advanced Features:
+  - Containers: containers/containers-quickstart.md
+  - Nework Emulation: dsc/index.md
+  - Risky Experiments: core/risky-experiment.md
+  - Binary Analysis: https://binary.deterlab.net/docs
+  - Competitions: competitions/index.md
+  - Orchestrator: orchestrator/index.md
+  - Human user emulation: dash/index.md
+- Sharing:
+  - Sample Topologies: core/sample-topologies.md
+  - Shared Materials: core/sharing.md
+- Deterlab for Classes:
+  - Education Materials Overview: education/index.md
+  - Guidelines for Teachers: education/guidelines-for-teachers.md
+  - Class Support: education/class-support.md
+  - Course Setup: education/course-setup.md
+  - Good Teaching Practices: education/good-teaching-practices.md
+  - Connect With Other Teachers: education/connect-with-teachers.md
+  - Guidelines for Students: education/guidelines-for-students.md
+  - Public Materials: education/public-materials.md
+- Reference:
+  - DETERLab commands: core/deterlab-commands.md
+  - NS commands: core/ns-commands.md
 - Support:
-    - Registering with DETERLab: support/registering.md
-    - Getting Help: support/getting-help.md
-    - FAQs: support/faqs.md
-    - Passwords: support/passwords.md
-    - Usage Policy: support/usage-policy.md
-    - Configuring E-lab in E-lab: support/elab-elab-ssh-proxy.md
-- DETERLab Core:
-    - Core Quickstart: core/core-quickstart.md
-    - Core Guide: core/core-guide.md
-    - Sample Topologies: core/sample-topologies.md
-    - Using Your Nodes: core/using-nodes.md
-    - Generating Traffic: core/generating-traffic.md
-    - End Node Traffic Shaping: core/link-delays.md 
-    - Risky Experiments: core/risky-experiment.md
-    - Using Shared Materials: core/sharing.md 
-    - User Do's and Don'ts: core/user-guidelines.md 
-- Core Reference:
-    - DETERLab Commands: core/deterlab-commands.md
-    - NS Commands Extensions: core/ns-commands.md
-    - Understanding Swapping (Node Use Policies): core/swapping.md
-    - Accessing testbeds using SSH: core/DETERSSH.md
-    - DETERLab Node Types: core/node-types.md
-    - Using the Serial Console: core/serial-console.md
-    - Dell Serial Console: core/dell-serial-console.md
-    - OS Images: core/os-images.md
-    - Creating Custom Images: core/custom-images.md
-    - Windows XP: core/windows.md
-    - Legacy Tools: core/legacy-tools.md
-- Orchestrator:
-    #- Orchestrator TOC: orchestrator/index.md
-    - Orchestrator Quickstart: orchestrator/orchestrator-quickstart.md
-    - Orchestrator Guide: orchestrator/orchestrator-guide.md
-    - Orchestrator Case Studies: orchestrator/orchestrator-case-studies.md
-    - Simple Client Server Case Study: orchestrator/simple-client-server.md
-    - Scaled Client Server Case Study: orchestrator/scaled-client-server.md
-    - Feedback Case Study: orchestrator/feedback.md
-    - Flooder Case Study: orchestrator/flooder.md
-    - Specialized User: orchestrator/writing-agents.md
-    - Orchestrator Data Management: orchestrator/data-management.md
-    - MAGI Configuration: orchestrator/orchestrator-config.md
-  #  - Configuring a MAGI Agent at Runtime: orchestrator/agent-configuration.md
-    - Orchestrator Reference: orchestrator/orchestrator-reference.md
-    - MAGI System Organization: orchestrator/system-files.md
-    - MAGI Agent Library: orchestrator/agent-library.md
-    - MAGI Tools: orchestrator/magi-tools.md
-    - MAGI Development Codebase: orchestrator/magi-dev.md
-    - MAGI Desktop: orchestrator/magi-desktop.md
-- Containers:
-    - Containers Quickstart: containers/containers-quickstart.md
-    - Containers Guide: containers/containers-guide.md
-    - Containers Reference: containers/containers-reference.md
-- DeterLab Tools: 
-    - Tools Index: tools/index.md
-    - Internet Atlas: tools/internet-atlas.md
-- Other Features:
-    - Federation: federation/index.md
-    - ABAC: abac/index.md
-    - Competitions: competitions/index.md
-- Education Materials:
-    - Education Materials Overview: education/index.md
-    - Guidelines for Teachers: education/guidelines-for-teachers.md
-    - Class Support: education/class-support.md
-    - Course Setup: education/course-setup.md
-    - Good Teaching Practices: education/good-teaching-practices.md
-    - Connect With Other Teachers: education/connect-with-teachers.md
-    - Guidelines for Students: education/guidelines-for-students.md
-    - Student Introduction to DETERLab: education/student-intro.md
-    - Public Materials: education/public-materials.md
-- Miscellaneous:
-    - DETERLab Rooms: ISIUCB.md
-#- About:
-#    - Release Notes: about/release-notes.md
-#    - Contributing: about/contributing.md
-#    - License: about/license.md
+  - Getting Help: support/getting-help.md
+  - FAQs: support/faqs.md
+  - Usage Policy: support/usage-policy.md
 
 markdown_extensions:
     - toc:

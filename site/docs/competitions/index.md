@@ -18,17 +18,17 @@ If you wish to run competitions within your DETERLab project, please submit a ti
 
 You can create a new competition from your "My DETERLab" view. There will be a "Competitions" tab once you have a competition-enabled project. From that tab, you can click on the left-hand menu option "New competition".
 
-The dialogue will ask you for the competition name and folder path. You should specify a unique name, such that no current experiments of your contain it as a prefix (e.g., you can specify 'comp' if you have no experiments whose name starts with 'comp'). The folder path should lead to a folder which has at least two files inside it: (1) cctf.ns file, describing the topology of an experiment that will be used for the competition and (2) start.pl, specifying a script to set up software on and limit access to experimental nodes. There are several competitions in shared materials, which you can reuse. You should also read our [guide to writing competition scripts](index.md#writing).
+The dialogue will ask you for the competition name and folder path. You should specify a unique name, such that no current experiments of your contain it as a prefix (e.g., you can specify 'comp' if you have no experiments whose name starts with 'comp'). The folder path should lead to a folder which has at least two files inside it: (1) cctf.ns file, describing the topology of an experiment that will be used for the competition and (2) start.pl, specifying a script to set up software on and limit access to experimental nodes. There are several competitions in shared materials, which you can reuse. You should also read our [guide to writing competition scripts](../competitions/comp-script-guide/).
 
 The dialogue will also ask you how many copies of the competition you need and whether team assignment should be "paired" or "circular". The figures below illustrate these two assignment types.  
 
 In a circular assignment there are as many teams as there are experiments. Each team defends one experiment and attacks one other experiment. This team assignment enables participants on each team to play both defensive and offensive roles.
 
-![Circular Assigment](/img/circular.png "Circular team assignment")
+![Circular Assigment](../img/circular.png "Circular team assignment")
 
 In a paired assignment the number of teams is twice that of the experiments. Each team either defends one experiment or attacks one experiment. This team assignment places each participant into either offensive or defensive role. 
 
-![Paired Assigment](/img/paired.png "Paired team assignment")	
+![Paired Assigment](../img/paired.png "Paired team assignment")	
 
 Once you click "Submit" DETERLab will create a number of experiments and teams for your competition.
 

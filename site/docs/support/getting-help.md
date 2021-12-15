@@ -2,12 +2,14 @@
 
 **Summary:** take *all* of the details about your problem (project/experiment IDs, logs, error output, etc) and [file a ticket](https://trac.deterlab.net/newticket) in our Trac issue-tracking system.
 
+**If you are using DETERLab for your class do not file a ticket.** Email your instructor or TA instead.
+
 !!! note
     You must log into Trac using your DETERLab username and password.
 
 ## What to do first if you are having trouble?
 
-- Read the [FAQ page](/faqs/) to see if your question has already been answered. 
+- Read the [FAQ page](../faqs/) to see if your question has already been answered. 
 - You can also search the documentation (see the search box at the top of the left sidebar) and trouble tickets on the [Trac Search page](https://trac.deterlab.net/search).
 
 ## If you still need help, create a Trac support ticket

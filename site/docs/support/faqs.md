@@ -20,17 +20,13 @@ The reverse of the previous question: copy the files you want to your home direc
 
 The currently supported operating system images (see the ​[Recommended list for currently supported OS images](https://www.isi.deterlab.net/showosid_list.php3)) have access to full package repositories on a local mirror. Depending on your OS you may use `yum`, `apt-get`, or `pkg_add` to install software that has been pre-packaged for each OS.
 
-If there is no package for the software you wish to install, you may install from source. Copy the source tarball to the testbed (see [How do I copy files from my workstation to a node in an experiment?](#HowdoIcopyfilesfrommyworkstationtoanodeinanexperiment) or use `wget` or `curl` on `users`), then follow the package's installation instructions.
+If there is no package for the software you wish to install, you may install from source. Copy the source tarball to the testbed (see [our guide to file coping](../core/interact.md#transfer-files) or use `wget` or `curl` on `users`), then follow the package's installation instructions.
 
 While we will do everything we can to assist any issues you face, we do not have the resources to help individual users install software.
 
-## How do I connect the web browser on my workstation to the inner boss within an Emulab-in-Emulab experiment?
-
-See [Setting Up FoxyProxy](/support/elab-elab-ssh-proxy/).
-
 ## I try to swap in and get the error: Admission Control: $project/$experiment has too many nodes allocated!
 
-**If you are a class user:** the maximum number of nodes that can be allocated for a class is limited (see [Class Resource Limits](/education/course-setup/#resource-limits) for details). Wait for some of your classmates to free up resources before trying to swap in again.
+**If you are a class user:** the maximum number of nodes that can be allocated for a class is limited (see [Class Resource Limits](../../education/course-setup/#resource-limits) for details). Wait for some of your classmates to free up resources before trying to swap in again.
 
 You are less likely to encounter this during non-peak hours (late night and early morning) and when deadlines are distant.
 
@@ -42,4 +38,4 @@ This may not be so frequent an error, but may arise when the experiment delibera
 
 ## Your site claims that my new password is in the dictionary. I checked the dictionary and 'qwerty1234' is not in it.
 
-Please see our [Passwords page](/support/passwords/).
+Please see our [Passwords page](../passwords/).

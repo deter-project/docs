@@ -18,7 +18,7 @@ Orchestrator data management uses [MongoDB](http://www.mongodb.org) at its base.
 
 The data management layer configuration is part of the Orchestrator’s experiment level and node level configuration files.
 
-As mentioned earlier, Orchestrator’s data management layer is highly configurable. More information about the same in available at <a href="/orchestrator/orchestrator-config/#dbdl-configure-the-magi-data-management-layer">DBDL: Configure the Orchestrator Data Management Layer</a>.
+As mentioned earlier, Orchestrator’s data management layer is highly configurable. More information about the same in available at <a href="../orchestrator-config/#dbdl-configure-the-magi-data-management-layer">DBDL: Configure the Orchestrator Data Management Layer</a>.
 
 Orchestrator’s data management layer enables an experimenter to do the following.
 

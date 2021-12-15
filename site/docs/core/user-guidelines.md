@@ -1,12 +1,11 @@
 # User Do's and Don'ts
 
-**If you are a student: DO read the [Student Introduction to DETERLab](/education/student-intro/).**
 
 ## Preserving our Control Network
 
 - DON'T use control network unless absolutely necessary. This means:
 
-    - DON'T use full node names such as `ping node1.YourExperiment.YourProject`
+    - DON'T use full node names such as `ping node1.YourExperiment.YourProject` when communicating *between* nodes in your experiment
 
         - DO use short names such as `ping node1`. This ensures that traffic goes over experimental network.
 
@@ -20,18 +19,13 @@
 
     - DO store these files locally on a node, e.g., in `/tmp` folder. If you need more disk space on a Linux or FreeBSD node you can mount more to `/mnt/local` by doing
         
-        ```sudo /usr/local/etc/emulab/mkextrafs.pl /mnt 
-        user='whoami' 
-        sudo chown $user /mnt/local
-        ```
+```
+	sudo /usr/local/etc/emulab/mkextrafs.pl /mnt
+	user='whoami'
+	sudo chown $user /mnt/local
+```
         
-        or on an XP node, SSH in and set a root password:
-        
-        `% passwd root`
-        
-        then through rdesktop log in as root, and use _start -> control panel -> performance and maintenance -> administrative tools -> computer management -> storage -> disk management (local)_ to create a new partition. After the partition formats, log out of the root account and the storage will be available to your usual identity.
-        
-    Transfer the files to your home directory before you swap out to save them.
+Remember to transfer the files to your home directory before you swap out to save them.
 
 - DON'T transfer large (>500 MB) files frequently between your home or project directories and a local directory on your experimental machine.
 

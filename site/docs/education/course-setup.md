@@ -73,7 +73,7 @@ Some classes within the same institution may be taught by different instructors 
 **Please follow these steps even if a hand-off is temporary.**
 
 !!! note 
-    These instructions do not apply to instructors from _different_ institutions looking to adopt each other's material in a course they teach. For that, look at our [guidelines for sharing](/core/sharing/).
+    These instructions do not apply to instructors from _different_ institutions looking to adopt each other's material in a course they teach. For that, look at our [guidelines for sharing](../../core/sharing/).
 
 ## Managing a Class
 
@@ -143,7 +143,7 @@ A "material" is a useful link for your students, required reading, a set of lect
 
 ##### 1\. Adopt a shared material
 
-See instructions about [sharing](/core/sharing/).
+See instructions about [sharing](../../core/sharing/).
 
 ##### 2\. Upload a material or specify a URL
 
@@ -173,7 +173,7 @@ To assign something to students:
 3. Select materials you want to assign from the list and choose if you want to assign them to all students, a group of students, or individual students. 
 4. You must set the due date for the assignment and fill either the anticipated number of nodes per student or the class limit ([see about class limits](#resource-limits)). 
 
-    Once you create an assignment, the system will automatically enforce the limit for your class from the date of the assignment's creation until the due date. If you modify the due date (see how), the system will automatically modify the limits.
+    Once you create an assignment, the system will automatically enforce the limit for your class from the date of the assignment's creation until the due date.
 
 #### Managing Assignments
 
@@ -181,13 +181,20 @@ To make changes to assignments:
 
 1. From the left menu choose _Manage Assignments_. 
 2. To delete an assignment, select those you want to delete and click _Modify_ (see warning below).
-3. To change the due date, input a new date and click _Modify_
-4. To view student progress or download submissions for grading, TODO. 
-
-    You can download submissions many times. New submissions will be added to the folder with the old ones.
+3. To change the due date, input a new date and click _Modify_. If you modify the due date, the system will automatically modify the limits for your class.
 
 !!! warning 
     Deleting an assignment also deletes all submissions for it.
+
+#### Monitoring progress
+
+You can monitor progress on an assignment by clicking on *Teaching* tab, then *Manage Assignments* on left sidebar, then *View progress* button next to the given assignment. You will be able to see which students have started work, and which have submitted their answers.
+
+#### Downloading submissions
+
+To download student submissions click on *Teaching* tab, then *Manage Assignments* on left sidebar, then *Download submissions* button next to the given assignment. 
+
+You can download submissions many times. New submissions will be added to the folder with the old ones.
 
 ### Access Control
 

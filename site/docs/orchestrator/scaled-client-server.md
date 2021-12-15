@@ -2,11 +2,11 @@
 
 In this example we demonstrate how to set up client server traffic generators in a larger topology.
 
-This case study is identical to <a href="/orchestrator/simple-client-server/">Simple Client Case Study</a> except the topology is significantly larger.
+This case study is identical to <a href="../simple-client-server/">Simple Client Case Study</a> except the topology is significantly larger.
 
 ## Event Streams
 
-As in the <a href="/orchestrator/simple-client-server/">simpler case</a>, this example has three events streams; the server stream, the client stream, and the cleanup stream.
+As in the <a href="../simple-client-server/">simpler case</a>, this example has three events streams; the server stream, the client stream, and the cleanup stream.
 
 ## Mapping to the Topology
 
@@ -63,7 +63,7 @@ The server event stream consists of three states.
 2. It then enters the **wait** state where it waits for a trigger from the client event stream.
 3. Once the trigger is received, it enters the **stop** state, where the server is deactivated or terminated.
 
-The AAL description is the same as the one used in the <a href="/downloads/casestudy_clientserver.aal">Simple Client case study</a>.
+The AAL description is the same as the one used in the <a href="../../downloads/casestudy_clientserver.aal">Simple Client case study</a>.
 
 ## Client Stream
 
@@ -80,7 +80,7 @@ The client event stream consists of five states.
 
 ### Step 1: Swap in the experiment
 
-Swap in the experiment using this network description file: <a href="/downloads/cs55_topology.tcl">cs55_topology.tcl</a>
+Swap in the experiment using this network description file: <a href="../../downloads/cs55_topology.tcl">cs55_topology.tcl</a>
 
 ### Step 2: Set up your environment
 
@@ -101,7 +101,7 @@ Once the experiment is swapped in, run the orchestrator, giving it the AAL above
 
 Once run, you will see the orchestrator step through the events in the AAL file. The example output below uses the project “montage” with experiment “caseClientServer”:
 
-![Example of Orchestrator output](/img/cs55_orch.png)
+![Example of Orchestrator output](../img/cs55_orch.png)
 
 1. The Orchestrator enacts an internally defined stream called ```initilization``` that is responsible for establishing the server_group and the client_group and loading the agents. Once the agents are loaded, as indicated by the received trigger ```AgentLoadDone```, The initialization stream is complete.
 2. Now the serverstream, clientstream and the cleanup stream start concurrently. The serverstream sends the startServer event to the server_group. All members of the server_group start the server and fire a trigger serverStarted.
@@ -111,10 +111,10 @@ Once run, you will see the orchestrator step through the events in the AAL file.
 
 The experiment artifacts, the procedure and topology file that were used for the casestudy are attached below. Additionally, we have attached a detailed orchestration log that lists triggers from the clientnodes and the servernodes in the experiment.
 
-* **Procedure:** <a href="/downloads/casestudy_clientserver55.aal">casestudy_clientserver55.aal</a>
-* **Topology:** <a href="/downloads/casestudy_clientserver55.tcl">casestudy_clientserver55.tcl</a>
-* **Archive Logs:** <a href="/downloads/casestudy_clientserver55.tar.gz">casestudy_clientserver55.tar.gz</a>
-* **Orchestration:** <a href="/downloads/casestudy_clientserver55.orch.log">casestudy_clientserver55.orch.log</a>
+* **Procedure:** <a href="../../downloads/casestudy_clientserver55.aal">casestudy_clientserver55.aal</a>
+* **Topology:** <a href="../../downloads/casestudy_clientserver55.tcl">casestudy_clientserver55.tcl</a>
+* **Archive Logs:** <a href="../../downloads/casestudy_clientserver55.tar.gz">casestudy_clientserver55.tar.gz</a>
+* **Orchestration:** <a href="../../downloads/casestudy_clientserver55.orch.log">casestudy_clientserver55.orch.log</a>
 
 ## Visualizing Experiment Results
 
@@ -164,11 +164,8 @@ Offline: A plot of the traffic flowing through the router node connecting the cl
 > /share/magi/current/magi_graph.py -e $EXP -p $PROJ -c $GRAPHCONF -o cs_traffic_plot.png
 ```
 
-![Example of traffice plot](/img/cs55_traffic_plot.png)
+![Example of traffice plot](../img/cs55_traffic_plot.png)
 
-Real Time: A real time simulated traffic plot using canned data from a pre-run experiment can be visualized <a href="http://tau.isi.edu/magidemos/casestudy/clientserver55/traffic.html">here</a>.
-
-A similar plot using live data can be plotted by visiting the same web page, and additionally passing it the hostname of the database config node of your experiment.
 
 You can find the database config node for your experiment by reading your experiment’s configuration file, similar to the following.
 
@@ -198,7 +195,7 @@ http://<web-host>/traffic.html?host=node-1.myExperiment.myProject
 
 The procedure, graph configuration, and archived log files that were used for the visualization of this case study are attached below.
 
-* **Procedure:** <a href="/downloads/casestudy_clientserver55_monitor.aal">casestudy_clientserver55_monitor.aal</a>
-* **Topology:** <a href="/downloads/cs55_topology.tcl">cs55_topology.tcl</a>
-* **Archived Logs:** <a href="/downloads/casestudy_clientserver55_monitor.tar.gz">casestudy_clientserver55_monitor.tar.gz</a>
-* **Graph Config:** <a href="/downloads/casestudy_clientserver55_magi_graph.conf">casestudy_clientserver55_magi_graph.conf</a>
+* **Procedure:** <a href="../../downloads/casestudy_clientserver55_monitor.aal">casestudy_clientserver55_monitor.aal</a>
+* **Topology:** <a href="../../downloads/cs55_topology.tcl">cs55_topology.tcl</a>
+* **Archived Logs:** <a href="../../downloads/casestudy_clientserver55_monitor.tar.gz">casestudy_clientserver55_monitor.tar.gz</a>
+* **Graph Config:** <a href="../../downloads/casestudy_clientserver55_magi_graph.conf">casestudy_clientserver55_magi_graph.conf</a>

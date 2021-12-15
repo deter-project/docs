@@ -1,6 +1,6 @@
 # Containers Reference
 
-This document describes the details of the commands and data structures that make up the Containers system.  The <a href="/containers/containers-guide/">Containers Guide</a> provides useful context about the workflows and goals of the system that inform these technical details.
+This document describes the details of the commands and data structures that make up the Containers system.  The <a href="../containers-guide/">Containers Guide</a> provides useful context about the workflows and goals of the system that inform these technical details.
 
 ## Commands
 
@@ -14,11 +14,11 @@ The ```containerize.py``` command creates a DETERLab experiment made up of conta
 $ /share/containers/containerize.py MyProject MyExperiment ~/mytopology.tcl
 ```
 
-It will create a new experiment in *MyProject* called *MyExperiment* containing the experiment topology in ```mytopology.tcl```.  All the topology creation commands supported by DETERLab are supported by the Containers system, but DETERLab program agents are not.  <a href="/core/core-guide/#starting-your-application-automatically">DETERLab start commands</a> **are** supported.
+It will create a new experiment in *MyProject* called *MyExperiment* containing the experiment topology in ```mytopology.tcl```.  All the topology creation commands supported by DETERLab are supported by the Containers system, but DETERLab program agents are not.  <a href="../../core/ns-commands/#tb-set-node-startcmd">DETERLab start commands</a> **are** supported.
 
 Containers will create an experiment in a group if the project parameter is of the form *project*/*group*.  To start an experiment in the ```testing``` group of the ```DETER``` project, the first parameter is specified as ```DETER/testing```.
 
-Containers supports <a href="/core/ns-commands/">ns2 file</a> or <a href="http://fedd.deterlab.net/wiki/TopDl">topdl</a> descriptions.  Ns2 descriptions must end with ```.tcl``` or ```.ns```.  Other files are assumed to be topdl descriptions.
+Containers supports <a href="../../core/ns-commands/">ns2 file</a> or <a href="http://fedd.deterlab.net/wiki/TopDl">topdl</a> descriptions.  Ns2 descriptions must end with ```.tcl``` or ```.ns```.  Other files are assumed to be topdl descriptions.
 
 Names of substrates and nodes in ns2 files are restricted to valid tcl variable names.  Names of substrates and nodes in topdl files are restricted to the characters A-Z, a-z, digits, the underscore and the hyphen (-).
 
@@ -48,7 +48,7 @@ The ```containerize.py``` command takes several parameters that can change its b
 
 * ```--size=```*int*
 
-    Attempt to divide the experiment into *int* physical nodes.  The default is to use packing.  There are some nuances to this with mixed containers.  See the <a href="/containers/containers-guide/#more-sophisticated-packing-multiple-passes">Containers Guide</a> for more details.
+    Attempt to divide the experiment into *int* physical nodes.  The default is to use packing.  There are some nuances to this with mixed containers.  See the <a href="../containers-guide/#more-sophisticated-packing-multiple-passes">Containers Guide</a> for more details.
 
 * ```--config=```*filename*
 
@@ -72,7 +72,7 @@ The ```containerize.py``` command takes several parameters that can change its b
 
 * ```--openvz-template```
 
-     Set the default openvz template.  Templates are described in the <a href="/containers/containers-guide/#setting-openvz-parameters">Containers Guide</a>.
+     Set the default openvz template.  Templates are described in the <a href="../containers-guide/#setting-openvz-parameters">Containers Guide</a>.
 
 * ```--openvz-template-dir```
 
@@ -96,15 +96,15 @@ The ```containerize.py``` command takes several parameters that can change its b
 
 * ```--pass-size=```*pass*:*size*[,*pass*:*size*...]
 
-     Specify the number of physical machines to use for each partitioning pass.  The <a href="/containers/containers-guide/#more-sophisticated-packing-multiple-passes">Containers Guide</a> describes this in detail.
+     Specify the number of physical machines to use for each partitioning pass.  The <a href="../containers-guide/#more-sophisticated-packing-multiple-passes">Containers Guide</a> describes this in detail.
 
 * ```--pass-pnodes=```*pass*:*type*[,*type*...][;*pass*:*type*[,*type*...]...]
 
-     Specify the pnode types on which nodes packed in partitioning pass *pass* can be placed.  The <a href="/containers/containers-guide/#more-sophisticated-packing-multiple-passes">Containers Guide</a> describes this in detail.
+     Specify the pnode types on which nodes packed in partitioning pass *pass* can be placed.  The <a href="../containers-guide/#more-sophisticated-packing-multiple-passes">Containers Guide</a> describes this in detail.
 
 * ```--pass-nodes-only=```*pass*[,*pass*...]
 
-     Specify the partitioning passes on which network connectivity is ignored.  The <a href="/containers/containers-guide/#more-sophisticated-packing-multiple-passes">Containers Guide</a> describes this in detail.
+     Specify the partitioning passes on which network connectivity is ignored.  The <a href="../containers-guide/#more-sophisticated-packing-multiple-passes">Containers Guide</a> describes this in detail.
 
 * ```--prefer-qemu-users=```*user[,user...]*
 
@@ -128,7 +128,7 @@ takes the topology in ```~/experiment.xml``` (which must be a topdl description)
 
 The result of a successful ```containerize.py``` run is a DETERLab experiment that can be swapped in.
 
-More detailed examples are available in the <a href="/containers/containers-guide/">Containers Guide</a>.
+More detailed examples are available in the <a href="../containers-guide/">Containers Guide</a>.
 
 ### container_image.py
 
@@ -179,13 +179,13 @@ A common invocation looks like:
 
 ## Topdl Attributes For Containers
 
-Several <a href="http://fedd.deterlab.net/wiki/TopDl">topdl</a> attributes influence how an experiment is containerized.  These can be added to nodes using the ns2 ```tb-add-node-attribute``` command (used throughout the <a href="/containers/containers-guide/">Containers Guide</a>) or directly to the topdl.
+Several <a href="http://fedd.deterlab.net/wiki/TopDl">topdl</a> attributes influence how an experiment is containerized.  These can be added to nodes using the ns2 ```tb-add-node-attribute``` command (used throughout the <a href="../containers-guide/">Containers Guide</a>) or directly to the topdl.
 
 These attributes are all attached to nodes/Computers:
 
 * ```containers:node_type```
 
-    The container that will hold this node.  <a href="/containers/containers-quickstart/#kinds-of-containers">The full list</a> is available here.
+    The container that will hold this node.  <a href="../containers-quickstart/#kinds-of-containers">The full list</a> is available here.
 
 * ```containers:partition```
 
@@ -193,7 +193,7 @@ These attributes are all attached to nodes/Computers:
 
 * ```containers:openvz_template```
 
-    The flavor of Linux distribution to emulate on openvz.  There is a list of valid choices in <a href="/containers/containers-guide/#setting-openvz-parameters">the Containers Guide</a>.
+    The flavor of Linux distribution to emulate on openvz.  There is a list of valid choices in <a href="../containers-guide/#setting-openvz-parameters">the Containers Guide</a>.
 
 * ```containers:openvz_diskspace```
 
@@ -425,7 +425,7 @@ Qemu nodes are limited to 7 experimental interfaces.  They currently run only Ub
 
 ### Physical Nodes
 
-Physical nodes can be incorporated into experiments, but should only use modern versions of Ubuntu, to allow the Containers system to run their <a href="/containers/containers-guide/#start-commands">start commands</a> correctly and to initialize their routing tables.
+Physical nodes can be incorporated into experiments, but should only use modern versions of Ubuntu, to allow the Containers system to run their <a href="../containers-guide/#start-commands">start commands</a> correctly and to initialize their routing tables.
 
 ### Interconnections: VDE switches and local networking
 
@@ -437,11 +437,11 @@ Inserting elements into the VDE switch topology allows the system to modify the 
 
 This figure shows three containers sharing a virtual LAN (VLAN) on a VDE switch with no traffic shaping:
 
-![Figure of unshaped virtual LAN](/img/Unshaped.png)
+![Figure of unshaped virtual LAN](../img/Unshaped.png)
 
 The blue containers connect to the switch and the switch has interconnected their VDE ports into the red shared VLAN.  To add delays to two of the nodes on that VLAN, the following VDE switch configuration would be used:
 
-![Diagram of configuration to add delays to two nodes](/img/shaped.png)
+![Diagram of configuration to add delays to two nodes](../img/shaped.png)
 
 The VDE switch connects the containers with shaped traffic to the delay elements, not to the shared VLAN.  The delay elements are on the VLAN and delay all traffic passing through them.  The Container system configures the delay elements to delay traffic symmetrically - traffic from the LAN and traffic from the container are both delayed.  The VDE tools can be configured asymmetrically as well.  This is a very flexible way to interconnect containers.
 
