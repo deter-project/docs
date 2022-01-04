@@ -19,4 +19,6 @@ It can be time consuming to program agent behaviors, and a typical cyber securit
 
 Please see DASH documentation [here](https://github.com/isi-usc-edu/dash/blob/master/docs/DASH_guide.docx) and download DASH from [https://github.com/isi-usc-edu/dash](https://github.com/isi-usc-edu/dash)
 
+DASH can simulate traffic stemming from user actions, or it can *emulate* it by sending real traffic in a DeterLab experiment. Documentation showing how to use DASH in emulation is [here](https://docs.google.com/document/d/1uJaL1aQa5BtSIYQHE2fnyXZHENM-WE4_/edit?usp=sharing&ouid=106458123212792183536&rtpof=true&sd=true).
+
 For comments or questions about DASH and to obtain a copy for research purposes, please contact Jim Blythe at [blythe@isi.edu](mailto:blythe@isi.edu).
