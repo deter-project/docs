@@ -24,7 +24,7 @@ pages:
   - Containers: containers/containers-quickstart.md
   - Nework Emulation: dsc/index.md
   - Risky Experiments: core/risky-experiment.md
-  - Binary Analysis: https://binary.deterlab.net/docs
+  - Binary Analysis: https://binary.deterlab.net/docs 
   - Competitions: competitions/index.md
   - Orchestrator: orchestrator/index.md
   - Human user emulation: dash/index.md
