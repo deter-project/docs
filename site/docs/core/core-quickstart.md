@@ -45,21 +45,25 @@ Every experiment in DETERLab is based on a network topology file written in NS f
     # This is a simple ns script. Comments start with #.
     set ns [new Simulator]                 
     source tb_compat.tcl
-    
+
+    # Create 4 nodes
     set nodeA [$ns node]
     set nodeB [$ns node]
     set nodeC [$ns node]
     set nodeD [$ns node]
-    
-    set link0 [$ns duplex-link $nodeB $nodeA 30Mb 50ms DropTail]
-    tb-set-link-loss $link0 0.01
-    
+
+    # Link between nodeA and nodeB with no delay and 10Mb bandwidth
+    set link0 [$ns duplex-link $nodeB $nodeA 10Mb 0ms DropTail]
+
+    # LAN among nodeB, nodeC and nodeD with no delay and 100Mb bandwidth    
     set lan0 [$ns make-lan "$nodeD $nodeC $nodeB " 100Mb 0ms]
     
-    # Set the OS on a couple.
+    # Set the OS on a couple of nodes
+    # Ubuntu-STD is the preferred image
     tb-set-node-os $nodeA FBSD-STD
     tb-set-node-os $nodeC Ubuntu-STD         
 
+    # Set up routing
     $ns rtproto Static
     
     # Go!
