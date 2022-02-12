@@ -1,3 +1,6 @@
+!!! note
+    This is advanced material. For beginners looking to learn how to create topologies please view [topology documentation](../topology/)
+
 # NS Commands
 
 In order to use the testbed specific commands, you must include the following line near the top of your NS topology file (before any testbed commands are used):
