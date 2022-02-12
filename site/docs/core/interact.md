@@ -105,6 +105,22 @@ Then *on your device*  open a terminal window, navigate to the folder where you 
         scp YourUsername@users.deterlab.net:myfile.txt .
 ```
 
+## Install Software
+
+To contain malicious traffic within experiments, DETERLab has no connectivity to the outside world. To install packages please use our mirrors of popular content:
+
+- Install Ubuntu packages by typing
+```
+	sudo apt install [package name]
+```
+- Install Python packages by typing
+```
+	pip install -i https://fbsd-build.isi.deterlab.net/pypi/web/simple [package name]
+```
+- Install software from source by: (1) downloading the software into your home directory by typing on `users.deterlab.net` the following `wget [software URL]`, then (2) in your experiment access the software you downloaded in your home directory, extract it and follow install instructions
+
+If you have any other installation needs that are not met with the above instructions please file a ticket.
+
 ## Generate Traffic
 
 You can generate traffic in your experiment in many ways. At first, as you are designing your experiment, you may want generate traffic [manually and interactively](../traffic/manual.md). Later, you may want to [write scripts](automate.md) for traffic generation. You may also want to [emulate human actions](../dash/index.md) in your experiments.

@@ -12,9 +12,4 @@ DETERLab is a state-of-the-art scientific computing facility for cyber-security 
 
 ## Organization
 
-DETERLab docs are organized by the dominant systems (Core, Orchestrator and Containers) and then each system includes:
-
-* **Quickstart** - Gives a summary of the system and an overview of the steps involved to use it.
-* **Guide** - Provides details on the most common, basic ways to use the system. It serves as a basic tutorial and reference.
-* **Reference** - Includes references to configuration, commands and other reference materials
-* **Ad hoc topics** - More advanced topics for more complicated features of the system.
+This site is organized via menu on the left to provide guidelines on how to use DETERLab for different user communities. Please explore the menu to learn more. You can start with [quickstart documentation](quickstart.md)
