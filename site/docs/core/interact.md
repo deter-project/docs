@@ -105,6 +105,17 @@ Then *on your device*  open a terminal window, navigate to the folder where you 
         scp YourUsername@users.deterlab.net:myfile.txt .
 ```
 
+## Mount More Disk Space
+
+DETERLab nodes come with a modest amount of disk space. You can mount more disk space by typing the following instructions on your experimental node:
+
+```
+	sudo mkdir /mnt/local
+	sudo /usr/local/etc/emulab/mkextrafs /mnt/local
+	user=`whoami`
+	sudo chown $user /mnt/local
+```
+
 ## Install Software
 
 To contain malicious traffic within experiments, DETERLab has no connectivity to the outside world. To install packages please use our mirrors of popular content:
