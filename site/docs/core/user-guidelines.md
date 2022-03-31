@@ -20,8 +20,9 @@
     - DO store these files locally on a node, e.g., in `/tmp` folder. If you need more disk space on a Linux or FreeBSD node you can mount more to `/mnt/local` by doing
         
 ```
-	sudo /usr/local/etc/emulab/mkextrafs.pl /mnt
-	user='whoami'
+	sudo mkdir /mnt/local
+	sudo /usr/local/etc/emulab/mkextrafs /mnt/local
+	user=`whoami`
 	sudo chown $user /mnt/local
 ```
         
