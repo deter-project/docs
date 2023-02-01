@@ -50,6 +50,7 @@ pages:
   - Usage Policy: support/usage-policy.md
 
 markdown_extensions:
+    - attr_list
     - toc:
         permalink: 
     - admonition:
