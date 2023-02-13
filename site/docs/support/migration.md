@@ -4,7 +4,10 @@
 2. Apply for account on the new DeterLab [here](https://launch.mod.deterlab.net/registration). Please select a password that is strong but easy for you to remember and type. For example, passwords that contain 5+ words significant to you should work.
 3. Wait for approval, which should arrive via email
 4. Set up your SSH access by following instructions [here](https://mergetb.org/docs/experimentation/xdc/) to set up an XDC (experiment development container), similar to the current `users.deterlab.net` gateway. When setting up `.ssh/config`, please log into `users.deterlab.net` and make changes there. If everything is set up correctly, you should be able to SSH to your first XDC.
-5. To migrate a project X using your new username U and password P, type on `users.deterlab.net`:
+5. Migrate your projects, experiments and data by following instructions below this list
+6. Put in a [DeterLab ticket](getting-help.md) to let us know you have migrated your items
+
+To migrate a project X using your new username U and password P, type on `users.deterlab.net`:
 
 ```
 migrate U P X
@@ -31,18 +34,20 @@ All research projects and users (project leaders and research students) should m
 ## What are the advantages of the new infrastructure?
 
 There are multiple advantages to users from migrating to the new infrastructure:
-- You will be able to request virtual machines, and thus run larger scale experiments.
-- You should experience less resource contention. It will be easier to obtain resources.
-- Experiments will be set up quickly - within seconds instead of minutes
-- Experiment specification errors will be caught early, before resources are committed
-- All experiments will have external access for software installation
+
+* You will be able to request virtual machines, and thus run larger scale experiments.
+* You should experience less resource contention. It will be easier to obtain resources.
+* Experiments will be set up quickly - within seconds instead of minutes
+* Experiment specification errors will be caught early, before resources are committed
+* All experiments will have external access for software installation
 
 ## What are the differences between the old and the new infrastructure?
-- The new infrastructure is running a new software, called Merge, which is more stable, robust and modular than the old software.
-- The new infrastructure has all new hardware - end servers and switches - and will be more stable.
-- The new infrastructure has a new UI for experiment management (creation, swap in/out, termination)
-- The new infrastructure has a new access process: you still SSH twice but the SSH process should be smoother
-- The new infrastructure has a new topology definition language
+
+* The new infrastructure is running a new software, called Merge, which is more stable, robust and modular than the old software.
+* The new infrastructure has all new hardware - end servers and switches - and will be more stable.
+* The new infrastructure has a new UI for experiment management (creation, swap in/out, termination)
+* The new infrastructure has a new access process: you still SSH twice but the SSH process should be smoother
+* The new infrastructure has a new topology definition language
 
 ## Where can I learn more?
 - Please read [Merge documentation](https://mergetb.org/docs/)
