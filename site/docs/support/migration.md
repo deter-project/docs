@@ -3,14 +3,14 @@
 1. Carefully read [Merge documentation](https://mergetb.org/docs/)
 2. Apply for account on the new DeterLab [here](https://launch.mod.deterlab.net/registration). Please select a password that is strong but easy for you to remember and type. For example, passwords that contain 5+ words significant to you should work.
 3. Wait for approval, which should arrive via email
-4. Set up your SSH access by following instructions [here](https://mergetb.org/docs/experimentation/xdc/) to set up an XDC (experiment development container), similar to the current `users.deterlab.net` gateway. When setting up `.ssh/config`, please log into `users.deterlab.net` and make changes there. If everything is set up correctly, you should be able to SSH to your first XDC.
+4. Log into  `users.deterlab.net` and edit `.ssh/config` file by following instructions [here](https://mergetb.org/docs/experimentation/xdc/#ssh-configuration-for-old-openssh-versions). Then set up an XDC (experiment development container), similar to the current `users.deterlab.net` gateway, by following the instructions [here](https://mergetb.org/docs/experimentation/hello-world-gui/#create-an-xdc).  If everything is set up correctly, you should be able to SSH to your first XDC. There is no need to create new experiments at this step, although you are welcome to try it.
 5. Migrate your projects, experiments and data by following instructions below this list
 6. Put in a [DeterLab ticket](getting-help.md) to let us know you have migrated your items
 
-To migrate a project X using your new username U and password P, type on `users.deterlab.net`:
+To migrate a project X using your new username U, type on `users.deterlab.net`:
 
 ```
-migrate U P X
+migrate U X (you will be prompted for password)
 ```
 
 Experiments in your project will be automatically converted and migrated to a new project on our new infrastructure. Project and experiment naming conventions have changed, so you may notice some differences. New project and experiment names must be all lower-case and alphanumeric only. In addition to this, current OS images on the new infrastructure differ from the existing OS images, and there is currently no support for startup commands. Thus, during experiment conversion OS, hardware and startup directives are skipped.
@@ -18,7 +18,7 @@ Experiments in your project will be automatically converted and migrated to a ne
 You will also need to migrate any data in your personal user directory, which you want to keep. To do so, create folder `newdeter` in your home directory, and move into it all files and folders that you want to keep. Then run:
 
 ```
-migrate U P
+migrate U (you will be prompted for password)
 ```
 
 !!! note
