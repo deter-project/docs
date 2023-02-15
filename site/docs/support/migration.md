@@ -3,9 +3,11 @@
 1. Carefully read [Merge documentation](https://mergetb.org/docs/)
 2. Apply for account on the new DeterLab [here](https://launch.mod.deterlab.net/registration). Please select a password that is strong but easy for you to remember and type. For example, passwords that contain 5+ words significant to you should work.
 3. Wait for approval, which should arrive via email
-4. Log into  `users.deterlab.net` and edit `.ssh/config` file by following instructions [here](https://mergetb.org/docs/experimentation/xdc/#ssh-configuration-for-old-openssh-versions). Then set up an XDC (experiment development container), similar to the current `users.deterlab.net` gateway, by following the instructions [here](https://mergetb.org/docs/experimentation/hello-world-gui/#create-an-xdc).  If everything is set up correctly, you should be able to SSH to your first XDC. There is no need to create new experiments at this step, although you are welcome to try it.
-5. Migrate your projects, experiments and data by following instructions below this list
-6. Put in a [DeterLab ticket](getting-help.md) to let us know you have migrated your items
+4. Log into  `users.deterlab.net` and edit `.ssh/config` file by following instructions [here](https://mergetb.org/docs/experimentation/xdc/#ssh-configuration-for-old-openssh-versions).
+5. Set up an XDC (experiment development container), which will serve as your gateway into the new DeterLab, by following the instructions [here](https://mergetb.org/docs/experimentation/hello-world-gui/#create-an-xdc).  If everything is set up correctly, you should be able to SSH into your first XDC by typing on `users.deterlab.net` the following command `ssh <xdcname>-<yourusername>`. There is no need to create new experiments at this step, although you are welcome to try it.
+6. Migrate your projects, experiments and data by following instructions below this list
+7. Put in a [DeterLab ticket](getting-help.md) to let us know you have migrated your items.
+8. From this point on please do not use old DeterLab anymore.
 
 To migrate a project X using your new username U, type on `users.deterlab.net`:
 
