@@ -44,11 +44,13 @@ pages:
   - DETERLab commands: core/deterlab-commands.md
   - NS commands: core/ns-commands.md
 - Support:
+  - Migration Instructions: support/migration.md
   - Getting Help: support/getting-help.md
   - FAQs: support/faqs.md
   - Usage Policy: support/usage-policy.md
 
 markdown_extensions:
+    - attr_list
     - toc:
         permalink: 
     - admonition:
