@@ -1,3 +1,7 @@
+
+!!! important
+    This page is deprecated. Please use our <a href="https://launch.mod.deterlab.net/">new platform</a> and accompanying documentation.
+
 # DETERLab Commands
 
 The following commands are available from the commandline on `users.deterlab.net`. 

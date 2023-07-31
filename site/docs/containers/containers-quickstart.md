@@ -1,3 +1,7 @@
+
+!!! important
+    This page is deprecated. Please use our <a href="https://launch.mod.deterlab.net/">new platform</a> and accompanying documentation.
+
 # Containers Quickstart
 
 This page describes basic information about DETERLab Containers and provides an overview of how to use it. More details are available in the <a href="../containers-guide/">Containers Guide</a>.

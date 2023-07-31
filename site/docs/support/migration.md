@@ -1,4 +1,29 @@
+
+!!! note
+    This page is updated to show the workflow with our <a href="https://launch.mod.deterlab.net/">new platform</a>.
+
 # Migration Instructions
+
+At this time **all** projects must migrate to our <a href="https://launch.mod.deterlab.net/">new platform</a>. Class projects can continue to use this user interface for class management purposes. All experimentation will occur on our new platform and old machines will be decomissioned. Instructions below show how to migrate existing projects to our new platform.
+
+## Migrating Class Projects
+
+1. Edit your User Profile to set up Merge password (it is currently set at random, please reset it to a string of your choosing if you wish). See illustrations below.
+
+Access your profile:
+
+![](profile.png)
+
+Edit profile:
+
+![](editprofile.png)
+
+Set up Merge password:
+
+![](mergepass.png)
+2. Click on _Teaching_ tab, then choose your class and click on _Migrate Class_ from the left menu.
+
+## Migrating Research Projects
 
 1. Carefully read [Merge documentation](https://mergetb.org/docs/)
 2. Apply for account on the new DeterLab [here](https://launch.mod.deterlab.net/registration). Please select a password that is strong but easy for you to remember and type. For example, passwords that contain 5+ words significant to you should work.

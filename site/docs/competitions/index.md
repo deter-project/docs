@@ -1,3 +1,7 @@
+
+!!! important
+    This page is deprecated. Currently we do not support competitions on our <a href="https://launch.mod.deterlab.net/">new platform</a>, but we hope to add support for this in early 2024.
+
 Competitions on DETERLab
 ==============
 

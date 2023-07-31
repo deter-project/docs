@@ -1,3 +1,7 @@
+
+!!! important
+    This page is deprecated. Please use our <a href="https://launch.mod.deterlab.net/">new platform</a> and accompanying documentation.
+
 # DETERLab Glossary
 <ul class="definition-list">
   <li class="term">Agent Abstraction Language (AAL)</li>

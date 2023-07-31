@@ -1,3 +1,7 @@
+
+!!! note
+    This page is updated to show the workflow with our <a href="https://launch.mod.deterlab.net/">new platform</a>.
+
 # Course Setup
 
 Since we apply different access control ([see about this topic](#access-control)) for educational projects, we really need to hear from you if you're planning to run a class on DETERLab. This is the procedure you should follow:
@@ -9,9 +13,10 @@ Since we apply different access control ([see about this topic](#access-control)
 If you don't already have a project for the given class, start a new project on DETERLab by selecting _Experimentation->Start New Project_ once you log into DETERLab or [click here](https://www.isi.deterlab.net/newproject.php). Tell us in the description that this is a class project.
 
 !!! note 
-    Only do this if you have _never_ taught a given class. For each new semester that       you teach for the same class, recycle your current class project (see [here](#recycle-an-account)). 
+    Only do this if you have _never_ taught a given class. For each new semester that you teach for the same class, recycle your current class project (see [here](#recycle-an-account)). 
     
     If you already have a research project on DETERLab, do not reuse your research project for your class. Start a new project and categorize it as "class" in the project application. Wait for your project to be approved. It should take a few days and you should receive an automated email message once it is approved.
+
 
 ### Set up your class
 
@@ -19,9 +24,10 @@ If you don't already have a class project see above.
 
 1. Log in to DETERLab, click the _My DETERLab_ link, find the _Teaching_ tab and click on your class. 
 2. Then select _Setup Class_ from the left menu. You will not be able to enroll students until you complete this step. You will be able to populate your class with materials.
-3. Input the end date for your class, the estimated number of students and at least one anticipated assignment. 
-4. For the assignment, make your best guess of the start and submission dates, and the number of machines you will need per student. You can change these values at any time. 
-5. The system calculates the class limit automatically as `per_student_num_students_0.25`. You can also assign a value that is more suitable for your needs. At least one of the "number of machines per student" or "class limit" values must be entered.
+3. Input the end date for your class and the estimated number of students
+4. **In our new workflow** you must set up your Merge password in your user profile, so you and your students can use our new platform for experimentation. You will do this only once. Please see <a href="../../support/migration/index.html#migrating-class-projects">illustrations</a>. 
+
+5. **In our new workflow** you must select _Migrate Class_ from the left menu to create your class on our new platform. You only need to do this once per class project.
 
 ### Create accounts for students and TAs
 
@@ -33,10 +39,10 @@ DO NOT ask students or TAs to open accounts themselves. Follow the steps below.
 To create accounts:
 
 1. Copy and paste your students' (or TA's) emails, one per line. Account creation takes up to a minute per student. 
-2. When accounts are created, the system will automatically email the students/TAs so make sure to alert them to the fact that you are signing them up for a DETERLab account.
+2. When accounts are created, the system will automatically email the students/TAs so make sure to alert them to the fact that you are signing them up for a DETERLab account. Students and TAs will get an automatically chosen username and password in email. 
 
 !!! note  
-    If your students or TAs later desire to use DETERLab for research, they will need to join a research project and open an individual account on DETERLab. **Class accounts are only for class use**. If you later desire to use DETERLab in research please apply for a research project.
+    If you, your students or TAs later desire to use DETERLab for research, they will need to open a research account <a href="https://launch.mod.deterlab.net/">on our new platform</a>. **Class accounts are only for class use**. 
 
 ## Course Wrap-up
 
@@ -67,7 +73,7 @@ Once the student has completed the work the teacher should recycle the student's
 
 Some classes within the same institution may be taught by different instructors each time. To hand your class off to another instructor:
 
-1. Ask the new instructor to [use this link](https://www.isi.deterlab.net/joinproject.php) to create a DETERLab account and join the project "Share". If they already have a DETERLab account, skip this step. 
+1. Create a TA account for the new instructor
 2. Either you or the new instructor should [file a ticket](https://trac.deterlab.net/wiki/GettingHelp) asking Testbed Ops to complete the hand-off. 
 
 **Please follow these steps even if a hand-off is temporary.**
@@ -83,14 +89,15 @@ You and your TA both can manage your course with minimal involvement of DETERLab
 
 Additionally, you can do the following actions to help students that have problems during your class:
 
-#### Reset student passwords
+#### Lookup and reset student passwords
 
 If a student forgets their password:
 
 1. From the left menu choose _Manage students or TAs_. 
-2. Select the student and choose _Reset password_ from the select box below the student list. 
+2. Look up student's password in the last column of the table.
+3. If you wish you can select the student and choose _Reset password_ from the select box below the student list. 
 
-The student will receive an automated email with instructions for choosing a new password.
+The student will receive an automated email with their new password.
 
 #### Unfreeze student accounts
 
@@ -116,14 +123,6 @@ Students will receive an automated email with further instructions.
 
 1. From the left menu choose _Manage students or TAs_
 2. Click on the glasses icon next to the student.
-
-#### Log into a student's experiment
-
-1. SSH to `users.deterlab.net` and then SSH to the student's experiment as `root`, like this:
-    ```
-    ssh root@.... 
-    ```
-2. To get a student's view, type `sudo su student_username`.
 
 #### Recycle an account
 
@@ -171,9 +170,7 @@ To assign something to students:
 1. Add it to your class via _Add Materials_. 
 2. Choose _Assign to Students_ from the left menu.
 3. Select materials you want to assign from the list and choose if you want to assign them to all students, a group of students, or individual students. 
-4. You must set the due date for the assignment and fill either the anticipated number of nodes per student or the class limit ([see about class limits](#resource-limits)). 
-
-    Once you create an assignment, the system will automatically enforce the limit for your class from the date of the assignment's creation until the due date.
+4. You must set the due date for the assignment.
 
 #### Managing Assignments
 
@@ -198,26 +195,6 @@ You can download submissions many times. New submissions will be added to the fo
 
 ### Access Control
 
-When an experiment is created in a DETERLab research project by one member, all members have their home directories exported to the experiment's machines. All members can also log on to the experiment's machines. 
+Students do not have access to each other's files or experiments. Currently teachers and TAs can access students' experiments using username and password for a student (shown in _Manage Students or TAs_ view).
 
-This creates a problem for the educational use of DETERLab since students can log on to experiments created by their classmates and can also access their home directories (if they change permissions on them first, running `sudo` from experimental machines). To address these problems we treat class projects differently than research projects.
 
-**If a student creates an experiment in the default group of the project,** only this student (and no other students, TAs or instructors) gets his home directory exported to the experiment's machines. Instructors and TA's will be able to log on to the machines with root privileges ([see how](#log-into-a-students-experiment)). No other students will be able to log on this experiment's machines. This creates conditions for class use of DETERLab by individual students.
-
-**If a student creates an experiment in a group other than the default group of the project,** all members of that group (and no other students, TAs or instructors) get their home directories exported to the experiment's machines and can log on to them. Instructors and TA's will be able to log on to the machines with root privileges. This creates conditions for class use of DETERLab by groups of students. Content is protected between groups but collaboration is facilitated within each group.
-
-In the past, we have been asked by instructors to prevent topology display on the experiment's web page so students could learn how to use reconnaissance tools to infer it. We are working on automating this process. At the moment, if you need this service [file a ticket](https://trac.deterlab.net/wiki/GettingHelp).
-
-### Resource Limits
-
-Once you set up your course and input a schedule of assignments, an automated program will enforce the limits you set on your class. This means that if your limit is `L` for a given day, your students will only be able to use up to **`L` total machines on that day simultaneously**. 
-
-You can always change limits to accommodate more students by choosing _Setup Class_ from the left menu. Please be mindful of other DETERLab users and set reasonable limits for your class. These are usually around 1/4 of the maximum anticipated usage for your class.
-
-If you move around your class assignments or change what you want to do and how many machines will be in use, the limits will be adjusted automatically. When you create the Nth assignment for your students, our system rewrites the Nth anticipated assignment in your class schedule with the actual assignment you created. If you end up moving a due date of your assignment, the limits will be extended to match the new due date.
-
-!!! note
-    Use of resources by students that are granted "incompletes" in your class is not counted against the class limit. Also use of resources by the teacher or the TAs is not counted against the class limit.
-
-!!! warning
-    If a student attempts to swap in an experiment in your class on a day for which limits have not been set, and if this student does not have an incomplete, this swap in will fail and the student will receive a message that he/she was not allowed to allocate resources.

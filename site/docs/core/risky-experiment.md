@@ -1,3 +1,7 @@
+
+!!! important
+    This page is deprecated. Please use our <a href="https://launch.mod.deterlab.net/">new platform</a> and accompanying documentation.
+
 # Risky Experiment Support
 
 We define as a risky experiment each experiment that either uses some type of malware such as DoS tool, a worm, an exploit, etc, even when the malware code is written by the experimenter and/or requires connectivity to the outside directly from experimental nodes. We recognize all these experiment types are interesting and important to facilitate new research in security. At the same time there is potential risk to the testbed and the Internet that must be contained. This risk includes:

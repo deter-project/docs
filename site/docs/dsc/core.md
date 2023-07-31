@@ -1,3 +1,7 @@
+
+!!! important
+    This page is deprecated. Please use our <a href="https://launch.mod.deterlab.net/">new platform</a> and accompanying documentation.
+
 # Core Principles of Network Emulation on Deterlab
 
 To use network emulation, you need to represent your topology as a list of edges. Some edges may have attributes, such as bandwidth and delay associated with them. To specify nodes that will not be modeled on a Click router (enclave

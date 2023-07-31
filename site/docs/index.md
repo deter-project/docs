@@ -1,3 +1,7 @@
+
+!!! important
+    This page is deprecated. Please use our <a href="https://launch.mod.deterlab.net/">new platform</a> and accompanying documentation.
+
 These pages constitute the end-user documentation for DETERLab documentation.
 
 ## What is DETERLab?

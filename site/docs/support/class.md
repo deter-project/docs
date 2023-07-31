@@ -1,3 +1,7 @@
+
+!!! note
+    This page is updated to show the workflow with our <a href="https://launch.mod.deterlab.net/">new platform</a>.
+
 # Opening an Account for Class
 
 DETERLab accounts for class use can be created by instructors at any institution. **Students need to take no action to create an account.** Their instructor creates an account for them. 
@@ -12,20 +16,15 @@ DETERLab accounts for class use can be created by instructors at any institution
     If you already have a DETERLab account, please **login** first. This will help streamline the process.
 
 
-- **If you are an instructor** who wants to request a new project on DETERLab, fill out the ​[New Project Application Form](https://www.isi.deterlab.net/newproject.php) and note that this project is for a class. 
-    - You will be asked a number of questions about your project and how you intend to use DETERLab. Please be detailed, especially with respect to any possible risks from your experiment. Our staff member may contact you to discuss or clarify any potential issues.
+- **If you are an instructor** who wants to request a new project on DETERLab, fill out the ​[New Project Application Form](https://www.isi.deterlab.net/newproject.php).
 - Upon submission, your application must be **approved by the DETER Executive Committee**; this generally takes a few days. They may contact you and ask for clarification.
 - You will receive an **email notification upon approval** and your user account will be active. You may then [log in](https://www.isi.deterlab.net) with the username and password you entered on the form.
 - If you are curious about the progress on your application, [you may ​contact us](https://www.deter-project.org/contact).
 
-!!! note
-    If you later desire to use DETERLab in research please apply for a research project. Class projects are configured differently from research projects.
-
 ## Creating Accounts for Your TA and Students
 
-Before you can create accounts for your TA and students, you need to [set up](../education/course-setup.md) your class.
-
-DO NOT ask students or TAs to open accounts themselves. Follow the steps below.
+DO NOT ask students or TAs to open accounts themselves. 
+You will create accounts for them. They will be able to access class materials on our old platform and to perform experiments on our new platform. 
 
 
 !!! note
@@ -34,10 +33,10 @@ DO NOT ask students or TAs to open accounts themselves. Follow the steps below.
 To create accounts:
 
 1. Copy and paste your students' (or TA's) emails, one per line. Account creation takes up to a minute per student.
-2. When accounts are created, the system will automatically email the students/TAs so make sure to alert them to the fact that you are signing them up for a DETERLab account.
+2. When accounts are created, the system will automatically email the students/TAs, so make sure to alert them to the fact that you are signing them up for a DETERLab account. Students and TAs will receive their username and password in email. Passwords cannot be changed by TAs/students.
 
 !!! note
-    If your students or TAs later desire to use DETERLab for research, they will need to join a research project and open an individual account on DETERLab. Class accounts are only for class use.
+    If you or your TAs/students later desire to use DETERLab in research please <a href="https://launch.mod.deterlab.net/">use our new platform to apply for an account. Class accounts are only for class use.
 
 ## Getting Help
 

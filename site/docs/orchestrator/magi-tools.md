@@ -1,3 +1,7 @@
+
+!!! important
+    This page is deprecated. Please use our <a href="https://launch.mod.deterlab.net/">new platform</a> and accompanying documentation.
+ 
 # MAGI Tools
 
 The following tools are available for MAGI experiments in DETERLab:

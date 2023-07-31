@@ -1,3 +1,7 @@
+
+!!! important
+    This page is deprecated. Please use our <a href="https://launch.mod.deterlab.net/">new platform</a> and accompanying documentation.
+
 # Create Experiment Topology
 
 Part of DETERLab's power lies in its ability to assume many different topologies; the description of a such a topology is a necessary part
