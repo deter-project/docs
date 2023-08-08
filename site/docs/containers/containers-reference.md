@@ -1,3 +1,7 @@
+
+!!! important
+    This page is deprecated. Please use our <a href="https://launch.mod.deterlab.net/">new platform</a> and accompanying documentation.
+
 # Containers Reference
 
 This document describes the details of the commands and data structures that make up the Containers system.  The <a href="../containers-guide/">Containers Guide</a> provides useful context about the workflows and goals of the system that inform these technical details.

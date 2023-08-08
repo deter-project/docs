@@ -1,3 +1,7 @@
+
+!!! important
+    This page is deprecated. Please use our <a href="https://launch.mod.deterlab.net/">new platform</a> and accompanying documentation.
+
 !!! note
     This is advanced material. For beginners looking to learn how to create topologies please view [topology documentation](../topology/)
 

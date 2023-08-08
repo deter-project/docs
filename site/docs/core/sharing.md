@@ -1,3 +1,7 @@
+
+!!! note
+    This page is updated to show the workflow with our <a href="https://launch.mod.deterlab.net/">new platform</a>.
+
 # Using Shared Materials
 
 ## Sharing and Using Shared Materials
@@ -31,22 +35,22 @@ A lecture can be a Word document, a set of slides, or a URL to an online content
 
 #### Homework
 
-A homework is a specification of an assignment that a student will see. Ideally it should follow the format specified <a href="https://education.deterlab.net/sharing/Exercise.html">here</a> but we will accept other formats.
+A homework is a specification of an assignment that a student will see. Ideally it should follow the format similar to other homework assignments on site. 
 
 #### Teacher Manuals
 
-A teacher manual accompanies a homework or a CCTF. Ideally it should follow the format specified <a href="https://education.deterlab.net/sharing/Exercise.teach.html">here</a> but we will accept other formats. 
+A teacher manual accompanies a homework or a CCTF. Ideally it should follow the format similar to other teacher manuals on site.
 
 !!! note
     Teacher manuals are only visible to heads of class projects on DETERLab and they can only be downloaded as ZIP files.
 
 #### CCTFs
 
-CCTFs or Class Capture-the-Flag exercises are targeted exercises that pit two student teams against each other in attack/defense scenarios. These are ideal to assign to classes after they have completed a few homeworks with DETERLab. For more information about CCTFs see <a href="http://www.isi.edu/~mirkovic/publications/3gse.pdf">this paper</a>.
+CCTFs or Class Capture-the-Flag exercises are targeted exercises that pit two student teams against each other in attack/defense scenarios. These are ideal to assign to classes after they have completed a few homeworks with DETERLab. For more information about CCTFs see <a href="http://www.isi.edu/~mirkovic/publications/3gse.pdf">this paper</a>. **CCTFs are not currently supported on our new platform. We hope to support them starting in early 2024.**
 
 #### Experiments
 
-An experiment is a set of files (e.g., NS file, input data, output data, setup scripts, etc.) that enables someone else to recreate an experiment done by a user. This definition is intentionally open-ended. Share any files you believe are useful to others that seek to repeat or build upon your work.
+An experiment is a set of files (e.g., topology file, input data, output data, setup scripts, etc.) that enables someone else to recreate an experiment done by a user. This definition is intentionally open-ended. Share any files you believe are useful to others that seek to repeat or build upon your work.
 
 #### Datasets
 

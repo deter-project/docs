@@ -1,3 +1,7 @@
+
+!!! important
+    This page is deprecated. Please use our <a href="https://launch.mod.deterlab.net/">new platform</a> and accompanying documentation.
+
 # Containers Guide
 
 In this tutorial we walk you through setting up a basic containerized experiment. This page also includes common advanced topics. Detailed descriptions of the commands and configuration files are available in the <a href="../containers-reference/">reference section</a>. 

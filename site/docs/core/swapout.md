@@ -1,3 +1,7 @@
+
+!!! important
+    This page is deprecated. Please use our <a href="https://launch.mod.deterlab.net/">new platform</a> and accompanying documentation.
+
 # Swap Out (Release Resources)
 
 When you are done working with your nodes, it is best practice to save your work and swap out the experiment so that other users have access to the physical machines.

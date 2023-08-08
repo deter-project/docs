@@ -1,4 +1,4 @@
-site_name: DETERLab Documentation
+site_name: DeterLab Documentation (DEPRECATED)
 site_description: User documentation for the DETERLab testbed
 theme:
     name: readthedocs

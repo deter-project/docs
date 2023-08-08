@@ -1,3 +1,8 @@
+
+!!! important
+    This page is deprecated. Please use our <a href="https://launch.mod.deterlab.net/">new platform</a> and accompanying documentation.
+ 
+
 # Specialized User
 
 This page gives you a brief introduction on writing your own Magi Agent. It is designed to give you sample code, briefly explain it, then show you the pieces needed to run it. After reading this page you should be able to write and run a basic MAGI Agent. Further details and more advanced agent information may be found in the Magi Agent Library document (link).

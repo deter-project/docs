@@ -1,3 +1,6 @@
+!!! important
+    This page is deprecated. Please use our <a href="https://launch.mod.deterlab.net/">new platform</a> and accompanying documentation.
+
 # Human User Emulation using DASH 
 
 DASH (Deterlab Agents Simulating Humans) are intended to simulate human behavior in a variety of situations in Deterlab and other environments, where group decision-making is mediated by computers. For example, they have been used to model observed behavior in:

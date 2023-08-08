@@ -1,3 +1,7 @@
+
+!!! important
+    This page is deprecated. Please use our <a href="https://launch.mod.deterlab.net/">new platform</a> and accompanying documentation.
+ 
 # MAGI Desktop
 
 ## Step 1: Install the following dependencies. 

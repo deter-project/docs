@@ -1,3 +1,7 @@
+
+!!! important
+    This page is deprecated. Please use our <a href="https://launch.mod.deterlab.net/">new platform</a> and accompanying documentation.
+
 # MAGI System Organization
 
 The MAGI system is divided into **magicore** and **magimodules**.

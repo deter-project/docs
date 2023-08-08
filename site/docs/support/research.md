@@ -1,3 +1,7 @@
+
+!!! important
+    This page is deprecated. Please use our <a href="https://launch.mod.deterlab.net/">new platform</a> and accompanying documentation.
+
 # Opening an Account for Research
 
 Each DETERLab account belongs to a project. Therefore the project leader or PI must first request a project, then other users apply for membership to that project.

@@ -1,3 +1,8 @@
+
+!!! important
+    This page is deprecated. Please use our <a href="https://launch.mod.deterlab.net/">new platform</a> and accompanying documentation.
+ 
+
 # MAGI Orchestrator
 
 The MAGI Orchestrator is a DETERLab capability that allows you to automate and manage the procedures of a DETERLab experiment.

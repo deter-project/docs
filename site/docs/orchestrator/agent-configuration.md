@@ -1,3 +1,7 @@
+
+!!! important
+    This page is deprecated. Please use our <a href="https://launch.mod.deterlab.net/">new platform</a> and accompanying documentation.
+ 
 # Configuring a MAGI Agent at Runtime
 
 In <a href="../writing-agents/">Writing MAGI Agents</a>, you saw how to create a basic agent. The sample agent created a single file on a test node. This document will explain how to use configuration in the AAL file to configure an agent at runtime.

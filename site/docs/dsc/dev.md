@@ -1,3 +1,7 @@
+
+!!! important
+    This page is deprecated. Please use our <a href="https://launch.mod.deterlab.net/">new platform</a> and accompanying documentation.
+
 # Network Emulation: Developer Documentation
 
 The program graphGen is an automatic generator for Click templates based on an edge-list format. 

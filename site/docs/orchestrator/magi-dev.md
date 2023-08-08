@@ -1,3 +1,7 @@
+
+!!! important
+    This page is deprecated. Please use our <a href="https://launch.mod.deterlab.net/">new platform</a> and accompanying documentation.
+ 
 # MAGI Development Codebase
 
 The MAGI codebase is maintained in three branches.

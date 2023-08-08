@@ -1,3 +1,7 @@
+
+!!! important
+    This page is deprecated. Please use our <a href="https://launch.mod.deterlab.net/">new platform</a> and accompanying documentation.
+
 # Orchestrator Quickstart
 
 This page describes basic information about the MAGI Orchestrator and provides a high-level overview of how to use it. More details are available in the <a href="../orchestrator-guide/">Orchestrator Guide</a>.

@@ -1,3 +1,7 @@
+
+!!! important
+    This page is deprecated. Please use our <a href="https://launch.mod.deterlab.net/">new platform</a> and accompanying documentation.
+ 
 # Orchestrator Reference
 
 The following sections contain reference information for the MAGI orchestrator system components:

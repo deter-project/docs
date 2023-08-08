@@ -1,3 +1,7 @@
+
+!!! important
+    This page is deprecated. Please use our <a href="https://launch.mod.deterlab.net/">new platform</a> and accompanying documentation.
+
 # Getting Help with DETER
 
 **Summary:** take *all* of the details about your problem (project/experiment IDs, logs, error output, etc) and [file a ticket](https://trac.deterlab.net/newticket) in our Trac issue-tracking system.

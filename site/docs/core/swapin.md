@@ -1,3 +1,7 @@
+
+!!! important
+    This page is deprecated. Please use our <a href="https://launch.mod.deterlab.net/">new platform</a> and accompanying documentation.
+
 # Start An Experiment (Swap-in)
 
 To start an experiment you will need to ``swap it in'', which will allocate resources to it.

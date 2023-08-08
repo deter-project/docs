@@ -1,3 +1,7 @@
+
+!!! important
+    This page is deprecated. Please use our <a href="https://launch.mod.deterlab.net/">new platform</a> and accompanying documentation.
+
 # Network Emulation Tutorial
 
 In this tutorial we will show you how to create an experiment with emulated network.
