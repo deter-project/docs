@@ -6,7 +6,8 @@ theme:
 site_dir: '_site'
 extra_css: [css/extra.css]
 
-pages:
+#pages:
+nav:
 - Welcome to the DETERLab Documentation: index.md
 - Glossary: Glossary.md
 - Quickstart: quickstart.md
