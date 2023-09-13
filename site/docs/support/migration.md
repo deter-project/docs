@@ -23,6 +23,8 @@ Set up Merge password:
 ![](mergepass.png)
 2. Click on _Teaching_ tab, then choose your class and click on _Migrate Class_ from the left menu.
 
+To migrate your existing class materials please see [our guidelines here](../../education/migrating-materials).
+
 ## Migrating Research Projects
 
 1. Carefully read [Merge documentation](https://mergetb.org/docs/)
