@@ -57,7 +57,9 @@ If new students enroll into your class you can repeat this action without any il
 
 ### Populating Private Lab
 
-8. Create a folder structure that looks like illustrated in the figure below. Red text denotes names of files or folders that should not be changed. Files are denoted by F and folders by D label. Our example assumes you had three-node topology with node names X, Y and Z. Nodes X and Y needed some set up for your lab and node Z did not. All node names are listed in `nodes` file. Only those nodes that need setup have a separate folder with `install` script inside. That script should have `a+rx` permissions. You can see sample `install` scripts in the illustration. If there are any files or folders that should be copied onto individual nodes at setup time, please place them into the corresponding nodes' folders and they will be copied when students run `runlab`. In the illustration, file `file1` will be copied onto `/tmp/X` folder on node `X` and folder `folder1` will be copied into `/tmp/Y/folder1` on node `Y`.
+8. Create a folder structure that looks like illustrated in the figure below. Red text denotes names of files or folders that should not be changed. Files are denoted by F and folders by D label. 
+
+The topology for the lab is in the file with extension ".model" and the same name as your lab name (in our example that is "firstlab"). Our example assumes you had three-node topology with node names X, Y and Z. Nodes X and Y needed some set up for your lab and node Z did not. All node names are listed in `nodes` file. Only those nodes that need setup have a separate folder with `install` script inside. That script should have `a+rx` permissions. You can see sample `install` scripts in the illustration. If there are any files or folders that should be copied onto individual nodes at setup time, please place them into the corresponding nodes' folders and they will be copied when students run `runlab`. In the illustration, file `file1` will be copied onto `/tmp/X` folder on node `X` and folder `folder1` will be copied into `/tmp/Y/folder1` on node `Y`.
 
 ![](folderstruct.png)
 
