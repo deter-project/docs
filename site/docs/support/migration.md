@@ -25,6 +25,12 @@ Set up Merge password:
 
 To migrate your existing class materials please see [our guidelines here](../../education/migrating-materials).
 
+After you have migrated your class you can continue using this
+interface to manage your materials and students. Students will use
+our new platform to perform experiments. Your, TAs' and students' accounts will be synchronized between the two platforms (same
+usernames and passwords). You can read more about the new
+platform and how students use it [here](https://mergetb.org/docs/experimentation/classes/).
+
 ## Migrating Research Projects
 
 1. Carefully read [Merge documentation](https://mergetb.org/docs/)
