@@ -26,7 +26,6 @@ If you don't already have a class project see above.
 2. Then select _Setup Class_ from the left menu. You will not be able to enroll students until you complete this step. You will be able to populate your class with materials.
 3. Input the end date for your class and the estimated number of students
 4. **In our new workflow** you must set up your Merge password in your user profile, so you and your students can use our new platform for experimentation. You will do this only once. Please see <a href="../../support/migration/index.html#migrating-class-projects">illustrations</a>. 
-
 5. **In our new workflow** you must select _Migrate Class_ from the left menu to create your class on our new platform. You only need to do this once per class project.
 
 ### Create accounts for students and TAs
