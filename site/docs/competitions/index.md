@@ -1,6 +1,6 @@
 
 !!! important
-    This page is deprecated. Currently we do not support competitions on our <a href="https://launch.mod.deterlab.net/">new platform</a>, but we hope to add support for this in early 2024.
+    Our current support for competitions is limited. Please read this page carefully. 
 
 Competitions on DETERLab
 ==============
@@ -10,8 +10,9 @@ DETERLab can be used to run attack/defense exercises between teams of students o
 - Easy creation of experiments and teams
 - Specification of which teams can access which experiments and which machines in an experiment
 - Experiment setup (swap in, application installation)
-- Competition scoring
-- Experiment termination
+
+!!! Important
+    Examples below assume that you want to run a competiton called *MyComp* in a class called *MyClass* on our new infrastructure. You will also need a project, which we will assume is called *MyCompProject*.
 
 ## Enabling competitions
 
@@ -22,7 +23,7 @@ If you wish to run competitions within your DETERLab project, please submit a ti
 
 You can create a new competition from your "My DETERLab" view. There will be a "Competitions" tab once you have a competition-enabled project. From that tab, you can click on the left-hand menu option "New competition".
 
-The dialogue will ask you for the competition name and folder path. You should specify a unique name, such that no current experiments of your contain it as a prefix (e.g., you can specify 'comp' if you have no experiments whose name starts with 'comp'). The folder path should lead to a folder which has at least two files inside it: (1) cctf.ns file, describing the topology of an experiment that will be used for the competition and (2) start.pl, specifying a script to set up software on and limit access to experimental nodes. There are several competitions in shared materials, which you can reuse. You should also read our [guide to writing competition scripts](../competitions/comp-script-guide/).
+The dialogue will ask you for the competition name and folder path. Currently you *must* specify a path to a folder that has a file called *nodes*, with each node's name on a separate line. Let's assume that you have specified a path to folder named *MyComp*.
 
 The dialogue will also ask you how many copies of the competition you need and whether team assignment should be "paired" or "circular". The figures below illustrate these two assignment types.  
 
@@ -30,27 +31,19 @@ In a circular assignment there are as many teams as there are experiments. Each 
 
 ![Circular Assigment](../img/circular.png "Circular team assignment")
 
+
 In a paired assignment the number of teams is twice that of the experiments. Each team either defends one experiment or attacks one experiment. This team assignment places each participant into either offensive or defensive role. 
 
 ![Paired Assigment](../img/paired.png "Paired team assignment")	
 
-Once you click "Submit" DETERLab will create a number of experiments and teams for your competition.
+!!! important
+    We currently only support the circular assignment.
+    
+Once you click "Submit" DETERLab will create a teams for your competition.
 
 ### <a name="writing"></a> Writing start up scripts for competitions
 
-A good start up script for a competition has the following properties:
-- Is project and experiment agnostic - it takes project and experiment names as arguments from command line. This enables scaling and portability.
-- Limits access to specific experiment's nodes to red/blue team or removes access to all teams
-- Installs needed software
-- Starts scoring
-- Makes any changes persist through reboots
-- Ends up with node reboot
-
-Please start from our [sample script with these features](start.pl) and version it to satisfy your needs.
-
-!!! note
-    Don't forget to make your script executable
-
+Instead of start up scripts, please leverage our support for project-specific experiments, described [here](https://docs.deterlab.net/education/migrating-materials/#migrating-private-materials). These guidelines also describe how these materials need to be in a separate project on our new platform, and that project has to be in your class organization. Please create this project, which we will refer to as *MyCompProject* in the rest of this documentation.
 
 ## Managing your competition
 
@@ -71,28 +64,40 @@ You can assign a participant to a team by dragging him/her into the gray blocks 
 
 ### Run
 
-Running a competition requires that machines be assigned to it, and software set up on those machines.
+The past two steps created some files in **/proj/yourProjectOnOldInfrastructure/MyComp**. On our new platform create a project for your competition, if you haven't already. Assume the project's name is  *MyCompProject*. Create an XDC in the *MyCompProject*, assume its name is *MyCompXDC*.   Copy the entire folder from **/proj/yourProjectOnOldInfrastructure/MyComp** over to *MyCompXDC*. See [here](https://mergetb.org/docs/experimentation/xdc/#copying-files-to-or-from-your-xdc) how to copy files to your XDC. Something like this should work on *users.deterlab.net*:
+```
+mrg xdc ssh upload -r /proj/yourProjectOnOldInfrastructure/MyComp MyCompXDC.MyCompProject
+```
 
-#### Allocating machines
+If you haven't already, make all your students part of the *MyCompProject* by typing on MyCompXDC:
 
-When you click "Allocate" in the "Run" screen for your competition all related experiments will start swap-in. All experiments must successfully swap in before you can proceed.
+```
+/share/addstudents MyCompProject MyClass
+```
 
-#### Setting up software
+Then to create competition experiments run the following on MyCompXDC:
 
-You can set up necessary software for the competition manually but this does not scale. A better option is to put all your set up commands into start.pl script in your competition folder path. This script will be run when you click "Install" button in the "Run" screen. It will be run once per each experiment and the project and experiment names will be passed to the script. Our sample start.pl script in [guide to writing competition scripts](index.md#writing) sets up limited access to machines, as specified in "Team access" option and makes sure that these changes remain in effect after reboots. After all the set up actions are completed, the script reboots the machines. It is also a good idea to start your scoring script at the time when you install the software. The scoring script should run periodically and update the "score" file in each experiment's "tbdata" directory. Please see [guide to writing competition scripts](index.md#writing) for a full example. 
+```
+/share/startcompetition MyCompProj exp_name num_teams folder_w_model MyComp
+```
+This will simply generate a script, which you then need to run via bash and monitor to ensure that everything progressed smoothly.
 
-#### Starting the competition
 
-When teams are ready to start please click the "Start" button in the "Run" screen to zero out the score. You can also use this button to reset the score.
+Imagine that you ran the following command:
+```
+/share/startcompetition compddos ddos 4 ddosf /users/jelena/ddosc
+```
+This would generate a script to create experiments named ddos1, ddos2, ddos3 and ddos4 in your project compddos on the new infrastructure. It would mine team membership information and which machines should be accessible to red and blue teams from /users/jelena/ddosc folder (which was previously copied over from old DeterLab) and it would use startup scripts and topology model from /organization/ddosf.
 
-#### Scoring the competition
+!!! Important
+    It is currently very difficult to add a new student to a running competition so please ensure that your team assignments are complete before you start the competition.
 
-If you followed our [guide to writing competition scripts](index.md#writing) team scores will be continuously updated. You can see them by clicking on the "Score" button. The score will be shown per experiment and broken into "red" and "blue" parts for offense and defense teams.
 
 #### Retiring the competition 
 
-You can release the machines (swap out) when your competition is done. This action does not affect any of the competition's software or logs.
+You must manually release the machines (swap out) when your competition is done. 
+
 
 ### Destroy
 
-When you are completely done with your competition, click the "Destroy" button. This will remove all the experiments and teams. It is important to clean up your competitions when you don't need them anymore to preserve DETERLab's resources.
+When you are completely done with your competition, click the "Destroy" button. This will remove the teams. It is important to clean up your competitions when you don't need them anymore to preserve DETERLab's resources.
